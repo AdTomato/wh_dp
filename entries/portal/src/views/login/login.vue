@@ -6,7 +6,7 @@
     <div class="login-content">
       <div class="login-content-contain">
         <div class="login-content-contain__left">
-          <!-- <h1>重塑连接，赋能业务在线</h1>
+          <!-- <h1>重塑连接，赋能业务在线 123</h1>
           <h2>弥合管理碎片，盘活IT资产</h2>-->
           <img class="bj-image" src="../../assets/images/bj.png" />
         </div>
