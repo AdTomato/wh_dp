@@ -1,0 +1,32 @@
+.tox .tox-selectfield select:focus, .tox .tox-textarea:focus, .tox .tox-textfield:focus {
+    border-color: #2970FF!important;
+    
+}
+.tox .tox-dialog .tox-dialog__footer-end .tox-button,.tox .tox-dialog .tox-dialog__footer-end .tox-button:hover {
+    background-color: #2970FF;
+}
+.tox .tox-dialog .tox-dialog__footer-end  .tox-button--secondary{
+    background-color: #fff;
+}
+.tox .tox-dialog .tox-dialog__footer-end  .tox-button--secondary:hover {
+    background-color: #fff;
+    border-color: #2970FF;
+}
+.tox .tox-dialog {
+    box-shadow: 0px 2px 8px 0px rgba(30, 85, 255, 0.15)!important;
+    border-radius: 4px!important;
+    border: 0!important;
+}
+.tox .tox-dialog__title {
+    font-size: 17px!important;
+    font-weight: 500!important;
+}
+.tox .tox-tbtn svg {
+    fill: rgba(0, 0, 0, 0.65)!important;
+}
+/* body{
+    background: red;
+} */
+/* .tox-textfield{
+    border-color: red!important;
+} */

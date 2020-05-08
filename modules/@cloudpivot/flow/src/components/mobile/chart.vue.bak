@@ -1,0 +1,460 @@
+<template>
+  <div class="flow-track-chart" @touchstar.stop>
+    <div ref="drawer" class="flow-track-chart__drawer">
+      <workflow-designer
+        v-if="chart"
+        :style="chartLayoutStyle"
+        :lineColor="'#666666'"
+        :flowData="chart"
+        :flowStatus="flowNodeStatus"
+        :workflowStatus="workflowStatus"
+        :chartOptions="chartOptions"
+        @onActivity="clickActivity"
+      />
+    </div>
+    <div class="flow-track-chart__explain">
+      <div class="flow-track-chart__explain-item">
+        <i class="flow-track-chart__finish"></i>
+        <span>{{ $t('cloudpivot.flow.mobile.FinishNode') }}</span>
+      </div>
+      <div class="flow-track-chart__explain-item">
+        <i class="flow-track-chart__processing"></i>
+        <span>{{ $t('cloudpivot.flow.mobile.ProcessNode') }}</span>
+      </div>
+      <div class="flow-track-chart__explain-item">
+        <i class="flow-track-chart__wrong"></i>
+        <span>{{ $t('cloudpivot.flow.mobile.WrongNode') }}</span>
+      </div>
+      <div class="flow-track-chart__explain-item">
+        <i class="flow-track-chart__default"></i>
+        <span>{{ $t('cloudpivot.flow.pc.UnstartNode') }}</span>
+      </div>
+    </div>
+    <div
+      class="chart-guide"
+      v-if="!hasGuide"
+      @click="hideGuide"
+    >
+      <div class="guide-content">
+        <img src="./images/guide.png"/>
+        <p>流程图可手势调整大小</p>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script lang="ts">
+import {
+  Component, Vue, Prop, Watch
+} from 'vue-property-decorator';
+
+import flowDrawer from '@cloudpivot/flow-drawer';
+import { setGesture } from './touch-scale';
+import { workflowApi } from '@cloudpivot/api';
+import common from '@cloudpivot/common';
+
+
+
+
+// import WorkflowDesigner from 'h3-flow-drawer/src/components/index.vue';
+
+@Component({
+  name: 'workflow-chart',
+  components: {
+    WorkflowDesigner: flowDrawer.components.WorkflowDesigner
+  }
+})
+export default class WorkflowChart extends Vue {
+  // @Prop({ default: () => ({}) }) chart!: any;
+
+  @Prop() workflowStatus?: string;
+
+  @Prop() show!: Boolean;
+
+  // @Prop() chartSize:any;
+
+  // 数据
+  chart:any = null;
+  chartSize:any;
+  chartOptions:any = { clickable:false };
+  hasGuide:any = false;
+  // 比例
+  viewScale:any = 1; // 初始缩放比例
+  maxScale:number = 1.2; // 最大放大比例
+  minScale:number = 0.3; // 最大缩小比例
+  endScale:number = 1; // 缩放后的比例
+  // 流程图样式
+  chartLayoutStyle:any = {};
+
+  /**
+   * 获取流程节点状态
+   */
+  get flowNodeStatus() {
+    const flowStatus: any = [];
+    if (this.chart && this.chart.activityStatus) {
+      this.chart.activityStatus.forEach((activity: any) => {
+        let status = '';
+        switch (activity.status) {
+          case 0:
+            status = 'finish';
+            break;
+          case 1:
+            status = 'processing';
+            break;
+          case 2:
+            status = 'wrong';
+            break;
+          default:
+            break;
+        }
+        flowStatus.push({ activityCode: activity.activityCode, status });
+      });
+    }
+    return flowStatus;
+  }
+
+  // 图形高度
+  // @Watch('chartSize', {immediate:true})
+  getChartLayoutStyle() {
+    let style:any = {};
+    if ( !this.chartSize || !this.chartSize.width || !this.chartSize.height ) return style;
+
+    // this.chartSize.width = 100;
+    // this.chartSize.height = 200;
+    let wrapper       = document.querySelector('.flow-track-chart__drawer') as any;
+    let clientWidth   = this.chartSize.width;
+    let clientHeight  = this.chartSize.height;
+    let wrapperWidth  = wrapper.clientWidth - 30;
+    let wrapperHeight = wrapper.clientHeight - 30;
+    let bashOnWidth   = clientWidth/clientHeight > wrapperWidth/wrapperHeight;
+    let scale         = bashOnWidth? wrapperWidth/clientWidth: wrapperHeight/clientHeight
+
+    console.log( wrapperWidth, wrapperHeight )
+
+
+      // this.viewScale =
+      // this.minScale  =
+      // this.endScale  = +scale.toFixed(2);
+
+    if ( scale<=1 ) {
+      this.viewScale =
+      this.minScale  =
+      this.endScale  = +scale.toFixed(2);
+      this.maxScale  = 1;
+    }
+    else {
+      this.viewScale =
+      this.endScale =
+      this.minScale = 1;
+      this.maxScale = +scale.toFixed(2);
+    }
+
+
+    style.width = this.chartSize.width + 'px';
+    style.height = this.chartSize.height + 'px';
+    style.transform = `translate3d(0,0,0) scale(${this.viewScale})`;
+    style.transformOrigin = '0 50%';
+
+    return style;
+  }
+
+  // 设置居中
+  makeChartCenterTimer:any;
+  makeChartCenter() {
+
+
+    this.$h3.toast.hide();
+
+    return;
+    clearTimeout( this.makeChartCenterTimer );
+    let drawerWrapper:any = this.$el.querySelector('.flow-track-chart__drawer') as any;
+
+
+
+    let finalHeight = 0, finalWidth = 0;
+    // console.log( finalWidth, finalHeight )
+    console.log( drawerWrapper.scrollWidth )
+    console.log( drawerWrapper.scrollHeight );
+    if (
+      (
+        this.viewScale <1 &&
+        (
+          (finalHeight>drawerWrapper.clientHeight) &&
+          (drawerWrapper.scrollHeight===drawerWrapper.clientHeight)
+        )
+      ) ||
+      (
+        (this.viewScale>1 ) &&
+        (
+          (finalWidth>drawerWrapper.clientWidth) &&
+          (drawerWrapper.scrollWidth===drawerWrapper.clientWidth)
+        )
+      )
+    ) {
+      return this.makeChartCenterTimer = setTimeout( this.makeChartCenter,10 );
+    }
+
+    let scrollLeft = Math.floor((drawerWrapper.scrollWidth - drawerWrapper.clientWidth) / 2);
+    let scrollTop  = Math.floor((drawerWrapper.scrollHeight - drawerWrapper.clientHeight) / 2);
+    drawerWrapper.scrollLeft = scrollLeft;
+    drawerWrapper.scrollTop = scrollTop;
+
+    console.log( scrollLeft, scrollTop )
+
+    this.makeChartCenterTimer = setTimeout(()=>{
+      if (
+          (scrollLeft>0 && drawerWrapper.scrollLeft !== scrollLeft) ||
+          (scrollTop>0 && drawerWrapper.scrollTop !== scrollTop)
+      ) this.makeChartCenter();
+      else this.$h3.toast.hide();
+    }, 10);
+  }
+
+  created() {
+    this.onShowChange(true);
+  }
+
+  @Watch('show')
+  onShowChange(val:boolean) {
+    if ( !val ) return;
+    if ( !!this.chart ) return this.makeChartCenter();
+
+
+    this.$h3.toast.show({iconType:'loading', duration:99999999});
+
+    workflowApi.getWorkflowChart({ workflowInstanceId:this.$route.params.workflowInstanceId })
+    .then(resp=>{
+      if ( resp.errcode!==0 ) throw resp.errmsg;
+      if ( !resp.data || typeof(resp.data)!=='object' || !Array.isArray(resp.data.activities) ) throw '找不到流程节点信息';
+
+      let vMax=0,hMax=0,value;
+      resp.data.activities.forEach((item:any) => {
+        // 记录横向和纵向的最大值, 用以做缩放处理
+        if ( (value=item.x+item.width)>hMax ) hMax=value;
+        if ( (value=item.y+item.height)>vMax ) vMax=value;
+        // 兼容处理(多语言)
+        item = common.utils.compatible(item, 'activityName');
+      });
+      // 赋值
+      this.chart = resp.data;
+      // 计算样式
+      // 因为这里的最大宽高只取 activity, 考虑到有线的存在, +120
+      this.chartSize = { width:hMax+120, height:vMax+120 };
+      this.chartLayoutStyle = this.getChartLayoutStyle();
+      this.makeChartCenter();
+    })
+    .catch(err=>this.$h3.toast.show({text:err.toString()}));
+  }
+
+
+
+  // @Watch('show')
+  // WatchShow(val: Boolean) {
+  //   if (val) {
+  //     (this.$refs.drawer as HTMLElement).scrollLeft = (this.$refs.drawer as HTMLElement).scrollWidth;
+  //     // 打开流程图时默认流程图全屏展示
+  //     const box:any = document.querySelector(".workflow-designer");
+  //     const boxWrap:any = document.querySelector(".flow-track-chart");
+  //     if(box && boxWrap) {
+  //       const scaleData = Math.min(boxWrap.clientWidth / box.clientWidth, boxWrap.clientHeight / box.clientHeight);
+  //       this.viewScale = scaleData > 1 ? 1: scaleData;
+  //       box.style.transform= `scale(${this.viewScale})`;
+  //       this.maxScale = this.viewScale === 1 ? 1.2 : 1;
+  //       this.minScale = this.viewScale === 1 ? 0.5 : this.viewScale;
+  //       this.endScale = this.viewScale;
+  //     }
+  //   }
+  // }
+
+  /**
+   * 事件回调
+   */
+  clickActivity(activity: any, e: Event) {
+    this.$emit('clickActivity', activity, e);
+  }
+
+  /*
+  * 隐藏指引图
+  */
+  hideGuide() {
+    this.hasGuide = true;
+    window.localStorage.setItem('chartGuide', 'true');
+  }
+
+  mounted() {
+    this.hasGuide = window.localStorage.getItem('chartGuide');
+    this.callDesigner();
+  }
+
+  callDesigner() {
+    const timer = setTimeout(() => {
+      let scale = 1;
+      const box:any = document.querySelector(".workflow-designer");
+      const boxWrap:any = document.querySelector(".flow-track-chart");
+      if(box && boxWrap){
+        const boxGesture:any = setGesture(boxWrap);
+        boxGesture.gesturestart = (e:any) => {  //双指开始
+          scale = this.endScale;
+          box.style.transformOrigin = `${e.center.x} ${e.center.y}`;
+        };
+        boxGesture.gesturemove = (scaleData:any) => {  //双指移动
+          let resultScale:number = Math.min(scale*scaleData, this.maxScale);
+          resultScale = resultScale <= this.minScale ? this.minScale: resultScale;
+          box.style.transform=`scale(${resultScale})`; //改变目标元素的大小和角度
+          this.endScale = resultScale;
+        };
+        boxGesture.gestureend = (e:any) => {  //双指结束
+        };
+        clearTimeout(timer);
+      }else{
+        this.callDesigner();
+      }
+    }, 300);
+  }
+}
+</script>
+<style lang="less">
+@import "~@cloudpivot/common/styles/mixins.less";
+
+@finish-bg-color: rgba(0, 255, 156, 0.1);
+@finish-hover-bg-color: rgba(0, 255, 156, 0.15);
+@finish-border-color: rgba(23, 188, 148, 0.5);
+@finish-hover-border-color: rgba(50, 182, 131, 1);
+
+@process-bg-color: rgba(41, 112, 255, 0.1);
+@process-hover-bg-color: rgba(41, 112, 255, 0.15);
+@process-border-color: rgba(41, 112, 255, 0.5);
+@process-hover-border-color: rgba(41, 112, 255, 1);
+
+@wrong-bg-color: rgba(244, 69, 78, 0.1);
+@wrong-hover-bg-color: rgba(244, 69, 78, 0.15);
+@wrong-border-color: rgba(244, 69, 78, 0.5);
+@wrong-hover-border-color: rgba(207, 48, 61, 1);
+
+@default-font-color: rgba(0, 0, 0, 0.85);
+@default-hover-bg-color: rgba(102, 102, 102, 0.15);
+@default-border-color: rgba(153, 153, 153, 1);
+@default-hover-border-color: rgba(102, 102, 102, 1);
+
+.flow-track-chart {
+  position: relative;
+  overflow: hidden;
+  height: 100%;
+  background-color: #fff;
+  &__drawer {
+    // .px2rem(padding, 10px);
+    display:flex; align-items:center; justify-content:center;
+    padding:15px;
+    overflow: auto;
+    cursor: move;
+    box-sizing: border-box;
+    height: 100%;
+    .workflow-designer {
+      margin: 0;
+      min-width: 100%;
+      .activity-instance {
+        .px2rem(border-radius, 4px);
+      }
+      .activity-instance {
+        border-color: #052535;
+        i {
+          color: #052535;
+        }
+      }
+      .finish {
+        background: @finish-bg-color;
+        border-color: @finish-border-color !important;
+        i {
+          color: @finish-hover-border-color;
+        }
+      }
+      .wrong {
+        background: @wrong-bg-color;
+        border-color: @wrong-border-color !important;
+        i {
+          color: @wrong-hover-border-color;
+        }
+      }
+      .processing {
+        background: @process-bg-color;
+        border-color: @process-border-color !important;
+        i {
+          color: @process-hover-border-color;
+        }
+      }
+    }
+
+    // 隐藏滚动条
+    // &::-webkit-scrollbar {
+    //   width:0; height:0;
+    // }
+  }
+
+  &__explain {
+    position: absolute;
+    .px2rem(top, 30px);
+    .px2rem(right, 0);
+    .px2rem(width, 200px);
+    z-index: 10;
+  }
+  &__explain-item {
+    display: flex;
+    align-items: center;
+    .px2rem(margin-bottom, 16px);
+    i {
+      flex: 0 0;
+      .px2rem(flex-basis, 26px);
+      .px2rem(height, 26px);
+      .px2rem(border-radius, 4px);
+      .px2rem(margin-right, 16px);
+    }
+    span {
+      flex: 1 1;
+      text-align: left;
+      .px2rem(font-size, 26px);
+      color: rgba(0, 0, 0, 0.65);
+    }
+  }
+  &__finish {
+    background-color: @finish-bg-color;
+    border: 1px solid @finish-border-color !important;
+  }
+  &__wrong {
+    background-color: @wrong-bg-color;
+    border: 1px solid @wrong-border-color !important;
+  }
+  &__processing {
+    background-color: @process-bg-color;
+    border: 1px solid @process-border-color !important;
+  }
+  &__default {
+    border: 1px solid @default-border-color !important;
+  }
+}
+.chart-guide{
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 989;
+  text-align: center;
+  background: rgba(0, 0, 0, 0.5);
+  .guide-content{
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    z-index: 999;
+    .px2rem(margin-left, -140px);
+    .px2rem(margin-top, -200px);
+    text-align: center;
+    img{
+      .px2rem(width, 280px);
+    }
+    p{
+      color: rgba(255,255,255,0.85);
+      .px2rem(font-size, 28px);
+    }
+  }
+}
+</style>

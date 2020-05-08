@@ -1,0 +1,167 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title>全局自定义模板</title>
+</head>
+<body>
+<!--css配置-->
+<style>
+</style>
+<!--是否加载全局模板 请填写正确的load-template 格式：http://www.xxx.com/-->
+<section id="rootTemplate" load-template=""></section>
+<!--配置API地址 可以覆盖root配置 api-url格式：http://www.xxx.com/-->
+<section id="controller" api-url=""></section>
+<!--RootToolbar配置-->
+<section id="toolbar">
+</section>
+<!--Template配置 key是唯一标识，请不要修改已保证页面正常运行-->
+<section type="template" id="template">
+    <a-row>
+        <a-col>
+            <a-title key="203-1546070505862" data-name="测试"></a-title>
+        </a-col>
+    </a-row>
+    <a-row>
+        <a-col>
+            <a-modified-time key="modifiedTime" data-name="修改时间"></a-modified-time>
+        </a-col>
+    </a-row>
+    <a-row>
+        <a-col>
+            <a-create-by key="createBy" data-name="创建人ID"></a-create-by>
+        </a-col>
+        <a-col>
+            <a-created-time key="createdTime" data-name="创建时间"></a-created-time>
+        </a-col>
+        <a-col>
+            <a-owner key="ownerId" data-name="拥有者"></a-owner>
+        </a-col>
+    </a-row>
+    <a-row>
+        <a-col>
+            <a-group-title key="200-1546070505862"></a-group-title>
+        </a-col>
+    </a-row>
+    <a-row>
+        <a-col>
+            <a-text key="text11" data-name="单文本"></a-text>
+        </a-col>
+    </a-row>
+    <a-row>
+        <a-col>
+            <a-textarea key="text222" data-name="长文本"></a-textarea>
+        </a-col>
+    </a-row>
+    <a-row>
+        <a-col>
+            <a-radio key="test12" data-name="单选框"></a-radio>
+        </a-col>
+    </a-row>
+    <a-row>
+        <a-col>
+            <a-checkbox key="test13" data-name="复选框"></a-checkbox>
+        </a-col>
+    </a-row>
+    <a-row>
+        <a-col>
+            <a-dropdown key="test14" data-name="下拉框"></a-dropdown>
+        </a-col>
+    </a-row>
+    <a-row>
+        <a-col>
+            <a-logic key="test15" data-name="逻辑"></a-logic>
+        </a-col>
+    </a-row>
+    <a-row>
+        <a-col>
+            <a-number key="test32" data-name="数值"></a-number>
+        </a-col>
+    </a-row>
+    <a-row>
+        <a-col>
+            <a-user-selector key="test18" data-name="人员单选"></a-user-selector>
+        </a-col>
+    </a-row>
+    <a-row>
+        <a-col>
+            <a-user-selector key="test19" data-name="人员多选"></a-user-selector>
+        </a-col>
+    </a-row>
+    <a-row>
+        <a-col>
+            <a-user-selector key="test20" data-name="部门单选"></a-user-selector>
+        </a-col>
+    </a-row>
+    <a-row>
+        <a-col>
+            <a-user-selector key="test21" data-name="部门多选"></a-user-selector>
+        </a-col>
+    </a-row>
+    <a-row>
+        <a-col>
+            <a-attachment key="test22" data-name="附件"></a-attachment>
+        </a-col>
+    </a-row>
+    <a-row>
+        <a-col>
+            <a-image key="test24" data-name="图片"></a-image>
+        </a-col>
+    </a-row>
+    <a-row>
+        <a-col>
+            <a-location key="test26" data-name="位置"></a-location>
+        </a-col>
+    </a-row>
+    <a-row>
+        <a-col>
+            <a-group-title key="200-1546327475115"></a-group-title>
+        </a-col>
+    </a-row>
+    <a-row>
+        <a-col>
+            <a-description key="202-1546327488658"></a-description>
+        </a-col>
+    </a-row>
+    <a-row>
+        <a-col>
+            <a-grid-view key="test28" data-name="子表">
+                <a-columns>
+                    <a-number key="test31" data-name="子表数值"></a-number>
+                </a-columns>
+                <a-totals>
+                    <a-total key="stat-test31" columnKey="test31" data-statisticMode="sum" data-format="int" data-name="统计"></a-total>
+                </a-totals>
+            </a-grid-view>
+        </a-col>
+    </a-row>
+</section>
+<!--自定义事件配置-->
+<script id="customScript">
+    (function(form){
+        /**
+         * 用户自定义JS区域
+         */
+        /**
+         * 事件绑定，form.on
+         * @param eventType 事件类型
+         * @params function 事件
+         * @param  cover    true, false 是否覆盖root的生命周期 默认不覆盖
+         */
+        //加载前执行
+        form.on('OnBeforeLoad',function(){},'cover');
+        //加载后执行
+        form.on('OnAfterLoad',function(){});
+        //提交前执行
+        form.on('OnBeforeSubmit',function(){});
+        //提交后执行
+        form.on('OnAfterSubmit',function(){});
+        //验证执行
+        form.on('OnValidate',function(){});
+    })
+</script>
+</body>
+</html>

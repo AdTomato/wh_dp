@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="128px" height="128px" viewBox="0 0 128 128" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 52.5 (67469) - http://www.bohemiancoding.com/sketch -->
+    <title>遮罩</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <circle id="path-1" cx="64" cy="64" r="64"></circle>
+        <mask id="mask-2" maskContentUnits="userSpaceOnUse" maskUnits="objectBoundingBox" x="0" y="0" width="128" height="128" fill="white">
+            <use xlink:href="#path-1"></use>
+        </mask>
+    </defs>
+    <g id="网页端" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-dasharray="20" stroke-opacity="0.29894135">
+        <g id="画板" transform="translate(-1712.000000, -684.000000)" stroke="#F5F5F5" stroke-width="14">
+            <g id="导入进度条" transform="translate(1500.000000, 592.000000)">
+                <g id="分组-2" transform="translate(129.000000, 92.000000)">
+                    <g id="Progress-Bar/Circular/Default/Progress-68%" transform="translate(83.000000, 0.000000)">
+                        <g id="Group">
+                            <use id="遮罩" mask="url(#mask-2)" xlink:href="#path-1"></use>
+                        </g>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

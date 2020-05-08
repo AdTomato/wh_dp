@@ -1,0 +1,582 @@
+
+
+.field{
+//   display: flex;
+//   padding: @base10-padding-sm 0;
+
+//   &__label{
+//     width: 90px;
+//     display: flex;
+//     align-items: center;
+//     margin-right: @base4-padding-xs;
+//     // padding-top: @base4-padding-base;
+//   }
+
+  &__control{
+    flex-grow: 1;
+    overflow-x: auto;
+    overflow-y: hidden;
+
+    .ant-select-selection--multiple{
+      .ant-select-selection__rendered{
+        margin-left: 11px;
+      }
+      .ant-select-selection__placeholder{
+        margin-left: 0px; 
+      }
+    }
+
+  }
+
+}
+@error-color            : #F4454E;
+@error-bd-color         : #e0b4b4;
+@error-bg-color         : #fff6f6;
+
+.sheet-menus{
+  & .ant-popover-inner-content{
+    width: 120px;
+    padding: 0;
+  }
+}
+
+.row-menus {
+
+  & > li{
+    padding: 0 12px;
+    cursor: pointer;
+    height: 32px;
+    line-height: 32px;
+
+    &:hover {
+      background-color: #E8FCF4;
+    }
+  }
+
+}
+
+
+.field.required  > .field__label,
+.sheet .required
+{
+
+  position: relative;
+    
+  &:before{
+    content: '*';
+    color: @error-color;    
+    position: absolute;
+    left: -0.5em;
+  }
+
+}
+
+
+
+.field.edit{
+
+  .field__control{
+
+    .radio,.checkbox{
+      padding-top: 0.3em;
+    }
+  }
+
+}
+
+
+.field.error > .field__control,
+.sheet .error
+{
+
+  .ant-select-selection,
+  .ant-select > div,
+  .ant-input-number,
+  .date-picker input,
+  .ant-input
+  {
+    color : @error-color;
+    border-color: @error-bd-color;
+    background-color: @error-bg-color;
+  }
+
+  .ant-radio-group,
+  .ant-checkbox-group
+  {
+    border-color: @error-bd-color;
+  }
+
+}
+
+.ant-select-selection-selected-value{
+  height: 30px;
+}
+
+.unwritable > .ant-upload-list .anticon-cross{
+  display: none;
+}
+
+// 表单 边框模式 样式 👇
+@form-border-padding-left: 10px;
+.has-form-boder-mixin() {
+  & > div {
+    padding: 12px 12px;
+    &.field__control{
+      display: flex;
+      align-items: center;
+      height: 100%;
+      padding-left: 0;
+      padding: 0;
+      & > div,
+      & div.text,
+      & div.number,
+      & div.date,
+      & div.staffselector,
+      & div.relevance-form-modal,
+      & div.relevanceform,
+      & div.ant-select,
+      & span.ant-calendar-picker,
+      & span.ant-input-affix-wrapper,
+      & div.h3-organization,
+      & input[type="text"],
+      & input.ant-input,
+      & div.location,
+      & input.ant-input-number-input {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        & > span {
+          margin-left: 10px;
+        }
+        & > div {
+          height: 100%;
+          width: 100%;
+        }
+      }
+      & span.ant-input-affix-wrapper {
+        margin-left: 0 !important;
+        & .ant-input-suffix{
+          z-index: 3;
+        }
+      }
+      & div.ant-input-number,
+      & div.h3-textarea,
+      & input.ant-input,
+      & div.ant-select-selection,
+      & div.h3-organization__label.show-select{
+        position: relative;
+        border-radius: 0;
+        border: 0;
+        &:focus {
+          border: 1px solid #5291ff;
+          z-index: 2;
+        }
+      }
+      & div.ant-input-number {
+        display: flex;
+      }
+      & div.relevanceform {
+        & > div > a {
+          display:flex;
+          align-items: center;
+          height: 100%;
+          padding-left: 10px;
+        }
+      }
+      & div.tox-tinymce{
+        border: 0;
+      }
+      & div.h3-organization__label,
+      & div.ant-select-selection {
+        display: flex;
+        align-items: center;
+      }
+      & div.ant-input-number-focused,
+      & div.ant-select-focused,
+      & div.h3-textarea_focus {
+          border: 1px solid #5291ff;
+          z-index: 2;
+      }
+      & div.ant-select-selection__rendered {
+        width: 100%;
+      }
+      & div.image{
+        padding: 10px;
+      }
+      & > div.ant-input-disabled {
+        border-radius: 0;
+      }
+      & div.h3-textarea.disabled {
+        padding: 0;
+      }
+      & div.radio,
+      & div.checkbox,
+      & div.logic,
+      & div.location,
+      & div.signature,
+      & div.attachment {
+        display: flex;
+        align-items: center;
+        padding-top: 5px;
+        padding-bottom: 5px;
+        padding-left: @form-border-padding-left;
+        padding-right: @form-border-padding-left;
+        & > div{
+          width: 100%;
+        }
+      }
+      & div.staffselector, & div.staffmultiselector, & div.departmentselector, & div.departmentmultiselector{
+        &>div.form-staff-warp{
+          height: 100%;
+          & > div.form-staff {
+            height: 100%;
+            padding: @form-border-padding-left;
+          }
+        }
+        & div.h3-organization__label.disabled{
+          border: 0 !important;
+          border-radius: 0;
+        }
+      }
+      & div.dropdown {
+        &>div.items {
+          height: 100%;
+          display: flex;
+          align-items: center;
+          padding-left: @form-border-padding-left;
+        }
+      }
+      & div.textarea {
+        & > div > div.text {
+          padding: @form-border-padding-left;
+        }
+        & > div > div.editor-html {
+          padding: @form-border-padding-left;
+        }
+      }
+      & div.text {
+        & > div > div.text {
+          padding-left: @form-border-padding-left;
+        }
+      }
+      & div.location {
+        padding: 0;
+        & > div {
+          padding-left: @form-border-padding-left;
+          display: flex;
+          align-items: center;
+        }
+        & > div.h3-location {
+          padding: 0;
+        }
+        & .ant-input-affix-wrapper .ant-input:not(:last-child) {
+          padding-left: @form-border-padding-left;
+        }
+      }
+    }
+  }
+}
+.has-form-border{
+  // h3-panel 下面的 border
+  .h3-panel > .h3-panel-body > .ant-row-flex{
+    position: relative;
+    border: 1px solid rgba(217,217,217,1); // 左右边框
+    border-bottom: 0;
+    // border-top: 0;
+    // &.dashed {
+    //   border-bottom: 1px solid rgba(217,217,217,1);
+    // }
+    & .number:before,& .logic:before{
+      content: ''
+    }
+    &.form-title-flex {
+      border: 0;
+    }
+    & > .ant-col {
+      //border-left: 1px solid rgba(217,217,217,1); // col 里面左边框
+      & > div.description {
+        &::before{
+          position: absolute;
+          top: 0;
+          left: 0;
+          content: '';
+          width: 100%;
+          //border-top:1px solid rgba(217,217,217,1);
+          z-index: 1;
+        }
+      }
+      & > div.field {
+        min-height: 49px;
+        padding: 0;
+        &::before{
+          position: absolute;
+          top: 0;
+          left: 0;
+          content: '';
+          width: 100%;
+          border-top:1px solid rgba(217,217,217,1);
+          z-index: 1;
+        }
+        & > .field__label {
+          display: flex;
+          align-items: center;
+          border-right: 1px solid rgba(217,217,217,1);
+          background-color: rgba(250,250,250,1);
+          margin-right: 0;
+        }
+        .has-form-boder-mixin();
+      }
+      & > div.form-sheet {
+        &::before{
+          position: absolute;
+          top: 0;
+          left: 0;
+          content: '';
+          width: 100%;
+          //border-top:1px solid rgba(217,217,217,1)
+        }
+      }
+
+      div.description{
+        padding: 8px;
+      }
+
+      div.system {
+        & > div {
+          &.field__label{
+            margin-left: 0;
+          }
+          &.field__control{
+            padding-left: 8px;
+          }
+        }
+      }
+
+      .input-image {
+        .field__control{
+          padding-bottom: 0;
+          padding-left: 0;
+        }
+      }
+    }
+    & > .ant-col:first-child{
+      border-left: 0;
+    }
+    .field.required>.field__label{
+      position: relative;
+      &:before {
+        content: '*';
+        color: @error-color;
+        position: absolute;
+        left: 0.35em;
+      }
+
+    }
+    .sheet .required {
+      position: relative;
+      &:before {
+        content: '*';
+        color: @error-color;
+        position: absolute;
+        left: -.5em;
+      }
+
+    }
+    .field__control {
+      .ant-upload-select-picture-card {
+        margin-bottom: 0;
+      }
+      .dropdown{
+        & > div {
+          display: block;
+        }
+      }
+      .ant-checkbox-group,.ant-radio-group{
+        vertical-align:top;
+      }
+      .ant-checkbox-wrapper,.ant-radio-wrapper{
+        vertical-align:top;
+        top: 0;
+      }
+    }
+  }
+
+  & >.h3-panel {
+    & > .h3-panel-body {
+     & >  .ant-row-flex:last-child{
+        border-bottom: 1px solid rgba(217,217,217,1);
+      }
+    }
+  }
+  .form-sheet {
+    padding: 0;
+    & > div.h3-panel {
+      & > div.h3-panel-header, & > div.h3-panel-right {
+        padding-left: 12px;
+        padding-right: 12px;
+      }
+      & > div.h3-panel-body {
+        & > div.ant-divider, & > div.actions{
+          padding-left: 12px;
+          padding-right: 12px;
+        }
+        & div.sheet {
+          border-left: 0;
+          border-right: 0;
+          border-radius: 0;
+          & > div.sheet__row.total {
+            &  div.sheet__col {
+              border-top: 1px solid #e8e8e8;
+              border-bottom: 0;
+            }
+          }
+          & > div.sheet__body {
+            &>div.sheet__row:last-child {
+              & div.sheet__col {
+                border-bottom: 0;
+              }
+            }
+          }
+        }
+        & div.sheet__row.scrollbar{
+          min-height: 0;
+        }
+      }
+    }
+  }
+}
+// 针对 系统控件 特殊处理
+.has-form-border  > div.ant-row-flex, .has-form-border .ant-tabs-tabpane>div.ant-row-flex {
+    position: relative;
+    border: 1px solid rgba(217,217,217,1);
+    border-bottom: 0;
+    border-top: 0;
+    & > .ant-col {
+      border-left: 1px solid rgba(217,217,217,1);
+      & > div.form-sheet,& > div.desc  {
+        &::before{
+          position: absolute;
+          left: 0;
+          bottom: 0;
+          content: '';
+          width: 100%;
+          //border-top:1px solid rgba(217,217,217,1);
+          z-index: 1;
+        }
+      }
+      & > div.description {
+        &::before{
+          position: absolute;
+          bottom: 0;
+          left: 0;
+          content: '';
+          width: 100%;
+          //border-top:1px solid rgba(217,217,217,1);
+          z-index: 1;
+        }
+      }
+      & > div.field {
+        padding: 0;
+        &::before{
+          position: absolute;
+          left: 0;
+          bottom: 0;
+          content: '';
+          width: 100%;
+          //border-top:1px solid rgba(217,217,217,1);
+          z-index: 1;
+        }
+        .has-form-boder-mixin();
+        & > .field__label {
+          border-right: 1px solid rgba(217,217,217,1);
+          background-color: rgba(250,250,250,1);
+          margin-right: 0;
+          display: flex;
+          align-items: center;
+        }
+        & > div {
+          padding: 8px 12px;
+          &.field__control{
+            padding-left: 0;
+            display: flex;
+            align-items: center;
+            & >div {
+              flex-basis: 100%;
+            }
+          }
+        }
+      }
+
+      div.description{
+        padding: 8px;
+      }
+
+      div.system {
+        & > div {
+          &.field__label{
+            margin-left: 0;
+          }
+          &.field__control{
+            padding-left: 8px;
+          }
+        }
+      }
+
+      .input-image {
+        .field__control{
+          padding-bottom: 0;
+          padding-left: 0;
+        }
+      }
+    }
+    & > .ant-col:first-child{
+      border-left: 0;
+    }
+    .field.required>.field__label{
+      position: relative;
+      &:before {
+        content: '*';
+        color: @error-color;
+        position: absolute;
+        left: 0.35em;
+      }
+
+    }
+    .sheet .required {
+      position: relative;
+      &:before {
+        content: '*';
+        color: @error-color;
+        position: absolute;
+        left: -.5em;
+      }
+
+    }
+    .field__control {
+      .ant-upload-select-picture-card {
+        margin-bottom: 0;
+      }
+      .dropdown{
+        & > div {
+          display: block;
+        }
+      }
+      .ant-checkbox-group,.ant-radio-group{
+        vertical-align:top;
+      }
+      .ant-checkbox-wrapper,.ant-radio-wrapper{
+        vertical-align:top;
+        top: 0;
+      }
+      .relevanceform .ant-input-affix-wrapper{
+        margin-left: 0 !important;
+      }
+    }
+}
+.has-form-border  div.form-title-flex {
+  border: 0;
+}
+.has-form-border  div.form-title-flex+div.ant-row-flex {
+  border-top: 1px solid rgba(217,217,217,1);
+}

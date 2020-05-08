@@ -1,0 +1,294 @@
+{
+  "workflowName": "oooo",
+  "workflowCode": "oooo",
+  "workflowVersion": 0,
+  "activities": [{
+    "activityCode": "Activity1",
+    "activityName": "开始",
+    "beforeActivate": null,
+    "afterActivate": null,
+    "endActivity": null,
+    "cancelActivity": null,
+    "asyncEndJob": null,
+    "jobSubmitted": null,
+    "jobRejected": null,
+    "height": 40,
+    "width": 158,
+    "x": 497,
+    "y": 299,
+    "activityType": "START"
+  }, {
+    "activityCode": "Activity2",
+    "activityName": "填写申请单",
+    "beforeActivate": {
+      "receiver": null,
+      "content": null,
+      "cancelParllelActivity": false,
+      "dataDisposals": null,
+      "bizActions": null
+    },
+    "afterActivate": {
+      "receiver": null,
+      "content": null,
+      "cancelParllelActivity": false,
+      "dataDisposals": null,
+      "bizActions": null
+    },
+    "endActivity": {
+      "receiver": null,
+      "content": null,
+      "cancelParllelActivity": false,
+      "dataDisposals": null,
+      "bizActions": null
+    },
+    "cancelActivity": {
+      "receiver": null,
+      "content": null,
+      "cancelParllelActivity": false,
+      "dataDisposals": null,
+      "bizActions": null
+    },
+    "asyncEndJob": null,
+    "jobSubmitted": {
+      "receiver": null,
+      "content": null,
+      "cancelParllelActivity": false,
+      "dataDisposals": null,
+      "bizActions": null
+    },
+    "jobRejected": {
+      "receiver": null,
+      "content": null,
+      "cancelParllelActivity": false,
+      "dataDisposals": null,
+      "bizActions": null
+    },
+    "height": 40,
+    "width": 158,
+    "x": 302,
+    "y": 46,
+    "activityType": "PARTICIPANT",
+    "participant": "{Originator}",
+    "participantType": "SINGLE_PARTICIPANT",
+    "submitButtonName": "同意",
+    "rejectButtonName": "不同意",
+    "finishExit": null,
+    "sheetCode": "",
+    "propertyPermissions": [],
+    "permittedAction": {
+      "forward": true,
+      "retrieve": true,
+      "adjustParticipant": false,
+      "finishInstance": false,
+      "rejectToStart": false,
+      "reject": false,
+      "rejectToFixded": false,
+      "rejectToActivityCode": null,
+      "assist": false,
+      "circulate": false
+    },
+    "participationModel": "PARALLEL",
+    "noParticipant": "TO_ADMIN",
+    "originator": "DEFAULT",
+    "perviousParticipate": "DEFAULT",
+    "participated": "DEFAULT",
+    "followUpParticipate": "DEFAULT",
+    "noParticipantNextActivity": "DEFAULT",
+    "approveExit": "100%",
+    "disapproveExit": "1",
+    "targetActivityCode": null,
+    "allowedTime": "",
+    "timeoutWarn1": "",
+    "timeoutWarn2": "",
+    "timeoutStrategy": "NOTIFY_HANDLER"
+  }, {
+    "activityCode": "Activity3",
+    "activityName": "审批",
+    "beforeActivate": {
+      "receiver": null,
+      "content": null,
+      "cancelParllelActivity": false,
+      "dataDisposals": null,
+      "bizActions": null
+    },
+    "afterActivate": {
+      "receiver": null,
+      "content": null,
+      "cancelParllelActivity": false,
+      "dataDisposals": null,
+      "bizActions": null
+    },
+    "endActivity": {
+      "receiver": null,
+      "content": null,
+      "cancelParllelActivity": false,
+      "dataDisposals": null,
+      "bizActions": null
+    },
+    "cancelActivity": {
+      "receiver": null,
+      "content": null,
+      "cancelParllelActivity": false,
+      "dataDisposals": null,
+      "bizActions": null
+    },
+    "asyncEndJob": null,
+    "jobSubmitted": {
+      "receiver": null,
+      "content": null,
+      "cancelParllelActivity": false,
+      "dataDisposals": null,
+      "bizActions": null
+    },
+    "jobRejected": {
+      "receiver": null,
+      "content": null,
+      "cancelParllelActivity": false,
+      "dataDisposals": null,
+      "bizActions": null
+    },
+    "height": 40,
+    "width": 158,
+    "x": 136,
+    "y": 225,
+    "activityType": "PARTICIPANT",
+    "participant": "",
+    "participantType": "SINGLE_PARTICIPANT",
+    "submitButtonName": "同意",
+    "rejectButtonName": "不同意",
+    "finishExit": null,
+    "sheetCode": "",
+    "propertyPermissions": [],
+    "permittedAction": {
+      "forward": true,
+      "retrieve": true,
+      "adjustParticipant": false,
+      "finishInstance": false,
+      "rejectToStart": false,
+      "reject": false,
+      "rejectToFixded": false,
+      "rejectToActivityCode": null,
+      "assist": false,
+      "circulate": false
+    },
+    "participationModel": "PARALLEL",
+    "noParticipant": "TO_ADMIN",
+    "originator": "DEFAULT",
+    "perviousParticipate": "DEFAULT",
+    "participated": "DEFAULT",
+    "followUpParticipate": "DEFAULT",
+    "noParticipantNextActivity": "DEFAULT",
+    "approveExit": "100%",
+    "disapproveExit": "1",
+    "targetActivityCode": null,
+    "allowedTime": "",
+    "timeoutWarn1": "",
+    "timeoutWarn2": "",
+    "timeoutStrategy": "NOTIFY_HANDLER"
+  }, {
+    "activityCode": "Activity4",
+    "activityName": "结束",
+    "beforeActivate": null,
+    "afterActivate": null,
+    "endActivity": null,
+    "cancelActivity": null,
+    "asyncEndJob": null,
+    "jobSubmitted": null,
+    "jobRejected": null,
+    "height": 40,
+    "width": 158,
+    "x": 0,
+    "y": 81,
+    "activityType": "END"
+  }, {
+    "activityCode": "Activity5",
+    "activityName": "系统活动",
+    "beforeActivate": {
+      "receiver": null,
+      "content": null,
+      "cancelParllelActivity": false,
+      "dataDisposals": [],
+      "bizActions": []
+    },
+    "afterActivate": {
+      "receiver": null,
+      "content": null,
+      "cancelParllelActivity": false,
+      "dataDisposals": [],
+      "bizActions": []
+    },
+    "endActivity": {
+      "receiver": null,
+      "content": null,
+      "cancelParllelActivity": false,
+      "dataDisposals": [],
+      "bizActions": []
+    },
+    "cancelActivity": {
+      "receiver": null,
+      "content": null,
+      "cancelParllelActivity": false,
+      "dataDisposals": [],
+      "bizActions": []
+    },
+    "asyncEndJob": null,
+    "jobSubmitted": {
+      "receiver": null,
+      "content": null,
+      "cancelParllelActivity": false,
+      "dataDisposals": [],
+      "bizActions": []
+    },
+    "jobRejected": {
+      "receiver": null,
+      "content": null,
+      "cancelParllelActivity": false,
+      "dataDisposals": [],
+      "bizActions": []
+    },
+    "height": 40,
+    "width": 158,
+    "x": 537,
+    "y": 17,
+    "activityType": "SYSTEM_ACTIVITY",
+    "bizActions": ["fff", "gg"],
+    "finishCondition": null
+  }],
+  "rules": [{
+    "text": "",
+    "utilizeElse": false,
+    "fixedPoint": true,
+    "formula": "",
+    "preActivityCode": "Activity2",
+    "postActivityCode": "Activity5",
+    "points": ["460, 65", "498, 65", "498, 36", "537, 36"],
+    "popupType": "FUNCTION"
+  }, {
+    "text": "拖拽文字",
+    "utilizeElse": true,
+    "fixedPoint": true,
+    "formula": "",
+    "preActivityCode": "Activity1",
+    "postActivityCode": "Activity3",
+    "points": ["572, 339", "572, 359", "209, 359", "209, 265"],
+    "popupType": "FUNCTION"
+  }, {
+    "text": "",
+    "utilizeElse": false,
+    "fixedPoint": true,
+    "formula": "",
+    "preActivityCode": "Activity2",
+    "postActivityCode": "Activity4",
+    "points": ["302, 67", "230, 67", "230, 100", "158, 100"],
+    "popupType": "FUNCTION"
+  }, {
+    "text": "",
+    "utilizeElse": false,
+    "fixedPoint": true,
+    "formula": "",
+    "preActivityCode": "Activity3",
+    "postActivityCode": "Activity2",
+    "points": ["294, 250", "395, 250", "395, 86"],
+    "popupType": "FUNCTION"
+  }]
+}

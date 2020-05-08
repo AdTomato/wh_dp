@@ -1,0 +1,77 @@
+@default-list-height   : 90px;
+// vertical paddings
+@vertical-padding-lg    : 24px; // containers
+@vertical-padding-md    : 16px; // small containers and buttons
+@vertical-padding-sm    : 12px; // Form controls and items
+@vertical-padding-xs    : 8px;  // small items
+@vertical-padding-base  : 4px;  // base 
+
+// horizontal paddings
+@horizontal-padding-lg : 30px;
+@horizontal-padding-md : 20px;
+@horizontal-padding-sm : 10px; // base
+
+@font-size-base         : 30px;
+@primary-color          : #2970FF; // 品牌色
+@text-color-main        : #333;
+
+.h3-approve{
+    // position: absolute;
+    // height: 100%;
+    // width: 100%;
+    // background: #f8f8f8;
+    // z-index: 3;
+    // overflow: hidden;
+    &-switch{
+      position: relative;
+      background: #fff;
+      .px2rem(height, @default-list-height);
+      .px2rem(padding-left, @horizontal-padding-lg);
+      .px2rem(padding-right, @horizontal-padding-lg);
+      .hairline('bottom', #eee);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      span{
+        color: #666;
+        font-size: @font-size-base / 2;
+      }
+    }
+    &-select{
+      position: relative;
+      background: #fff;
+      .hairline('bottom', #eee);
+      .h3-cell{
+        .px2rem(height, @default-list-height) !important;
+        .h3-cell__hd{
+          font-size:  @font-size-base / 2;
+        }
+      }
+      &-list{
+        .px2rem(height, 475);
+        overflow: scroll;
+        &-item{
+          position: relative;
+          .px2rem(min-height, @default-list-height);
+          .px2rem(padding-left, @horizontal-padding-lg);
+          .px2rem(padding-right, @horizontal-padding-lg);
+          .px2rem(padding-top, 26);
+          .px2rem(padding-bottom, 26);
+          .hairline('bottom', #eee);
+          &-content{
+            .px2rem(width, 618);
+            .px2rem(margin-right, @vertical-padding-lg );
+            display: inline-block;
+            font-size: @font-size-base / 2;
+            color: @text-color-main ;
+            word-break: break-all;
+          }
+          &-check{
+            color: @primary-color;
+            display: inline-block;
+            position: absolute;
+          }
+        }
+      }
+    }
+}

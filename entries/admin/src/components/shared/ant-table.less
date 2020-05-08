@@ -1,0 +1,24 @@
+
+/deep/.ant-table-thead > tr > th, 
+/deep/.ant-table-tbody > tr > td{
+  padding: 8px 16px;
+}
+
+/deep/.ant-table-thead > tr > th {
+  color:rgba(0,0,0,0.85);
+  position: relative;
+  padding-left: 16px;
+  background-color:#FAFAFA;
+  font-weight: 500;
+
+  &:not(:first-child)::after{
+    content:" ";
+    width: 1px;
+    height: 22px;
+    left:0;
+    position: absolute;
+    top: 8px;
+    background-color: #E8E8E8;
+  }
+
+}

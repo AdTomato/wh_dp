@@ -1,0 +1,53 @@
+@import '../../../../../styles/themes/default.less';
+.menu-content {
+    .ant-menu.ant-menu-dark .ant-menu-item-selected, .ant-menu-submenu-open .ant-menu-item .ant-menu-item-selected {
+      background-color: @white-background;
+      a {
+        color: @light-color-1;
+      }
+    }
+
+    .ant-menu-inline-collapsed {
+      width: 52px;
+      .ant-menu-item {
+        padding: 0 @base10-padding-md!important;
+      }
+    }
+    .ant-menu-inline-collapsed > .ant-menu-submenu > .ant-menu-submenu-title{
+        padding: 0 @base10-padding-md!important;
+      }
+    & > ul > li > a > .aufontAll,
+    .ant-menu-submenu > .ant-menu-submenu-title span .aufontAll,
+    .ant-menu-dark .ant-menu-inline.ant-menu-sub .ant-menu-item .aufontAll {
+      font-size: 18px;
+      margin-right: @base4-padding-md;
+      display: inline-block;
+      vertical-align: middle;
+    }
+    & > ul > li > a > span,
+    .ant-menu-submenu > .ant-menu-submenu-title span span,
+    .ant-menu-dark .ant-menu-inline.ant-menu-sub .ant-menu-item span {
+      display: inline-block;
+      vertical-align: middle;
+      max-width: 125px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+    .ant-menu-dark .ant-menu-inline.ant-menu-sub .ant-menu-item span {
+      max-width: 100px!important;
+    }
+    .ant-menu-dark .ant-menu-submenu-title .ant-menu-submenu-arrow, .ant-menu-dark .ant-menu-sub .ant-menu-submenu-title .ant-menu-submenu-arrow{
+      margin-top: 3px;
+    }
+
+    .ant-menu-dark.ant-menu-inline .ant-menu-submenu-title:hover {
+      & .ant-menu-submenu-arrow {
+        opacity: 1;
+        &::before, &::after {
+          background: white;
+         
+        }
+      }
+    }
+  }

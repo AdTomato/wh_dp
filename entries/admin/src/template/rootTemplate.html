@@ -1,0 +1,63 @@
+<!--css配置-->
+<link />
+<style>
+    .test1 {
+
+    }
+</style>
+<!--配置API地址 可以覆盖root配置-->
+<section id="controller" api-url="http://127.0.0.1"></section>
+<!--RootToolbar配置-->
+<section id="toolbar">
+    <action title="提交"  method="onsubmit"/>
+</section>
+<!--自定义全局表头-->
+<Section id="templateHeader">
+    <div>我是页头</div>
+    <select>
+        <option value ="volvo">Volvo</option>
+        <option value ="saab">Saab</option>
+        <option value="opel">Opel</option>
+        <option value="audi">Audi</option>
+    </select>
+</Section>
+<!--自定义表体放置区域，对应表体ID -->
+<section id="template"></section>
+<!--自定义全局表体-->
+<Section id="templateFooter">
+    <div>我是页脚</div>
+</Section>
+<!--js配置-->
+<script>
+    var text = '我是方法A';
+</script>
+<script id="customScript">
+    (function(form){
+        /**
+         * 用户自定义JS区域
+         */
+        /**
+         * 事件绑定，form.on
+         * @param eventType 事件类型
+         * @params function 事件
+         */
+        //数据加载后，渲染之前，this为window
+        form.on('onLoad',function(data, dataPermission){ });
+
+        //渲染之后
+        form.on('onRendered',function(data){ });
+
+        //内置校验完成后，返回false阻止提交
+        form.on('onValidate',function(action,data){ });
+
+        //操作前（包含自定义按钮）执行，返回false阻止按钮操作
+        form.on('onPreAction',function(action,data){ });
+        
+        //自定义按钮执行
+        form.on('onCustomAction',function(action,data){ });
+
+        //操作后执行
+        form.on('onActionDone',function(action,data,httpRes){ });
+    })
+</script>
+

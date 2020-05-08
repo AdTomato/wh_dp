@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title>全局自定义模板</title>
+</head>
+<body>
+<!--css配置-->
+<style>
+    .workflow-collapse{
+        display: none;
+    }
+    .custom{
+        margin-top: 24px;
+    }
+    .print-title {
+        width: 100%;
+        border-bottom: 4px solid #FF0B0B;
+    }
+    .print-title .print-header{
+        text-align: center;
+        font-size: 34px;
+        line-height: 34px;
+        color: #ff0000;
+        font-weight: 900;
+        letter-spacing: 6px;
+        padding-bottom: 17px;
+    }
+    .print-title .print-send {
+        font-size: 16px;
+        text-align: right;
+        padding-right: 86px;
+        padding-bottom: 17px;
+    }
+    .print_content{
+        padding: 0 70px;
+    }
+    .print_content .theme {
+        font-size: 22px;
+        line-height: 22px;
+        font-weight: 600;
+        text-align: center;
+        margin-top: 21px;
+    }
+    .print_content .msg-title {
+        margin-top: 24px;
+        font-weight: 600;
+        font-size: 20px;
+        line-height: 20px;
+    }
+    .print_content .msg-details {
+        margin-top: 17px;
+        line-height: 17px;
+        font-size: 16px;
+    }
+    .msg-details .start, .msg-details .end {
+        font-weight: 600;
+        padding-right: 24px;
+    }
+    .msg-details .end {
+        margin-left: 24px;
+    }
+    .print_content .send-org{
+        padding: 14px 0;
+        padding-right: 30px;
+        text-align: right;
+        font-size: 16px;
+    }
+    .print_content .send-time {
+        padding-right: 30px;
+        text-align: right;
+        font-size: 16px;
+    }
+    /* .actions button:first-child {
+        display: none;
+    } */
+    .edit {
+        display: none;
+    }
+    .save,.submit,.delete{
+        display: none;
+    }
+</style>
+
+<style media="print">
+    .header{
+        display: none!important;
+    }
+</style>
+<!--是否加载全局模板 请填写正确的load-template 格式：http://www.xxx.com/-->
+<section id="rootTemplate" load-template=""></section>
+<!--配置API地址 可以覆盖root配置 api-url格式：http://www.xxx.com/-->
+<section id="controller" api-url=""></section>
+<!--RootToolbar配置-->
+<section id="toolbar">
+</section>
+<!--Template配置 key是唯一标识，请不要修改已保证页面正常运行-->
+<section type="template" id="template">
+
+<a-row>
+    <a-col class="print-title">
+        <p class="print-header">常山县人民政府会议通知单</p>
+        <p class="print-send">签发人： <span class="send-people" id="send-people">方建平</span></p>
+    </a-col>
+</a-row>
+<a-row>
+    <a-col>
+        <div id="print_content" class="print_content">
+
+        </div>
+    </a-col>
+</a-row>
+
+</section>
+<!-- 用户确认信息 -->
+<!--自定义事件配置-->
+<script id="customScript">
+    (function(form){
+        /**
+         * 用户自定义JS区域
+         */
+        /**
+         * 事件绑定，form.on
+         * @param eventType 事件类型
+         * @params function 事件
+         * @param  cover    true, false 是否覆盖root的生命周期 默认不覆盖 
+         */
+        //数据加载后，渲染之前
+        form.on('onLoad',function(data){
+            
+        },'cover');
+
+        form.on('onRendered',function(data) {
+            
+            var aContainer = window.parent.document.getElementById('print_content');
+            var aSendPeople = window.parent.document.getElementById('send-people');
+            // 签发人姓名
+            var signPeople = data.signer.length>0 ? data.signer[0].name: '';
+            // 签发人部门
+            var signDepartment = data.signDepartment.length>0 ? data.signDepartment[0].name: '';
+            
+            // 参与人
+            var meettingUser = [];
+
+            // 会议地址
+            var meettingAddres = data.meetingAddress ? data.meetingAddress.name : '';
+
+            // 参与部门
+            if (data.meetingDepartmentRef) {
+                data.meetingDepartmentRef.forEach(function(res) {
+                    meettingUser.push(res.name);
+                });
+            }
+            // 参会人员
+            // if (data.meetingParticipantDetail) {
+            //     data.meetingParticipantDetail.forEach(function(res) {
+            //         meettingUser.push(res.name);
+            //     });
+            // }
+
+            axios.get('/api/meeting/get_meeting_users_info', {
+                params: {
+                    workflowInstanceId: data.workflowInstanceId,
+                    activityCode: data.activityCode || 'Activity9',
+                    hasUserList: data.hasUserList
+                }
+            }).then(function(res){
+                if (res.errcode === 0) {
+                    var people = [];
+                    res.data.unconfirmedList.forEach(function(man){
+                        people.push(man.name);
+                    });
+
+                    var aContentStr = '';
+                        aContentStr += '<p class="theme">' + data.subject + '</p>'
+                        + '<p class="msg-title"> 一 、会议时间 </p>' 
+                        + '<p class="msg-details">' + data.mettingTime + '<span class="end"> 至 </span>' + data.meetingEndtime + '</p>'
+                        + '<p class="msg-title"> 二、会议地点 </p>' 
+                        + '<p class="msg-details">' + meettingAddres + '</p>'
+                        + '<p class="msg-title"> 三 、会议对象 </p>' 
+                        + '<p class="msg-details">' + people.join('、') + '</p>'
+                        + '<p class="msg-title"> 四、会议内容 </p>' 
+                        + '<p class="msg-details">' + data.meetingContent + '</p>'
+                        + '<p class="send-org">'+ signDepartment +'</p>'
+                        + '<p class="send-time">'+ data.createdTime +'</p>'
+                    
+                    aContainer.innerHTML = aContentStr;
+                   
+                }
+            });
+       
+                aSendPeople.innerHTML = signPeople;
+        })
+        //内置校验完成后，返回false阻止提交
+        form.on('onValidate',function(action,data){});
+        //操作前执行，返回false阻止按钮操作
+        form.on('onPreAction',function(action,data){});
+        //操作后执行
+        form.on('onActionDone',function(action,data){});
+    })
+</script>
+<script src="/admin/js/chunk-vendors.js" class="templateScript"></script>
+<script src="/admin/js/template.js" class="templateScript"></script>
+</body>
+</html>

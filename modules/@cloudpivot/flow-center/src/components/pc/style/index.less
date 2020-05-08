@@ -1,0 +1,319 @@
+@keyframes loading {
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.workitem-box {
+  height: 100%;
+  position: relative;
+
+  .high-light{
+    color: @primary-color;
+  }
+
+  .loading-box {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    width: 100%;
+    height: calc(100% - 52px);
+    background: rgba(255, 255, 255, 0.85);
+    z-index: 100;
+
+    .loading {
+      text-align: center;
+    }
+
+    img {
+      animation: loading 1s linear infinite;
+    }
+
+    p {
+      margin-top: @base4-padding-lg;
+      color: @light-color-3;
+    }
+  }
+
+  /deep/.ant-pagination-total-text {
+    margin-right: @base4-padding-md;
+  }
+
+  .content-top {
+    height: 34px;
+    display: flex;
+    margin-bottom: @base4-padding-md;
+    justify-content: space-between;
+    align-items: center;
+
+    .content-right {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    h2 {
+      color: @light-color-1;
+      font-size: @font-size-16;
+      font-weight: @font-weight-md;
+      padding-left: @base4-padding-md;
+    }
+
+    .search-input {
+      margin-left: @base4-padding-xs;
+    }
+
+    .suffix-icon {
+      cursor: pointer;
+    }
+
+    .close-icon {
+      margin-right: @base4-padding-xs;
+      color: @light-color-3;
+    }
+
+    .search-icon {
+      color: @light-color-3;
+    }
+
+    .h-icon-all-filter-o {
+      font-size: 18px;
+      cursor: pointer;
+
+      &:hover {
+        color: @primary-color;
+      }
+    }
+
+    .tabs {
+      flex-grow: 1;
+      margin-left: 40px;
+      display: flex;
+
+      & .tab-btn {
+        padding: 5px 16px;
+        border-radius: 16px;
+        margin-right: 8px;
+        font-size: 12px;
+        cursor: pointer;
+        transition: all ease .3s;
+
+        &.active {
+          background-color: @primary-color;
+          color: white !important;
+        }
+
+        &:hover {
+          color: @primary-color;
+        }
+      }
+    }
+    .content-top-right-box {
+      display: flex;
+      align-items: center;
+    }
+  }
+
+  .table-box {
+    height: calc(100% - 52px);
+    box-shadow: 0px 2px 8px 0px rgba(30, 85, 255, 0.1);
+    position: relative;
+
+    .table {
+      height: 100%;
+      &::after{
+        content: '*';
+        font-size: 0;
+        display: block;
+        clear: both;
+      }
+    }
+
+    /deep/.ant-table-header {
+      background: #f8fbff;
+      overflow: hidden;
+      // 解决ie11表头 国际化下显示不完整问题
+      margin-bottom: -7px !important; 
+      border-radius: 4px;
+    }
+
+    /deep/.ant-table-empty {
+      overflow: hidden !important;
+
+      .ant-table-body {
+        overflow: hidden !important;
+      }
+
+      .ant-table-scroll {
+        overflow: hidden !important;
+      }
+
+    }
+
+    background-color: @white-background;
+    border-radius: @border-radius-lg;
+
+    /deep/.ant-table-thead>tr>th {
+      color: @light-color-2;
+      overflow: hidden;
+      font-weight: @font-weight-lg;
+      background-color: #f8fbff;
+    }
+
+    /deep/.ant-table-tbody>tr>td {
+      color: @light-color-1;
+    }
+
+    /deep/.ant-table-thead>tr>th,
+    /deep/.ant-table-tbody>tr>td {
+      padding: @base4-padding-xs @base4-padding-md;
+    }
+
+    /deep/.ant-table-placeholder {
+      display: none;
+    }
+
+    // /deep/.ant-pagination-item-active {
+    //   background: @primary-color;
+
+    //   a {
+    //     color: white;
+    //   }
+    // }
+
+    .no-data {
+      margin-top: 15%;
+      text-align: center;
+
+      p {
+        font-size: @font-size-14;
+        color: @light-color-3;
+      }
+    }
+
+    .gray {
+      color: @light-color-3;
+    }
+
+    .fake-btn {
+      cursor: pointer;
+      transition: all ease .3s;
+
+      &:hover {
+        color: @primary-color;
+      }
+    }
+
+    .load-all {
+      text-align: center;
+      color: @light-color-3;
+      margin-top: @base10-padding-sm * 2;
+      // 先注销
+      display: none !important;
+    }
+
+    .overtime {
+      display: inline-block;
+      min-width: 46px;
+      width: auto;
+      padding: 0 5px;
+      height: 18px;
+      line-height: 16px;
+      background-color: @error-color;
+      color: @dark-color-2;
+      border-radius: 9px;
+      font-size: @font-size-10;
+      text-align: center;
+      margin-left: @base4-padding-md;
+      vertical-align: middle;
+      border: 1px solid #F4454E;
+
+      &.en {
+        width: 55px;
+      }
+
+      &.beUrged {
+        color: #F4454E;
+        background-color: white;
+      }
+    }
+
+    .overtime-icon {
+      margin-left: @base4-padding-xs;
+      margin-top: -2px;
+    }
+
+    .pagination-box {
+      margin-top: @base4-padding-xs;
+      text-align: right;
+      padding: @base4-padding-xs @base4-padding-md;
+      border-top: 1px solid @base-border-color;
+    }
+
+    /deep/.ant-select-dropdown-menu-item {
+      text-align: center;
+    }
+  }
+
+  .reload-btn {
+    margin-top: @base4-padding-md;
+  }
+
+  .text-ellipsis {
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    /* autoprefixer: ignore next */
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  /*ie11 css hack*/ 
+  @media all and (-ms-high-contrast:none) { 
+    *::-ms-backdrop, .text-ellipsis { display: inline-block; height: 21px; vertical-align: middle; } 
+  } 
+
+  // 改变列宽指令 
+  .resize {
+    display: inline-block;
+    height: 21px;
+    width: calc(100% + 32px);
+    padding: 0 16px;
+    -webkit-transform: translateX(-16px);
+    transform: translateX(-16px);
+    border-left: 1px solid rgba(0, 0, 0, 0.15);
+    // border-left: 1px solid #e8e8e8;
+  }
+
+  .resize-first {
+    border: none;
+  }
+
+  .load-fail-box {
+    padding-top: 100px;
+  }
+}
+
+.mr {
+  margin-right: 16px;
+}
+
+/**
+* antd 表格滚动条
+*/
+/deep/.ant-table-body::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0);
+  box-shadow: unset;
+  transition: all ease .3s;
+}
+
+/deep/.ant-table-body.active::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, .45);
+  box-shadow: auto;
+}
+
+@media screen and (max-width: 1366px) {
+  .workitem-box .table-box .no-data {
+    margin-top: 10%;
+  }
+}

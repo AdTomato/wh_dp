@@ -1,0 +1,50 @@
+@prefixCls: h3-location;
+
+.@{prefixCls}{
+  position: relative;
+  .h-icon-all-get-address-o{
+    color: rgba(0, 0, 0, 0.65);
+  }
+  &-map{
+    // position: absolute;
+    // margin-top: 8px;
+    // border-radius: 4px;
+    // box-shadow: 0px 0px 12px 0px rgba(0,0,0,0.2);
+    // width: 590px;
+    // z-index: 9;
+    &-content{
+      background: #ccc;
+      height: 339px;
+      border-radius: 4px 4px 0 0;
+      .search-box{
+        transform: translate(16px,16px);
+        position: absolute;
+      }
+      .amap-demo{
+        border-radius: 4px 4px 0 0;
+        overflow: hidden;
+      }
+    }
+    &-footer{
+      height: 48px;
+      padding: 0 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-flow: row-reverse;
+      background: #fff;
+      div:nth-child(2){
+        width: 400px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+      .cancle{
+        margin-right:8px;
+      }
+      .h-icon-all-get-address-o{
+        color: rgba(0, 0, 0, 0.65);
+      }
+    }
+  }
+}

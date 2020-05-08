@@ -1,0 +1,195 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title>全局自定义模板</title>
+  </head>
+
+  <body>
+    <!--css配置-->
+    <style>
+      .workflow-collapse {
+        display: none;
+      }
+
+      .custom {
+        margin-top: 24px;
+      }
+
+      .custom .custom__title {
+        font-weight: 500;
+        color: rgba(0, 0, 0, .85);
+        font-size: 18px;
+      }
+
+      .custom__content p {
+        text-align: left;
+        padding: 8px;
+        text-align: left;
+      }
+
+      .custom__content--title {
+        display: inline-block;
+        min-width: 102px;
+        max-width: 102px;
+      }
+
+      .edit {
+        display: none;
+      }
+    </style>
+    <!--是否加载全局模板 请填写正确的load-template 格式：http://www.xxx.com/-->
+    <section id="rootTemplate" load-template=""></section>
+    <!--配置API地址 可以覆盖root配置 api-url格式：http://www.xxx.com/-->
+    <section id="controller" api-url=""></section>
+    <!--RootToolbar配置-->
+    <section id="toolbar">
+      <action text="催办" code="dingUser" />
+    </section>
+    <!--Template配置 key是唯一标识，请不要修改已保证页面正常运行-->
+    <section type="template" id="template">
+      <a-row>
+        <a-col>
+          <a-title key="2031553064451064" data-name="未确认详情"></a-title>
+        </a-col>
+      </a-row>
+      <a-row>
+        <a-col>
+          <a-create-by key="creater" data-name="创建人"></a-create-by>
+        </a-col>
+        <a-col>
+          <a-created-time key="createdTime" data-name="创建时间"></a-created-time>
+        </a-col>
+        <a-col>
+          <a-sequence-no key="sequenceNo" data-name="单据号"></a-sequence-no>
+        </a-col>
+      </a-row>
+      <a-row>
+        <a-col>
+          <a-group-title key="2001553064451065" data-name="会议信息"></a-group-title>
+        </a-col>
+      </a-row>
+      <a-row>
+        <a-col>
+          <a-date key="mettingTime" data-name="会议开始时间" data-format="YYYY-MM-DD HH:mm"></a-date>
+        </a-col>
+        <a-col>
+          <a-association-form key="meetingAddress" data-name="会议地点" data-schema-code="meeting_notice">
+          </a-association-form>
+        </a-col>
+      </a-row>
+      <a-row>
+        <a-col>
+          <a-text key="subject" data-name="标题" data-default-value="会议通知单"></a-text>
+        </a-col>
+        <a-col>
+        </a-col>
+      </a-row>
+      <a-row class="custom">
+        <p class="custom__title">确认情况</p>
+        <div class="custom__content" id="members"></div>
+      </a-row>
+    </section>
+    <!-- 用户确认信息 -->
+    <!--自定义事件配置-->
+    <script id="customScript">
+      (function (form) {
+        /**
+         * 用户自定义JS区域
+         */
+        /**
+         * 事件绑定，form.on
+         * @param eventType 事件类型
+         * @params function 事件
+         * @param  cover    true, false 是否覆盖root的生命周期 默认不覆盖 
+         */
+        //数据加载后，渲染之前
+        var unconfirmedInfo = null;
+        form.on('onLoad', function (data) {
+          if (env.isMobile) {
+            this.actions.forEach(function (res) {
+              if (res.code === 'print') {
+                res.visible = false;
+              }
+            });
+          }
+        }, 'cover');
+        // 渲染后
+        form.on('onRendered', function (data) {
+          axios.get('/api/meeting/get_meeting_users_info', {
+            params: {
+              workflowInstanceId: data.workflowInstanceId,
+              activityCode: data.activityCode || 'Activity9',
+              hasUserList: data.hasUserList
+            }
+          }).then(function (res) {
+            if (res.errcode === 0) {
+              unconfirmedInfo = res.data;
+              var dom = window.parent.document.getElementById('members');
+              var people = [];
+              res.data.unconfirmedList.forEach(function (man) {
+                people.push(man.name);
+              })
+              dom.innerHTML = '<p><span class="custom__content--title">计划参会人数</span><span>' + res.data
+                .planNum + '</span></p><p><span class="custom__content--title">未确认人数</span><span>' + res.data
+                .unconfirmedNum + '</span></p><p><span class="custom__content--title">未确认人</span><span>' +
+                people.join('、') + '</span></p>';
+            }
+          });
+        })
+        //内置校验完成后，返回false阻止提交
+        form.on('onValidate', function (action, data) {});
+        //操作前执行，返回false阻止按钮操作
+        form.on('onPreAction', function (action, data) {
+          
+          if (action.code === 'dingUser') {
+            if (!unconfirmedInfo || !unconfirmedInfo.unconfirmedList) {
+              return;
+            }
+            var users = [];
+            unconfirmedInfo.unconfirmedList.forEach(function (res) {
+              users.push(res.userId);
+            });
+            const mettingTime = new Date(data.mettingTime);
+            const timeStr = mettingTime.getFullYear() + '-' + (mettingTime.getMonth()+1) + '-' + mettingTime.getDate() + ' ' + mettingTime.getHours() + ':' + mettingTime.getMinutes()
+            var tipsInfo = '您有一条会议通知,请及时查看!\n会议标题: ' + data.subject + '\n会议时间: ' + timeStr;
+            var params = {
+              users: users, // 用户列表，工号
+              corpId: window.parent.Environment.corpId, //企业id
+              type: 2, //钉类型 1：image  2：link
+              alertType: 2,
+              alertDate: {
+                format: "yyyy-MM-dd HH:mm",
+                value: "2019-03-21 21:10"
+              },
+              attachment: {
+                title: '', //附件的标题
+                url: '', //附件点击后跳转url
+                image: '', //附件显示时的图片 【可选】
+                text: '' //附件显示时的消息体 【可选】
+              },
+              text: tipsInfo, //消息体
+              onSuccess: function () {
+
+              },
+              onFail: function () {}
+            }
+            window.parent.dd.ready(function () {
+              window.parent.dd.biz.ding.post(
+                params
+              )
+            })
+          }
+        });
+        //操作后执行
+        form.on('onActionDone', function (action, data) {});
+      })
+    </script>
+    <script src="/admin/js/chunk-vendors.js" class="templateScript"></script>
+    <script src="/admin/js/template.js" class="templateScript"></script>
+  </body>
+
+</html>

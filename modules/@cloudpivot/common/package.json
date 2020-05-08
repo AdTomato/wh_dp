@@ -1,0 +1,10 @@
+{
+  "name": "@cloudpivot/common",
+  "version": "1.5.0-alpha.25",
+  "description": "",
+  "main": "index.ts",
+  "scripts": {},
+  "publishConfig": {
+    "registry": "http://nexus.h3yun.com:8888/repository/npm-authine/"
+  }
+}

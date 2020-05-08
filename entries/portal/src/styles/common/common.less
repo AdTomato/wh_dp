@@ -1,0 +1,164 @@
+// 这里请写全局样式，控件样式请在控件里面写
+@import "../themes/default.less";
+@import "../utils/utils";
+
+#app {
+  height: 100%;
+  width: 100%;
+
+  //全局容器用flex布局
+  .bpm-container {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    min-width: @layout-min-width;
+
+    >.header {
+      display: flex;
+      flex: 0 0 64px;
+      width: 100%;
+      padding: 0 @base10-padding-sm * 4;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 2px 8px rgba(30, 85, 255, 0.1);
+      z-index: 99;
+
+      a.open-blank {
+        color: @primary-color;
+        font-size: @font-size-12;
+        display: inline-block;
+        border-radius: 1em 1em 1em 0;
+        background-color: #F4F6FC;
+        margin-left: @base4-padding-md;
+        padding: 3px @base4-padding-md;
+
+        &:hover {
+          color: @primary-color;
+        }
+      }
+
+      >.logo {
+        display: flex;
+        //flex: 0 0;
+        flex-shrink: 0;
+        align-items: center;
+        height: 100%;
+
+        img {
+          max-height: 100%;
+        }
+      }
+
+      .back {
+        flex: 0 0 180px;
+        font-size: @font-size-18;
+
+        .line {
+          display: inline-block;
+          color: @border-color;
+          padding: 0 @base4-padding-xs;
+        }
+      }
+    }
+
+    >.main {
+      flex: 1 1;
+      width: 100%;
+      overflow: auto;
+    }
+  }
+}
+
+/*基础table样式*/
+.bpm-table {
+
+  .ant-table-thead {
+    tr {
+      th {
+        position: relative;
+        background: rgba(244, 246, 252, 1);
+        padding: @base4-padding-xs  !important;
+        color: @light-color-3;
+        font-weight: @font-weight-base;
+        border-bottom: 1px solid rgba(234, 237, 243, 1) !important;
+      }
+
+      // th:before {
+      //   content: '';
+      //   position: absolute;
+      //   background: rgba(234, 237, 243, 1);
+      //   right: 0;
+      //   top: @base4-padding-xs;
+      //   width: 1px;
+      //   height: calc(100% - @base4-padding-xs*2);
+      // }
+
+      th:last-child:before {
+        content: none;
+      }
+    }
+  }
+
+  .ant-table-tbody {
+    tr {
+      td {
+        padding: @base4-padding-xs  !important;
+        color: @light-color-1  !important;
+        border-bottom: 1px solid rgba(234, 237, 243, 1) !important;
+      }
+    }
+  }
+}
+
+/*全局统一控制ant-table-header样式*/
+.ant-table-header::-webkit-scrollbar {
+  height: 0;
+  background: #fff;
+}
+
+.ant-table-header {
+  min-height: 46px;
+}
+
+.avatar {
+  .avatarMixin(32px);
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+  height: 7px;
+  cursor: pointer !important;
+}
+
+::-webkit-scrollbar-thumb {
+  /*滚动条里面小方块*/
+  border-radius: 5px;
+  -webkit-box-shadow: inset 0 0 5px @light-color-3;
+  background: @light-color-3;
+}
+
+// ::-webkit-scrollbar-thumb:hover {
+//   background-color:#9c3;
+//   margin: 5px;
+// }
+// ::-webkit-scrollbar-thumb:active {background-color:#00aff0;}
+::-webkit-scrollbar-track {
+  /*滚动条里面轨道*/
+  // -webkit-box-shadow: inset 0 0 5px rgba(0,0,0,0.2);
+  border-radius: 0;
+  background: #fff;
+}
+
+.ant-modal:not(:has(div.h3-organization-body)) {
+  &-header {
+    border-bottom: none;
+  }
+
+  &-footer {
+    border-top: none;
+  }
+}
+
+.ant-calendar-picker-input {
+  padding-right: 20px !important;
+}

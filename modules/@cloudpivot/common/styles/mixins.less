@@ -1,0 +1,79 @@
+
+@import './hairline.less';
+
+@baseFontSize: 75px;
+
+.px2rem(@name, @px) {
+  @{name}: @px/@baseFontSize * 1rem;
+}
+
+.px2remImp(@name, @px) {
+  @{name}: @px/@baseFontSize * 1rem !important;
+}
+
+.lineclamp(@count) {
+  display: -webkit-box;
+  /* autoprefixer: ignore next */
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: @count;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.ghostbutton() {
+  display: block;
+  height: 100%;
+  .px2rem(padding-left, 30px);
+  .px2rem(padding-right, 30px);
+  .px2rem(padding-top, 12px);
+  .px2rem(padding-bottom, 12px);
+  color: @primary-color;
+  .hairline("all", @primary-color, 30px);
+  box-sizing: border-box;
+}
+
+.cornerbadge() {
+  position: absolute;
+  z-index: 2;
+  .px2rem(top, 4px);
+  .px2rem(right, 4px);
+  .px2rem(border-top-right-radius, 16px);
+  .px2rem(width, 70px);
+  .px2rem(height, 70px);
+  background: url('~@/assets/images/corner.png') no-repeat top right;
+  background-size: contain;
+  overflow: hidden;
+
+  i {
+    position: relative;
+    z-index: 9;
+    display: inline-block;
+    max-width: 3em;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    text-align: center;
+    white-space: nowrap;
+    .px2rem(margin-top, 24px);
+    .px2rem(font-size, 36px);
+    font-style: normal;
+    font-weight: 400;
+    color: #fff;
+    transform: rotate(45deg) scale(0.5);
+    transform-origin: 50% -15%;
+  }
+}
+
+.noscrollbar() {
+  &::-webkit-scrollbar {
+    width: 0;
+    height: 0;
+  }
+}
+
+// 背景图片
+//.bg-image(@url){
+//  src: url(@url + "@2x.png");
+//  @media (-webkit-min-device-pixel-ratio: 3),(min-device-pixel-ratio: 3){
+//    src: url(@url + "@3x.png");
+//  }
+//}

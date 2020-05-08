@@ -1,0 +1,54 @@
+@import './color.less';
+@import './font.less';
+
+.ant-form-item {
+  margin-bottom: 16px;
+  &:last-child {
+    margin-bottom: 0;
+  }
+  &-label {
+    margin-left: -7px;
+    padding-left: 7px;
+    line-height: 32px;
+  }
+  &-required {
+    &::before {
+      position: absolute;
+      z-index: 5;
+      left: -7px;
+      top: 4px;
+      margin-right: 0;
+    }
+  }
+  &-with-help {
+    margin-bottom: 5px;
+  }
+  &-control {
+    line-height: 1;
+  }
+}
+
+.ant-drawer-title{
+  font-size:16px;
+  font-family:PingFangSC-Regular;
+  font-weight:400;
+  color:rgba(0,0,0,1);
+  line-height:24px;
+}
+
+.ant-calendar-picker {
+  vertical-align: middle;
+}
+.ant-calendar-picker-input {
+  .ant-calendar-range-picker-input,
+  .ant-calendar-range-picker-separator {
+    font-family: initial;
+    font-size: 14px;
+  }
+}
+.ant-confirm-btns .ant-btn-danger {
+  background: #17BC94;
+  border: 1px solid #17BC94;
+  transition: all 0.3s;
+  color: #fff;
+}

@@ -1,0 +1,273 @@
+.flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.flex-justify-between {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.divider-vertical {
+  width: 0;
+  height: 100%;
+  border-left: 1px solid #fff;
+}
+
+.text-ellipsis {
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  word-break: break-all;
+}
+
+.label-required {
+  position: relative;
+
+  &::after {
+    content: "*";
+    display: block;
+    font-size: 14px;
+    position: absolute;
+    left: 0;
+    top: 0;
+    transform: translateX(-100%);
+    color: #f5222d;
+    line-height: 19px;
+  }
+}
+
+// ant-design 必填
+.form-required {
+  .ant-form-item-label {
+    label {
+      position: relative;
+
+      &:before {
+        display: inline-block;
+        margin-right: 4px;
+        content: "*";
+        font-family: SimSun;
+        line-height: 1;
+        font-size: 14px;
+        color: #f5222d;
+        position: absolute;
+        z-index: 5;
+        left: -7px;
+        top: 4px;
+        margin-right: 0;
+      }
+
+    }
+  }
+}
+
+
+.ant-form-item-label {
+  // margin-left: -12px;
+  text-align: left;
+}
+
+.cursor-pointer {
+  cursor: pointer !important;
+}
+
+.highlight {
+  color: @primary-color;
+}
+
+::-webkit-scrollbar {
+  width: 7px;
+  height: 7px;
+  cursor: pointer !important;
+}
+
+::-webkit-scrollbar-thumb {
+  /*滚动条里面小方块*/
+  border-radius: 5px;
+  -webkit-box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.45);
+  background: rgba(0, 0, 0, 0.45);
+}
+
+::-webkit-scrollbar-track {
+  /*滚动条里面轨道*/
+  // -webkit-box-shadow: inset 0 0 5px rgba(0,0,0,0.2);
+  border-radius: 0;
+  background: #fff;
+}
+
+#app {
+  // font-family: 'Avenir', Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  // text-align: center;
+
+  // color: #2c3e50;
+  .container {
+    position: absolute;
+    top: 64px;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: #fff;
+    min-width: 1024px;
+  }
+
+  .head-wrap {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 999;
+    min-width: 1024px;
+  }
+}
+
+// ant表单,错误提示
+.has-error .ant-form-explain {
+  font-size: 12px;
+}
+
+.ant-drawer-close-x:before {
+  color: rgba(0, 0, 0, 0.25);
+}
+
+/* 修改ant弹框title字重 */
+.ant-modal-title {
+  font-weight: 400;
+}
+
+.ant-input.error,
+.ant-select.error>div,
+.ant-input-number.error,
+.date-picker.error input {
+  //   border-color:#f5222d !important;
+  background-color: #fff6f6 !important;
+  color: #f5222d !important;
+  border: 1px solid #e0b4b4 !important;
+}
+
+.ant-drawer-body {
+  height: calc(100% - 57px);
+}
+
+// ant-design 弹框关闭 x 样式修改
+.ant-modal-close-x {
+  font-size: 14px;
+  color: rgba(0, 0, 0, 0.25);
+}
+
+// // 修改ant-design placeholder 字体样式
+// .ant-select-selection__placeholder, .ant-select-search__field__placeholder{
+//   color: rgba(0,0,0,0.45);
+// }
+
+.ant-table-small>.ant-table-content .ant-table-row:last-child td {
+  border-bottom: 1px solid #e8e8e8;
+}
+
+// 表头对齐问题统一处理
+
+.ant-table-fixed-header .ant-table-scroll .ant-table-header {
+  overflow: auto;
+  margin-bottom: 0 !important;
+
+  &::-webkit-scrollbar {
+    width: 0;
+    height: 0;
+    display: none;
+  }
+}
+
+.ant-table-thead {
+  th>span {
+    display: block;
+    height: 22px;
+    line-height: 22px;
+    font-weight: 600;
+    color: rgba(0, 0, 0, 0.65);
+  }
+
+  .ant-checkbox-wrapper {
+    vertical-align: top;
+  }
+}
+
+.ant-alert {
+  color: @light-color-2;
+}
+
+.ant-select-tree-node-selected {
+  position: relative;
+  background-color: #fdfdfd !important;
+
+  &::after {
+    content: "\e98f";
+    color: @primary-color;
+    position: absolute;
+    right: 3px;
+    display: inline-block;
+    font-family: "aufontAll" !important;
+    font-weight: bold;
+  }
+}
+
+
+.unsave-confirm {
+
+  &>.ant-modal {
+    width: 400px !important;
+    margin: auto;
+  }
+
+  &--content {
+
+    &>i {
+      color: #faad14;
+      font-size: 22px;
+      margin-right: 16px;
+      vertical-align: middle;
+    }
+  }
+
+  .ant-modal-footer {
+    border-top: none;
+    padding-top: 0;
+  }
+
+}
+
+
+.ant-btn-link {
+  border: none;
+  height: 20px;
+  padding: 0;
+}
+
+.ant-select-tree-dropdown.fixed {
+
+  .ant-select-dropdown-content {
+    height: 100%;
+    overflow: auto;
+  }
+
+  .ant-select-dropdown-search {
+    position: absolute;
+    z-index: 1;
+    background: #fff;
+    width: 97%;
+    top: 0;
+  }
+
+}
+
+.icon.aufontAll:hover {
+  color: @primary-color;
+}
+
+.h3-report-confirm__modal .ant-modal-body {
+  padding: 0 !important;
+}

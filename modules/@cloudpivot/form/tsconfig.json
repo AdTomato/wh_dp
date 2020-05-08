@@ -1,0 +1,18 @@
+{
+    "compilerOptions": {
+        "target": "esnext",
+        "module": "esnext",
+        "strict": true,
+        "experimentalDecorators": true,
+        "emitDecoratorMetadata": true,
+        "outDir": "dist/",
+        "moduleResolution": "node",
+        "declaration": false,
+        "noImplicitAny": true,
+        "removeComments": true,
+        "sourceMap": false,
+        "newLine": "CRLF",
+        "allowJs": true,
+        "alwaysStrict":true
+    }
+}

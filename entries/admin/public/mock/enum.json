@@ -1,0 +1,104 @@
+{
+    "errcode": 0,
+    "errmsg": "查询固定类型成功",
+    "data": {
+        "dateType": [
+            {
+                "name": "SAME",
+                "index": 1,
+                "desc": "当天"
+            },
+            {
+                "name": "BEFORE",
+                "index": 2,
+                "desc": "之前"
+            },
+            {
+                "name": "AFTER",
+                "index": 3,
+                "desc": "之后"
+            }
+        ],
+        "remindConditionOperator": [
+            {
+                "name": "EQ",
+                "index": 1,
+                "operator": "=",
+                "desc": "=="
+            },
+            {
+                "name": "NEQ",
+                "index": 2,
+                "operator": "!=",
+                "desc": "!="
+            },
+            {
+                "name": "GT",
+                "index": 3,
+                "operator": ">",
+                "desc": ">"
+            },
+            {
+                "name": "LT",
+                "index": 4,
+                "operator": "<",
+                "desc": "<"
+            },
+            {
+                "name": "GTEQ",
+                "index": 5,
+                "operator": ">=",
+                "desc": ">="
+            },
+            {
+                "name": "LTEQ",
+                "index": 6,
+                "operator": "<=",
+                "desc": "<="
+            },
+            {
+                "name": "IN",
+                "index": 7,
+                "operator": "in",
+                "desc": "包含"
+            },
+            {
+                "name": "NOT_IN",
+                "index": 8,
+                "operator": "not in",
+                "desc": "不包含"
+            }
+        ],
+        "valueType": [
+            {
+                "name": "DYNAMIC",
+                "index": 1,
+                "desc": "插件值"
+            },
+            {
+                "name": "FIXED",
+                "index": 2,
+                "desc": "固定值"
+            }
+        ],
+        "conditionType": [
+            {
+                "name": "ALL",
+                "index": 1,
+                "desc": "任意"
+            },
+            {
+                "name": "MEET_THE_CONDITIONS",
+                "index": 2,
+                "desc": "满足条件的数据"
+            }
+        ],
+        "remindType": [
+            {
+                "name": "ACCORDING_TO_DATE",
+                "index": 1,
+                "desc": "根据日期控件提醒"
+            }
+        ]
+    }
+}

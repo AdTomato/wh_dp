@@ -1,0 +1,239 @@
+
+@import "./mixins.less";
+
+
+@default-list-height   : 90px;
+
+
+.field{
+  text-align: left;
+  display: flex;
+  position: relative;
+  min-height: @line-height-base;
+  // .px2rem(font-size,@font-size-base);
+  font-size: 15px;
+  .px2rem(padding-left,@font-size-base);
+  .px2rem(padding-right,@font-size-base);
+  align-items: center;
+  .hairline('bottom',#eee);
+
+  &__label{
+    //width: 122px;
+    width: 106px;
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+    color: @light-color-2;
+    //.px2rem(margin-right,@horizontal-padding-md);
+    // padding-top: @base4-padding-base;
+
+    &.top{
+      align-self: flex-start;
+      padding-top:10px;
+    }
+
+  }
+
+  &__control{
+    display: flex;
+    flex-grow: 1;
+    align-items: center;
+    color: @light-color-2 !important;
+    min-height: 1em;
+    text-align: left;
+    //color: @text-color-disabled;
+    overflow: auto;
+  }
+
+  &.dotted{
+    .hairline('bottom',#eee);
+  }
+
+  & > i.icon{
+    color: @text-color-describe;
+    font-size:10px; 
+    height: 13px;
+  }
+
+  /* 使用webkit内核的浏览器 */
+  ::-webkit-input-placeholder{
+    color: @text-color-describe;
+  }
+}
+
+.placeholder{
+  color: @text-color-describe;
+}
+
+.field.required  > .field__label,
+.sheet .required
+{
+
+  position: relative;
+  &:before{
+    content: '*';
+    color: @error-color;    
+    position: absolute;
+    left: -0.5em;
+  }
+
+}
+
+
+.field.relevance-form{
+  .hairline('bottom',#eee);
+}
+
+
+.reverse-relevance{
+
+  &.field{
+    padding-right: 0;
+  }
+
+  & > .field__label{
+    // .px2rem(padding-top,@horizontal-padding-sm);
+    // .px2rem(padding-bottom,@horizontal-padding-sm);
+    padding:10px 0;
+  }
+
+  &__item{
+    width: 100%;
+    min-height: @line-height-base;
+    display: flex;
+    align-items: center;
+    position: relative;
+    
+    &:not(:last-child){
+      .hairline('bottom',#eee);
+    }
+
+    & > div{
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      flex-grow: 1;
+    }
+
+    & > i.icon{
+      color: @text-color-describe;
+      font-size:10px; 
+      height: 13px;
+      .px2rem(margin-right,@font-size-base);
+    }
+
+  }
+}
+
+
+.h3-approve{
+  // position: absolute;
+  // height: 100%;
+  // width: 100%;
+  // background: #f8f8f8;
+  // z-index: 3;
+  // overflow: hidden;
+  .h3-cell__hd{
+    color: @text-color-secondary;
+  }
+
+  &-switch{
+    position: relative;
+    background: #fff;
+    .px2rem(height, @default-list-height);
+    .px2rem(padding-left, @horizontal-padding-lg);
+    .px2rem(padding-right, @horizontal-padding-lg);
+    .hairline('bottom', #eee);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    span{
+      color: #666;
+      font-size: @font-size-base / 2;
+    }
+  }
+  &-select{
+    position: relative;
+    background: #fff;
+    .hairline('bottom', #eee);
+    .h3-cell{
+      .px2rem(height, @default-list-height) !important;
+      padding-top: 0;
+      padding-bottom: 0;
+      .h3-cell__hd{
+        font-size:  @font-size-base / 2;
+      }
+    }
+    &-list{
+      .px2rem(height, 475);
+      overflow: scroll;
+      &-item{
+        position: relative;
+        .px2rem(min-height, @default-list-height);
+        .px2rem(padding-left, @horizontal-padding-lg);
+        .px2rem(padding-right, @horizontal-padding-lg);
+        .px2rem(padding-top, 26);
+        .px2rem(padding-bottom, 26);
+        .hairline('bottom', #eee);
+        &-content{
+          .px2rem(width, 618);
+          .px2rem(margin-right, @vertical-padding-lg );
+          display: inline-block;
+          font-size: @font-size-base / 2;
+          color: @text-color-main ;
+          word-break: break-all;
+        }
+        &-check{
+          color: @primary-color;
+          display: inline-block;
+          position: absolute;
+        }
+      }
+    }
+  }
+}
+
+.error{
+
+  &.h3-org,
+  &.h3-upload,
+  &.h3-checkbox-list,
+  & > .h3-list-item,
+  & .h3-field,
+  &.field
+  {
+    background: @error-bg;
+  }
+
+}
+
+
+.h3-textarea-control > textarea{
+  min-height: 2em;
+}
+
+.h3-checkbox-list-0 .h3-field-box > .h3-field-icon-wrapper{
+  position: static;
+  width: 23px;
+  text-align: center;
+  line-height: 45px;
+}
+
+.h3-upload-list-file-item-content{
+  align-items: initial !important;
+
+  &-action{
+    padding: 0 0.8em;
+    display: inline-flex;
+    align-items: center;
+  }
+
+}
+
+.h3-upload-list-file-item-progress{
+  background: rgba(41,112,255,0.1) !important;
+}
+
+.h3-datetime-clear,.h3-popup-header-clear{
+  left: 57px !important;
+}

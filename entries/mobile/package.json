@@ -1,0 +1,51 @@
+{
+  "name": "cloudpivot-mobile",
+  "version": "1.4.0-alpha.20",
+  "private": true,
+  "scripts": {
+    "dll": "webpack -p --progress --config ./webpack.dll.conf.js",
+    "serve": "vue-cli-service serve",
+    "dev": "rimraf node_modules/.cache && vue-cli-service serve --mode debug",
+    "dev2": "rimraf node_modules/.cache && vue-cli-service serve --mode debug2",
+    "build-dev": "vue-cli-service build --mode development",
+    "build-prod": "rimraf node_modules/.cache && vue-cli-service build --mode production",
+    "build": "npm run build-prod",
+    "lint": "vue-cli-service lint",
+    "analyze": "cross-env npm_config_report=true npm run build-prod"
+  },
+  "dependencies": {
+    "add-asset-html-webpack-plugin": "^3.1.3",
+    "babel-polyfill": "^6.26.0",
+    "clean-webpack-plugin": "^3.0.0",
+    "compression-webpack-plugin": "^3.0.0",
+    "happypack": "^5.0.1",
+    "simple-progress-webpack-plugin": "^1.1.2",
+    "webpack-cli": "^3.3.9"
+  },
+  "devDependencies": {
+    "@vue/cli-plugin-babel": "^3.2.0",
+    "@vue/cli-plugin-eslint": "^3.2.0",
+    "@vue/cli-plugin-typescript": "^3.2.0",
+    "@vue/cli-service": "^3.2.0",
+    "@vue/eslint-config-airbnb": "3.0.3",
+    "@vue/eslint-config-typescript": "^3.2.0",
+    "babel-core": "7.0.0-bridge.0",
+    "babel-eslint": "^10.0.1",
+    "babel-plugin-import": "^1.11.0",
+    "babel-plugin-syntax-dynamic-import": "^6.18.0",
+    "babel-plugin-syntax-jsx": "^6.18.0",
+    "babel-plugin-transform-vue-jsx": "^3.7.0",
+    "cross-env": "^5.2.0",
+    "eslint": "^5.12.1",
+    "eslint-plugin-html": "^4.0.6",
+    "eslint-plugin-typescript": "^0.13.0",
+    "eslint-plugin-vue": "^5.0.0",
+    "less": "^3.0.4",
+    "less-loader": "^4.1.0",
+    "rimraf": "^2.6.3",
+    "typescript": "~3.1.1",
+    "vconsole": "^3.3.0",
+    "vue-template-compiler": "2.6.10",
+    "webpack-bundle-analyzer": "^3.0.3"
+  }
+}

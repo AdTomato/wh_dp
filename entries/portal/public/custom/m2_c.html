@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title>全局自定义模板</title>
+</head>
+<body>
+<!--css配置-->
+<style>
+</style>
+<!--是否加载全局模板 请填写正确的load-template 格式：http://www.xxx.com/-->
+<section id="rootTemplate" load-template=""></section>
+<!--配置API地址 可以覆盖root配置 api-url格式：http://www.xxx.com/-->
+<section id="controller" api-url=""></section>
+<!--RootToolbar配置-->
+<section id="toolbar">
+</section>
+<!--Template配置 key是唯一标识，请不要修改已保证页面正常运行-->
+<section type="template" id="template">
+<a-row>
+    <a-col>
+        <a-title key="2031552047784910" data-name="m2"></a-title>
+    </a-col>
+</a-row>
+<a-row>
+    <a-col>
+        <a-sequence-no key="sequenceNo" data-name="单据号"></a-sequence-no>
+    </a-col>
+</a-row>
+<a-row>
+    <a-col>
+        <a-created-time key="createdTime" data-name="创建时间"></a-created-time>
+    </a-col>
+    <a-col>
+        <a-create-by key="creater" data-name="创建人"></a-create-by>
+    </a-col>
+    <a-col>
+        <a-create-by-org key="createdDeptId" data-name="创建人部门"></a-create-by-org>
+    </a-col>
+</a-row>
+<a-row>
+    <a-col>
+        <a-owner key="owner" data-name="拥有者"></a-owner>
+    </a-col>
+    <a-col>
+        <a-modify-b key="modifier" data-name="修改人"></a-modify-b>
+    </a-col>
+    <a-col>
+        <a-modified-time key="modifiedTime" data-name="修改时间"></a-modified-time>
+    </a-col>
+</a-row>
+<a-row>
+    <a-col>
+        <a-group-title key="2001552047784910" data-name="业务标题"></a-group-title>
+    </a-col>
+</a-row>
+<a-row>
+    <a-col>
+        <a-association-form key="RelevanceForm1552556441138" data-name="关联表单" data-query-code="m33" data-schema-code="m33" data-conditions="Logic1552555494031:{Logic1}" data-mappings="ShortText1554792230897:{ShortText1552283340882}"></a-association-form>
+    </a-col>
+    <a-col>
+        <a-text key="ShortText1552047795348" data-name="单行文本" data-regexp="/^[\u4e00-\u9fa5] $/" data-regexp-text="请输入中文字符"></a-text>
+    </a-col>
+    <a-col>
+        <a-checkbox key="ShortText1554893550954" data-name="复选框" data-default-value="a;b" data-options="a;b;v"></a-checkbox>
+    </a-col>
+</a-row>
+<a-row>
+    <a-col>
+        <a-date key="Date1552393682971" data-name="日期" data-min-date="{createdTime}"></a-date>
+    </a-col>
+</a-row>
+<a-row>
+    <a-col>
+        <a-logic key="Logic1" data-name="逻辑" data-display-formula="{ShortText1554893550954} 包含 'a'"></a-logic>
+    </a-col>
+    <a-col>
+        <a-number key="Number1552047796760" data-name="数值" data-required-formula="{Logic1} == true" data-compute-formula="count({Sheet1553322937985.amount})" data-regexp="/^[\ \-]?\d*?\.?\d*?$/" data-regexp-text="请输入一个数字" data-format="tenths"></a-number>
+    </a-col>
+    <a-col>
+        <a-user-selector key="StaffSelector1552220080264" data-name="人员单选" data-dept-visible="all"></a-user-selector>
+    </a-col>
+</a-row>
+<a-row>
+    <a-col>
+        <a-dropdown key="ShortText1552136674134" data-name="下拉框" data-options="fdgdfgdfdgdfgdfdgdfgdfdgdfgdfdgdfgdfdgdfgdfdgdfgdfdgdfgdfdgdfgdfdgdfgd;b;c"></a-dropdown>
+    </a-col>
+    <a-col>
+        <a-association-form key="RelevanceForm1552193334229" data-name="关联表单" data-query-code="test2" data-schema-code="test2" data-conditions="name:5" data-mappings="sequenceNo:{ShortText1552047795348}"></a-association-form>
+    </a-col>
+    <a-col>
+        <a-location key="ShortText1552283340882" data-name="位置" data-display-formula="{Logic1} == true" data-required-formula="{Logic1} == true && {Number1552047796760} == 7"></a-location>
+    </a-col>
+</a-row>
+<a-row>
+    <a-col>
+        <a-attachment key="attachments" data-name="附件1"></a-attachment>
+    </a-col>
+</a-row>
+<a-row>
+    <a-col>
+        <a-description key="2021552534720024" data-name="描述说明描述说明描述说明描述说明描述说明描述说明描述说明描述说明描述说明描述说明描述说明描述说明描述说明描述说明描述说明描述说明描述说明描述说明描述说明描述说明描述说明描述说明描述说明描述说明描述说明描述说明描述说明描述说明描述说明描述说明描述说明描述说明描述说明描述说明描述说明描述说明描述说明描述说明描述说明描述说明描述说明描述说明描述说明描述说明"></a-description>
+    </a-col>
+</a-row>
+<a-row>
+    <a-col>
+        <a-sheet key="Sheet1553322937985" data-name="子表" data-display-formula="{Logic1} == true" data-mobile-display-mode="page">
+            <a-columns>
+                <a-text key="ShortText1553322942757" data-name="单行文本"></a-text>
+                <a-attachment key="Attachment1553322946052" data-name="附件"></a-attachment>
+                <a-number key="price" data-name="数值"></a-number>
+                <a-number key="amount" data-name="数值"></a-number>
+                <a-number key="total" data-name="数值" data-compute-formula="{Sheet1553322937985.price} {Sheet1553322937985.amount}"></a-number>
+            </a-columns>
+            <a-totals>
+                <a-total key="stat-price" column-key="price" data-statistic-mode="sum" data-format="integer" data-name="统计"></a-total>
+                <a-total key="stat-amount" column-key="amount" data-statistic-mode="sum" data-format="integer" data-name="统计"></a-total>
+                <a-total key="stat-total" column-key="total" data-statistic-mode="sum" data-format="integer" data-name="统计"></a-total>
+            </a-totals>
+        </a-sheet>
+    </a-col>
+</a-row>
+<a-row>
+    <a-col>
+        <a-association-form key="RelevanceForm1554967094434" data-name="关联表单" data-query-code="m44" data-schema-code="m44" data-mappings="sequenceNo:{ttttt}" data-sheet-mappings="Sheet1554966955640:{sheet222}"></a-association-form>
+    </a-col>
+    <a-col>
+        <a-text key="ttttt" data-name="单行文本"></a-text>
+    </a-col>
+</a-row>
+<a-row>
+    <a-col>
+        <a-sheet key="sheet222" data-name="子表">
+            <a-columns>
+                <a-radio key="text1" data-name="单行文本" data-default-value="a" data-options="a;b;c"></a-radio>
+                <a-logic key="logic" data-name="逻辑"></a-logic>
+                <a-dropdown key="text" data-name="单行文本"></a-dropdown>
+                <a-date key="date" data-name="日期"></a-date>
+                <a-number key="number" data-name="数值"></a-number>
+                <a-location key="location" data-name="位置"></a-location>
+            </a-columns>
+            <a-totals>
+                <a-total key="stat-Number1554967047746" column-key="number" data-statistic-mode="sum" data-format="integer" data-name="统计"></a-total>
+            </a-totals>
+        </a-sheet>
+    </a-col>
+</a-row>
+</section>
+<!--自定义事件配置-->
+<script id="customScript">
+    (function(form){
+        /**
+         * 用户自定义JS区域
+         */
+        /**
+         * 事件绑定，form.on
+         * @param eventType 事件类型
+         * @params function 事件
+         * @param  cover    true, false 是否覆盖root的生命周期 默认不覆盖 
+         */
+        //数据加载后，渲染之前，this为window
+        form.on('onLoad',function(data, dataPermission){
+           
+            var logic = dataPermission.sheet222.subDataPermission.find(x => x.propertyCode === 'logic');
+            logic.e = false;
+
+        },'cover');
+        //渲染完成后
+        form.on('onRendered',function(data){});
+        //内置校验完成后，返回false阻止提交
+        form.on('onValidate',function(action,data){});
+        //操作前（包含自定义按钮）执行，返回false阻止按钮操作
+        form.on('onPreAction',function(action,data){});
+        //自定义按钮执行
+        form.on('onCustomAction',function(action,data){});
+        //操作完成后执行
+        form.on('onActionDone',function(action,data,httpRes){});
+    })
+</script>
+<script src="/admin/config.js" class="templateScript"></script>
+<script src="/admin/js/chunk-vendors.js" class="templateScript"></script>
+<script src="/admin/js/template.js" class="templateScript"></script>
+</body>
+</html>

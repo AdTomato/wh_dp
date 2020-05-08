@@ -1,0 +1,10 @@
+config.js
+*.config.js
+.browserslistrc
+.eslintignore
+.gitignore
+H3BPM Logo.svg
+package.json
+package-lock.json
+tsconfig.json
+**/assets/*

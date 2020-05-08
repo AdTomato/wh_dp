@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="44px" height="44px" viewBox="0 0 44 44" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 53.1 (72631) - https://sketchapp.com -->
+    <title>qrcode-o copy 2</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <polygon id="path-1" points="0 0 44 0 44 44"></polygon>
+        <polygon id="path-3" points="0 0 44 44 0 44"></polygon>
+        <filter x="-36.4%" y="-40.9%" width="172.7%" height="172.7%" filterUnits="objectBoundingBox" id="filter-4">
+            <feOffset dx="0" dy="-2" in="SourceAlpha" result="shadowOffsetOuter1"></feOffset>
+            <feGaussianBlur stdDeviation="5" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
+            <feColorMatrix values="0 0 0 0 0   0 0 0 0 0   0 0 0 0 0  0 0 0 0.2 0" type="matrix" in="shadowBlurOuter1"></feColorMatrix>
+        </filter>
+    </defs>
+    <g id="登录页" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="画板" transform="translate(-797.000000, -184.000000)">
+            <g id="分组-4-copy" transform="translate(513.000000, 152.000000)">
+                <g id="qrcode-o-copy-2" transform="translate(284.000000, 32.000000)">
+                    <mask id="mask-2" fill="white">
+                        <use xlink:href="#path-1"></use>
+                    </mask>
+                    <g id="Mask"></g>
+                    <g id="qrcode-o" mask="url(#mask-2)">
+                        <rect id="矩形" fill="#000000" fill-rule="nonzero" opacity="0" x="0" y="0" width="44" height="44"></rect>
+                        <g id="desktop-o" transform="translate(10.000000, 0.000000)" fill-rule="nonzero">
+                            <rect id="矩形" fill="#000000" opacity="0" x="0" y="0" width="34" height="34"></rect>
+                            <path d="M33.4355469,3.86816406 C33.8007812,4.24446615 33.9833984,4.68717448 33.9833984,5.19628906 L33.9833984,22.1298828 C33.9833984,22.6611328 33.8007812,23.109375 33.4355469,23.4746094 C33.0703125,23.8398438 32.6220703,24.0224609 32.0908203,24.0224609 L18.0126953,24.0224609 L18.0126953,28.6044922 L22.9267578,28.6044922 C23.5101992,28.6125285 23.9812215,29.0835508 23.9892578,29.6669922 C23.9936865,29.9444403 23.8788209,30.2104448 23.6738281,30.3974609 C23.4743298,30.5922663 23.2055706,30.69977 22.9267578,30.6962891 L11.0400391,30.6962891 C10.761199,30.6999167 10.4923856,30.5923913 10.2929688,30.3974609 C10.0878686,30.2105214 9.97298103,29.9444659 9.97753906,29.6669922 C9.98557535,29.0835508 10.4565977,28.6125285 11.0400391,28.6044922 L15.9208984,28.6044922 L15.9208984,24.0224609 L1.90917969,24.0224609 C1.4000651,24.0224609 0.957356771,23.8398437 0.581054688,23.4746094 C0.204752604,23.109375 0.0166015625,22.6611328 0.0166015625,22.1298828 L0.0166015625,5.19628906 C0.0166015625,4.68717448 0.204752604,4.24446615 0.581054688,3.86816406 C0.957356771,3.49186198 1.4000651,3.30371094 1.90917969,3.30371094 L32.0908203,3.30371094 C32.6220703,3.30371094 33.0703125,3.49186198 33.4355469,3.86816406 Z M2.10839844,5.39550781 L2.10839844,21.9306641 L31.8916016,21.9306641 L31.8916016,5.39550781 L2.10839844,5.39550781 Z" id="形状" fill="#999999"></path>
+                        </g>
+                        <g id="矩形">
+                            <use fill="black" fill-opacity="1" filter="url(#filter-4)" xlink:href="#path-3"></use>
+                            <use fill="#FFFFFF" fill-rule="evenodd" xlink:href="#path-3"></use>
+                        </g>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

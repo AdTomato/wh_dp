@@ -1,0 +1,86 @@
+.flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.flex-justify-between {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.divider-vertical {
+  width: 0;
+  height: 100%;
+  border-left: 1px solid #fff;
+}
+.text-ellipsis {
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.cursor-pointer {
+  cursor: pointer !important;
+}
+// ant表单,错误提示
+.has-error .ant-form-explain {
+  font-size: 12px;
+}
+.ant-drawer-close-x:before {
+  color: rgba(0, 0, 0, 0.25);
+}
+/* 修改ant弹框title字重 */
+.ant-modal-title {
+  font-weight: 400;
+}
+::-webkit-scrollbar {
+  width: 7px;
+  height: 7px;
+  cursor: pointer !important;
+}
+::-webkit-scrollbar-thumb {/*滚动条里面小方块*/
+  border-radius: 5px;
+  -webkit-box-shadow: inset 0 0 5px rgba(0,0,0,0.45);
+  background: rgba(0,0,0,0.45);
+}
+::-webkit-scrollbar-track {/*滚动条里面轨道*/
+  // -webkit-box-shadow: inset 0 0 5px rgba(0,0,0,0.2);
+  border-radius: 0;
+  background: #fff;
+}
+
+
+.ant-input.error,
+.ant-select.error > div,
+.ant-input-number.error,
+.date-picker.error input{
+//   border-color:#f5222d !important;
+  background-color: #fff6f6 !important;
+  color: #f5222d !important;
+  border: 1px solid #e0b4b4 !important;
+}
+#app {
+  // font-family: 'Avenir', Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-align: center;
+  color: #2c3e50;
+  .container {
+    position: absolute;
+    top: 64px;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: #fff;
+  }
+  .head-wrap {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 999;
+  }
+}
