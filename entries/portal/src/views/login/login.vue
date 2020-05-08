@@ -66,7 +66,7 @@ export default class Login extends Vue {
   defaultView: string = 'qrcode'; // 默认展示页面
 
   async mounted() {
-    // 获取环境配置
+    // 获取环境配置  测试提交
     localStorage.removeItem('token');
     localStorage.removeItem('refresh_token');
     localStorage.removeItem('expireTime');
