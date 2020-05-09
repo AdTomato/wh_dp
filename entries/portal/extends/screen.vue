@@ -98,6 +98,36 @@
                         <li><div class="round bj_r"></div>保修</li>
                     </ul>
                 </div>
+
+                <div class="clear vehicle">
+                   <ul class="ve_ul">
+                        <li><div class="list_bj">抢险救援消防车 <div class="round bj_g fr"></div>  </div> <div class="list_text">
+                            <div class="mt2">发动机功率:***</div>
+                            <div class="list_text">起重重量:1500吨</div></div>
+                        </li>
+                        <li><div class="list_bj">五十铃水罐消防车 <div class="round bj_y fr"></div></div> <div class="list_text">
+                            <div class="mt2">发动机功率:***</div>
+                            <div class="list_text">起重重量:1500吨</div></div>
+                        </li>
+                        <li><div class="list_bj">豪沃水罐消防车 <div class="round bj_r fr"></div></div> <div class="list_text">
+                            <div class="mt2">发动机功率:***</div>
+                            <div class="list_text">起重重量:1500吨</div></div>
+                        </li>
+                        <li><div class="list_bj">德国曼压沫水罐消防车 <div class="round bj_g fr"></div></div> <div class="list_text">
+                            <div class="mt2">发动机功率:***</div>
+                            <div class="list_text">起重重量:1500吨</div></div>
+                        </li>
+                        <li><div class="list_bj">45米叠高平台消防车 <div class="round bj_g fr"></div></div> <div class="list_text">
+                            <div class="mt2">发动机功率:***</div>
+                            <div class="list_text">起重重量:1500吨</div></div>
+                        </li>
+                        <li><div class="list_bj">32米高喷消防车 <div class="round bj_r fr"></div></div> <div class="list_text">
+                            <div class="mt2">发动机功率:***</div>
+                            <div class="list_text">起重重量:1500吨</div></div>
+                        </li>
+                    </ul>
+                </div>
+
             </div>
 
             <div class="right-bottom">
@@ -105,6 +135,23 @@
                     <div class="title">
                          值班信息
                     </div>
+                </div>
+                <div class="duty">
+                   <ul class="duty_ul">
+                        <li class="size17">大队全勤指挥部:</li>
+                        <li style="float: left;">巴荣兵</li>
+                        <li style="float: left;margin-left: 10px;">霍建华</li>
+                    </ul>
+                </div>
+
+                <div class="duty">
+                   <ul class="duty_ul">
+                        <li class="size17">大队全勤指挥部:</li>
+                        <li style="float: left;">巴荣兵</li>
+                        <li class="duty_ul_li">胡歌</li>
+                        <li class="duty_ul_li">彭于晏</li>
+                        <li class="duty_ul_li">薛之谦</li>
+                    </ul>
                 </div>
             </div>
         </div>
