@@ -102,7 +102,6 @@
                 <div class="clear vehicle">
                     <vue-seamless-scroll :data="listData" class="seamless-warp" :class-option="classOption">
                         <ul class="ve_ul">
-
                             <li v-for="item in listData">
                                 <div class="list_bj">{{item.xfc}}
                                      <div v-if="item.status==1" class="round bj_y fr"></div>
@@ -112,37 +111,6 @@
                                 <div class="mt2">发动机功率:{{item.gl}}</div>
                                 <div class="list_text">起重重量:{{item.zl}}</div></div>
                             </li>
-
-                            <!-- <li ><div class="list_bj">抢险救援消防车 <div class="round bj_g fr"></div>  </div> <div class="list_text">
-                                <div class="mt2">发动机功率:***</div>
-                                <div class="list_text">起重重量:1500吨</div></div>
-                            </li>
-                            <li><div class="list_bj">五十铃水罐消防车 <div class="round bj_y fr"></div></div> <div class="list_text">
-                                <div class="mt2">发动机功率:***</div>
-                                <div class="list_text">起重重量:1500吨</div></div>
-                            </li>
-                            <li><div class="list_bj">豪沃水罐消防车 <div class="round bj_r fr"></div></div> <div class="list_text">
-                                <div class="mt2">发动机功率:***</div>
-                                <div class="list_text">起重重量:1500吨</div></div>
-                            </li>
-                            <li><div class="list_bj">德国曼压沫水罐消防车 <div class="round bj_g fr"></div></div> <div class="list_text">
-                                <div class="mt2">发动机功率:***</div>
-                                <div class="list_text">起重重量:1500吨</div></div>
-                            </li>
-                            <li><div class="list_bj">45米叠高平台消防车 <div class="round bj_g fr"></div></div> <div class="list_text">
-                                <div class="mt2">发动机功率:***</div>
-                                <div class="list_text">起重重量:1500吨</div></div>
-                            </li>
-                            <li><div class="list_bj">32米高喷消防车 <div class="round bj_r fr"></div></div> <div class="list_text">
-                                <div class="mt2">发动机功率:***</div>
-                                <div class="list_text">起重重量:1500吨</div></div>
-                            </li> -->
-
-                            <!-- <ul class="item">
-                                <li v-for="item in listData">
-                                    <span class="title" v-text="item.title"></span><span class="date" v-text="item.date"></span>
-                                </li>
-                            </ul> -->
                         </ul>
                     </vue-seamless-scroll>
                 </div>
@@ -178,41 +146,6 @@
         
       </div>
     </div>
-    <!-- <el-row>
-      <el-button>默认按钮</el-button>
-      <el-button type="primary">主要按钮</el-button>
-      <el-button type="success">成功按钮</el-button>
-      <el-button type="info">信息按钮</el-button>
-      <el-button type="warning">警告按钮</el-button>
-      <el-button type="danger">危险按钮</el-button>
-    </el-row>
-
-    <el-row>
-      <el-button plain>朴素按钮</el-button>
-      <el-button type="primary" plain>主要按钮</el-button>
-      <el-button type="success" plain>成功按钮</el-button>
-      <el-button type="info" plain>信息按钮</el-button>
-      <el-button type="warning" plain>警告按钮</el-button>
-      <el-button type="danger" plain>危险按钮</el-button>
-    </el-row>
-
-    <el-row>
-      <el-button round>圆角按钮</el-button>
-      <el-button type="primary" round>主要按钮</el-button>
-      <el-button type="success" round>成功按钮</el-button>
-      <el-button type="info" round>信息按钮</el-button>
-      <el-button type="warning" round>警告按钮</el-button>
-      <el-button type="danger" round>危险按钮</el-button>
-    </el-row>
-
-    <el-row>
-      <el-button icon="el-icon-search" circle></el-button>
-      <el-button type="primary" icon="el-icon-edit" circle></el-button>
-      <el-button type="success" icon="el-icon-check" circle></el-button>
-      <el-button type="info" icon="el-icon-message" circle></el-button>
-      <el-button type="warning" icon="el-icon-star-off" circle></el-button>
-      <el-button type="danger" icon="el-icon-delete" circle></el-button>
-    </el-row> -->
   </div>
 </template>
 <style>
