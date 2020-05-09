@@ -21,6 +21,7 @@
     "element-ui": "^2.13.1",
     "happypack": "^5.0.1",
     "simple-progress-webpack-plugin": "^1.1.2",
+    "vue-seamless-scroll": "^1.1.21",
     "webpack-cli": "^3.3.9"
   },
   "devDependencies": {

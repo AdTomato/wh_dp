@@ -69,7 +69,7 @@
                 </div>
                 <div class="info">
                     <ul>
-                        <li><div class="round"></div>警情信息</li>
+                        <li><div class="round1"></div>警情信息</li>
                     </ul>
                 </div>
 
@@ -100,32 +100,51 @@
                 </div>
 
                 <div class="clear vehicle">
-                   <ul class="ve_ul">
-                        <li><div class="list_bj">抢险救援消防车 <div class="round bj_g fr"></div>  </div> <div class="list_text">
-                            <div class="mt2">发动机功率:***</div>
-                            <div class="list_text">起重重量:1500吨</div></div>
-                        </li>
-                        <li><div class="list_bj">五十铃水罐消防车 <div class="round bj_y fr"></div></div> <div class="list_text">
-                            <div class="mt2">发动机功率:***</div>
-                            <div class="list_text">起重重量:1500吨</div></div>
-                        </li>
-                        <li><div class="list_bj">豪沃水罐消防车 <div class="round bj_r fr"></div></div> <div class="list_text">
-                            <div class="mt2">发动机功率:***</div>
-                            <div class="list_text">起重重量:1500吨</div></div>
-                        </li>
-                        <li><div class="list_bj">德国曼压沫水罐消防车 <div class="round bj_g fr"></div></div> <div class="list_text">
-                            <div class="mt2">发动机功率:***</div>
-                            <div class="list_text">起重重量:1500吨</div></div>
-                        </li>
-                        <li><div class="list_bj">45米叠高平台消防车 <div class="round bj_g fr"></div></div> <div class="list_text">
-                            <div class="mt2">发动机功率:***</div>
-                            <div class="list_text">起重重量:1500吨</div></div>
-                        </li>
-                        <li><div class="list_bj">32米高喷消防车 <div class="round bj_r fr"></div></div> <div class="list_text">
-                            <div class="mt2">发动机功率:***</div>
-                            <div class="list_text">起重重量:1500吨</div></div>
-                        </li>
-                    </ul>
+                    <vue-seamless-scroll :data="listData" class="seamless-warp" :class-option="classOption">
+                        <ul class="ve_ul">
+
+                            <li v-for="item in listData">
+                                <div class="list_bj">{{item.xfc}}
+                                     <div v-if="item.status==1" class="round bj_y fr"></div>
+                                     <div v-else-if="item.status==2" class="round bj_r fr"></div>
+                                     <div v-else="item.status==3" class="round bj_g fr"></div>
+                                     </div> <div class="list_text">
+                                <div class="mt2">发动机功率:{{item.gl}}</div>
+                                <div class="list_text">起重重量:{{item.zl}}</div></div>
+                            </li>
+
+                            <!-- <li ><div class="list_bj">抢险救援消防车 <div class="round bj_g fr"></div>  </div> <div class="list_text">
+                                <div class="mt2">发动机功率:***</div>
+                                <div class="list_text">起重重量:1500吨</div></div>
+                            </li>
+                            <li><div class="list_bj">五十铃水罐消防车 <div class="round bj_y fr"></div></div> <div class="list_text">
+                                <div class="mt2">发动机功率:***</div>
+                                <div class="list_text">起重重量:1500吨</div></div>
+                            </li>
+                            <li><div class="list_bj">豪沃水罐消防车 <div class="round bj_r fr"></div></div> <div class="list_text">
+                                <div class="mt2">发动机功率:***</div>
+                                <div class="list_text">起重重量:1500吨</div></div>
+                            </li>
+                            <li><div class="list_bj">德国曼压沫水罐消防车 <div class="round bj_g fr"></div></div> <div class="list_text">
+                                <div class="mt2">发动机功率:***</div>
+                                <div class="list_text">起重重量:1500吨</div></div>
+                            </li>
+                            <li><div class="list_bj">45米叠高平台消防车 <div class="round bj_g fr"></div></div> <div class="list_text">
+                                <div class="mt2">发动机功率:***</div>
+                                <div class="list_text">起重重量:1500吨</div></div>
+                            </li>
+                            <li><div class="list_bj">32米高喷消防车 <div class="round bj_r fr"></div></div> <div class="list_text">
+                                <div class="mt2">发动机功率:***</div>
+                                <div class="list_text">起重重量:1500吨</div></div>
+                            </li> -->
+
+                            <!-- <ul class="item">
+                                <li v-for="item in listData">
+                                    <span class="title" v-text="item.title"></span><span class="date" v-text="item.date"></span>
+                                </li>
+                            </ul> -->
+                        </ul>
+                    </vue-seamless-scroll>
                 </div>
 
             </div>
@@ -197,6 +216,10 @@
   </div>
 </template>
 <style>
+ .seamless-warp {
+        height: 229px;
+        overflow: hidden;
+    }
 </style>
 
 <script>
@@ -205,15 +228,79 @@ import './assets/lib/rem.js'
 import ElementUI from "element-ui";
 import "element-ui/lib/theme-chalk/index.css";
 import axios from "axios";
-Vue.use(ElementUI, axios);
+import vueSeamlessScroll from 'vue-seamless-scroll'
+Vue.use(ElementUI, axios,vueSeamlessScroll);
 export default {
   name: "hello",
   data() {
     return {
-      url: "https://kp.ctce.com.cn:10088/api"
+      url: "https://kp.ctce.com.cn:10088/api",
+      listData: [{
+                   'xfc': '抢险救援消防车',
+                   'gl': '***',
+                   'zl': '****',
+                   'status':1
+                 }, {
+                   'xfc': '五十铃水罐消防车',
+                   'gl': '***',
+                   'zl': '****',
+                   'status':2
+                 }, {
+                    'xfc': '豪沃水罐消防车',
+                     'gl': '***',
+                     'zl': '****',
+                     'status':1
+                 }, {
+                     'xfc': '德国曼压沫水罐消防车',
+                     'gl': '***',
+                     'zl': '****',
+                     'status':2
+                 }, {
+                     'xfc': '45米叠高平台消防车',
+                     'gl': '***',
+                     'zl': '****',
+                     'status':3
+                 }, {
+                     'xfc': '32米高喷消防车',
+                     'gl': '***',
+                     'zl': '****',
+                     'status':2
+                 }, {
+                     'xfc': '德国曼压沫水罐消防车',
+                     'gl': '***',
+                     'zl': '****',
+                     'status':1
+                 }, {
+                     'xfc': '豪沃水罐消防车',
+                     'gl': '***',
+                     'zl': '****',
+                     'status':2
+                 }, {
+                     'xfc': '抢险救援消防车',
+                     'gl': '***',
+                     'zl': '****',
+                     'status':3
+                 }]
     };
   },
-  methods: {}
+  components: {    //组件
+        vueSeamlessScroll
+    },
+  methods: {},
+  computed: {
+     classOption () {
+       return {
+        step: 0.2, // 数值越大速度滚动越快
+        limitMoveNum: 2, // 开始无缝滚动的数据量 this.dataList.length
+        hoverStop: true, // 是否开启鼠标悬停stop
+        direction: 1, // 0向下 1向上 2向左 3向右
+        openWatch: true, // 开启数据实时监控刷新dom
+        singleHeight: 0, // 单步运动停止的高度(默认值0是无缝不停止的滚动) direction => 0/1
+        singleWidth: 0, // 单步运动停止的宽度(默认值0是无缝不停止的滚动) direction => 2/3
+        waitTime: 1000 // 单步运动停止的时间(默认值1000ms)
+      }
+    }
+  }
 };
 </script>
 
