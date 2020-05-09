@@ -55,6 +55,60 @@
       </div>
       <!-- 右边 -->
       <div class="screen-right">
+
+          <!-- xsheng 添加 srtat -->
+        <div class="rigth">
+            <div class="right-top">
+                <div class="text">
+                    <div class="title">
+                        今日警情信息
+                    </div>
+                </div>
+                <div class="num">
+                    接处警总量(8起)
+                </div>
+                <div class="info">
+                    <ul>
+                        <li><div class="round"></div>警情信息</li>
+                    </ul>
+                </div>
+
+                <div class="info">
+                    <ul class="tel_ul">
+                        <li>火灾扑救 <div class="color_r mt">(1起)</div> </li>
+                        <li>抢险救援 <div class="color_b mt">(2起)</div> </li>
+                        <li>社会救助 <div class="color_y mt">(3起)</div> </li>
+                        <li>虚假报警 <div class="color_g mt">(5起)</div> </li>
+                        <li>其他警情 <div class="color_o mt">(0起)</div> </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="right-content">
+                <div class="text1">
+                     <div class="title">
+                         值勤车辆
+                    </div>
+                </div>
+
+                <div class="num1">
+                   <ul class="zq_ul">
+                        <li><div class="round bj_g"></div>在位</li>
+                        <li><div class="round bj_y"></div>出动</li>
+                        <li><div class="round bj_r"></div>保修</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="right-bottom">
+                <div class="text2">
+                    <div class="title">
+                         值班信息
+                    </div>
+                </div>
+            </div>
+        </div>
+    <!-- xsheng 添加 end -->
         
       </div>
     </div>
@@ -118,4 +172,5 @@ export default {
 
 <style lang="less">
   @import "./assets/styles/screen.less";
+  @import "./assets/styles/right.less";
 </style>
