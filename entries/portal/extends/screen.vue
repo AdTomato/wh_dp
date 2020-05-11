@@ -2,20 +2,20 @@
   <div class="screen">
     <div class="screen-title">
       <h2>武汉市汉阳区消防救援大队</h2>
-      <img src="./assets/images/navbar_bg.png" alt="">
+      <img src="./assets/images/navbar_bg.png" alt />
     </div>
     <div class="screen-main">
       <!-- 左边 -->
       <div class="screen-left">
         <!-- 天气情况 -->
         <div class="screen-item">
-          <img class="screen-item-bg" src="./assets/images/left_item_bg.png" alt="">
+          <img class="screen-item-bg" src="./assets/images/left_item_bg.png" alt />
           <div class="screen-item-main">
             <h3 class="screen-item-title">天气情况</h3>
             <div class="weather-info">
               <span>2020年4月7号</span>
               <span>星期二</span>
-              <img src="./assets/images/sun_icon.png" alt="">
+              <img src="./assets/images/sun_icon.png" alt />
               <span>7-18℃</span>
             </div>
             <ul class="weather-item">
@@ -48,11 +48,11 @@
         </div>
         <!-- 通知公告 -->
         <div class="screen-item">
-          <img class="screen-item-bg" src="./assets/images/left_item_bg.png" alt="">
+          <img class="screen-item-bg" src="./assets/images/left_item_bg.png" alt />
           <div class="screen-item-main">
             <h3 class="screen-item-title">通知公告</h3>
             <div class="warn-info">
-            <img class="notice-icon" src="./assets/images/notice_icon.png" alt="">
+              <img class="notice-icon" src="./assets/images/notice_icon.png" alt />
               <span>公告：</span>
               <div class="warn-txt">
                 <p>关于建设平安武汉</p>
@@ -65,7 +65,7 @@
         </div>
         <!-- 本周重点工作 -->
         <div class="screen-item">
-          <img class="screen-item-bg" src="./assets/images/left_item_bg.png" alt="">
+          <img class="screen-item-bg" src="./assets/images/left_item_bg.png" alt />
           <div class="screen-item-main">
             <h3 class="screen-item-title">本周重点工作</h3>
             <ul class="important-work">
@@ -90,179 +90,217 @@
         </div>
       </div>
       <!-- 中间 -->
-      <div class="screen-center">
-        
-      </div>
+      <div class="screen-center"></div>
       <!-- 右边 -->
       <div class="screen-right">
-
-          <!-- xsheng 添加 srtat -->
+        <!-- xsheng 添加 srtat -->
         <div class="rigth">
-            <div class="right-top">
-                <div class="text">
-                    <div class="title">
-                        今日警情信息
-                    </div>
-                </div>
-                <div class="num">
-                    接处警总量(8起)
-                </div>
-                <div class="info">
-                    <ul>
-                        <li><div class="round1"></div>警情信息</li>
-                    </ul>
-                </div>
+          <!-- 今日警情信息strat -->
+          <div class="screen-item">
+            <img class="screen-item-bg" src="./assets/images/left_item_bg.png" alt />
+            <div class="screen-item-main">
+              <h3 class="screen-item-title">今日警情信息</h3>
 
-                <div class="info">
-                    <ul class="tel_ul">
-                        <li>火灾扑救 <div class="color_r mt">(1起)</div> </li>
-                        <li>抢险救援 <div class="color_b mt">(2起)</div> </li>
-                        <li>社会救助 <div class="color_y mt">(3起)</div> </li>
-                        <li>虚假报警 <div class="color_g mt">(5起)</div> </li>
-                        <li>其他警情 <div class="color_o mt">(0起)</div> </li>
-                    </ul>
-                </div>
+              <div class="num">接处警总量(8起)</div>
+              <div class="info">
+                <ul>
+                  <li>
+                    <div class="round1"></div>警情信息
+                  </li>
+                </ul>
+              </div>
+
+              <div class="info">
+                <ul class="tel_ul">
+                  <li>
+                    火灾扑救
+                    <div class="color_r mt">(1起)</div>
+                  </li>
+                  <li>
+                    抢险救援
+                    <div class="color_b mt">(2起)</div>
+                  </li>
+                  <li>
+                    社会救助
+                    <div class="color_y mt">(3起)</div>
+                  </li>
+                  <li>
+                    虚假报警
+                    <div class="color_g mt">(5起)</div>
+                  </li>
+                  <li>
+                    其他警情
+                    <div class="color_o mt">(0起)</div>
+                  </li>
+                </ul>
+              </div>
             </div>
+          </div>
+          <!-- 今日警情信息end -->
 
-            <div class="right-content">
-                <div class="text1">
-                     <div class="title">
-                         值勤车辆
-                    </div>
-                </div>
+          <!-- 值勤车辆strat -->
+          <div class="screen-item">
+            <img class="screen-item-bg" src="./assets/images/left_item_bg.png" alt />
+            <div class="screen-item-main">
+              <h3 class="screen-item-title">值勤车辆</h3>
 
-                <div class="num1">
-                   <ul class="zq_ul">
-                        <li><div class="round bj_g"></div>在位</li>
-                        <li><div class="round bj_y"></div>出动</li>
-                        <li><div class="round bj_r"></div>保修</li>
-                    </ul>
-                </div>
+              <div class="num1">
+                <ul class="zq_ul">
+                  <li>
+                    <div class="round bj_g"></div>在位
+                  </li>
+                  <li>
+                    <div class="round bj_y"></div>出动
+                  </li>
+                  <li>
+                    <div class="round bj_r"></div>保修
+                  </li>
+                </ul>
+              </div>
 
-                <div class="clear vehicle">
-                    <vue-seamless-scroll :data="listData" class="seamless-warp" :class-option="classOption">
-                        <ul class="ve_ul">
-                            <li v-for="item in listData">
-                                <div class="list_bj">{{item.xfc}}
-                                     <div v-if="item.status==1" class="round bj_y fr"></div>
-                                     <div v-else-if="item.status==2" class="round bj_r fr"></div>
-                                     <div v-else="item.status==3" class="round bj_g fr"></div>
-                                     </div> <div class="list_text">
-                                <div class="mt2">发动机功率:{{item.gl}}</div>
-                                <div class="list_text">起重重量:{{item.zl}}</div></div>
-                            </li>
-                        </ul>
-                    </vue-seamless-scroll>
-                </div>
-
+              <div class="clear vehicle">
+                <vue-seamless-scroll
+                  :data="listData"
+                  class="seamless-warp"
+                  :class-option="classOption"
+                >
+                  <ul class="ve_ul">
+                    <li v-for="item in listData">
+                      <div class="list_bj">
+                        {{item.xfc}}
+                        <div v-if="item.status==1" class="round bj_y fr"></div>
+                        <div v-else-if="item.status==2" class="round bj_r fr"></div>
+                        <div v-else="item.status==3" class="round bj_g fr"></div>
+                      </div>
+                      <div class="list_text">
+                        <div class="mt2">发动机功率:{{item.gl}}</div>
+                        <div class="list_text">起重重量:{{item.zl}}</div>
+                      </div>
+                    </li>
+                  </ul>
+                </vue-seamless-scroll>
+              </div>
             </div>
+          </div>
+          <!-- 值勤车辆end -->
 
-            <div class="right-bottom">
-                <div class="text2">
-                    <div class="title">
-                         值班信息
-                    </div>
-                </div>
-                <div class="duty">
-                   <ul class="duty_ul">
-                        <li class="size17">大队全勤指挥部:</li>
-                        <li style="float: left;">巴荣兵</li>
-                        <li style="float: left;margin-left: 10px;">霍建华</li>
-                    </ul>
-                </div>
+          <!-- 值班信息strat -->
+          <div class="screen-item">
+            <img class="screen-item-bg" src="./assets/images/left_item_bg.png" alt />
+            <div class="screen-item-main">
+              <h3 class="screen-item-title">值班信息</h3>
+              <div class="duty">
+                <ul class="duty_ul">
+                  <li class="size17">大队全勤指挥部:</li>
+                  <li style="float: left;">巴荣兵</li>
+                  <li style="float: left;margin-left: 10px;">霍建华</li>
+                </ul>
+              </div>
 
-                <div class="duty">
-                   <ul class="duty_ul">
-                        <li class="size17">大队全勤指挥部:</li>
-                        <li style="float: left;">巴荣兵</li>
-                        <li class="duty_ul_li">胡歌</li>
-                        <li class="duty_ul_li">彭于晏</li>
-                        <li class="duty_ul_li">薛之谦</li>
-                    </ul>
-                </div>
+              <div class="duty">
+                <ul class="duty_ul">
+                  <li class="size17">大队全勤指挥部:</li>
+                  <li style="float: left;">巴荣兵</li>
+                  <li class="duty_ul_li">胡歌</li>
+                  <li class="duty_ul_li">彭于晏</li>
+                  <li class="duty_ul_li">薛之谦</li>
+                </ul>
+              </div>
             </div>
+          </div>
+           <!-- 值班信息end -->
         </div>
-    <!-- xsheng 添加 end -->
-        
+        <!-- xsheng 添加 end -->
       </div>
     </div>
   </div>
 </template>
 <style>
- .seamless-warp {
-        height: 229px;
-        overflow: hidden;
-    }
+.seamless-warp {
+  height: 229px;
+  overflow: hidden;
+}
 </style>
 
 <script>
 import Vue from "vue";
-import './assets/lib/rem.js'
+import "./assets/lib/rem.js";
 import ElementUI from "element-ui";
 import "element-ui/lib/theme-chalk/index.css";
 import axios from "axios";
-import vueSeamlessScroll from 'vue-seamless-scroll'
-Vue.use(ElementUI, axios,vueSeamlessScroll);
+import vueSeamlessScroll from "vue-seamless-scroll";
+Vue.use(ElementUI, axios, vueSeamlessScroll);
 export default {
   name: "hello",
   data() {
     return {
       url: "https://kp.ctce.com.cn:10088/api",
-      listData: [{
-                   'xfc': '抢险救援消防车',
-                   'gl': '***',
-                   'zl': '****',
-                   'status':1
-                 }, {
-                   'xfc': '五十铃水罐消防车',
-                   'gl': '***',
-                   'zl': '****',
-                   'status':2
-                 }, {
-                    'xfc': '豪沃水罐消防车',
-                     'gl': '***',
-                     'zl': '****',
-                     'status':1
-                 }, {
-                     'xfc': '德国曼压沫水罐消防车',
-                     'gl': '***',
-                     'zl': '****',
-                     'status':2
-                 }, {
-                     'xfc': '45米叠高平台消防车',
-                     'gl': '***',
-                     'zl': '****',
-                     'status':3
-                 }, {
-                     'xfc': '32米高喷消防车',
-                     'gl': '***',
-                     'zl': '****',
-                     'status':2
-                 }, {
-                     'xfc': '德国曼压沫水罐消防车',
-                     'gl': '***',
-                     'zl': '****',
-                     'status':1
-                 }, {
-                     'xfc': '豪沃水罐消防车',
-                     'gl': '***',
-                     'zl': '****',
-                     'status':2
-                 }, {
-                     'xfc': '抢险救援消防车',
-                     'gl': '***',
-                     'zl': '****',
-                     'status':3
-                 }]
+      listData: [
+        {
+          xfc: "抢险救援消防车",
+          gl: "***",
+          zl: "****",
+          status: 1
+        },
+        {
+          xfc: "五十铃水罐消防车",
+          gl: "***",
+          zl: "****",
+          status: 2
+        },
+        {
+          xfc: "豪沃水罐消防车",
+          gl: "***",
+          zl: "****",
+          status: 1
+        },
+        {
+          xfc: "德国曼压沫水罐消防车",
+          gl: "***",
+          zl: "****",
+          status: 2
+        },
+        {
+          xfc: "45米叠高平台消防车",
+          gl: "***",
+          zl: "****",
+          status: 3
+        },
+        {
+          xfc: "32米高喷消防车",
+          gl: "***",
+          zl: "****",
+          status: 2
+        },
+        {
+          xfc: "德国曼压沫水罐消防车",
+          gl: "***",
+          zl: "****",
+          status: 1
+        },
+        {
+          xfc: "豪沃水罐消防车",
+          gl: "***",
+          zl: "****",
+          status: 2
+        },
+        {
+          xfc: "抢险救援消防车",
+          gl: "***",
+          zl: "****",
+          status: 3
+        }
+      ]
     };
   },
-  components: {    //组件
-        vueSeamlessScroll
-    },
+  components: {
+    //组件
+    vueSeamlessScroll
+  },
   methods: {},
   computed: {
-     classOption () {
-       return {
+    classOption() {
+      return {
         step: 0.2, // 数值越大速度滚动越快
         limitMoveNum: 2, // 开始无缝滚动的数据量 this.dataList.length
         hoverStop: true, // 是否开启鼠标悬停stop
@@ -271,13 +309,13 @@ export default {
         singleHeight: 0, // 单步运动停止的高度(默认值0是无缝不停止的滚动) direction => 0/1
         singleWidth: 0, // 单步运动停止的宽度(默认值0是无缝不停止的滚动) direction => 2/3
         waitTime: 1000 // 单步运动停止的时间(默认值1000ms)
-      }
+      };
     }
   }
 };
 </script>
 
 <style lang="less">
-  @import "./assets/styles/screen.less";
-  @import "./assets/styles/right.less";
+@import "./assets/styles/screen.less";
+@import "./assets/styles/right.less";
 </style>
