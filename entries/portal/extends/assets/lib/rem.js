@@ -68,18 +68,19 @@
   
     function refreshRem() {
       let width = docEl.getBoundingClientRect().width;
-      if (width / dpr > 540) {
-        width = 540 * dpr;
-      }
-      const rem = width / 10;
+      // if (width / dpr > 540) {
+      //   width = 540 * dpr;
+      // }
+      // const rem = width / 10;
+      const rem = (width / 1920) * 100;
       docEl.style.fontSize = `${rem}px`;
       flexible.rem = rem;
       win.rem = rem;
     }
   
-    document.body.style.height = `${window.innerHeight}px`;
+    document.body.style.height = `${window.innerHeight+64}px`;
     win.addEventListener('resize', () => {
-      document.body.style.height = `${window.innerHeight}px`;
+      document.body.style.height = `${window.innerHeight+64}px`;
       clearTimeout(tid);
       tid = setTimeout(refreshRem, 300);
     }, false);
