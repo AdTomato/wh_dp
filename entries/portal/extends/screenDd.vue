@@ -91,9 +91,7 @@
           <h3 class="screen-item-title">月度警情量分析</h3>
         </div>
         <!-- 生日 -->
-        <div class="dd-birthday dd-list">
-
-        </div>
+        <div class="dd-birthday dd-list"></div>
       </div>
       <!-- 右边 -->
       <div class="screen-right dd-item">
@@ -101,18 +99,81 @@
         <!-- 今日警情信息 -->
         <div class="dd-list jq-info">
           <h3 class="screen-item-title">今日警情信息</h3>
+
+          <div class="num">接处警总量(8起)</div>
+          <div class="info info1">
+            <ul>
+              <li>
+                <div class="round1"></div>警情信息
+              </li>
+            </ul>
+          </div>
+          <div class="info">
+            <ul class="tel_ul">
+              <li>
+                火灾扑救
+                <div class="color_r mt">(1起)</div>
+              </li>
+              <li>
+                抢险救援
+                <div class="color_b mt">(2起)</div>
+              </li>
+              <li>
+                社会救助
+                <div class="color_y mt">(3起)</div>
+              </li>
+              <li>
+                虚假报警
+                <div class="color_g mt">(5起)</div>
+              </li>
+              <li>
+                其他警情
+                <div class="color_o mt">(0起)</div>
+              </li>
+            </ul>
+          </div>
         </div>
         <!-- 月度警情类型分析 -->
         <div class="month-type dd-list">
           <h3 class="screen-item-title">月度警情类型分析</h3>
+          <div class="Echarts">
+            <div id="main" style="width: 100%;height:2rem;"></div>
+          </div>
         </div>
         <!-- 双随机一公开数据 -->
         <div class="double-data dd-list">
           <h3 class="screen-item-title">双随机一公开数据</h3>
+          <div class="progress">
+            <div class="pro-div">
+              <span>本月应检查</span> <el-progress :format="format" :percentage="50" :stroke-width="12" :color="customColor1" class="pro"  style="width: 3.5rem;"></el-progress>
+            </div>
+            <div class="pro-div">
+              <span>本月已检查</span> <el-progress :format="format" :percentage="100" :stroke-width="12" :color="customColor2" class="pro" style="width: 3.5rem;"></el-progress>
+            </div>
+            <div class="pro-div">
+              <span>本月剩余检查</span> <el-progress :format="format" :percentage="100" :stroke-width="12" :color="customColor3" class="pro" style="width: 3.5rem;"></el-progress>
+            </div>
+          </div>
+          
         </div>
         <!-- 值班信息 -->
         <div class="zhiban-info dd-list">
           <h3 class="screen-item-title">值班信息</h3>
+          <div class="duty-main">
+              <div class="duty">
+                <ul class="duty_ul">
+                  <li class="size17 duty_ul_li">指挥长:</li>
+                  <li class="duty_ul_li">巴荣兵</li>
+                </ul>
+              </div>
+
+              <div class="duty">
+                <ul class="duty_ul">
+                  <li class="size17 duty_ul_li">指挥助理:</li>
+                  <li class="duty_ul_li">巴荣兵</li>
+                </ul>
+              </div>
+            </div>
         </div>
         <!-- xsheng 添加 end -->
       </div>
@@ -120,7 +181,6 @@
   </div>
 </template>
 <style>
-
 </style>
 
 <script>
@@ -130,21 +190,97 @@ import ElementUI from "element-ui";
 import "element-ui/lib/theme-chalk/index.css";
 import axios from "axios";
 import vueSeamlessScroll from "vue-seamless-scroll";
+import echarts from "echarts";
+Vue.prototype.$echarts = echarts;
 Vue.use(ElementUI, axios, vueSeamlessScroll);
 export default {
   name: "screen-dd",
   data() {
     return {
-      
+      orgOptions: {},
+      customColor1: '#EE6B77',
+      customColor2: '#EDD300',
+      customColor3: '#F588FE',
     };
   },
   components: {
     //组件
     vueSeamlessScroll
   },
-  methods: {},
-  computed: {
-    
+  methods: {
+    myEcharts() {
+      // 基于准备好的dom，初始化echarts实例
+      var myChart = this.$echarts.init(document.getElementById("main"));
+
+      // 指定图表的配置项和数据
+      var option = {
+        tooltip: {
+          trigger: "item",
+          formatter: "{a} <br/>{b}: {c} ({d}%)"
+        },
+        legend: {
+          orient: "vertical",
+          align:'left',
+          itemWidth: 15,  // 设置宽度
+          itemHeight: 15, // 设置高度
+          right: 10,
+          data: ["直接访问", "邮件营销", "联盟广告", "视频广告", "搜索引擎"],
+          y: 'center',    //延Y轴居中
+          x: 'right', //居右显示
+          padding:[0,100,0,0],
+          textStyle:{//图例文字的样式
+              color:'#ccc',
+              fontSize:15,
+              
+          }
+        },
+        color: ['#8D00E2','#F29B1A','#027FF3','#34D160','#00C6FF'], 
+        series: [
+          {
+            name: "访问来源",
+            type: "pie",
+            radius: ["45%", "70%"],
+            center: ["30%", "53%"], 　
+            avoidLabelOverlap: false,
+            label: {
+              show: false,
+              position: "center"
+            },
+            emphasis: {
+              label: {
+                show: true,
+                fontSize: "15",
+                fontWeight: "bold"
+              }
+            },
+            labelLine: {
+              show: false
+            },
+            data: [
+              { value: 335, name: "直接访问" },
+              { value: 310, name: "邮件营销" },
+              { value: 234, name: "联盟广告" },
+              { value: 135, name: "视频广告" },
+              { value: 1548, name: "搜索引擎" }
+            ]
+          }
+        ]
+      };
+
+      // 使用刚指定的配置项和数据显示图表。
+      myChart.setOption(option);
+      myChart.resize();
+    },
+    format(percentage) {
+      return percentage === 100 ? '45' : `${percentage}/45`;
+    }
+
+  },
+  mounted() {
+    this.myEcharts();
+    window.onresize = function() {
+      myChart.resize();
+    };
   }
 };
 </script>
