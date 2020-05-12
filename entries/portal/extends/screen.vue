@@ -1,7 +1,7 @@
 <template>
   <div class="screen">
     <div class="screen-title">
-      <h2>武汉市汉阳区消防救援大队</h2>
+      <h2>武汉市汉阳区七里庙消防救援站</h2>
       <img src="./assets/images/navbar_bg.png" alt />
     </div>
     <div class="screen-main">
@@ -253,7 +253,7 @@
 </template>
 <style>
 .seamless-warp {
-  height: 229px;
+  height: 266px;
   overflow: hidden;
 }
 </style>
