@@ -136,7 +136,185 @@
         </div>
       </div>
       <!-- 中间 -->
-      <div class="screen-center"></div>
+      <div class="screen-center">
+          <div class="content-top">
+            <div class="screen-item" style="height:100%">
+                <h3 class="screen-item-title">人员动态</h3>
+                <div class="total_num">
+                  <ul class="tel_ul">
+                      <li>总指挥 <div class="commander mt">(*人)</div> </li>
+                      <li>指挥员 <div class="controller mt">(*人)</div> </li>
+                      <li>消防员 <div class="fireman mt">(*人)</div> </li>
+                      <li>在岗 <div class="on_work mt">(*人)</div> </li>
+                      <li style="color: #129D1D;">公差 <div class="out_work mt">(*人)</div> </li>
+                      <li style="color: #BDA100"> 休假 <div class="no_work mt">(*人)</div> </li>
+                  </ul>
+                </div>
+                <div class="detail_num">
+                  <ul class="commander_list">
+                    <li class="commander_detail">
+                      指  挥  员:
+                      <span>郭海涛</span>
+                      <span>张 卓</span>
+                      <span>宋星星</span>
+                      <span>赵章全</span>
+                      <span>王 杰</span>
+                      <span>李梦念</span>
+                    </li>
+                  </ul>
+                  <ul class="commander_list">
+                    <li class="commander_detail">
+                      特情一班:
+                      <span>李 斌</span>
+                      <span>宁成伟</span>
+                      <span>邓 彪</span>
+                      <span class="yellow_name">黄 磊</span>
+                      <span>王 晶</span>
+                      <span>张 娟</span>
+                      <span>黄 玲</span>
+                      <span>袁 东</span>
+                    </li>
+                  </ul>
+                  <ul class="commander_list">
+                    <li class="commander_detail">
+                      特情二班:
+                      <span>李 斌</span>
+                      <span>宁成伟</span>
+                      <span>邓 彪</span>
+                      <span class="yellow_name">黄 磊</span>
+                      <span>王 晶</span>
+                      <span>张 娟</span>
+                      <span>黄 玲</span>
+                    </li>
+                  </ul>
+                  <ul class="commander_list">
+                    <li class="commander_detail">
+                      灭火一班:
+                      <span>李 斌</span>
+                      <span>宁成伟</span>
+                      <span>邓 彪</span>
+                      <span class="yellow_name">黄 磊</span>
+                      <span>王 晶</span>
+                      <span>张 娟</span>
+                      <span>黄 玲</span>
+                      <span>袁 东</span>
+                    </li>
+                  </ul>
+                  <ul class="commander_list">
+                    <li class="commander_detail">
+                      灭火二班:
+                      <span>李 斌</span>
+                      <span>宁成伟</span>
+                      <span>邓 彪</span>
+                      <span class="yellow_name">黄 磊</span>
+                      <span>王 晶</span>
+                      <span>张 娟</span>
+                      <span>黄 玲</span>
+                      <span>袁 东</span>
+                    </li>
+                  </ul>
+                  <ul class="commander_list">
+                    <li class="commander_detail">
+                      特情保障班:
+                      <span>李 斌</span>
+                      <span>宁成伟</span>
+                      <span>邓 彪</span>
+                      <span class="yellow_name">黄 磊</span>
+                      <span>王 晶</span>
+                      <span>张 娟</span>
+                      <span>黄 玲</span>
+                      <span>袁 东</span>
+                    </li>
+                  </ul>
+                </div>
+            </div>
+          </div>
+          <div class="content-center">
+            <div class="content-left">
+                <div class="screen-item" style="height:100%">
+                    <h3 class="screen-item-title">每月之星栏</h3>
+                    <div class="star_month">
+                      <ul>
+                        <li>
+                          <img src="./assets/images/learn_star.png" />
+                          <img src="./assets/images/star_man.png" />
+                          <span class="star_name">沈伟</span>
+                        </li>
+                      </ul>
+                      <ul>
+                        <li>
+                          <img src="./assets/images/learn_star.png" />
+                          <img src="./assets/images/star_man.png" />
+                          <span class="star_name">沈伟</span>
+                        </li>
+                      </ul>
+                      <ul>
+                        <li>
+                          <img src="./assets/images/learn_star.png" />
+                          <img src="./assets/images/star_man.png" />
+                          <span class="star_name">沈伟</span>
+                        </li>
+                      </ul>
+                      <ul>
+                        <li>
+                          <img src="./assets/images/learn_star.png" />
+                          <img src="./assets/images/star_man.png" />
+                          <span class="star_name">沈伟</span>
+                        </li>
+                      </ul>
+                  </div>
+                </div>
+            </div>
+            <div class="content-right">
+                <div class="screen-item" style="height:100%">
+                  <h3 class="screen-item-title">量化考评周报</h3>
+                  <div class="evaluate">
+                    <ul class="evaluate_detail">
+                        <li>
+                          <span>x  x</span>
+                          <span>政治思想</span>
+                          <span>+1分</span>
+                        </li>
+                        <li>
+                          <span>x  x</span>
+                          <span>作风养成</span>
+                          <span>-2分</span>
+                        </li>
+                        <li>
+                          <span>x  x</span>
+                          <span>军事训练</span>
+                          <span>-2分</span>
+                        </li>
+                        <li>
+                          <span>x  x</span>
+                          <span>服从命令</span>
+                          <span>+1分</span>
+                        </li>
+                        <li>
+                          <span>x  x</span>
+                          <span>灭火救援</span>
+                          <span>+2分</span>
+                        </li>
+                        <li>
+                          <span>x  x</span>
+                          <span>遵章守纪</span>
+                          <span>-2分</span>
+                        </li>
+                    </ul>
+                  </div>
+                </div>
+            </div>
+          </div>
+          <div class="content-bottom">
+            <vue-seamless-scroll :data="birthday_data" class="seamless" :class-option="center_option">
+              <ul class="center_item">
+                <li v-for="item in birthday_data">
+                  <span class="birthday_text" v-text="item.text"></span>
+                </li>
+              </ul>
+            </vue-seamless-scroll>
+          </div>
+      </div>
       <!-- 右边 -->
       <div class="screen-right">
         <!-- xsheng 添加 srtat -->
@@ -256,6 +434,13 @@
   height: 266px;
   overflow: hidden;
 }
+.seamless{
+  height: 100%;
+  overflow: hidden;
+  z-index: 999;
+  float: left;
+  padding-left: 10%;
+}
 </style>
 
 <script>
@@ -326,7 +511,12 @@ export default {
           zl: "****",
           status: 3
         }
-      ]
+      ],
+      birthday_data: [{
+          'text': '祝陈飞同志生日快乐'
+        }, {
+          'text': '祝飞儿同志生日快乐'
+        }]
     };
   },
   components: {
@@ -346,6 +536,18 @@ export default {
         singleWidth: 0, // 单步运动停止的宽度(默认值0是无缝不停止的滚动) direction => 2/3
         waitTime: 1000 // 单步运动停止的时间(默认值1000ms)
       };
+    },
+    center_option(){
+      return{
+        step: 0.2, // 数值越大速度滚动越快
+        limitMoveNum: 2, // 开始无缝滚动的数据量 this.dataList.length
+        hoverStop: true, // 是否开启鼠标悬停stop
+        direction: 1, // 0向下 1向上 2向左 3向右
+        openWatch: true, // 开启数据实时监控刷新dom
+        singleHeight: 0, // 单步运动停止的高度(默认值0是无缝不停止的滚动) direction => 0/1
+        singleWidth: 0, // 单步运动停止的宽度(默认值0是无缝不停止的滚动) direction => 2/3
+        waitTime: 1000 // 单步运动停止的时间(默认值1000ms)
+      }
     }
   }
 };
@@ -354,4 +556,5 @@ export default {
 <style lang="less">
 @import "./assets/styles/screen.less";
 @import "./assets/styles/right.less";
+@import "./assets/styles/content.less";
 </style>
