@@ -8,5 +8,10 @@ export default {
     path: '/form/detail/screen',  //  /application
     name: 'screen',
     component: () => import('./screen.vue')
+  },
+  screenDd: {
+    path: '/form/detail/screen-dd',  //  /application
+    name: 'screen-dd',
+    component: () => import('./screenDd.vue')
   }
 } as any;
