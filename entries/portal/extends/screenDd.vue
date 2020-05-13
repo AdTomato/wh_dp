@@ -8,41 +8,42 @@
       <!-- 左边 -->
       <div class="screen-left dd-item">
         <!-- 天气情况 -->
-        <div class="screen-item">
+        <weather></weather>
+        <!-- <div class="screen-item">
           <h3 class="screen-item-title">天气情况</h3>
           <div class="weather-info">
-            <span>2020年4月7号</span>
-            <span>星期二</span>
+            <span>{{currentDate[0]}}</span>
+            <span>{{currentDate[1]}}</span>
             <img src="./assets/images/sun_icon.png" alt />
             <span>7-18℃</span>
           </div>
           <ul class="weather-item">
             <li>
               <span class="weather-item-left weather-item-mid-left">湿度</span>
-              <span class="weather-item-right weather-item-mid-right">99%</span>
+              <span class="weather-item-right weather-item-mid-right">{{humidity}}%</span>
             </li>
             <li>
               <span class="weather-item-left weather-item-big-left">空气质量</span>
-              <span class="weather-item-right weather-item-big-right">良</span>
+              <span class="weather-item-right weather-item-big-right">{{airQuality}}</span>
             </li>
             <li>
               <span class="weather-item-left weather-item-small-left">气温</span>
-              <span class="weather-item-right weather-item-small-right">14.1℃</span>
+              <span class="weather-item-right weather-item-small-right">{{airTemperature}}℃</span>
             </li>
             <li>
               <span class="weather-item-left weather-item-mid-left">风力</span>
-              <span class="weather-item-right weather-item-mid-right">1级</span>
+              <span class="weather-item-right weather-item-mid-right">{{windSpeed}}级</span>
             </li>
             <li>
               <span class="weather-item-left weather-item-big-left">风向</span>
-              <span class="weather-item-right weather-item-big-right">东南风</span>
+              <span class="weather-item-right weather-item-big-right">{{windDirection}}</span>
             </li>
             <li>
               <span class="weather-item-left weather-item-small-left">能见度</span>
-              <span class="weather-item-right weather-item-small-right">9.66KM</span>
+              <span class="weather-item-right weather-item-small-right">{{weatherVisible}}KM</span>
             </li>
           </ul>
-        </div>
+        </div> -->
         <!-- 通知公告 -->
         <div class="screen-item">
           <h3 class="screen-item-title">通知公告</h3>
@@ -190,6 +191,8 @@ import ElementUI from "element-ui";
 import "element-ui/lib/theme-chalk/index.css";
 import axios from "axios";
 import vueSeamlessScroll from "vue-seamless-scroll";
+import weather from './components/weather';
+import request from './api/request';
 import echarts from "echarts";
 Vue.prototype.$echarts = echarts;
 Vue.use(ElementUI, axios, vueSeamlessScroll);
@@ -205,7 +208,8 @@ export default {
   },
   components: {
     //组件
-    vueSeamlessScroll
+    vueSeamlessScroll,
+    weather
   },
   methods: {
     myEcharts() {
@@ -273,10 +277,17 @@ export default {
     },
     format(percentage) {
       return percentage === 100 ? '45' : `${percentage}/45`;
+    },
+    getData(){
+      // 调用
+      request.getStationAlertInfo().then(res => {
+        console.log(res);
+      })
     }
-
   },
   mounted() {
+    
+    // this.loadDate();
     this.myEcharts();
     window.onresize = function() {
       myChart.resize();
