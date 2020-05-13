@@ -332,23 +332,23 @@
             </div>
             <div class="info">
               <ul class="tel_ul">
-                <li>
+                <li  @click="dialogFormVisible = true">
                   火灾扑救
                   <div class="color_r mt">(1起)</div>
                 </li>
-                <li>
+                <li @click="dialogFormVisible = true">
                   抢险救援
                   <div class="color_b mt">(2起)</div>
                 </li>
-                <li>
+                <li @click="dialogFormVisible = true">
                   社会救助
                   <div class="color_y mt">(3起)</div>
                 </li>
-                <li>
+                <li @click="dialogFormVisible = true">
                   虚假报警
                   <div class="color_g mt">(5起)</div>
                 </li>
-                <li>
+                <li @click="dialogFormVisible = true">
                   其他警情
                   <div class="color_o mt">(0起)</div>
                 </li>
@@ -381,7 +381,7 @@
                 :class-option="classOption"
               >
                 <ul class="ve_ul">
-                  <li v-for="item in listData">
+                  <li v-for="item in listData" @click="dialogFormVisibleType = true">
                     <div class="list_bj">
                       {{item.xfc}}
                       <div v-if="item.status==1" class="round bj_y fr"></div>
@@ -424,7 +424,37 @@
           </div>
            <!-- 值班信息end -->
         </div>
-        <!-- xsheng 添加 end -->
+
+
+
+        <el-dialog title="警情信息" :visible.sync="dialogFormVisible">
+          <el-form :model="form">
+            <el-form-item label="警情数量" :label-width="formLabelWidth">
+              <el-input v-model="form.name" autocomplete="off"></el-input>
+            </el-form-item>
+          </el-form>
+          <div slot="footer" class="dialog-footer">
+            <el-button @click="dialogFormVisible = false">取 消</el-button>
+            <el-button type="primary" @click="dialogFormVisible = false">确 定</el-button>
+          </div>
+        </el-dialog>
+
+        <el-dialog title="值勤车辆" :visible.sync="dialogFormVisibleType">
+          <el-form :model="formType">
+            <el-form-item label="值勤类型" :label-width="formLabelWidth">
+              <el-select v-model="formType.region" placeholder="请选择值勤类型">
+                <el-option label="在位" value="shanghai"></el-option>
+                <el-option label="出动" value="beijing"></el-option>
+                <el-option label="保修" value="baoxiu"></el-option>
+              </el-select>
+            </el-form-item>
+          </el-form>
+          <div slot="footer" class="dialog-footer">
+            <el-button @click="dialogFormVisibleType = false">取 消</el-button>
+            <el-button type="primary" @click="dialogFormVisibleType = false">确 定</el-button>
+          </div>
+        </el-dialog>
+
       </div>
     </div>
   </div>
@@ -456,6 +486,8 @@ export default {
   data() {
     return {
       url: "https://kp.ctce.com.cn:10088/api",
+      dialogFormVisible: false,
+      dialogFormVisibleType: false,
       listData: [
         {
           xfc: "抢险救援消防车",
@@ -512,6 +544,13 @@ export default {
           status: 3
         }
       ],
+      form: {
+          region: '',
+        },
+      formType: {
+          region: '',
+        },
+      formLabelWidth: '120px',
       birthday_data: [{
           'text': '祝陈飞同志生日快乐'
         }, {
