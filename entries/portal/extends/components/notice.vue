@@ -5,7 +5,10 @@
           <div class="warn-info">
             <img class="notice-icon" src="../assets/images/notice_icon.png" alt />
             <span>公告：</span>
-            <div class="warn-txt">
+            <div class="warn-txt" v-if="noticeFlag">
+                <p>数据正在加载中....</p>
+            </div>
+            <div class="warn-txt" v-else>
                 <vue-seamless-scroll :data="listData" class="seamless-notice" :class-option="noticeClassOption">
                     <ul class="item">
                         <li v-for="item in listData">
@@ -27,34 +30,8 @@
         name: "notice",
         data() {
             return {
-                listData: [{
-                   'title': '关于建设平安武汉',
-                   'date': '2017-12-16'
-                 }, {
-                    'title': '支队持续推进暑期消防安全宣教活动',
-                    'date': '2017-12-16'
-                 }, {
-                     'title': 'XX大队召开卫健系统消防安全培训会',
-                     'date': '2017-12-16'
-                 }, {
-                     'title': 'XX大队到辖区沿街商铺开展消防宣传活动',
-                     'date': '2017-12-16'
-                 }, {
-                     'title': '支队持续推进暑期消防安全宣教活动',
-                     'date': '2017-12-16'
-                 }, {
-                     'title': 'XX大队召开卫健系统消防安全培训会',
-                     'date': '2017-12-16'
-                 }, {
-                     'title': '关于建设平安武汉',
-                     'date': '2017-12-16'
-                 }, {
-                     'title': '支队持续推进暑期消防安全宣教活动',
-                     'date': '2017-12-16'
-                 }, {
-                     'title': 'XX大队到辖区沿街商铺开展消防宣传活动',
-                     'date': '2017-12-16'
-                }],
+                listData: [],
+                noticeFlag: true
             }
         },
         components: {
@@ -69,20 +46,31 @@
             }
         },
         methods:{
-            getNoticeInfo(){
+            async getNoticeInfo(){
                 // 后期userId传入
                 let par = {
-                    userId: '2c90a43e6efe8b04016effb119271c6f'
+                    deptId: '145600593'
                 }
-                request.getNotice(par).then(res => {
-                    console.log(res);
-                })
+                const res = await request.getNotice(par);
+                let noticeRes = res.data;
+                if(noticeRes.notice){
+                    this.noticeFlag = false;
+                    let arr = [];
+                    for (let i = 0; i < noticeRes.notice.length; i++) {
+                        let noticeObj = {};
+                        noticeObj.title = noticeRes.notice[i].title;
+                        arr.push(noticeObj);
+                    }
+
+                    this.listData = arr;
+                }
+                console.log(this.listData);
             }
             
                    
         },
         mounted(){
-            // this.getNoticeInfo();
+            this.getNoticeInfo();
         }
     }
 </script>

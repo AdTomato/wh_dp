@@ -7,10 +7,7 @@ const request = {
 <<<<<<< Updated upstream
     getNotice:(data) => {
         // 获取公告
-        return Post('/controller/notice/getNoticeById',data);
-    },
-    getMonthStar:(data) => {
-        return Get('/controller/starMonth/getStationStarMonthByStationId', data)
+        return Get('/controller/personlInfo/getInfo',data);
     }
 =======
 
