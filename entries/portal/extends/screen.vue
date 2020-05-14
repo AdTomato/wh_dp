@@ -8,55 +8,9 @@
       <!-- 左边 -->
       <div class="screen-left">
         <!-- 天气情况 -->
-        <div class="screen-item">
-          <h3 class="screen-item-title">天气情况</h3>
-          <div class="weather-info">
-            <span>2020年4月7号</span>
-            <span>星期二</span>
-            <img src="./assets/images/sun_icon.png" alt />
-            <span>7-18℃</span>
-          </div>
-          <ul class="weather-item">
-            <li>
-              <span class="weather-item-left weather-item-mid-left">湿度</span>
-              <span class="weather-item-right weather-item-mid-right">99%</span>
-            </li>
-            <li>
-              <span class="weather-item-left weather-item-big-left">空气质量</span>
-              <span class="weather-item-right weather-item-big-right">良</span>
-            </li>
-            <li>
-              <span class="weather-item-left weather-item-small-left">气温</span>
-              <span class="weather-item-right weather-item-small-right">14.1℃</span>
-            </li>
-            <li>
-              <span class="weather-item-left weather-item-mid-left">风力</span>
-              <span class="weather-item-right weather-item-mid-right">1级</span>
-            </li>
-            <li>
-              <span class="weather-item-left weather-item-big-left">风向</span>
-              <span class="weather-item-right weather-item-big-right">东南风</span>
-            </li>
-            <li>
-              <span class="weather-item-left weather-item-small-left">能见度</span>
-              <span class="weather-item-right weather-item-small-right">9.66KM</span>
-            </li>
-          </ul>
-        </div>
+        <Weather></Weather>
         <!-- 通知公告 -->
-        <div class="screen-item">
-          <h3 class="screen-item-title">通知公告</h3>
-          <div class="warn-info">
-            <img class="notice-icon" src="./assets/images/notice_icon.png" alt />
-            <span>公告：</span>
-            <div class="warn-txt">
-              <p>关于建设平安武汉</p>
-              <p>支队持续推进暑期消防安全宣教活动</p>
-              <p>XX大队召开卫健系统消防安全培训会</p>
-              <p>XX大队到辖区沿街商铺开展消防宣传活动</p>
-            </div>
-          </div>
-        </div>
+        <Notice></Notice>
         <!-- 本周重点工作 -->
         <div class="two-branch">
           <div class="branch-item">
@@ -479,6 +433,8 @@ import "./assets/lib/rem.js";
 import ElementUI from "element-ui";
 import "element-ui/lib/theme-chalk/index.css";
 import axios from "axios";
+import Weather from './components/weather';
+import Notice from './components/notice';
 import vueSeamlessScroll from "vue-seamless-scroll";
 Vue.use(ElementUI, axios, vueSeamlessScroll);
 export default {
@@ -560,7 +516,9 @@ export default {
   },
   components: {
     //组件
-    vueSeamlessScroll
+    vueSeamlessScroll,
+    Weather,
+    Notice
   },
   methods: {},
   computed: {
