@@ -628,9 +628,8 @@ export default {
     },
 
     handleClick(event){
-      console.log("target",event.target);
       this.dialogFormVisibleType = true;
-      this.carsId = event.target.id;
+      this.carsId = event.target.dataset.dept;
     },
 
     //根据大队id获取大队下消防站的数据
