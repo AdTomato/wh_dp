@@ -346,15 +346,15 @@
               </ul>
             </div>
 
-            <div class="clear vehicle">
+            <div class="clear vehicle" @click="handleClick($event)">
               <vue-seamless-scroll
                 :data="listData"
                 class="seamless-warp"
                 :class-option="classOption"
               >
                 <ul class="ve_ul">
-                  <li v-for="item in listData" @click="uploadVehicleStatus(item.id)">
-                    <div class="list_bj">
+                  <li v-for="item in listData" >
+                    <div class="list_bj" :data-dept="item.id">
                       {{item.xfc}}
                       <div v-if="item.status=='出动'" class="round bj_y fr"></div>
                       <div v-else-if="item.status=='保修'" class="round bj_r fr"></div>
@@ -692,6 +692,12 @@ export default {
 
     getFormType() {
       this.status = this.formType.region;
+    },
+
+    handleClick(event){
+      console.log("target",event.target);
+      this.dialogFormVisibleType = true;
+      this.carsId = event.target.id;
     },
 
     //根据大队id获取大队下消防站的数据
