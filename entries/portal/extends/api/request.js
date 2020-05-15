@@ -9,6 +9,14 @@ const request = {
         // 获取公告
         return Get('/controller/personlInfo/getInfo',data);
     },
+    getEducationInfo:(data) => {
+        // 获取教育训练计划
+        return Get('/controller/Education/getStationEduTrainPalnByStationId',data);
+    },
+    getTrainInfo:(data) => {
+        // 获取龙虎榜
+        return Get('/controller/trainResult/getTrainResults',data);
+    },
     getMonthStar:(data) => {
         return Get('/controller/starMonth/getStationStarMonthByStationId', data)
     },

@@ -11,83 +11,8 @@
         <Weather></Weather>
         <!-- 通知公告 -->
         <Notice ref="notice"></Notice>
-        <!-- 本周重点工作 -->
-        <div class="two-branch">
-          <div class="branch-item">
-            <h3 class="screen-item-title">教育训练计划</h3>
-            <div class="branch-cont">
-              <div class="branch-cont-title">
-                <span class="branch-time">时间</span>
-                <span class="branch-content">内容</span>
-              </div>
-              <ul class="branch-ul">
-                <li>
-                  <span class="branch-time">早上</span>
-                  <span class="branch-project">队容风纪检查</span>
-                </li>
-                <li>
-                  <span class="branch-time">上午</span>
-                  <span class="branch-project">1人3盘水带走接操</span>
-                </li>
-                <li>
-                  <span class="branch-time">下去</span>
-                  <span class="branch-project">思想政治教育</span>
-                </li>
-                <li>
-                  <span class="branch-time">晚上</span>
-                  <span class="branch-project">100m跑</span>
-                </li>
-              </ul>
-            </div>
-          </div>
-          <div class="branch-item">
-            <h3 class="screen-item-title">龙虎榜</h3>
-            <div class="branch-cont">
-              <div class="branch-cont-title branch-bang-title">
-                <span class="bang-subject">训练科目</span>
-                <span class="bang-name">姓名</span>
-                <span class="bang-score">成绩</span>
-              </div>
-              <ul class="bang-ul">
-                <li>
-                  <span class="bang-subject">单杠一练习</span>
-                  <span class="bang-name">沈伟</span>
-                  <span class="bang-score">32个</span>
-                </li>
-                <li>
-                  <span class="bang-subject">单杠二练习</span>
-                  <span class="bang-name">张旭</span>
-                  <span class="bang-score">25个</span>
-                </li>
-                <li>
-                  <span class="bang-subject">双杠一练习</span>
-                  <span class="bang-name">李坤</span>
-                  <span class="bang-score">35个</span>
-                </li>
-                <li>
-                  <span class="bang-subject">壶铃折返</span>
-                  <span class="bang-name">曹磊</span>
-                  <span class="bang-score">39"</span>
-                </li>
-                <li>
-                  <span class="bang-subject">200m负重跑</span>
-                  <span class="bang-name">华环</span>
-                  <span class="bang-score">36"</span>
-                </li>
-                <li>
-                  <span class="bang-subject">400m疏散物资</span>
-                  <span class="bang-name">李涛</span>
-                  <span class="bang-score">70"</span>
-                </li>
-                <li>
-                  <span class="bang-subject">3000m徒手跑</span>
-                  <span class="bang-name">宋奎</span>
-                  <span class="bang-score">11'05"</span>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </div>
+        <!-- 教育训练计划和龙虎榜 -->
+        <Education ref="education"></Education>
       </div>
       <!-- 中间 -->
       <div class="screen-center">
@@ -492,6 +417,7 @@ import "element-ui/lib/theme-chalk/index.css";
 import axios from "axios";
 import Weather from './components/weather';
 import Notice from './components/notice';
+import Education from './components/education';
 import request from "./api/request";
 import vueSeamlessScroll from "vue-seamless-scroll";
 Vue.use(ElementUI, axios, vueSeamlessScroll);
@@ -522,7 +448,8 @@ export default {
         { text: "祝飞儿同志生日快乐" }
       ],
       value1: "",
-      sourceId: '',
+      noticeSourceId: '',
+      eduStationId: '',
       earlyInfo:{},  //今日警情信息
       earlyType:0,   //警情类型 处理传参
       OnDutyInfo:{}, //今日值班信息
@@ -535,7 +462,8 @@ export default {
     //组件
     vueSeamlessScroll,
     Weather,
-    Notice
+    Notice,
+    Education
   },
   methods: {
     inputRef: function(){
@@ -582,21 +510,24 @@ export default {
       console.log("formOrg_z==", this.formOrg_z); //站json
       console.log("formOrg_z", this.formOrg); //大队json
       if (this.formOrg.id != "" && this.formOrg_z.id == "") {
-        this.sourceId = this.formOrg.sourceId;
+        this.noticeSourceId = this.formOrg.sourceId;
+        this.eduStationId = this.formOrg.id;
         this.dialogFormVisibleOrg = false; //查看大队大屏
         this.$message({
           message: "查看大队大屏",
           type: "success"
         });
       } else if (this.formOrg.id != "" && this.formOrg_z.id != "") {
-        this.sourceId = this.formOrg.sourceId;
+        this.noticeSourceId = this.formOrg.sourceId;
+        this.eduStationId = this.formOrg.id;
         this.$message({
           message: "查看大队下面消防站大屏",
           type: "success"
         });
         this.dialogFormVisibleOrg = false; //查看大队下面消防站大屏
       } else if (this.formOrg_z.id != "" && this.formOrg.id == "") {
-        this.sourceId = this.formOrg_z.sourceId;
+        this.noticeSourceId = this.formOrg_z.sourceId;
+        this.eduStationId = this.formOrg_z.id;
         this.$message({
           message: "只查看消防站大屏",
           type: "success"
@@ -630,7 +561,9 @@ export default {
         }); //车辆信息
 
         // 公告
-        this.$refs['notice'].getNoticeInfo(this.sourceId);
+        this.$refs['notice'].getNoticeInfo(this.noticeSourceId);
+        // 教育训练计划
+        this.$refs['education'].getEducationData(this.eduStationId);
 
       } else {
         this.$message({
