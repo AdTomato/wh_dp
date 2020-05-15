@@ -353,7 +353,7 @@
                 :class-option="classOption"
               >
                 <ul class="ve_ul">
-                  <li v-for="item in listData" @click="dialogFormVisibleType = true">
+                  <li v-for="item in listData" @click="uploadVehicleStatus(item.id)">
                     <div class="list_bj">
                       {{item.xfc}}
                       <div v-if="item.status=='出动'" class="round bj_y fr"></div>
@@ -376,7 +376,7 @@
             <h3 class="screen-item-title">值班信息</h3>
             <div class="duty-main">
               <div class="duty">
-                <ul class="duty_ul" >
+                <ul class="duty_ul">
                   <li class="size17">大队全勤指挥部:</li>
                   <li style="float: left;margin-left: 10px;" v-for="(item,i) in OnDutArr1">{{item}}</li>
                 </ul>
@@ -396,11 +396,41 @@
         <el-dialog title="警情信息" :visible.sync="dialogFormVisible">
           <el-form :model="earlyInfo">
             <el-form-item label="警情数量" :label-width="formLabelWidth">
-              <el-input v-if="earlyType==1"  v-model="earlyInfo.fireAlarmNum" autocomplete="off" ref="name" v-on:keyup="inputRef"></el-input>
-              <el-input v-else-if="earlyType==2"  v-model="earlyInfo.emergencyRescueNum" autocomplete="off" ref="name" v-on:keyup="inputRef"></el-input>
-              <el-input v-else-if="earlyType==3"  v-model="earlyInfo.socialAssistanceNum" autocomplete="off" ref="name" v-on:keyup="inputRef"></el-input>
-              <el-input v-else-if="earlyType==4"  v-model="earlyInfo.falseAlarmNum" autocomplete="off" ref="name" v-on:keyup="inputRef"></el-input>
-              <el-input v-else="earlyType==5"  v-model="earlyInfo.otherAlertNum" autocomplete="off" ref="name" v-on:keyup="inputRef"></el-input>
+              <el-input
+                v-if="earlyType==1"
+                v-model="earlyInfo.fireAlarmNum"
+                autocomplete="off"
+                ref="name"
+                v-on:keyup="inputRef"
+              ></el-input>
+              <el-input
+                v-else-if="earlyType==2"
+                v-model="earlyInfo.emergencyRescueNum"
+                autocomplete="off"
+                ref="name"
+                v-on:keyup="inputRef"
+              ></el-input>
+              <el-input
+                v-else-if="earlyType==3"
+                v-model="earlyInfo.socialAssistanceNum"
+                autocomplete="off"
+                ref="name"
+                v-on:keyup="inputRef"
+              ></el-input>
+              <el-input
+                v-else-if="earlyType==4"
+                v-model="earlyInfo.falseAlarmNum"
+                autocomplete="off"
+                ref="name"
+                v-on:keyup="inputRef"
+              ></el-input>
+              <el-input
+                v-else="earlyType==5"
+                v-model="earlyInfo.otherAlertNum"
+                autocomplete="off"
+                ref="name"
+                v-on:keyup="inputRef"
+              ></el-input>
             </el-form-item>
           </el-form>
           <div slot="footer" class="dialog-footer">
@@ -412,16 +442,16 @@
         <el-dialog title="值勤车辆" :visible.sync="dialogFormVisibleType">
           <el-form :model="formType">
             <el-form-item label="值勤类型" :label-width="formLabelWidth">
-              <el-select v-model="formType.region" placeholder="请选择值勤类型">
-                <el-option label="在位" value="shanghai"></el-option>
-                <el-option label="出动" value="beijing"></el-option>
-                <el-option label="保修" value="baoxiu"></el-option>
+              <el-select v-model="formType.region" placeholder="请选择值勤类型" @change="getFormType">
+                <el-option label="在位" value="在位"></el-option>
+                <el-option label="出动" value="出动"></el-option>
+                <el-option label="保修" value="保修"></el-option>
               </el-select>
             </el-form-item>
           </el-form>
           <div slot="footer" class="dialog-footer">
             <el-button @click="dialogFormVisibleType = false">取 消</el-button>
-            <el-button type="primary" @click="dialogFormVisibleType = false">确 定</el-button>
+            <el-button type="primary" @click="uploadVehicleStatusBtn">确 定</el-button>
           </div>
         </el-dialog>
 
@@ -490,8 +520,8 @@ import storage from "./api/right";
 import ElementUI from "element-ui";
 import "element-ui/lib/theme-chalk/index.css";
 import axios from "axios";
-import Weather from './components/weather';
-import Notice from './components/notice';
+import Weather from "./components/weather";
+import Notice from "./components/notice";
 import request from "./api/request";
 import vueSeamlessScroll from "vue-seamless-scroll";
 Vue.use(ElementUI, axios, vueSeamlessScroll);
@@ -510,10 +540,10 @@ export default {
       play_d: true,
       play_x: true,
       listData: [],
-      form: { region: "",name:'' },
+      form: { region: "", name: "" },
       options: [{ value: "选项1", label: "无数据", sourceId: "", id: "" }],
       options_z: [{ value: "选项1", label: "无数据", sourceId: "", id: "" }],
-      formType: { region: "" },
+      formType: { region: "", value: "" },
       formOrg: { id: "", region: "", name: "", sourceId: "" },
       formOrg_z: { id: "", region: "", name: "", sourceId: "" },
       formLabelWidth: "120px",
@@ -522,13 +552,15 @@ export default {
         { text: "祝飞儿同志生日快乐" }
       ],
       value1: "",
-      sourceId: '',
-      earlyInfo:{},  //今日警情信息
-      earlyType:0,   //警情类型 处理传参
-      OnDutyInfo:{}, //今日值班信息
-      OnDutArr1:[],  //值班信息数组1
-      OnDutArr2:[],  //值班信息数组2
-      vehicleInfo:{},
+      sourceId: "",
+      earlyInfo: {}, //今日警情信息
+      earlyType: 0, //警情类型 处理传参
+      OnDutyInfo: {}, //今日值班信息
+      OnDutArr1: [], //值班信息数组1
+      OnDutArr2: [], //值班信息数组2
+      vehicleInfo: {},
+      carsId: "",
+      status: ""
     };
   },
   components: {
@@ -538,9 +570,8 @@ export default {
     Notice
   },
   methods: {
-    inputRef: function(){
-        console.log(this.$refs.name.value)
-        this.form.name = this.$refs.name.value
+    inputRef: function() {
+      this.form.name = this.$refs.name.value;
     },
 
     //选择消防站时存储数据
@@ -550,7 +581,6 @@ export default {
         return item.id === val;
       });
       this.formOrg_z = obj;
-      console.log(this.formOrg_z);
     },
 
     //用户权限处理
@@ -576,11 +606,11 @@ export default {
         });
       }
     },
-    
+
     //确定按钮 处理查看大屏类型
     confirmBtn() {
       console.log("formOrg_z==", this.formOrg_z); //站json
-      console.log("formOrg_z", this.formOrg); //大队json
+      console.log("formOrg", this.formOrg); //大队json
       if (this.formOrg.id != "" && this.formOrg_z.id == "") {
         this.sourceId = this.formOrg.sourceId;
         this.dialogFormVisibleOrg = false; //查看大队大屏
@@ -602,36 +632,11 @@ export default {
           type: "success"
         });
         this.dialogFormVisibleOrg = false; //查看消防站大屏
-        storage.getEarlyInfo(this.formOrg_z.id).then(res => {
-          this.earlyInfo = res;
-        });  //今日警情信息
-
-        storage.getOnDutyInfo(this.formOrg_z.id).then(res => {
-          this.OnDutyInfo = res;
-          this.OnDutArr1 = res.brigadeHeadquarters;
-          this.OnDutArr2 = res.stationDutyCadres;
-        }); //值班信息
-
-        storage.getVehicleInfo(this.formOrg_z.id).then(res => {
-          
-          this.vehicleInfo = res;
-          var arrDate = res.vehicleInfos;
-          var ar = [];
-          for(var i=0;i<arrDate.length;i++){
-            var obj = new Object();
-            obj.xfc = arrDate[i].vehicleName;
-            obj.gl = arrDate[i].enginePower;
-            obj.zl = arrDate[i].liftingWeight; 
-            obj.status = arrDate[i].vehicleStatus;
-            ar.push(obj);
-          }
-          this.listData = ar;
-        
-        }); //车辆信息
-
+        this.getEarlyInfo(); //警情信息
+        this.getOnDutyInfo(); //值班信息
+        this.getVehicleInfo(); //车辆信息
         // 公告
-        this.$refs['notice'].getNoticeInfo(this.sourceId);
-
+        this.$refs["notice"].getNoticeInfo(this.sourceId);
       } else {
         this.$message({
           message: "请选择部门",
@@ -640,22 +645,21 @@ export default {
       }
     },
 
-    uploadEarliInfo(type){
-      this.dialogFormVisible = true ;
+    uploadEarliInfo(type) {
+      this.dialogFormVisible = true;
       this.earlyType = type;
     },
-    uploadEarlyBtn(){
+    uploadEarlyBtn() {
       this.dialogFormVisible = false;
-      console.log("this.earlyInfo=",this.earlyInfo);
       var parmar = {
-          id:this.earlyInfo.id,
-          callPoliceTotal:this.earlyInfo.callPoliceTotal,
-          fireAlarmNum:this.earlyInfo.fireAlarmNum,
-          emergencyRescueNum:this.earlyInfo.emergencyRescueNum,
-          socialAssistanceNum:this.earlyInfo.socialAssistanceNum,
-          falseAlarmNum:this.earlyInfo.falseAlarmNum,
-          otherAlertNum:this.earlyInfo.otherAlertNum
-        }
+        id: this.earlyInfo.id,
+        callPoliceTotal: this.earlyInfo.callPoliceTotal,
+        fireAlarmNum: this.earlyInfo.fireAlarmNum,
+        emergencyRescueNum: this.earlyInfo.emergencyRescueNum,
+        socialAssistanceNum: this.earlyInfo.socialAssistanceNum,
+        falseAlarmNum: this.earlyInfo.falseAlarmNum,
+        otherAlertNum: this.earlyInfo.otherAlertNum
+      };
       request.uploadEarlyInfo(parmar).then(res => {
         if (res.errcode == 0) {
           this.$message({
@@ -664,6 +668,30 @@ export default {
           });
         }
       });
+    },
+
+    uploadVehicleStatus(carsId) {
+      this.dialogFormVisibleType = true;
+      this.carsId = carsId;
+    },
+
+    uploadVehicleStatusBtn() {
+      axios.put(this.url +"/controller/carsInfo/updateCarsStatus?carsId=" +this.carsId +"&status=" +this.status)
+        .then(response => {
+          if (response.errcode == 0) {
+            this.$message({
+              message: "更新成功",
+              type: "success"
+            });
+            this.dialogFormVisibleType = false;
+            this.getVehicleInfo(); //车辆信息
+          }
+        })
+        .catch(error => {});
+    },
+
+    getFormType() {
+      this.status = this.formType.region;
     },
 
     //根据大队id获取大队下消防站的数据
@@ -675,11 +703,10 @@ export default {
       });
       this.formOrg = objs;
       //选择大队时存储数据 end
-      
+
       var parmar = { brigadeId: id };
       request.getStation(parmar).then(res => {
         if (res.errcode == 0) {
-          console.log("获取大队下的消防站", res);
           var arr = [];
           for (var i = 0; i < res.data.length; i++) {
             var obj = new Object();
@@ -710,6 +737,39 @@ export default {
         }
         return arr;
       }
+    },
+
+    //获取车辆信息
+    getVehicleInfo() {
+      storage.getVehicleInfo(this.formOrg_z.id).then(res => {
+        this.vehicleInfo = res;
+        var arrDate = res.vehicleInfos;
+        var ar = [];
+        for (var i = 0; i < arrDate.length; i++) {
+          var obj = new Object();
+          obj.id = arrDate[i].id;
+          obj.xfc = arrDate[i].vehicleName;
+          obj.gl = arrDate[i].enginePower;
+          obj.zl = arrDate[i].liftingWeight;
+          obj.status = arrDate[i].vehicleStatus;
+          ar.push(obj);
+        }
+        this.listData = ar;
+      });
+    },
+    //获取值班信息
+    getOnDutyInfo() {
+      storage.getOnDutyInfo(this.formOrg_z.id).then(res => {
+        this.OnDutyInfo = res;
+        this.OnDutArr1 = res.brigadeHeadquarters;
+        this.OnDutArr2 = res.stationDutyCadres;
+      });
+    },
+    //获取今日警情信息
+    getEarlyInfo() {
+      storage.getEarlyInfo(this.formOrg_z.id).then(res => {
+        this.earlyInfo = res;
+      });
     }
   },
   computed: {
@@ -740,7 +800,6 @@ export default {
   },
   mounted() {
     storage.getUserPermissionsDate().then(res => {
-      console.log("obj = ", res);
       this.setUserPermissions(res);
     });
   }
