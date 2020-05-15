@@ -5,8 +5,8 @@
           <div class="warn-info">
             <img class="notice-icon" src="../assets/images/notice_icon.png" alt />
             <span>公告：</span>
-            <div class="warn-txt" v-if="noticeFlag">
-                <p>数据正在加载中....</p>
+            <div class="warn-txt warn-img" v-if="noticeFlag">
+                <img src="../assets/images/timg.gif" alt />
             </div>
             <div class="warn-txt" v-else>
                 <vue-seamless-scroll :data="listData" class="seamless-notice" :class-option="noticeClassOption">
@@ -46,10 +46,10 @@
             }
         },
         methods:{
-            async getNoticeInfo(){
+            async getNoticeInfo(deptId){
                 // 后期userId传入
                 let par = {
-                    deptId: '145600593'
+                    deptId: deptId
                 }
                 const res = await request.getNotice(par);
                 let noticeRes = res.data;
@@ -70,7 +70,7 @@
                    
         },
         mounted(){
-            this.getNoticeInfo();
+            // this.getNoticeInfo();
         }
     }
 </script>

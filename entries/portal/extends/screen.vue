@@ -10,7 +10,7 @@
         <!-- 天气情况 -->
         <Weather></Weather>
         <!-- 通知公告 -->
-        <Notice></Notice>
+        <Notice ref="notice"></Notice>
         <!-- 本周重点工作 -->
         <div class="two-branch">
           <div class="branch-item">
@@ -522,7 +522,7 @@ export default {
         { text: "祝飞儿同志生日快乐" }
       ],
       value1: "",
-
+      sourceId: '',
       earlyInfo:{},  //今日警情信息
       earlyType:0,   //警情类型 处理传参
       OnDutyInfo:{}, //今日值班信息
@@ -582,18 +582,21 @@ export default {
       console.log("formOrg_z==", this.formOrg_z); //站json
       console.log("formOrg_z", this.formOrg); //大队json
       if (this.formOrg.id != "" && this.formOrg_z.id == "") {
+        this.sourceId = this.formOrg.sourceId;
         this.dialogFormVisibleOrg = false; //查看大队大屏
         this.$message({
           message: "查看大队大屏",
           type: "success"
         });
       } else if (this.formOrg.id != "" && this.formOrg_z.id != "") {
+        this.sourceId = this.formOrg.sourceId;
         this.$message({
           message: "查看大队下面消防站大屏",
           type: "success"
         });
         this.dialogFormVisibleOrg = false; //查看大队下面消防站大屏
       } else if (this.formOrg_z.id != "" && this.formOrg.id == "") {
+        this.sourceId = this.formOrg_z.sourceId;
         this.$message({
           message: "只查看消防站大屏",
           type: "success"
@@ -625,6 +628,9 @@ export default {
           this.listData = ar;
         
         }); //车辆信息
+
+        // 公告
+        this.$refs['notice'].getNoticeInfo(this.sourceId);
 
       } else {
         this.$message({
