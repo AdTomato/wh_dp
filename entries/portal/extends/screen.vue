@@ -142,88 +142,49 @@
                 <h3 class="screen-item-title">人员动态</h3>
                 <div class="total_num">
                   <ul class="tel_ul">
-                      <li>总指挥 <div class="commander mt">(*人)</div> </li>
-                      <li>指挥员 <div class="controller mt">(*人)</div> </li>
-                      <li>消防员 <div class="fireman mt">(*人)</div> </li>
-                      <li>在岗 <div class="on_work mt">(*人)</div> </li>
-                      <li style="color: #129D1D;">公差 <div class="out_work mt">(*人)</div> </li>
-                      <li style="color: #BDA100"> 休假 <div class="no_work mt">(*人)</div> </li>
+                      <li>总人数 <div class="commander mt">{{numAll}}人</div> </li>
+                      <li>指挥员 <div class="controller mt">{{numtype1}}人</div> </li>
+                      <li>消防员 <div class="fireman mt">{{numtype2}}人</div> </li>
+                      <li>在岗 <div class="on_work mt">{{numZaigang}}人</div> </li>
+                      <li style="color: #129D1D;">公差 <div class="out_work mt">{{numGongchai}}人</div> </li>
+                      <li style="color: #BDA100"> 休假 <div class="no_work mt">{{numXiujia}}人</div> </li>
                   </ul>
                 </div>
                 <div class="detail_num">
                   <ul class="commander_list">
                     <li class="commander_detail">
                       指  挥  员:
-                      <span>郭海涛</span>
-                      <span>张 卓</span>
-                      <span>宋星星</span>
-                      <span>赵章全</span>
-                      <span>王 杰</span>
-                      <span>李梦念</span>
+                       <span v-for="item in userNames1">{{item}}</span>
                     </li>
                   </ul>
                   <ul class="commander_list">
                     <li class="commander_detail">
                       特情一班:
-                      <span>李 斌</span>
-                      <span>宁成伟</span>
-                      <span>邓 彪</span>
-                      <span class="yellow_name">黄 磊</span>
-                      <span>王 晶</span>
-                      <span>张 娟</span>
-                      <span>黄 玲</span>
-                      <span>袁 东</span>
+                      <span v-for="item in userNames2">{{item}}</span>
                     </li>
                   </ul>
                   <ul class="commander_list">
                     <li class="commander_detail">
                       特情二班:
-                      <span>李 斌</span>
-                      <span>宁成伟</span>
-                      <span>邓 彪</span>
-                      <span class="yellow_name">黄 磊</span>
-                      <span>王 晶</span>
-                      <span>张 娟</span>
-                      <span>黄 玲</span>
+                      <span v-for="item in userNames3">{{item}}</span>
                     </li>
                   </ul>
                   <ul class="commander_list">
                     <li class="commander_detail">
                       灭火一班:
-                      <span>李 斌</span>
-                      <span>宁成伟</span>
-                      <span>邓 彪</span>
-                      <span class="yellow_name">黄 磊</span>
-                      <span>王 晶</span>
-                      <span>张 娟</span>
-                      <span>黄 玲</span>
-                      <span>袁 东</span>
+                      <span v-for="item in userNames4">{{item}}</span>
                     </li>
                   </ul>
                   <ul class="commander_list">
                     <li class="commander_detail">
                       灭火二班:
-                      <span>李 斌</span>
-                      <span>宁成伟</span>
-                      <span>邓 彪</span>
-                      <span class="yellow_name">黄 磊</span>
-                      <span>王 晶</span>
-                      <span>张 娟</span>
-                      <span>黄 玲</span>
-                      <span>袁 东</span>
+                      <span v-for="item in userNames5">{{item}}</span>
                     </li>
                   </ul>
                   <ul class="commander_list">
                     <li class="commander_detail">
                       特情保障班:
-                      <span>李 斌</span>
-                      <span>宁成伟</span>
-                      <span>邓 彪</span>
-                      <span class="yellow_name">黄 磊</span>
-                      <span>王 晶</span>
-                      <span>张 娟</span>
-                      <span>黄 玲</span>
-                      <span>袁 东</span>
+                      <span v-for="item in userNames6">{{item}}</span>
                     </li>
                   </ul>
                 </div>
@@ -235,31 +196,31 @@
                     <h3 class="screen-item-title">每月之星栏</h3>
                     <div class="star_month">
                       <ul>
-                        <li>
+                        <li style="display: inline-block;vertical-align :top">
                           <img src="./assets/images/learn_star.png" />
-                          <img src="./assets/images/star_man.png" />
-                          <span class="star_name">沈伟</span>
+                          <img :src="learn_img" class="star_img" />
+                          <span class="star_name">{{learnStar}}</span>
                         </li>
                       </ul>
                       <ul>
                         <li>
-                          <img src="./assets/images/learn_star.png" />
-                          <img src="./assets/images/star_man.png" />
-                          <span class="star_name">沈伟</span>
+                          <img src="./assets/images/discipline_star.png" />
+                          <img :src="discipline_img" class="star_img" />
+                          <span class="star_name">{{disciplineStar}}</span>
                         </li>
                       </ul>
                       <ul>
                         <li>
-                          <img src="./assets/images/learn_star.png" />
-                          <img src="./assets/images/star_man.png" />
-                          <span class="star_name">沈伟</span>
+                          <img src="./assets/images/train_star.png" />
+                          <img :src="train_img" class="star_img" />
+                          <span class="star_name">{{trainStar}}</span>
                         </li>
                       </ul>
                       <ul>
                         <li>
-                          <img src="./assets/images/learn_star.png" />
-                          <img src="./assets/images/star_man.png" />
-                          <span class="star_name">沈伟</span>
+                          <img src="./assets/images/house_star.png" />
+                          <img :src="houser_img" class="star_img" />
+                          <span class="star_name">{{houseStar}}</span>
                         </li>
                       </ul>
                   </div>
@@ -271,34 +232,22 @@
                   <div class="evaluate">
                     <ul class="evaluate_detail">
                         <li>
-                          <span>x  x</span>
-                          <span>政治思想</span>
-                          <span>+1分</span>
+                          <span v-for="item in idd1">{{item}}</span>
                         </li>
                         <li>
-                          <span>x  x</span>
-                          <span>作风养成</span>
-                          <span>-2分</span>
+                          <span v-for="item in idd2">{{item}}</span>
                         </li>
                         <li>
-                          <span>x  x</span>
-                          <span>军事训练</span>
-                          <span>-2分</span>
+                          <span v-for="item in idd3">{{item}}</span>
                         </li>
                         <li>
-                          <span>x  x</span>
-                          <span>服从命令</span>
-                          <span>+1分</span>
+
                         </li>
                         <li>
-                          <span>x  x</span>
-                          <span>灭火救援</span>
-                          <span>+2分</span>
+
                         </li>
                         <li>
-                          <span>x  x</span>
-                          <span>遵章守纪</span>
-                          <span>-2分</span>
+                          
                         </li>
                     </ul>
                   </div>
@@ -479,6 +428,7 @@ import "./assets/lib/rem.js";
 import ElementUI from "element-ui";
 import "element-ui/lib/theme-chalk/index.css";
 import axios from "axios";
+import request from "./api/request.js";
 import vueSeamlessScroll from "vue-seamless-scroll";
 Vue.use(ElementUI, axios, vueSeamlessScroll);
 export default {
@@ -552,17 +502,103 @@ export default {
         },
       formLabelWidth: '120px',
       birthday_data: [{
-          'text': '祝陈飞同志生日快乐'
+          'text': '祝陈飞同志生日快乐!'
         }, {
-          'text': '祝飞儿同志生日快乐'
-        }]
+          'text': '祝飞儿同志生日快乐!'
+        }],
+        //每月之星
+        learnStar: '',
+        disciplineStar: '',
+        houseStar: '',
+        trainStar: '',
+        learn_img: '',
+        discipline_img: '',
+        houser_img: '',
+        train_img: '',
+
+        //人员动态
+        numAll: '',
+        numtype1: '',
+        numtype2: '',
+        numZaigang: '',
+        numGongchai: '',
+        numXiujia: '',
+        commander_add: '',
+        userNames1:[],
+        userNames2:[],
+        userNames3:[],
+        userNames4:[],
+        userNames5:[],
+        userNames6:[],
+        //量化考评
+        idd1:[],
+        idd2:[],
+        idd3:[]
     };
   },
   components: {
     //组件
     vueSeamlessScroll
   },
-  methods: {},
+  methods: {
+    getMonth(){
+      let par = {
+        stationId: 'af127c960a8b490683a1ff9c57b83163',
+        date: '2020-04-01 00:00:00'
+      }
+      request.getStationStarMonth(par).then(res => {
+        this.learnStar = res.learningStar.name;
+        this.disciplineStar = res.disciplineStar.name;
+        this.trainStar = res.trainStar.name;
+        this.houseStar = res.houseStar.name;
+        this.learn_img = res.learningStar.imgUrl;
+        this.discipline_img = res.disciplineStar.imgUrl;
+        this.house_img = res.houseStar.imgUrl;
+        this.train_img = res.trainStar.imgUrl;
+      })
+    },
+    async getMainInfo(){
+      let par = {
+        deptId: '145600593'
+      }
+      const res = await request.getMainInfo(par);
+      this.userNames1 = res.userNames1;
+      this.userNames2 = res.userNames2;
+      this.userNames3 = res.userNames3;
+      this.userNames4 = res.userNames4;
+      this.userNames5 = res.userNames5;
+      this.userNames6 = res.userNames6;
+      this.numAll = res.numAll;
+      this.numtype1 = res.numtype1;
+      this.numtype2 = res.numtype2;
+      this.numZaigang = res.numZaigang;
+      this.numGongchai = res.numGongchai;
+      this.numXiujia = res.numXiujia;
+    },
+    getAssessmentInfo(){
+      let par = {
+        stationId: 'af127c960a8b490683a1ff9c57b83163'
+      }
+      request.getAssessmentInfo(par).then(res =>{
+        console.log(res);
+        let idd1 = [];
+        let idd2 = [];
+        let idd3 = [];
+        idd1.push(res[0].evaluationName);
+        idd1.push(res[0].project);
+        idd1.push(res[0].score + '分');
+        this.idd1 = idd1;
+        idd2.push(res[1].evaluationName);
+        idd2.push(res[1].project);
+        idd2.push(res[1].score + '分');
+        this.idd2 = idd2;
+        idd3.push(res[2].evaluationName);
+        idd3.push(res[2].project);
+        idd3.push(res[2].score + '分');
+        this.idd3 = idd3;
+      })
+    }
+  },
   computed: {
     classOption() {
       return {
@@ -588,6 +624,11 @@ export default {
         waitTime: 1000 // 单步运动停止的时间(默认值1000ms)
       }
     }
+  },
+  mounted(){
+    this.getMonth();
+    this.getMainInfo();
+    this.getAssessmentInfo();
   }
 };
 </script>
