@@ -566,16 +566,17 @@ export default {
         this.getEarlyInfo(); //警情信息
         this.getOnDutyInfo(); //值班信息
         this.getVehicleInfo(); //车辆信息
-        // 公告
-        this.$refs['notice'].getNoticeInfo(this.noticeSourceId);
-        // 教育训练计划
-        this.$refs['education'].getEducationData(this.eduStationId);
       } else {
         this.$message({
           message: "请选择部门",
           type: "warning"
         });
       }
+      console.log(this.noticeSourceId + '-------');
+      // 公告
+      this.$refs['notice'].getNoticeInfo(this.noticeSourceId);
+      // 教育训练计划
+      this.$refs['education'].getEducationData(this.eduStationId);
     },
 
     uploadEarliInfo(type) {
