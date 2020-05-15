@@ -39,3 +39,19 @@ export function Post(url, params) {
     });
 }
 
+/**
+ * put方法，对应put请求
+ * @param {String} url [请求的url地址]
+ * @param {Object} params [请求时携带的参数]
+ */
+export function Put(url, params){  
+    let _url = urlPath + url;  
+    return new Promise((resolve, reject) =>{        
+            axios.put(_url,params).then(res => {
+                resolve(res);
+            }).catch(err =>{
+                reject(err)        
+        })    
+    });
+}
+

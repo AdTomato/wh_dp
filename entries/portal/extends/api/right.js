@@ -6,9 +6,7 @@ var storage = {
         await request.getUserPermissions().then(res => {
           console.log("res===",res);
           if(res.errcode==0){
-            debugger;
             if(res.data.isStation==true){
-              debugger;
               obj =  res.data;
             }else if(res.data.isDetachment==true){
               obj =  res.data;
@@ -22,7 +20,73 @@ var storage = {
           }
         })
         return obj ;
+      },
+
+      //根据消防站id获取今日警情信息
+      async getEarlyInfo(stationId){
+        var parmar = {
+          stationId:stationId,
+          date:"2020-04-07 00:00:00"
+        }
+        await request.getEarlyInfo(parmar).then(res => {
+          console.log("今日警情信息=",res);
+          if(res.errcode==0){
+            obj = res.data;
+          }
+        })
+        return obj ;
+      },
+
+      //更新今日警情信息
+      async uploadEarlyInfo(parmar){
+        await request.uploadEarlyInfo(parmar).then(res => {
+          if(res.errcode==0){obj = res;}
+        })
+        return obj ;
+      },
+      //获取值班信息
+
+      async getOnDutyInfo(stationId){
+        var parmar = {
+          stationId:stationId,
+          date:"2020-04-07 00:00:00"
+        }
+        await request.getOnDutyInfo(parmar).then(res => {
+          console.log("今日值班信息=",res);
+          if(res.errcode==0){
+            obj = res.data;
+          }
+        })
+        return obj ;
+      },
+
+      //获取车辆信息
+      async getVehicleInfo(stationId){
+        var parmar = {stationId:stationId}
+        await request.getVehicleInfo(parmar).then(res => {
+          console.log("今日车辆信息=",res);
+          if(res.errcode==0){
+            obj = res.data;
+          }
+        })
+        return obj ;
+      },
+      //更新车辆状态
+      async uploadVehicleStatus(){
+        var parmar = {
+          stationId:stationId,
+          status:"在位"
+        }
+        await request.uploadVehicleStatus(parmar).then(res => {
+          console.log("更新车辆状态=",res);
+          if(res.errcode==0){
+            obj = res.data;
+          }
+        })
+        return obj ;
       }
+
+
       
 }
 export default storage;//把这个方法暴露出去，方便外部引用
