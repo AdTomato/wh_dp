@@ -4,12 +4,10 @@ const request = {
     getStationAlertInfo:(data) => {
         return Get('/controller/alertInfo/getStationAlertInfoByStationId',data);
     },
-<<<<<<< Updated upstream
     getNotice:(data) => {
         // 获取公告
         return Get('/controller/personlInfo/getInfo',data);
-    }
-=======
+    },
 
     //获取登录人权限
     getUserPermissions:(data) => {
@@ -21,7 +19,6 @@ const request = {
         return Get('/controller/org/getAllStationListByBrigadeId',data);
     },
 
->>>>>>> Stashed changes
 }
 
 export default request;

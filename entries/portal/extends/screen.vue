@@ -490,12 +490,9 @@ import storage from "./api/right";
 import ElementUI from "element-ui";
 import "element-ui/lib/theme-chalk/index.css";
 import axios from "axios";
-<<<<<<< Updated upstream
 import Weather from './components/weather';
 import Notice from './components/notice';
-=======
 import request from "./api/request";
->>>>>>> Stashed changes
 import vueSeamlessScroll from "vue-seamless-scroll";
 Vue.use(ElementUI, axios, vueSeamlessScroll);
 export default {
