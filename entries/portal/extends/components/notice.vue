@@ -5,7 +5,7 @@
           <div class="warn-info">
             <img class="notice-icon" src="../assets/images/notice_icon.png" alt />
             <span>公告：</span>
-            <div class="warn-txt warn-img" v-if="!noticeData">
+            <div class="warn-txt warn-img" v-if="!flagVisible">
                 <img src="../assets/images/timg.gif" alt />
             </div>
             <div class="warn-txt" v-else>
@@ -29,14 +29,15 @@
     export default {
         name: "notice",
         props: {
-            noticeData: {
-                type: Array
-            }
+            flagVisible: {
+                type: Boolean,
+                default: false
+            },
+            noticeData: Array
         },
         data() {
             return {
                 listData: [],
-                noticeFlag: true
             }
         },
         components: {
@@ -59,7 +60,6 @@
                 const res = await request.getNotice(par);
                 let noticeRes = res.data;
                 if(noticeRes.notice){
-                    this.noticeFlag = false;
                     let arr = [];
                     for (let i = 0; i < noticeRes.notice.length; i++) {
                         let noticeObj = {};
@@ -75,7 +75,6 @@
                    
         },
         mounted(){
-            // this.getNoticeInfo();
         }
     }
 </script>

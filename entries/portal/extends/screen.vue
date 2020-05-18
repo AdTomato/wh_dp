@@ -10,7 +10,7 @@
         <!-- 天气情况 -->
         <Weather></Weather>
         <!-- 通知公告 -->
-        <Notice ref="notice" :noticeData="noticeData"></Notice>
+        <Notice ref="notice" :noticeData="noticeData" :flagVisible="flagVisible"></Notice>
         <!-- 教育训练计划和龙虎榜 -->
         <Education ref="education"></Education>
       </div>
@@ -441,8 +441,6 @@ export default {
         score: '',
 
         value1: "",
-        noticeSourceId: '',
-        eduStationId: '',
         earlyInfo:{},  //今日警情信息
         earlyType:0,   //警情类型 处理传参
         OnDutyInfo:{}, //今日值班信息
@@ -451,7 +449,10 @@ export default {
         vehicleInfo:{},
         carsId: "",
         status: "",
-        noticeData: []
+        noticeSourceId: '',
+        eduStationId: '',
+        noticeData: [],
+        flagVisible: false
     };
   },
   components: {
@@ -717,6 +718,8 @@ export default {
         this.numGongchai = res.data.numGongchai;
         this.numXiujia = res.data.numXiujia;
         this.birthday_data = res.data.birthdayNames;
+        // myjing公告
+        this.flagVisible = true;
         // this.birthday_data = [{
         //   'text': '祝陈飞同志生日快乐!'
         // }, {
