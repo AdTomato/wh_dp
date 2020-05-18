@@ -8,56 +8,9 @@
       <!-- 左边 -->
       <div class="screen-left dd-item">
         <!-- 天气情况 -->
-        <weather></weather>
-        <!-- <div class="screen-item">
-          <h3 class="screen-item-title">天气情况</h3>
-          <div class="weather-info">
-            <span>{{currentDate[0]}}</span>
-            <span>{{currentDate[1]}}</span>
-            <img src="./assets/images/sun_icon.png" alt />
-            <span>7-18℃</span>
-          </div>
-          <ul class="weather-item">
-            <li>
-              <span class="weather-item-left weather-item-mid-left">湿度</span>
-              <span class="weather-item-right weather-item-mid-right">{{humidity}}%</span>
-            </li>
-            <li>
-              <span class="weather-item-left weather-item-big-left">空气质量</span>
-              <span class="weather-item-right weather-item-big-right">{{airQuality}}</span>
-            </li>
-            <li>
-              <span class="weather-item-left weather-item-small-left">气温</span>
-              <span class="weather-item-right weather-item-small-right">{{airTemperature}}℃</span>
-            </li>
-            <li>
-              <span class="weather-item-left weather-item-mid-left">风力</span>
-              <span class="weather-item-right weather-item-mid-right">{{windSpeed}}级</span>
-            </li>
-            <li>
-              <span class="weather-item-left weather-item-big-left">风向</span>
-              <span class="weather-item-right weather-item-big-right">{{windDirection}}</span>
-            </li>
-            <li>
-              <span class="weather-item-left weather-item-small-left">能见度</span>
-              <span class="weather-item-right weather-item-small-right">{{weatherVisible}}KM</span>
-            </li>
-          </ul>
-        </div> -->
+        <Weather></Weather>
         <!-- 通知公告 -->
-        <div class="screen-item">
-          <h3 class="screen-item-title">通知公告</h3>
-          <div class="warn-info">
-            <img class="notice-icon" src="./assets/images/notice_icon.png" alt />
-            <span>公告：</span>
-            <div class="warn-txt">
-              <p>关于建设平安武汉</p>
-              <p>支队持续推进暑期消防安全宣教活动</p>
-              <p>XX大队召开卫健系统消防安全培训会</p>
-              <p>XX大队到辖区沿街商铺开展消防宣传活动</p>
-            </div>
-          </div>
-        </div>
+        <Notice></Notice>
         <!-- 本周重点工作 -->
         <div class="screen-item">
           <h3 class="screen-item-title">本周重点工作</h3>
@@ -297,7 +250,8 @@ import ElementUI from "element-ui";
 import "element-ui/lib/theme-chalk/index.css";
 import axios from "axios";
 import vueSeamlessScroll from "vue-seamless-scroll";
-import weather from './components/weather';
+import Weather from './components/weather';
+import Notice from './components/notice';
 import request from './api/request';
 import echarts from "echarts";
 Vue.prototype.$echarts = echarts;
@@ -324,7 +278,8 @@ export default {
   components: {
     //组件
     vueSeamlessScroll,
-    weather
+    Weather,
+    Notice
   },
   methods: {
     myEcharts() {

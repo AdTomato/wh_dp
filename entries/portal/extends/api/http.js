@@ -15,9 +15,9 @@ export function Get(url, params){
             axios.get(_url, {            
                 params: params        
             }).then(res => {
-                resolve(res.data);
+                resolve(res);
             }).catch(err =>{
-                reject(err.data)        
+                reject(err)        
         })    
     });
 }
@@ -31,10 +31,27 @@ export function Post(url, params) {
     return new Promise((resolve, reject) => {
          axios.post(_url, QS.stringify(params))
         .then(res => {
-            resolve(res.data);
+            resolve(res);
         })
         .catch(err =>{
-            reject(err.data)
+            reject(err)
         })
     });
 }
+
+/**
+ * put方法，对应put请求
+ * @param {String} url [请求的url地址]
+ * @param {Object} params [请求时携带的参数]
+ */
+export function Put(url, params){  
+    let _url = urlPath + url;  
+    return new Promise((resolve, reject) =>{        
+            axios.put(_url,params).then(res => {
+                resolve(res);
+            }).catch(err =>{
+                reject(err)        
+        })    
+    });
+}
+
