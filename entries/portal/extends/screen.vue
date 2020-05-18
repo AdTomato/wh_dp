@@ -111,23 +111,23 @@
               <div class="evaluate">
                 <ul class="evaluate_detail">
                   <li>
-                          <span v-for="item in idd1">{{item}}</span>
-                        </li>
-                        <li>
-                          <span v-for="item in idd2">{{item}}</span>
-                        </li>
-                        <li>
-                          <span v-for="item in idd3">{{item}}</span>
-                        </li>
-                        <li>
-                          <span v-for="item in idd4">{{item}}</span>
-                        </li>
-                        <li>
-                          <span v-for="item in idd5">{{item}}</span>
-                        </li>
-                        <li>
-                          <span v-for="item in idd6">{{item}}</span>
-                        </li>
+                    <span v-for="item in idd1">{{item}}</span>
+                  </li>
+                  <li>
+                    <span v-for="item in idd2">{{item}}</span>
+                  </li>
+                  <li>
+                  <span v-for="item in idd3">{{item}}</span>
+                  </li>
+                  <li>
+                    <span v-for="item in idd4">{{item}}</span>
+                  </li>
+                  <li>
+                    <span v-for="item in idd5">{{item}}</span>
+                  </li>
+                  <li>
+                    <span v-for="item in idd6">{{item}}</span>
+                  </li>
                 </ul>
               </div>
             </div>
@@ -436,6 +436,8 @@ export default {
         idd4:[],
         idd5:[],
         idd6:[],
+        evaluate_list:[],
+        idds:[],
         evaluationName: '',
         project: '',
         score: '',
@@ -742,42 +744,54 @@ export default {
       request.getAssessmentInfo(par).then(res =>{
         console.log("量化考评");
         console.log(res.data);
+        var ar = [];
         if(res.data){
+            // for(var i; i<res.data.length;){
+            //   console.log(res.data[i].evaluationName);
+            // }
           let idd1 = [];
           let idd2 = [];
           let idd3 = [];
           let idd4 = [];
           let idd5 = [];
           let idd6 = [];
-          idd1.push(res.data[0].evaluationName);
-          idd1.push(res.data[0].project);
-          idd1.push(res.data[0].score + '分');
-          this.idd1 = idd1;
-          idd2.push(res.data[1].evaluationName);
-          idd2.push(res.data[1].project);
-          idd2.push(res.data[1].score + '分');
-          this.idd2 = idd2;
-          idd3.push(res.data[2].evaluationName);
-          idd3.push(res.data[2].project);
-          idd3.push(res.data[2].score + '分');
-          this.idd3 = idd3;
-          idd3.push(res.data[3].evaluationName);
-          idd3.push(res.data[3].project);
-          idd3.push(res.data[3].score + '分');
-          this.idd4 = idd4;
-          idd3.push(res.data[4].evaluationName);
-          idd3.push(res.data[4].project);
-          idd3.push(res.data[4].score + '分');
-          this.idd5 = idd5;
-          idd3.push(res.data[5].evaluationName);
-          idd3.push(res.data[5].project);
-          idd3.push(res.data[5].score + '分');
-          this.idd6 = idd6;
+          if(res.data[0] != null){
+            idd1.push(res.data[0].evaluationName);
+            idd1.push(res.data[0].project);
+            idd1.push(res.data[0].score + '分');
+            this.idd1 = idd1;
+          }
+          if(res.data[1] != null){
+            idd2.push(res.data[1].evaluationName);
+            idd2.push(res.data[1].project);
+            idd2.push(res.data[1].score + '分');
+            this.idd2 = idd2;
+          }
+          if(res.data[2] != null){
+            idd3.push(res.data[2].evaluationName);
+            idd3.push(res.data[2].project);
+            idd3.push(res.data[2].score + '分');
+            this.idd3 = idd3;
+          }
+          if(res.data[3] != null){
+            idd4.push(res.data[3].evaluationName);
+            idd4.push(res.data[3].project);
+            idd4.push(res.data[3].score + '分');
+            this.idd4 = idd4;
+          }
+          if(res.data[4] != null){
+            idd5.push(res.data[4].evaluationName);
+            idd5.push(res.data[4].project);
+            idd5.push(res.data[4].score + '分');
+            this.idd5 = idd5;
+          }
+          if(res.data[5] != null){
+            idd6.push(res.data[5].evaluationName);
+            idd6.push(res.data[5].project);
+            idd6.push(res.data[5].score + '分');
+            this.idd6 = idd6;
+          }
         }
-        
-        // console.log("啊哈哈哈哈");
-        // console.log(res);
-        
       })
     }
   },
