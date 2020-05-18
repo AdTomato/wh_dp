@@ -717,7 +717,13 @@ export default {
         this.numZaigang = res.data.numZaigang;
         this.numGongchai = res.data.numGongchai;
         this.numXiujia = res.data.numXiujia;
-        this.birthday_data = res.data.birthdayNames;
+        if(res.data.birthdayNames.length != 0){
+          this.birthday_data = res.data.birthdayNames;
+        }else{
+            this.birthday_data = [{
+            'text': '对党忠诚，纪律严明，赴汤蹈火，竭诚为民'
+          }];
+        }
         // myjing公告
         this.flagVisible = true;
         // this.birthday_data = [{
