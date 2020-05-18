@@ -546,6 +546,7 @@ export default {
       this.$refs['education'].getEducationData(this.eduStationId);
       this.getMainInfo(this.noticeSourceId);
       this.getAssessmentInfo(this.eduStationId);
+      this.getMonth(this.eduStationId);
     },
 
     uploadEarliInfo(type) {
@@ -681,21 +682,71 @@ export default {
     },
 
     // 每月之星
-    getMonth(){
+    getMonth(stationId){
+      var date = new Date();  
+      var month = date.getMonth() + 1;
+
+      var strDate = date.getDate();
+      if (month >= 1 && month <= 9) {
+          month = "0" + month;
+      }
+      if (strDate >= 0 && strDate <= 9) {
+          strDate = "0" + strDate;
+      } 
+      var hours = date.getHours();
+      if (hours >=0 && hours <= 9) {
+          if (hours == 0) {
+              hours = "00";
+          } else{
+              hours = "0" + hours;
+          }
+      }
+      var minutes = date.getMinutes();
+      if (minutes >=0 && minutes <= 9) {
+          if (minutes == 0) {
+              minutes = "00";
+          } else{
+              minutes = "0" + minutes;
+          }
+      }
+      var seconds = date.getSeconds();
+      if (seconds >=0 && seconds <= 9) {
+          if (seconds == 0) {
+              seconds = "00";
+          } else{
+              seconds = "0" + seconds;
+          }
+      }
+      var currentdate = date.getFullYear()+"-"+ month+"-"+strDate+" "+hours+":"+minutes+":"+ seconds;
       let par = {
-        stationId: 'af127c960a8b490683a1ff9c57b83163',
-        date: '2020-04-01 00:00:00'
+        stationId: stationId,
+        date: currentdate
       }
       request.getStationStarMonth(par).then(res => {
-        this.learnStar = res.data.learningStar.name;
-        // console.log(res.learningStar.name);
-        this.disciplineStar = res.data.disciplineStar.name;
-        this.trainStar = res.data.trainStar.name;
-        this.houseStar = res.data.houseStar.name;
-        this.learn_img = res.data.learningStar.imgUrl;
-        this.discipline_img = res.data.disciplineStar.imgUrl;
-        this.house_img = res.data.houseStar.imgUrl;
-        this.train_img = res.data.trainStar.imgUrl;
+        if(res.data.learningStar.name != null){
+          this.learnStar = res.data.learningStar.name;
+        }
+        if(res.data.disciplineStar.name != null){
+          this.disciplineStar = res.data.disciplineStar.name;
+        }
+        if(res.data.trainStar.name != null){
+          this.trainStar = res.data.trainStar.name;
+        }
+        if(res.data.houseStar.name != null){
+          this.houseStar = res.data.houseStar.name;
+        }
+        if(res.data.learningStar.imgUrl != null){
+          this.learn_img = res.data.learningStar.imgUrl;
+        }
+        if(res.data.disciplineStar.imgUrl != null){
+          this.discipline_img = res.data.disciplineStar.imgUrl;
+        }
+        if(res.data.houseStar.imgUrl != null){
+          this.house_img = res.data.houseStar.imgUrl;
+        }
+        if(res.data.trainStar.imgUrl != null){
+          this.train_img = res.data.trainStar.imgUrl;
+        } 
       })
     },
 
@@ -746,9 +797,6 @@ export default {
         console.log(res.data);
         var ar = [];
         if(res.data){
-            // for(var i; i<res.data.length;){
-            //   console.log(res.data[i].evaluationName);
-            // }
           let idd1 = [];
           let idd2 = [];
           let idd3 = [];
@@ -822,7 +870,7 @@ export default {
     }
   },
   mounted(){
-    this.getMonth();
+    //this.getMonth();
     // this.getMainInfo();
     //this.getAssessmentInfo();
     storage.getUserPermissionsDate().then(res => {
