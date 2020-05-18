@@ -717,9 +717,16 @@ export default {
         this.numZaigang = res.data.numZaigang;
         this.numGongchai = res.data.numGongchai;
         this.numXiujia = res.data.numXiujia;
-        this.birthday_data = res.data.birthdayNames;
+        // this.birthday_data = res.data.birthdayNames;
         // myjing公告
         this.flagVisible = true;
+        if(res.data.birthdayNames.length != 0){
+          this.birthday_data = res.data.birthdayNames;
+        }else{
+            this.birthday_data = [{
+            'text': '对党忠诚，纪律严明，赴汤蹈火，竭诚为民'
+          }];
+        }
         // this.birthday_data = [{
         //   'text': '祝陈飞同志生日快乐!'
         // }, {
