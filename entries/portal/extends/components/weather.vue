@@ -55,7 +55,18 @@
                 nowDate: '',
                 nowWeek: '',
                 imgUrl: '',
+                timer: null
             }
+        },
+        mounted(){
+            this.getWeather();
+            this.getCurrentDate();
+            this.timer = setInterval(() => {
+                setTimeout(() => {
+                  this.getWeather();
+                  this.getCurrentDate();
+                }, 0)
+            }, 1800000)
         },
         methods:{
             async getWeather(){
@@ -77,26 +88,30 @@
               if(weatherData.code == 0 || weatherData.code == 1 || weatherData.code == 2 
               || weatherData.code == 3 || weatherData.code == 38){
                 imgurls = 'sun_icon.png'
-              }else if(weatherData.code == 4 || weatherData.code == 5 || weatherData.code == 6 || weatherData.code == 7
-              || weatherData.code == 9 || weatherData.code == 8 || weatherData.code == 37){
-                imgurls = '4@2x.png'
-              }else if(weatherData.code == 10 || weatherData.code == 11 || weatherData.code == 12 
-              || weatherData.code == 13 || weatherData.code == 14 || weatherData.code == 15
+              }else if(weatherData.code == 4 || weatherData.code == 7 || weatherData.code == 9 || weatherData.code == 8 ){
+                imgurls = '4@1x.png'
+              }else if(weatherData.code == 10 || weatherData.code == 13 || weatherData.code == 14 || weatherData.code == 15
               || weatherData.code == 16 || weatherData.code == 17 || weatherData.code == 18 || weatherData.code == 19){
-                imgurls = '16@2x.png'
+                imgurls = '16@1x.png'
               }else if(weatherData.code == 20 || weatherData.code == 21 || weatherData.code == 22 
               || weatherData.code == 23 || weatherData.code == 24 || weatherData.code == 25){
-                imgurls = '23@2x.png'
+                imgurls = '23@1x.png'
               }else if(weatherData.code == 26 || weatherData.code == 27 || weatherData.code == 28 
               || weatherData.code == 29){
-                imgurls = '27@2x.png'
+                imgurls = '27@1x.png'
               }else if(weatherData.code == 32 || weatherData.code == 33 || weatherData.code == 34 
               || weatherData.code == 35 || weatherData.code == 36){
-                imgurls = '33@2x.png'
+                imgurls = '33@1x.png'
               }else if(weatherData.code == 30){
-                imgurls = '30@2x.png'
+                imgurls = '30@1x.png'
               }else if(weatherData.code == 31){
-                imgurls = '31@2x.png'
+                imgurls = '31@1x.png'
+              }else if(weatherData.code == 5 || weatherData.code == 6){
+                imgurls = '5@1x.png'
+              }else if(weatherData.code == 37){
+                imgurls = '37@1x.png'
+              }else if(weatherData.code == 11 || weatherData.code == 12){
+                imgurls = '11@1x.png'
               }
               this.imgUrl = require('../assets/images/' + imgurls);
 
@@ -125,11 +140,10 @@
                   this.nowWeek = "星期日";
               }
               _this.nowDate = yy + "年" + mm + "月" + dd + "号";
-            }          
+            }   
         },
-        mounted(){
-            this.getWeather();
-            this.getCurrentDate();
-        }
+        destroyed() {
+          clearInterval(this.timer)
+        },
     }
 </script>
