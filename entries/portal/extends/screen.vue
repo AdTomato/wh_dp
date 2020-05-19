@@ -21,12 +21,12 @@
             <h3 class="screen-item-title">人员动态</h3>
             <div class="total_num">
               <ul class="tel_ul">
-                      <li>总人数 <div class="commander mt">{{numAll}}人</div> </li>
-                      <li>指挥员 <div class="controller mt">{{numtype1}}人</div> </li>
-                      <li>消防员 <div class="fireman mt">{{numtype2}}人</div> </li>
-                      <li>在岗 <div class="on_work mt">{{numZaigang}}人</div> </li>
-                      <li style="color: #129D1D;">公差 <div class="out_work mt">{{numGongchai}}人</div> </li>
-                      <li style="color: #BDA100"> 休假 <div class="no_work mt">{{numXiujia}}人</div> </li>
+                  <li>总人数 <div class="commander mt">{{numAll}}人</div> </li>
+                  <li>指挥员 <div class="controller mt">{{numtype1}}人</div> </li>
+                  <li>消防员 <div class="fireman mt">{{numtype2}}人</div> </li>
+                  <li>在岗 <div class="on_work mt">{{numZaigang}}人</div> </li>
+                  <li style="color: #129D1D;">公差 <div class="out_work mt">{{numGongchai}}人</div> </li>
+                  <li style="color: #BDA100"> 休假 <div class="no_work mt">{{numXiujia}}人</div> </li>
               </ul>
             </div>
             <div class="detail_num">

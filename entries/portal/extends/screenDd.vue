@@ -288,17 +288,13 @@ export default {
         brigadeId: '586d63454d6841dfa667405212572ca7'
       }
       request.getWorkData(par).then(res => {
-        console.log(res);
-        let workArr = [];
+        console.log('结果打印');
         res.data.forEach(item => {
-          workArr.push(item.weekFocusList);
+          item.weekFocusList.forEach(ele => {
+            this.worksData.push(ele);
+          })
         })
-        for(var i=0; i<workArr.length; i++){
-          let workObj = {};
-          workObj.workContent = res.data[i].workContent;
-          workObj.status = res.data[i].status;
-          this.worksData.push(workObj);
-        }
+        console.log(this.worksData);
       })
     },
     myEcharts() {
@@ -491,9 +487,9 @@ export default {
     // this.loadDate();
     this.getWorks();
     this.myEcharts();
-    window.onresize = function() {
-      myChart.resize();
-    };
+    // window.onresize = function() {
+    //   myChart.resize();
+    // };
   }
 };
 </script>
