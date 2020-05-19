@@ -668,7 +668,7 @@ export default {
     },
     //获取值班信息
     getOnDutyInfo() {
-      storage.getOnDutyInfo(this.formOrg_z.id).then(res => {
+      storage.getOnDutyInfo(this.formOrg_z.id,1).then(res => {
         this.OnDutyInfo = res;
         this.OnDutArr1 = res.brigadeHeadquarters;
         this.OnDutArr2 = res.stationDutyCadres;
@@ -676,7 +676,7 @@ export default {
     },
     //获取今日警情信息
     getEarlyInfo() {
-      storage.getEarlyInfo(this.formOrg_z.id).then(res => {
+      storage.getEarlyInfo(this.formOrg_z.id,1).then(res => {
         this.earlyInfo = res;
       });
     },

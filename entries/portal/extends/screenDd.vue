@@ -125,7 +125,7 @@
         <div class="dd-list jq-info">
           <h3 class="screen-item-title">今日警情信息</h3>
 
-          <div class="num">接处警总量(8起)</div>
+          <div class="num">接处警总量({{earlyInfo.callPoliceTotal}}起)</div>
           <div class="info info1">
             <ul>
               <li>
@@ -137,23 +137,23 @@
             <ul class="tel_ul">
               <li>
                 火灾扑救
-                <div class="color_r mt">(1起)</div>
+                <div class="color_r mt">({{earlyInfo.falseAlarmNum}}起)</div>
               </li>
               <li>
                 抢险救援
-                <div class="color_b mt">(2起)</div>
+                <div class="color_b mt">({{earlyInfo.emergencyRescueNum}}起)</div>
               </li>
               <li>
                 社会救助
-                <div class="color_y mt">(3起)</div>
+                <div class="color_y mt">({{earlyInfo.socialAssistanceNum}}起)</div>
               </li>
               <li>
                 虚假报警
-                <div class="color_g mt">(5起)</div>
+                <div class="color_g mt">({{earlyInfo.fireAlarmNum}}起)</div>
               </li>
               <li>
                 其他警情
-                <div class="color_o mt">(0起)</div>
+                <div class="color_o mt">({{earlyInfo.otherAlertNum}}起)</div>
               </li>
             </ul>
           </div>
@@ -163,7 +163,7 @@
           <h3 class="screen-item-title">月度警情类型分析</h3>
           <div class="Echarts">
             <div id="main" style="width: 100%;height:2rem;"></div>
-          </div>
+          </div>F
         </div>
         <!-- 双随机一公开数据 -->
         <div class="double-data dd-list">
@@ -173,7 +173,7 @@
               <span>本月应检查</span>
               <el-progress
                 :format="format"
-                :percentage="50"
+                :percentage="random.shouldCheck"
                 :stroke-width="12"
                 :color="customColor1"
                 class="pro"
@@ -184,7 +184,7 @@
               <span>本月已检查</span>
               <el-progress
                 :format="format"
-                :percentage="100"
+                :percentage="random.remainingCheck"
                 :stroke-width="12"
                 :color="customColor2"
                 class="pro"
@@ -195,7 +195,7 @@
               <span>本月剩余检查</span>
               <el-progress
                 :format="format"
-                :percentage="100"
+                :percentage="random.checked"
                 :stroke-width="12"
                 :color="customColor3"
                 class="pro"
@@ -211,18 +211,49 @@
             <div class="duty">
               <ul class="duty_ul">
                 <li class="size17 duty_ul_li">指挥长:</li>
-                <li class="duty_ul_li">巴荣兵</li>
+                <li class="duty_ul_li"v-for="(item,i) in OnDutArr1">{{item.dutyName}}</li>
               </ul>
             </div>
 
             <div class="duty">
               <ul class="duty_ul">
                 <li class="size17 duty_ul_li">指挥助理:</li>
-                <li class="duty_ul_li">巴荣兵</li>
+                <li class="duty_ul_li"v-for="(item,i) in OnDutArr2">{{item.dutyName}}</li>
               </ul>
             </div>
           </div>
         </div>
+
+        <el-dialog
+          title="组织机构选择"
+          :visible.sync="dialogFormVisibleOrg"
+          :fullscreen="full"
+          :showClose="showClo"
+        >
+          <div style="height:300px">
+            <el-form :model="formOrg">
+              <el-form-item label="大队" :label-width="formLabelWidth" v-show="play_d">
+                <el-select v-model="formOrg.id" @change="getListData" placeholder="请选择大队">
+                  <el-option
+                    v-for="item in options"
+                    :key="item.value"
+                    :label="item.label"
+                    :value="item.value"
+                  ></el-option>
+                </el-select>
+              </el-form-item>
+            </el-form>
+          </div>
+          <div slot="footer" class="dialog-footer">
+            <!-- <el-button @click="dialogFormVisibleOrg = false">取 消</el-button> -->
+            <el-button type="primary" @click="confirmBtn">确 定</el-button>
+          </div>
+        </el-dialog>
+
+
+
+
+
         <!-- xsheng 添加 end -->
       </div>
     </div>
@@ -236,11 +267,15 @@
   float: left;
   padding-left: 10%;
 }
+.el-dialog__footer{
+  text-align: center;
+}
 </style>
 
 <script>
 import Vue from "vue";
 import "./assets/lib/rem.js";
+import storage from "./api/right";
 import ElementUI from "element-ui";
 import "element-ui/lib/theme-chalk/index.css";
 import axios from "axios";
@@ -255,6 +290,20 @@ export default {
   name: "screen-dd",
   data() {
     return {
+      //xsheng
+      earlyInfo:{},  //今日警情信息
+      earlyInfoEchart:[], //月度警情分析
+      OnDutyInfo:{}, //大队值班信息
+      OnDutArr1:[],
+      OnDutArr2:[],
+      random:{}, //双随机一公开数据
+      dialogFormVisibleOrg: true,
+      showClo: false,
+      full: true,
+      formOrg: { id: "", region: "", name: "", sourceId: "" },
+      formLabelWidth: "120px",
+      options: [{ value: "选项1", label: "无数据", sourceId: "", id: "" }],
+      play_d:false,
       //myjing
       noticeData: [],
       flagVisible: false,
@@ -265,7 +314,7 @@ export default {
       customColor2: "#EDD300",
       customColor3: "#F588FE",
 
-      url: "https://kp.ctce.com.cn:10088/api",
+      url: "",
       dialogFormVisible: false,
       dialogFormVisibleType: false,
       birthday_data: [{
@@ -301,10 +350,9 @@ export default {
         }
       })
     },
-    myEcharts() {
+    myEcharts(res) {
       // 基于准备好的dom，初始化echarts实例
       var myChart = this.$echarts.init(document.getElementById("main"));
-
       // 指定图表的配置项和数据
       var option = {
         tooltip: {
@@ -317,7 +365,7 @@ export default {
           itemWidth: 15, // 设置宽度
           itemHeight: 15, // 设置高度
           right: 10,
-          data: ["直接访问", "邮件营销", "联盟广告", "视频广告", "搜索引擎"],
+          data: ["火灾扑救", "抢险救援", "社会救助", "虚假报警", "其他警情"],
           y: "center", //延Y轴居中
           x: "right", //居右显示
           padding: [0, 100, 0, 0],
@@ -330,7 +378,7 @@ export default {
         color: ["#8D00E2", "#F29B1A", "#027FF3", "#34D160", "#00C6FF"],
         series: [
           {
-            name: "访问来源",
+            name: "警情类型",
             type: "pie",
             radius: ["45%", "70%"],
             center: ["30%", "53%"],
@@ -349,13 +397,7 @@ export default {
             labelLine: {
               show: false
             },
-            data: [
-              { value: 335, name: "直接访问" },
-              { value: 310, name: "邮件营销" },
-              { value: 234, name: "联盟广告" },
-              { value: 135, name: "视频广告" },
-              { value: 1548, name: "搜索引擎" }
-            ]
+            data: this.earlyInfoEchart
           }
         ]
       };
@@ -367,7 +409,6 @@ export default {
 
       // 基于准备好的dom，初始化echarts实例
       var myCharts = this.$echarts.init(document.getElementById("month-data"));
-
       // 指定图表的配置项和数据
       var options = {
         color: ["#3398DB"],
@@ -465,7 +506,104 @@ export default {
         console.log(res);
       })
       return percentage === 100 ? "45" : `${percentage}/45`;
-    }
+    },
+
+    // xsheng 添加strat 2020-02-19
+
+    //获取今日警情信息
+    getEarlyInfo() {
+      storage.getEarlyInfo(this.formOrg.id,2).then(res => {
+        if(res!=undefined){
+          this.earlyInfo = res.dateAlertInfo;
+          this.earlyInfoEchart = res.monthAlertAnalysis;
+          this.myEcharts(this.earlyInfoEchart);
+        }else{console.log("今日警情信息数据返回为空")}
+      });
+    },
+    //获取值班信息
+    getOnDutyInfo() {
+      storage.getOnDutyInfo(this.formOrg.id,2).then(res => {
+        if(res!=undefined){
+          this.OnDutyInfo = res;
+          this.OnDutArr1 = res.commanders;
+          this.OnDutArr2 = res.commandAssistants;
+        }else{console.log("值班信息数据返回为空")}
+      });
+    },
+
+    //获取双随机公开数据
+    getRandom(){
+      storage.getRandomData(this.formOrg.id,2).then(res => {
+        console.log("获取双随机信息=",res)
+        if(res!=undefined){
+          this.random = res
+        }else{console.log("双随机信息数据返回为空")}
+      });
+    },
+     //根据大队id获取大队下消防站的数据
+    getListData(id) {
+      //选择大队时存储数据 strat
+      let objs = {};
+      objs = this.options.find(item => {
+        return item.id === id;
+      });
+      this.formOrg = objs;
+      //选择大队时存储数据 end
+    },
+
+    //用户权限处理
+    setUserPermissions(obj) {
+      if (obj.isBrigade == true) {
+        this.play_d = true;
+        this.options = this.setDate(obj.brigadeData);
+      }else{
+        this.play_d = false;
+        this.$message({
+          message: "该用户没有权限，无法查看大屏数据",
+          type: "warning"
+        });
+      }
+    },
+
+    //确定按钮 处理查看大屏类型
+    confirmBtn() {
+      console.log("formOrg", this.formOrg); //大队json
+      if (this.formOrg.id != "") {
+        this.dialogFormVisibleOrg = false; //查看大队大屏
+        this.$message({
+          message: "查看大队大屏",
+          type: "success"
+        });
+      } else if(this.play_d == false){
+        this.$message({
+          message: "该用户没有权限，无法查看大屏数据",
+          type: "warning"
+        });
+      }else{
+        this.$message({
+          message: "请选择部门",
+          type: "warning"
+        });
+      }
+    },
+    //设置下拉数据 (公用)
+    setDate(arrs) {
+      if (arrs != null || arrs != "") {
+        var arr = [];
+        for (var i = 0; i < arrs.length; i++) {
+          var obj = new Object();
+          obj.sourceId = arrs[i].sourceId;
+          obj.name = arrs[i].name;
+          obj.id = arrs[i].id;
+          obj.value = arrs[i].id;
+          obj.label = arrs[i].name;
+          arr.push(obj);
+        }
+        return arr;
+      }
+    },
+    // xsheng 添加end
+
   },
   computed: {
     center_option(){
@@ -487,13 +625,16 @@ export default {
     }
   },
   mounted() {
-    
-    // this.loadDate();
+    var res = null;
     this.getWorks();
-    this.myEcharts();
-    window.onresize = function() {
-      myChart.resize();
-    };
+    this.getEarlyInfo();
+    this.myEcharts(res);
+    this.getOnDutyInfo();
+    this.getRandom();
+    storage.getUserPermissionsDate().then(res => {
+      console.log("用户权限")
+      this.setUserPermissions(res);
+    });
   }
 };
 </script>

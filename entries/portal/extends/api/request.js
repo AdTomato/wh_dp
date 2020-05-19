@@ -42,24 +42,37 @@ const request = {
     },
     //获取登录人权限
     getUserPermissions:(data) => {
-        return Get('/controller/org/getUserAuthority?userId=2c90a43e6efe8b04016effb119271c6f',data);
+        return Get('/controller/org/getUserAuthority?userId=2c90a43e6f457354016f5eac4ba31571',data);
     },
     //根据大队id获取消防站
     getStation:(data) => {
         return Get('/controller/org/getAllStationListByBrigadeId',data);
     },
-    //根据消防站id获取今日警情信息
-    getEarlyInfo(data){
-        return Get('/controller/alertInfo/getStationAlertInfoByStationId',data);
+    //根据消防站id获取今日警情信息/获取大队今日警情信息
+    getEarlyInfo(data,type){
+        if(type == 2){
+            console.log("查询大队")
+            return Get('/controller/alertInfo/getBrigadeAlertInfoByBrigadeId',data);
+        }else{
+            console.log("查询消防站")
+            return Get('/controller/alertInfo/getStationAlertInfoByStationId',data);
+        }
     },
+
     //更新今日警情信息
     uploadEarlyInfo(data){
         return Put('/controller/alertInfo/updateStationAlertInfoByStationId',data);
     },
 
     //获取值班信息
-    getOnDutyInfo(data){
-        return Get('/controller/stationDutyInfo/getStationDutyInfoByStationId',data);
+    getOnDutyInfo(data,type){
+        if(type == 2){
+            console.log("获取大队值班信息")
+            return Get('/controller/stationDutyInfo/getBrigadeDutyInfoByBrigadeId',data);
+        }else{
+            console.log("获取消防站值班信息")
+            return Get('/controller/stationDutyInfo/getStationDutyInfoByStationId',data);
+        }
     },
 
     //获取车辆信息
@@ -70,6 +83,10 @@ const request = {
     //更新车辆状态
     uploadVehicleStatus(data){
         return Put('/controller/carsInfo/updateCarsStatus',data);
+    },
+    //获取双随机公开数据a
+    getRandomData(data){
+        return Get('/controller/personlInfo/getTwoRandownInfo',data);
     }
 }
 
