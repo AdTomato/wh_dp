@@ -40,6 +40,7 @@
 
 <script>
     import axios from "axios";
+    import request from '../api/request';
     export default {
         name: "weather",
         data() {
@@ -51,70 +52,53 @@
                 windDirection: '',
                 weatherVisible: '',
                 temDif: '',
-                currentDate: [],
                 nowDate: '',
                 nowWeek: '',
-                imgCode: '',
                 imgUrl: '',
             }
         },
         methods:{
-            getWeatherData(){
-              // 获取当天天气情况
-              // 获取空气质量
-              axios.get('https://api.seniverse.com/v3/air/now.json?key=S2FU4pzhy2uHwdUpv&location=wuhan&scope=city')
-              .then(res => {
-                  this.airQuality = res.results[0].air.city.quality;
-              })
+            async getWeather(){
+              let par = {
+                cityCode: 'wuhan'
+              }
+              let res = await request.getWeatherData(par);
+              console.log(res);
+              let weatherData = res.data;
+              this.humidity = weatherData.humidity;
+              this.airTemperature = weatherData.temperature;
+              this.windSpeed = weatherData.wind_scale;
+              this.windDirection = weatherData.wind_direction;
+              this.weatherVisible = weatherData.visibility;
+              this.airQuality = weatherData.quality;
+              this.temDif = weatherData.low + '-' + weatherData.high;
 
-              // 获取温差
-              axios.get('https://api.seniverse.com/v3/weather/daily.json?key=S2FU4pzhy2uHwdUpv&location=wuhan&unit=c&start=0&days=1')
-              .then(res => {
-                  let highTem = res.results[0].daily[0].high;
-                  let lowTem = res.results[0].daily[0].low;
-                  this.temDif = lowTem + '-' + highTem;
-              })
-
-              // 获取其他条件
-              axios.get('https://api.seniverse.com/v3/weather/now.json?key=S2FU4pzhy2uHwdUpv&location=wuhan&unit=c')
-              .then(res => {
-                  console.log(res.results);
-                  let weatherData = res.results[0].now;
-                  this.humidity = weatherData.humidity;
-                  this.airTemperature = weatherData.temperature;
-                  this.windSpeed = weatherData.wind_scale;
-                  this.windDirection = weatherData.wind_direction;
-                  this.weatherVisible = weatherData.visibility;
-                  this.imgCode = weatherData.code;
-
-                  let imgurls = '';
-                  if(weatherData.code == 0 || weatherData.code == 1 || weatherData.code == 2 
-                  || weatherData.code == 3 || weatherData.code == 38){
-                    imgurls = 'sun_icon.png'
-                  }else if(weatherData.code == 4 || weatherData.code == 5 || weatherData.code == 6 || weatherData.code == 7
-                  || weatherData.code == 9 || weatherData.code == 8 || weatherData.code == 37){
-                    imgurls = '4@2x.png'
-                  }else if(weatherData.code == 10 || weatherData.code == 11 || weatherData.code == 12 
-                  || weatherData.code == 13 || weatherData.code == 14 || weatherData.code == 15
-                  || weatherData.code == 16 || weatherData.code == 17 || weatherData.code == 18 || weatherData.code == 19){
-                    imgurls = '16@2x.png'
-                  }else if(weatherData.code == 20 || weatherData.code == 21 || weatherData.code == 22 
-                  || weatherData.code == 23 || weatherData.code == 24 || weatherData.code == 25){
-                    imgurls = '23@2x.png'
-                  }else if(weatherData.code == 26 || weatherData.code == 27 || weatherData.code == 28 
-                  || weatherData.code == 29){
-                    imgurls = '27@2x.png'
-                  }else if(weatherData.code == 32 || weatherData.code == 33 || weatherData.code == 34 
-                  || weatherData.code == 35 || weatherData.code == 36){
-                    imgurls = '33@2x.png'
-                  }else if(weatherData.code == 30){
-                    imgurls = '30@2x.png'
-                  }else if(weatherData.code == 31){
-                    imgurls = '31@2x.png'
-                  }
-                  this.imgUrl = require('../assets/images/' + imgurls);
-                  
-              })
+              let imgurls = '';
+              if(weatherData.code == 0 || weatherData.code == 1 || weatherData.code == 2 
+              || weatherData.code == 3 || weatherData.code == 38){
+                imgurls = 'sun_icon.png'
+              }else if(weatherData.code == 4 || weatherData.code == 5 || weatherData.code == 6 || weatherData.code == 7
+              || weatherData.code == 9 || weatherData.code == 8 || weatherData.code == 37){
+                imgurls = '4@2x.png'
+              }else if(weatherData.code == 10 || weatherData.code == 11 || weatherData.code == 12 
+              || weatherData.code == 13 || weatherData.code == 14 || weatherData.code == 15
+              || weatherData.code == 16 || weatherData.code == 17 || weatherData.code == 18 || weatherData.code == 19){
+                imgurls = '16@2x.png'
+              }else if(weatherData.code == 20 || weatherData.code == 21 || weatherData.code == 22 
+              || weatherData.code == 23 || weatherData.code == 24 || weatherData.code == 25){
+                imgurls = '23@2x.png'
+              }else if(weatherData.code == 26 || weatherData.code == 27 || weatherData.code == 28 
+              || weatherData.code == 29){
+                imgurls = '27@2x.png'
+              }else if(weatherData.code == 32 || weatherData.code == 33 || weatherData.code == 34 
+              || weatherData.code == 35 || weatherData.code == 36){
+                imgurls = '33@2x.png'
+              }else if(weatherData.code == 30){
+                imgurls = '30@2x.png'
+              }else if(weatherData.code == 31){
+                imgurls = '31@2x.png'
+              }
+              this.imgUrl = require('../assets/images/' + imgurls);
 
             },
             
@@ -144,7 +128,7 @@
             }          
         },
         mounted(){
-            this.getWeatherData();
+            this.getWeather();
             this.getCurrentDate();
         }
     }

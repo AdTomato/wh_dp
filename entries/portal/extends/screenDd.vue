@@ -10,28 +10,23 @@
         <!-- 天气情况 -->
         <Weather></Weather>
         <!-- 通知公告 -->
-        <Notice></Notice>
+        <Notice ref="notice" :noticeData="noticeData" :flagVisible="flagVisible"></Notice>
         <!-- 本周重点工作 -->
         <div class="screen-item">
           <h3 class="screen-item-title">本周重点工作</h3>
-          <ul class="important-work">
+          <vue-seamless-scroll :data="worksData" class="seamless-work" :class-option="workClassOption">
+            <ul class="important-work">
+                <li v-for="(item, index) in worksData" :key="index">
+                    <p>{{item.workContent}}</p>
+                    <span>{{item.status}}</span>
+                </li>
+            </ul>
+          </vue-seamless-scroll>
+          <!-- <ul class="important-work">
             <li>
-              <p>1.主题教育要走深走实</p>
-              <span>完成</span>
+              
             </li>
-            <li>
-              <p>2.主题教育要走深走实</p>
-              <span>进行中</span>
-            </li>
-            <li>
-              <p>3.主题教育要走深走实</p>
-              <span>完成</span>
-            </li>
-            <li>
-              <p>4.主题教育要走深走实</p>
-              <span>进行中</span>
-            </li>
-          </ul>
+          </ul> -->
         </div>
       </div>
       <!-- 中间 -->
@@ -260,6 +255,11 @@ export default {
   name: "screen-dd",
   data() {
     return {
+      //myjing
+      noticeData: [],
+      flagVisible: false,
+      worksData: [],
+
       orgOptions: {},
       customColor1: "#EE6B77",
       customColor2: "#EDD300",
@@ -282,6 +282,25 @@ export default {
     Notice
   },
   methods: {
+    // 获取本周重点工作
+    getWorks(){
+      let par = {
+        brigadeId: '586d63454d6841dfa667405212572ca7'
+      }
+      request.getWorkData(par).then(res => {
+        console.log(res);
+        let workArr = [];
+        res.data.forEach(item => {
+          workArr.push(item.weekFocusList);
+        })
+        for(var i=0; i<workArr.length; i++){
+          let workObj = {};
+          workObj.workContent = res.data[i].workContent;
+          workObj.status = res.data[i].status;
+          this.worksData.push(workObj);
+        }
+      })
+    },
     myEcharts() {
       // 基于准备好的dom，初始化echarts实例
       var myChart = this.$echarts.init(document.getElementById("main"));
@@ -460,11 +479,17 @@ export default {
         singleWidth: 0, // 单步运动停止的宽度(默认值0是无缝不停止的滚动) direction => 2/3
         waitTime: 1000 // 单步运动停止的时间(默认值1000ms)
       }
+    },
+    workClassOption() {
+      return {
+          step: 0.2, // 数值越大速度滚动越快
+      };
     }
   },
   mounted() {
     
     // this.loadDate();
+    this.getWorks();
     this.myEcharts();
     window.onresize = function() {
       myChart.resize();

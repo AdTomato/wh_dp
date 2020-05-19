@@ -17,6 +17,10 @@ const request = {
     getAssessmentInfo:(data) =>{
         return Get('/controller/quantiAssessment/getAssessmentInfo',data);
     },
+    // 获取天气
+    getWeatherData: (data) => {
+        return Get('/controller/weather/getWeatherByCityCode',data)
+    },
     getNotice:(data) => {
         // 获取公告
         return Get('/controller/personlInfo/getInfo',data);
@@ -28,6 +32,10 @@ const request = {
     getTrainInfo:(data) => {
         // 获取龙虎榜
         return Get('/controller/trainResult/getTrainResults',data);
+    },
+    // 获取本周工作
+    getWorkData: (data) => {
+        return Get('/controller/weekWork/getWeekWorks',data);
     },
     getMonthStar:(data) => {
         return Get('/controller/starMonth/getStationStarMonthByStationId', data)
