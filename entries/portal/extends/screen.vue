@@ -530,7 +530,12 @@ export default {
           type: "success"
         });
         this.dialogFormVisibleOrg = false; //查看消防站大屏
-      } else {
+      } else if(this.play_d == false&&this.play_x == false){
+        this.$message({
+          message: "该用户没有权限，无法查看大屏数据",
+          type: "warning"
+        });
+      }else{
         this.$message({
           message: "请选择部门",
           type: "warning"

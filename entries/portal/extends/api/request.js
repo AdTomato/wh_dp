@@ -51,10 +51,8 @@ const request = {
     //根据消防站id获取今日警情信息/获取大队今日警情信息
     getEarlyInfo(data,type){
         if(type == 2){
-            console.log("查询大队")
             return Get('/controller/alertInfo/getBrigadeAlertInfoByBrigadeId',data);
         }else{
-            console.log("查询消防站")
             return Get('/controller/alertInfo/getStationAlertInfoByStationId',data);
         }
     },
@@ -67,10 +65,8 @@ const request = {
     //获取值班信息
     getOnDutyInfo(data,type){
         if(type == 2){
-            console.log("获取大队值班信息")
             return Get('/controller/stationDutyInfo/getBrigadeDutyInfoByBrigadeId',data);
         }else{
-            console.log("获取消防站值班信息")
             return Get('/controller/stationDutyInfo/getStationDutyInfoByStationId',data);
         }
     },
