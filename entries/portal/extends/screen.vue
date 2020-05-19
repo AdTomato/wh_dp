@@ -530,9 +530,6 @@ export default {
           type: "success"
         });
         this.dialogFormVisibleOrg = false; //查看消防站大屏
-        this.getEarlyInfo(); //警情信息
-        this.getOnDutyInfo(); //值班信息
-        this.getVehicleInfo(); //车辆信息
       } else {
         this.$message({
           message: "请选择部门",
@@ -547,6 +544,10 @@ export default {
       this.getMainInfo(this.noticeSourceId);
       this.getAssessmentInfo(this.eduStationId);
       this.getMonth(this.eduStationId);
+
+      this.getEarlyInfo(this.eduStationId); //警情信息
+      this.getOnDutyInfo(this.eduStationId); //值班信息
+      this.getVehicleInfo(this.eduStationId); //车辆信息
     },
 
     uploadEarliInfo(type) {
@@ -649,35 +650,44 @@ export default {
     },
 
     //获取车辆信息
-    getVehicleInfo() {
-      storage.getVehicleInfo(this.formOrg_z.id).then(res => {
-        this.vehicleInfo = res;
-        var arrDate = res.vehicleInfos;
-        var ar = [];
-        for (var i = 0; i < arrDate.length; i++) {
-          var obj = new Object();
-          obj.id = arrDate[i].id;
-          obj.xfc = arrDate[i].vehicleName;
-          obj.gl = arrDate[i].enginePower;
-          obj.zl = arrDate[i].liftingWeight;
-          obj.status = arrDate[i].vehicleStatus;
-          ar.push(obj);
+    getVehicleInfo(id) {
+      storage.getVehicleInfo(id).then(res => {
+        if(res!=undefined){
+          this.vehicleInfo = res;
+          var arrDate = res.vehicleInfos;
+          var ar = [];
+          for (var i = 0; i < arrDate.length; i++) {
+            var obj = new Object();
+            obj.id = arrDate[i].id;
+            obj.xfc = arrDate[i].vehicleName;
+            obj.gl = arrDate[i].enginePower;
+            obj.zl = arrDate[i].liftingWeight;
+            obj.status = arrDate[i].vehicleStatus;
+            ar.push(obj);
+          }
+          this.listData = ar;
+        }else{
+          var arrs = [{xfc:'暂无数据',gl:'0',zl:'0'}]
+          this.listData = arrs;
         }
-        this.listData = ar;
       });
     },
     //获取值班信息
-    getOnDutyInfo() {
-      storage.getOnDutyInfo(this.formOrg_z.id,1).then(res => {
-        this.OnDutyInfo = res;
-        this.OnDutArr1 = res.brigadeHeadquarters;
-        this.OnDutArr2 = res.stationDutyCadres;
+    getOnDutyInfo(id) {
+      storage.getOnDutyInfo('af127c960a8b490683a1ff9c57b83163',1).then(res => {
+        if(res!=undefined){
+          this.OnDutyInfo = res;
+          this.OnDutArr1 = res.brigadeHeadquarters;
+          this.OnDutArr2 = res.stationDutyCadres;
+        }else{this.OnDutArr1 = ['暂无数据'];this.OnDutArr2 = ['暂无数据']}
       });
     },
     //获取今日警情信息
-    getEarlyInfo() {
-      storage.getEarlyInfo(this.formOrg_z.id,1).then(res => {
-        this.earlyInfo = res;
+    getEarlyInfo(id) {
+      storage.getEarlyInfo(id,1).then(res => {
+        if(res!=undefined){
+          this.earlyInfo = res;
+        }
       });
     },
 
@@ -874,7 +884,14 @@ export default {
     // this.getMainInfo();
     //this.getAssessmentInfo();
     storage.getUserPermissionsDate().then(res => {
-      this.setUserPermissions(res);
+      if(res.errcode==405){
+          this.$message({
+            message: res.errmsg,
+            type: "warning"
+          });
+      }else{
+        this.setUserPermissions(res);
+      }
     });
   }
 };

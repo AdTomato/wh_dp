@@ -16,6 +16,8 @@ var storage = {
             }
           }else if(res.errcode == 406){
               obj =  res;
+          }else if(res.errcode == 405){
+            obj =  res;
           }
         })
         return obj ;

@@ -332,18 +332,15 @@ export default {
         brigadeId: '586d63454d6841dfa667405212572ca7'
       }
       request.getWorkData(par).then(res => {
-        console.log('结果打印');
         res.data.forEach(item => {
           item.weekFocusList.forEach(ele => {
             this.worksData.push(ele);
           })
         })
-        console.log(this.worksData);
       })
     },
     // 更新本周工作重点
     updateWorkStatus(item){
-      console.log(item);
       const urlPath = "http://121.41.27.194:8080/api";
       axios.put(urlPath+`/controller/weekWork/updateWorksStatus?id=${item.id}&status=${item.status}`)
       .then(res => {
@@ -354,7 +351,6 @@ export default {
             item.status = '已完成';
           }
         }
-        console.log(this.worksData);
       })
     },
     myEcharts(res) {
@@ -509,13 +505,11 @@ export default {
     },
     getData(){
       // 调用
-      request.getStationAlertInfo().then(res => {
-        console.log(res);
-      })
+      request.getStationAlertInfo().then(res => {})
       return percentage === 100 ? "45" : `${percentage}/45`;
     },
 
-    // xsheng 添加strat 2020-02-19
+    // xsheng 添加strat 2020-05-19
 
     //获取今日警情信息
     getEarlyInfo() {
@@ -541,7 +535,6 @@ export default {
     //获取双随机公开数据
     getRandom(){
       storage.getRandomData(this.formOrg.id,2).then(res => {
-        console.log("获取双随机信息=",res)
         if(res!=undefined){
           this.random = res
         }else{console.log("双随机信息数据返回为空")}
@@ -638,10 +631,7 @@ export default {
     this.myEcharts(res);
     this.getOnDutyInfo();
     this.getRandom();
-    storage.getUserPermissionsDate().then(res => {
-      console.log("用户权限")
-      this.setUserPermissions(res);
-    });
+    storage.getUserPermissionsDate().then(res => {this.setUserPermissions(res);});
     this.myEcharts();
   }
 };
