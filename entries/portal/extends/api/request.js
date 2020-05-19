@@ -62,6 +62,11 @@ const request = {
     //更新车辆状态
     uploadVehicleStatus(data){
         return Put('/controller/carsInfo/updateCarsStatus',data);
+    },
+
+    //大队人员动态和生日
+    getTeamInfo(data){
+        return Get('/controller/personlInfo/getTeamInfo', data);
     }
 }
 

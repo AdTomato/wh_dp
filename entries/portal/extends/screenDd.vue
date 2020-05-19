@@ -43,64 +43,47 @@
             <ul class="tel_ul">
               <li>
                 总指挥
-                <div class="commander mt">(*人)</div>
+                <div class="commander mt">{{numAll}}</div>
               </li>
               <li>
                 指挥员
-                <div class="controller mt">(*人)</div>
+                <div class="controller mt">{{numtype1}}</div>
               </li>
               <li>
                 消防员
-                <div class="fireman mt">(*人)</div>
+                <div class="fireman mt">{{numtype2}}</div>
               </li>
               <li>
                 在岗
-                <div class="on_work mt">(*人)</div>
+                <div class="on_work mt">{{numZaigang}}</div>
               </li>
               <li style="color: #129D1D;">
                 公差
-                <div class="out_work mt">(*人)</div>
+                <div class="out_work mt">{{numGongchai}}</div>
               </li>
               <li style="color: #BDA100">
                 休假
-                <div class="no_work mt">(*人)</div>
+                <div class="no_work mt">{{numXiujia}}</div>
               </li>
             </ul>
           </div>
           <div class="detail_num">
-            <ul class="commander_list">
+            <ul class="commander_list mf">
+              <li class="commander_name">大队主管:</li>
               <li class="commander_detail">
-                大队主管:
-                <span>巴荣兵</span>
-                <span>郑灿灿</span>
+                <span v-for="item in userNames1">{{item}}</span>
               </li>
             </ul>
-            <ul class="commander_list">
+            <ul class="commander_list ms">
+              <li class="commander_name">大队干部:</li>
               <li class="commander_detail">
-                大队干部:
-                <span>李斌</span>
-                <span>宁成伟</span>
-                <span>邓彪</span>
-                <span>黄磊</span>
-                <span>王晶</span>
-                <span>张娟</span>
-                <span>黄玲</span>
-                <span>廖志龙</span>
-                <span>潘华</span>
-                <span>凡超</span>
+                <span v-for="item in userNames2">{{item}}</span>
               </li>
             </ul>
-            <ul class="commander_list">
+            <ul class="commander_list mx">
+              <li class="commander_name">大队文员:</li>
               <li class="commander_detail">
-                大队文员:
-                <span>刘若男</span>
-                <span>郭春霞</span>
-                <span>程关</span>
-                <span>彭梦媛</span>
-                <span>江倩</span>
-                <span>丁婷婷</span>
-                <span>朱丹</span>
-                <span>张聪</span>
+                <span v-for="item in userNames3">{{item}}</span>
               </li>
             </ul>
           </div>
@@ -264,6 +247,16 @@ export default {
       customColor1: "#EE6B77",
       customColor2: "#EDD300",
       customColor3: "#F588FE",
+
+      numAll:'',
+      numtype1:'',
+      numtype2:'',
+      numZaigang:'',
+      numGongchai:'',
+      numXiujia:'',
+      userNames1: [],
+      userNames2: [],
+      userNames3: [],
 
       url: "https://kp.ctce.com.cn:10088/api",
       dialogFormVisible: false,
@@ -446,6 +439,43 @@ export default {
         console.log(res);
       })
       return percentage === 100 ? "45" : `${percentage}/45`;
+    },
+
+    //人员动态生日
+    getTeamInfo(){
+      let prr = {
+        sourceId: '145623281'
+      }
+      request.getTeamInfo(prr).then(res =>{
+        console.log(res);
+        if(res.data.numAll != null){
+          this.numAll = res.data.numAll;
+        }
+        if(res.data.numtype1 != null){
+          this.numtype1 = res.data.numtype1;
+        }
+        if(res.data.numtype2 != null){
+          this.numtype2 = res.data.numtype2;
+        }
+        if(res.data.numZaigang != null){
+          this.numZaigang = res.data.numZaigang;
+        }
+        if(res.data.numGongchai != null){
+          this.numGongchai = res.data.numGongchai;
+        }
+        if(res.data.numXiujia != null){
+          this.numXiujia = res.data.numXiujia;
+        }
+        if(res.data.userNames1 != null){
+          this.userNames1 = res.data.userNames1;
+        }
+        if(res.data.userNames2 != null){
+          this.userNames2 = res.data.userNames2;
+        }
+        if(res.data.userNames3 != null){
+          this.userNames3 = res.data.userNames3;
+        }
+      })
     }
   },
   computed: {
@@ -469,6 +499,7 @@ export default {
     window.onresize = function() {
       myChart.resize();
     };
+    this.getTeamInfo();
   }
 };
 </script>

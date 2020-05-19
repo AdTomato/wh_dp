@@ -19,53 +19,71 @@
         <div class="content-top">
           <div class="screen-item" style="height:100%">
             <h3 class="screen-item-title">人员动态</h3>
-            <div class="total_num">
+            <div class="total_nums">
               <ul class="tel_ul">
-                      <li>总人数 <div class="commander mt">{{numAll}}人</div> </li>
-                      <li>指挥员 <div class="controller mt">{{numtype1}}人</div> </li>
-                      <li>消防员 <div class="fireman mt">{{numtype2}}人</div> </li>
-                      <li>在岗 <div class="on_work mt">{{numZaigang}}人</div> </li>
-                      <li style="color: #129D1D;">公差 <div class="out_work mt">{{numGongchai}}人</div> </li>
-                      <li style="color: #BDA100"> 休假 <div class="no_work mt">{{numXiujia}}人</div> </li>
-              </ul>
+              <li>
+                总指挥
+                <div class="commander mt">{{numAll}}</div>
+              </li>
+              <li>
+                指挥员
+                <div class="controller mt">{{numtype1}}</div>
+              </li>
+              <li>
+                消防员
+                <div class="fireman mt">{{numtype2}}</div>
+              </li>
+              <li>
+                在岗
+                <div class="on_work mt">{{numZaigang}}</div>
+              </li>
+              <li style="color: #129D1D;">
+                公差
+                <div class="out_work mt">{{numGongchai}}</div>
+              </li>
+              <li style="color: #BDA100">
+                休假
+                <div class="no_work mt">{{numXiujia}}</div>
+              </li>
+            </ul>
             </div>
-            <div class="detail_num">
-              <ul class="commander_list">
-                    <li class="commander_detail">
-                      指  挥  员:
-                       <span v-for="item in userNames1">{{item}}</span>
-                    </li>
-                  </ul>
-                  <ul class="commander_list">
-                    <li class="commander_detail">
-                      特情一班:
-                      <span v-for="item in userNames2">{{item}}</span>
-                    </li>
-                  </ul>
-                  <ul class="commander_list">
-                    <li class="commander_detail">
-                      特情二班:
-                      <span v-for="item in userNames3">{{item}}</span>
-                    </li>
-                  </ul>
-                  <ul class="commander_list">
-                    <li class="commander_detail">
-                      灭火一班:
-                      <span v-for="item in userNames4">{{item}}</span>
-                    </li>
-                  </ul>
-                  <ul class="commander_list">
-                    <li class="commander_detail">
-                      灭火二班:
-                      <span v-for="item in userNames5">{{item}}</span>
-                    </li>
-                  </ul>
-                  <ul class="commander_list">
-                    <li class="commander_detail">
-                      特情保障班:
-                      <span v-for="item in userNames6">{{item}}</span>
-                    </li>
-                  </ul>
+            <div class="detail_nums">
+              <ul class="commander_list mf">
+                <li class="commander_name">指&nbsp;&nbsp;&nbsp;挥&nbsp;&nbsp;&nbsp;员 :</li>
+                <li class="commander_detail">
+                  <span v-for="item in userNames1">{{item}}</span>
+                </li>
+              </ul>
+              <ul class="commander_list ms">
+                <li class="commander_name">特 勤 一 班 :</li>
+                <li class="commander_detail">
+                  <span v-for="item in userNames2">{{item}}</span>
+                </li>
+              </ul>
+              <ul class="commander_list mx">
+                <li class="commander_name">特 勤 二 班 :</li>
+                <li class="commander_detail">
+                  <span v-for="item in userNames3">{{item}}</span>
+                </li>
+              </ul>
+              <ul class="commander_list mj">
+                <li class="commander_name">灭 火 一 班 :</li>
+                <li class="commander_detail">
+                  <span v-for="item in userNames4">{{item}}</span>
+                </li>
+              </ul>
+              <ul class="commander_list mk">
+                <li class="commander_name">灭 火 二 班 :</li>
+                <li class="commander_detail">
+                  <span v-for="item in userNames5">{{item}}</span>
+                </li>
+              </ul>
+              <ul class="commander_list ml">
+                <li class="commander_name"> 通讯保障班 :</li>
+                <li class="commander_detail">
+                  <span v-for="item in userNames6">{{item}}</span>
+                </li>
+              </ul>
             </div>
           </div>
         </div>
@@ -75,7 +93,8 @@
                     <h3 class="screen-item-title">每月之星栏</h3>
                     <div class="star_month">
                       <ul>
-                        <li style="display: inline-block;vertical-align :top">
+                        <!-- <li style="display: inline-block;vertical-align :top"> -->
+                        <li>
                           <img src="./assets/images/learn_star.png" />
                           <img :src="learn_img" class="star_img" />
                           <span class="star_name">{{learnStar}}</span>
@@ -137,7 +156,7 @@
           <vue-seamless-scroll :data="birthday_data" class="seamless" :class-option="center_option">
             <ul class="center_item">
               <li v-for="item in birthday_data">
-                <span class="birthday_text" v-text="item.text"></span>
+                <span class="birthday_text" v-text="item"></span>
               </li>
             </ul>
           </vue-seamless-scroll>
@@ -723,29 +742,33 @@ export default {
         date: currentdate
       }
       request.getStationStarMonth(par).then(res => {
-        if(res.data.learningStar.name != null){
+        if(res== "undefined" || res== null || res== ""){
+          return false;
+        }else{
+          if(res.data.learningStar.name != null){
           this.learnStar = res.data.learningStar.name;
-        }
-        if(res.data.disciplineStar.name != null){
-          this.disciplineStar = res.data.disciplineStar.name;
-        }
-        if(res.data.trainStar.name != null){
-          this.trainStar = res.data.trainStar.name;
-        }
-        if(res.data.houseStar.name != null){
-          this.houseStar = res.data.houseStar.name;
-        }
-        if(res.data.learningStar.imgUrl != null){
-          this.learn_img = res.data.learningStar.imgUrl;
-        }
-        if(res.data.disciplineStar.imgUrl != null){
-          this.discipline_img = res.data.disciplineStar.imgUrl;
-        }
-        if(res.data.houseStar.imgUrl != null){
-          this.house_img = res.data.houseStar.imgUrl;
-        }
-        if(res.data.trainStar.imgUrl != null){
-          this.train_img = res.data.trainStar.imgUrl;
+          }
+          if(res.data.disciplineStar.name != null){
+            this.disciplineStar = res.data.disciplineStar.name;
+          }
+          if(res.data.trainStar.name != null){
+            this.trainStar = res.data.trainStar.name;
+          }
+          if(res.data.houseStar.name != null){
+            this.houseStar = res.data.houseStar.name;
+          }
+          if(res.data.learningStar.imgUrl != null){
+            this.learn_img = res.data.learningStar.imgUrl;
+          }
+          if(res.data.disciplineStar.imgUrl != null){
+            this.discipline_img = res.data.disciplineStar.imgUrl;
+          }
+          if(res.data.houseStar.imgUrl != null){
+            this.house_img = res.data.houseStar.imgUrl;
+          }
+          if(res.data.trainStar.imgUrl != null){
+            this.train_img = res.data.trainStar.imgUrl;
+          }
         } 
       })
     },
@@ -756,7 +779,6 @@ export default {
         deptId: deptId
       }
       request.getMainInfo(par).then(res => {
-        console.log(res.data);
         this.noticeData = res.data.notice;
         this.userNames1 = res.data.userNames1;
         this.userNames2 = res.data.userNames2;
@@ -771,19 +793,17 @@ export default {
         this.numGongchai = res.data.numGongchai;
         this.numXiujia = res.data.numXiujia;
         if(res.data.birthdayNames.length != 0){
-          this.birthday_data = res.data.birthdayNames;
+          let pr;
+          pr = '祝'+ res.data.birthdayNames + '生日快乐！'
+          let br = [];
+          br.push(pr);
+          this.birthday_data = br;
         }else{
-            this.birthday_data = [{
-            'text': '对党忠诚，纪律严明，赴汤蹈火，竭诚为民'
-          }];
+            this.birthday_data = ['对党忠诚，纪律严明，赴汤蹈火，竭诚为民'];
         }
+        //this.birthday_data = ['对党忠诚，纪律严明，赴汤蹈火，竭诚为民'];
         // myjing公告
         this.flagVisible = true;
-        // this.birthday_data = [{
-        //   'text': '祝陈飞同志生日快乐!'
-        // }, {
-        //   'text': '祝飞儿同志生日快乐!'
-        // }];
       });
     },
 
@@ -793,8 +813,6 @@ export default {
         stationId: stationId
       }
       request.getAssessmentInfo(par).then(res =>{
-        console.log("量化考评");
-        console.log(res.data);
         var ar = [];
         if(res.data){
           let idd1 = [];
@@ -849,7 +867,7 @@ export default {
         step: 0.2, // 数值越大速度滚动越快
         limitMoveNum: 2, // 开始无缝滚动的数据量 this.dataList.length
         hoverStop: true, // 是否开启鼠标悬停stop
-        direction: 1, // 0向下 1向上 2向左 3向右
+        direction: 0, // 0向下 1向上 2向左 3向右
         openWatch: true, // 开启数据实时监控刷新dom
         singleHeight: 0, // 单步运动停止的高度(默认值0是无缝不停止的滚动) direction => 0/1
         singleWidth: 0, // 单步运动停止的宽度(默认值0是无缝不停止的滚动) direction => 2/3
