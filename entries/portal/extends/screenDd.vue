@@ -16,17 +16,12 @@
           <h3 class="screen-item-title">本周重点工作</h3>
           <vue-seamless-scroll :data="worksData" class="seamless-work" :class-option="workClassOption">
             <ul class="important-work">
-                <li v-for="(item, index) in worksData" :key="index">
+                <li v-for="(item, index) in worksData" :key="index" @click="updateWorkStatus(item)">
                     <p>{{item.workContent}}</p>
                     <span>{{item.status}}</span>
                 </li>
             </ul>
           </vue-seamless-scroll>
-          <!-- <ul class="important-work">
-            <li>
-              
-            </li>
-          </ul> -->
         </div>
       </div>
       <!-- 中间 -->
@@ -294,6 +289,22 @@ export default {
             this.worksData.push(ele);
           })
         })
+        console.log(this.worksData);
+      })
+    },
+    // 更新本周工作重点
+    updateWorkStatus(item){
+      console.log(item);
+      const urlPath = "http://121.41.27.194:8080/api";
+      axios.put(urlPath+`/controller/weekWork/updateWorksStatus?id=${item.id}&status=${item.status}`)
+      .then(res => {
+        if(res.errcode == 0){
+          if(item.status == '已完成'){
+            item.status = '进行中';
+          }else{
+            item.status = '已完成';
+          }
+        }
         console.log(this.worksData);
       })
     },
