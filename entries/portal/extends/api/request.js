@@ -17,6 +17,10 @@ const request = {
     getAssessmentInfo:(data) =>{
         return Get('/controller/quantiAssessment/getAssessmentInfo',data);
     },
+    // 获取天气
+    getWeatherData: (data) => {
+        return Get('/controller/weather/getWeatherByCityCode',data)
+    },
     getNotice:(data) => {
         // 获取公告
         return Get('/controller/personlInfo/getInfo',data);
@@ -29,29 +33,42 @@ const request = {
         // 获取龙虎榜
         return Get('/controller/trainResult/getTrainResults',data);
     },
+    // 获取本周工作
+    getWorkData: (data) => {
+        return Get('/controller/weekWork/getWeekWorks',data);
+    },
     getMonthStar:(data) => {
         return Get('/controller/starMonth/getStationStarMonthByStationId', data)
     },
     //获取登录人权限
     getUserPermissions:(data) => {
-        return Get('/controller/org/getUserAuthority?userId=2c90a43e6efe8b04016effb119271c6f',data);
+        return Get('/controller/org/getUserAuthority',data);
     },
     //根据大队id获取消防站
     getStation:(data) => {
         return Get('/controller/org/getAllStationListByBrigadeId',data);
     },
-    //根据消防站id获取今日警情信息
-    getEarlyInfo(data){
-        return Get('/controller/alertInfo/getStationAlertInfoByStationId',data);
+    //根据消防站id获取今日警情信息/获取大队今日警情信息
+    getEarlyInfo(data,type){
+        if(type == 2){
+            return Get('/controller/alertInfo/getBrigadeAlertInfoByBrigadeId',data);
+        }else{
+            return Get('/controller/alertInfo/getStationAlertInfoByStationId',data);
+        }
     },
+
     //更新今日警情信息
     uploadEarlyInfo(data){
         return Put('/controller/alertInfo/updateStationAlertInfoByStationId',data);
     },
 
     //获取值班信息
-    getOnDutyInfo(data){
-        return Get('/controller/stationDutyInfo/getStationDutyInfoByStationId',data);
+    getOnDutyInfo(data,type){
+        if(type == 2){
+            return Get('/controller/stationDutyInfo/getBrigadeDutyInfoByBrigadeId',data);
+        }else{
+            return Get('/controller/stationDutyInfo/getStationDutyInfoByStationId',data);
+        }
     },
 
     //获取车辆信息
@@ -63,10 +80,13 @@ const request = {
     uploadVehicleStatus(data){
         return Put('/controller/carsInfo/updateCarsStatus',data);
     },
-
     //大队人员动态和生日
     getTeamInfo(data){
         return Get('/controller/personlInfo/getTeamInfo', data);
+    },
+    //获取双随机公开数据a
+    getRandomData(data){
+        return Get('/controller/personlInfo/getTwoRandownInfo',data);
     }
 }
 

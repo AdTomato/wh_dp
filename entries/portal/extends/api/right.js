@@ -16,18 +16,27 @@ var storage = {
             }
           }else if(res.errcode == 406){
               obj =  res;
+          }else if(res.errcode == 405){
+            obj =  res;
           }
         })
         return obj ;
       },
 
       //根据消防站id获取今日警情信息
-      async getEarlyInfo(stationId){
-        var parmar = {
-          stationId:stationId,
-          date:"2020-04-07 00:00:00"
+      async getEarlyInfo(stationId,type){
+        if(type == 2){
+          var parmar = {
+            brigadeId:stationId,
+            date:new Date().toLocaleDateString().replace(/\//g, '-')+" 00:00:00"
+          }
+        }else{
+          var parmar = {
+            stationId:stationId,
+            date:new Date().toLocaleDateString().replace(/\//g, '-')+" 00:00:00"
+          }
         }
-        await request.getEarlyInfo(parmar).then(res => {
+        await request.getEarlyInfo(parmar,type).then(res => {
           if(res.errcode==0){
             obj = res.data;
           }
@@ -44,12 +53,19 @@ var storage = {
       },
       //获取值班信息
 
-      async getOnDutyInfo(stationId){
-        var parmar = {
-          stationId:stationId,
-          date:"2020-04-07 00:00:00"
+      async getOnDutyInfo(stationId,type){
+        if(type==2){
+          var parmar = {
+            brigadeId:stationId,
+            date:new Date().toLocaleDateString().replace(/\//g, '-')+" 00:00:00"
+          }
+        }else{
+          var parmar = {
+            stationId:stationId,
+            date:new Date().toLocaleDateString().replace(/\//g, '-')+" 00:00:00"
+          }
         }
-        await request.getOnDutyInfo(parmar).then(res => {
+        await request.getOnDutyInfo(parmar,type).then(res => {
           if(res.errcode==0){
             obj = res.data;
           }
@@ -66,7 +82,19 @@ var storage = {
           }
         })
         return obj ;
-      }
+      },
+
+      //获取双随机公开数据 getRandomData
+      async getRandomData(brigadeId){
+        var parmar = {brigadeId:brigadeId}
+        await request.getRandomData(parmar).then(res => {
+          if(res.errcode==0){
+            obj = res.data;
+          }
+        })
+        return obj ;
+      },
+
 }
 export default storage;//把这个方法暴露出去，方便外部引用
 

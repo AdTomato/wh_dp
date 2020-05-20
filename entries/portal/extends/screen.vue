@@ -21,31 +21,31 @@
             <h3 class="screen-item-title">人员动态</h3>
             <div class="total_nums">
               <ul class="tel_ul">
-              <li>
-                总指挥
-                <div class="commander mt">{{numAll}}</div>
-              </li>
-              <li>
-                指挥员
-                <div class="controller mt">{{numtype1}}</div>
-              </li>
-              <li>
-                消防员
-                <div class="fireman mt">{{numtype2}}</div>
-              </li>
-              <li>
-                在岗
-                <div class="on_work mt">{{numZaigang}}</div>
-              </li>
-              <li style="color: #129D1D;">
-                公差
-                <div class="out_work mt">{{numGongchai}}</div>
-              </li>
-              <li style="color: #BDA100">
-                休假
-                <div class="no_work mt">{{numXiujia}}</div>
-              </li>
-            </ul>
+                <li>
+                  总指挥
+                  <div class="commander mt">{{numAll}}</div>
+                </li>
+                <li>
+                  指挥员
+                  <div class="controller mt">{{numtype1}}</div>
+                </li>
+                <li>
+                  消防员
+                  <div class="fireman mt">{{numtype2}}</div>
+                </li>
+                <li>
+                  在岗
+                  <div class="on_work mt">{{numZaigang}}</div>
+                </li>
+                <li style="color: #129D1D;">
+                  公差
+                  <div class="out_work mt">{{numGongchai}}</div>
+                </li>
+                <li style="color: #BDA100">
+                  休假
+                  <div class="no_work mt">{{numXiujia}}</div>
+                </li>
+              </ul>
             </div>
             <div class="detail_nums">
               <ul class="commander_list mf">
@@ -89,66 +89,61 @@
         </div>
         <div class="content-center">
           <div class="content-left">
-                <div class="screen-item" style="height:100%">
-                    <h3 class="screen-item-title">每月之星栏</h3>
-                    <div class="star_month">
-                      <ul>
-                        <!-- <li style="display: inline-block;vertical-align :top"> -->
-                        <li>
-                          <img src="./assets/images/learn_star.png" />
-                          <img :src="learn_img" class="star_img" />
-                          <span class="star_name">{{learnStar}}</span>
-                        </li>
-                      </ul>
-                      <ul>
-                        <li>
-                          <img src="./assets/images/discipline_star.png" />
-                          <img :src="discipline_img" class="star_img" />
-                          <span class="star_name">{{disciplineStar}}</span>
-                        </li>
-                      </ul>
-                      <ul>
-                        <li>
-                          <img src="./assets/images/train_star.png" />
-                          <img :src="train_img" class="star_img" />
-                          <span class="star_name">{{trainStar}}</span>
-                        </li>
-                      </ul>
-                      <ul>
-                        <li>
-                          <img src="./assets/images/house_star.png" />
-                          <img :src="houser_img" class="star_img" />
-                          <span class="star_name">{{houseStar}}</span>
-                        </li>
-                      </ul>
-                  </div>
-                </div>
+            <div class="screen-item" style="height:100%">
+              <h3 class="screen-item-title">每月之星栏</h3>
+              <ul>
+                <li>
+                  <img src="./assets/images/learn_star.png" class="name_star" />
+                  <img :src="learn_img" class="star_img" />
+                  <span class="star_name">{{learnStar}}</span>
+                </li>
+              </ul>
+              <ul>
+                <li>
+                  <img src="./assets/images/discipline_star.png" class="name_star" />
+                  <img :src="discipline_img" class="star_img" />
+                  <span class="star_name">{{disciplineStar}}</span>
+                </li>
+              </ul>
+              <ul>
+                <li>
+                  <img src="./assets/images/train_star.png" class="name_star" />
+                  <img :src="train_img" class="star_img" />
+                  <span class="star_name">{{trainStar}}</span>
+                </li>
+              </ul>
+              <ul>
+                <li>
+                  <img src="./assets/images/house_star.png" class="name_star" />
+                  <img :src="houser_img" class="star_img" />
+                  <span class="star_name">{{houseStar}}</span>
+                </li>
+              </ul>
             </div>
+          </div>
           <div class="content-right">
             <div class="screen-item" style="height:100%">
               <h3 class="screen-item-title">量化考评周报</h3>
-              <div class="evaluate">
-                <ul class="evaluate_detail">
-                  <li>
-                    <span v-for="item in idd1">{{item}}</span>
-                  </li>
-                  <li>
-                    <span v-for="item in idd2">{{item}}</span>
-                  </li>
-                  <li>
+              <ul class="evaluate_detail">
+                <li>
+                  <span v-for="item in idd1">{{item}}</span>
+                </li>
+                <li>
+                  <span v-for="item in idd2">{{item}}</span>
+                </li>
+                <li>
                   <span v-for="item in idd3">{{item}}</span>
-                  </li>
-                  <li>
-                    <span v-for="item in idd4">{{item}}</span>
-                  </li>
-                  <li>
-                    <span v-for="item in idd5">{{item}}</span>
-                  </li>
-                  <li>
-                    <span v-for="item in idd6">{{item}}</span>
-                  </li>
-                </ul>
-              </div>
+                </li>
+                <li>
+                  <span v-for="item in idd4">{{item}}</span>
+                </li>
+                <li>
+                  <span v-for="item in idd5">{{item}}</span>
+                </li>
+                <li>
+                  <span v-for="item in idd6">{{item}}</span>
+                </li>
+              </ul>
             </div>
           </div>
         </div>
@@ -549,10 +544,12 @@ export default {
           type: "success"
         });
         this.dialogFormVisibleOrg = false; //查看消防站大屏
-        this.getEarlyInfo(); //警情信息
-        this.getOnDutyInfo(); //值班信息
-        this.getVehicleInfo(); //车辆信息
-      } else {
+      } else if(this.play_d == false&&this.play_x == false){
+        this.$message({
+          message: "该用户没有权限，无法查看大屏数据",
+          type: "warning"
+        });
+      }else{
         this.$message({
           message: "请选择部门",
           type: "warning"
@@ -566,6 +563,10 @@ export default {
       this.getMainInfo(this.noticeSourceId);
       this.getAssessmentInfo(this.eduStationId);
       this.getMonth(this.eduStationId);
+
+      this.getEarlyInfo(this.eduStationId); //警情信息
+      this.getOnDutyInfo(this.eduStationId); //值班信息
+      this.getVehicleInfo(this.eduStationId); //车辆信息
     },
 
     uploadEarliInfo(type) {
@@ -668,35 +669,44 @@ export default {
     },
 
     //获取车辆信息
-    getVehicleInfo() {
-      storage.getVehicleInfo(this.formOrg_z.id).then(res => {
-        this.vehicleInfo = res;
-        var arrDate = res.vehicleInfos;
-        var ar = [];
-        for (var i = 0; i < arrDate.length; i++) {
-          var obj = new Object();
-          obj.id = arrDate[i].id;
-          obj.xfc = arrDate[i].vehicleName;
-          obj.gl = arrDate[i].enginePower;
-          obj.zl = arrDate[i].liftingWeight;
-          obj.status = arrDate[i].vehicleStatus;
-          ar.push(obj);
+    getVehicleInfo(id) {
+      storage.getVehicleInfo(id).then(res => {
+        if(res!=undefined){
+          this.vehicleInfo = res;
+          var arrDate = res.vehicleInfos;
+          var ar = [];
+          for (var i = 0; i < arrDate.length; i++) {
+            var obj = new Object();
+            obj.id = arrDate[i].id;
+            obj.xfc = arrDate[i].vehicleName;
+            obj.gl = arrDate[i].enginePower;
+            obj.zl = arrDate[i].liftingWeight;
+            obj.status = arrDate[i].vehicleStatus;
+            ar.push(obj);
+          }
+          this.listData = ar;
+        }else{
+          var arrs = [{xfc:'暂无数据',gl:'0',zl:'0'}]
+          this.listData = arrs;
         }
-        this.listData = ar;
       });
     },
     //获取值班信息
-    getOnDutyInfo() {
-      storage.getOnDutyInfo(this.formOrg_z.id).then(res => {
-        this.OnDutyInfo = res;
-        this.OnDutArr1 = res.brigadeHeadquarters;
-        this.OnDutArr2 = res.stationDutyCadres;
+    getOnDutyInfo(id) {
+      storage.getOnDutyInfo('af127c960a8b490683a1ff9c57b83163',1).then(res => {
+        if(res!=undefined){
+          this.OnDutyInfo = res;
+          this.OnDutArr1 = res.brigadeHeadquarters;
+          this.OnDutArr2 = res.stationDutyCadres;
+        }else{this.OnDutArr1 = ['暂无数据'];this.OnDutArr2 = ['暂无数据']}
       });
     },
     //获取今日警情信息
-    getEarlyInfo() {
-      storage.getEarlyInfo(this.formOrg_z.id).then(res => {
-        this.earlyInfo = res;
+    getEarlyInfo(id) {
+      storage.getEarlyInfo(id,1).then(res => {
+        if(res!=undefined){
+          this.earlyInfo = res;
+        }
       });
     },
 
@@ -892,7 +902,14 @@ export default {
     // this.getMainInfo();
     //this.getAssessmentInfo();
     storage.getUserPermissionsDate().then(res => {
-      this.setUserPermissions(res);
+      if(res.errcode==405){
+          this.$message({
+            message: res.errmsg,
+            type: "warning"
+          });
+      }else{
+        this.setUserPermissions(res);
+      }
     });
   }
 };
