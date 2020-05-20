@@ -176,7 +176,7 @@
           <!-- 今日警情信息strat -->
           <div class="right-top screen-item">
             <h3 class="screen-item-title">今日警情信息</h3>
-            <div class="num">接处警总量({{earlyInfo.callPoliceTotal}}起)</div>
+            <div class="num">接出警总量({{earlyInfo.callPoliceTotal}}起)</div>
             <div class="info info1">
               <ul>
                 <li>
@@ -232,7 +232,7 @@
               <vue-seamless-scroll
                 :data="listData"
                 class="seamless-warp"
-                :class-option="classOption"
+                :class-option="length > 6 ? classOption : length < 6 ? test : '暂无数据'"
               >
                 <ul class="ve_ul">
                   <li v-for="item in listData" >
@@ -437,6 +437,7 @@ export default {
       formOrg_z: { id: "", region: "", name: "", sourceId: "" },
       formLabelWidth: "120px",
       birthday_data: [],
+      length:0,
         //每月之星
         learnStar: '',
         disciplineStar: '',
@@ -699,6 +700,7 @@ export default {
         if(res!=undefined){
           this.vehicleInfo = res;
           var arrDate = res.vehicleInfos;
+          this.length = arrDate.length;
           var ar = [];
           for (var i = 0; i < arrDate.length; i++) {
             var obj = new Object();
@@ -895,7 +897,7 @@ export default {
     classOption() {
       return {
         step: 0.2, // 数值越大速度滚动越快
-        limitMoveNum: 2, // 开始无缝滚动的数据量 this.dataList.length
+        limitMoveNum: 0, // 开始无缝滚动的数据量 this.dataList.length
         hoverStop: true, // 是否开启鼠标悬停stop
         direction: 0, // 0向下 1向上 2向左 3向右
         openWatch: true, // 开启数据实时监控刷新dom
@@ -903,6 +905,9 @@ export default {
         singleWidth: 0, // 单步运动停止的宽度(默认值0是无缝不停止的滚动) direction => 2/3
         waitTime: 1000 // 单步运动停止的时间(默认值1000ms)
       };
+    },
+
+    test() {
     },
     center_option() {
       return {
