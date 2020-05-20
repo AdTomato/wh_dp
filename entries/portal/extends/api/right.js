@@ -32,8 +32,8 @@ var storage = {
           }
         }else{
           var parmar = {
-            stationId:stationId,
-            date:new Date().toLocaleDateString().replace(/\//g, '-')+" 00:00:00"
+            stationId:"af127c960a8b490683a1ff9c57b83163",
+            date:"2020-04-07 00:00:00"
           }
         }
         await request.getEarlyInfo(parmar,type).then(res => {

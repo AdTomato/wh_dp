@@ -97,9 +97,7 @@
                     this.eduPmInfo = eduRes.data.afternoon;
                     this.eduNightInfo = eduRes.data.night;
                 }
-
-                this.trainData = lhbRes.data.detailInfos;
-
+                this.trainData = lhbRes.data[0].detailInfos;
                 console.log(eduRes);
             }
                    

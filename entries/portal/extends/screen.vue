@@ -79,7 +79,7 @@
                 </li>
               </ul>
               <ul class="commander_list ml">
-                <li class="commander_name"> 通讯保障班 :</li>
+                <li class="commander_name">通讯保障班 :</li>
                 <li class="commander_detail">
                   <span v-for="item in userNames6">{{item}}</span>
                 </li>
@@ -164,7 +164,7 @@
           <!-- 今日警情信息strat -->
           <div class="right-top screen-item">
             <h3 class="screen-item-title">今日警情信息</h3>
-            <div class="num">接出警总量({{earlyInfo.callPoliceTotal}}起)</div>
+            <div class="num">接出警总量({{count}}起)</div>
             <div class="info info1">
               <ul>
                 <li>
@@ -223,7 +223,7 @@
                 :class-option="length > 6 ? classOption : length < 6 ? test : '暂无数据'"
               >
                 <ul class="ve_ul">
-                  <li v-for="item in listData" >
+                  <li v-for="item in listData">
                     <div class="list_bj" :data-dept="item.id">
                       {{item.xfc}}
                       <div v-if="item.status=='出动'" class="round bj_y fr"></div>
@@ -391,9 +391,9 @@ import ElementUI from "element-ui";
 import "element-ui/lib/theme-chalk/index.css";
 import axios from "axios";
 import request from "./api/request.js";
-import Weather from './components/weather';
-import Notice from './components/notice';
-import Education from './components/education';
+import Weather from "./components/weather";
+import Notice from "./components/notice";
+import Education from "./components/education";
 import vueSeamlessScroll from "vue-seamless-scroll";
 Vue.use(ElementUI, axios, vueSeamlessScroll);
 export default {
@@ -419,57 +419,58 @@ export default {
       formOrg_z: { id: "", region: "", name: "", sourceId: "" },
       formLabelWidth: "120px",
       birthday_data: [],
-      length:0,
-        //每月之星
-        learnStar: '',
-        disciplineStar: '',
-        houseStar: '',
-        trainStar: '',
-        learn_img: '',
-        discipline_img: '',
-        houser_img: '',
-        train_img: '',
+      length: 0,
+      count: 0,
+      //每月之星
+      learnStar: "",
+      disciplineStar: "",
+      houseStar: "",
+      trainStar: "",
+      learn_img: "",
+      discipline_img: "",
+      houser_img: "",
+      train_img: "",
 
-        //人员动态
-        numAll: '',
-        numtype1: '',
-        numtype2: '',
-        numZaigang: '',
-        numGongchai: '',
-        numXiujia: '',
-        commander_add: '',
-        userNames1:[],
-        userNames2:[],
-        userNames3:[],
-        userNames4:[],
-        userNames5:[],
-        userNames6:[],
-        //量化考评
-        idd1:[],
-        idd2:[],
-        idd3:[],
-        idd4:[],
-        idd5:[],
-        idd6:[],
-        evaluate_list:[],
-        idds:[],
-        evaluationName: '',
-        project: '',
-        score: '',
+      //人员动态
+      numAll: "",
+      numtype1: "",
+      numtype2: "",
+      numZaigang: "",
+      numGongchai: "",
+      numXiujia: "",
+      commander_add: "",
+      userNames1: [],
+      userNames2: [],
+      userNames3: [],
+      userNames4: [],
+      userNames5: [],
+      userNames6: [],
+      //量化考评
+      idd1: [],
+      idd2: [],
+      idd3: [],
+      idd4: [],
+      idd5: [],
+      idd6: [],
+      evaluate_list: [],
+      idds: [],
+      evaluationName: "",
+      project: "",
+      score: "",
 
-        value1: "",
-        earlyInfo:{},  //今日警情信息
-        earlyType:0,   //警情类型 处理传参
-        OnDutyInfo:{}, //今日值班信息
-        OnDutArr1:[],  //值班信息数组1
-        OnDutArr2:[],  //值班信息数组2
-        vehicleInfo:{},
-        carsId: "",
-        status: "",
-        noticeSourceId: '',
-        eduStationId: '',
-        noticeData: [],
-        flagVisible: false
+      value1: "",
+      earlyInfo: {}, //今日警情信息
+      earlyType: 0, //警情类型 处理传参
+      OnDutyInfo: {}, //今日值班信息
+      OnDutArr1: [], //值班信息数组1
+      OnDutArr2: [], //值班信息数组2
+      vehicleInfo: {},
+      carsId: "",
+      status: "",
+      noticeSourceId: "",
+      eduStationId: "",
+      noticeData: [],
+      flagVisible: false
     };
   },
   components: {
@@ -505,7 +506,7 @@ export default {
         this.options = this.setDate(obj.brigadeData);
       } else if (obj.isDetachment == true) {
         this.play_d = true;
-        this.play_x = false;
+        this.play_x = true;
         this.options = this.setDate(obj.detachmentData);
       } else if (obj.errcode == 406) {
         this.play_d = false;
@@ -545,22 +546,22 @@ export default {
           type: "success"
         });
         this.dialogFormVisibleOrg = false; //查看消防站大屏
-      } else if(this.play_d == false&&this.play_x == false){
+      } else if (this.play_d == false && this.play_x == false) {
         this.$message({
           message: "该用户没有权限，无法查看大屏数据",
           type: "warning"
         });
-      }else{
+      } else {
         this.$message({
           message: "请选择部门",
           type: "warning"
         });
       }
-      console.log(this.noticeSourceId + '-------');
+      console.log(this.noticeSourceId + "-------");
       // 公告
       // this.$refs['notice'].getNoticeInfo(this.noticeSourceId);
       // 教育训练计划
-      this.$refs['education'].getEducationData(this.eduStationId);
+      this.$refs["education"].getEducationData(this.eduStationId);
       this.getMainInfo(this.noticeSourceId);
       this.getAssessmentInfo(this.eduStationId);
       this.getMonth(this.eduStationId);
@@ -568,6 +569,8 @@ export default {
       this.getEarlyInfo(this.eduStationId); //警情信息
       this.getOnDutyInfo(this.eduStationId); //值班信息
       this.getVehicleInfo(this.eduStationId); //车辆信息
+
+      self.setInterval("this.getEarlyInfo()",1000);
     },
 
     uploadEarliInfo(type) {
@@ -575,10 +578,22 @@ export default {
       this.earlyType = type;
     },
     uploadEarlyBtn() {
+      var fire = 0;
+      var eme = 0;
+      var soc = 0;
+      var falseA = 0;
+      var other = 0;
+      var count = 0;
       this.dialogFormVisible = false;
+      fire = parseInt(this.earlyInfo.fireAlarmNum);
+      eme = parseInt(this.earlyInfo.emergencyRescueNum);
+      soc = parseInt(this.earlyInfo.socialAssistanceNum);
+      falseA = parseInt(this.earlyInfo.falseAlarmNum);
+      other = parseInt(this.earlyInfo.otherAlertNum);
+      count = fire + eme + soc + falseA + other;
       var parmar = {
         id: this.earlyInfo.id,
-        callPoliceTotal: this.earlyInfo.callPoliceTotal,
+        callPoliceTotal: count,
         fireAlarmNum: this.earlyInfo.fireAlarmNum,
         emergencyRescueNum: this.earlyInfo.emergencyRescueNum,
         socialAssistanceNum: this.earlyInfo.socialAssistanceNum,
@@ -591,6 +606,7 @@ export default {
             message: "更新成功",
             type: "success"
           });
+          this.getEarlyInfo(this.eduStationId); //警情信息
         }
       });
     },
@@ -601,7 +617,14 @@ export default {
     },
 
     uploadVehicleStatusBtn() {
-      axios.put(this.url +"/controller/carsInfo/updateCarsStatus?carsId=" +this.carsId +"&status=" +this.status)
+      axios
+        .put(
+          this.url +
+            "/controller/carsInfo/updateCarsStatus?carsId=" +
+            this.carsId +
+            "&status=" +
+            this.status
+        )
         .then(response => {
           if (response.errcode == 0) {
             this.$message({
@@ -619,7 +642,7 @@ export default {
       this.status = this.formType.region;
     },
 
-    handleClick(event){
+    handleClick(event) {
       this.dialogFormVisibleType = true;
       this.carsId = event.target.dataset.dept;
     },
@@ -672,7 +695,7 @@ export default {
     //获取车辆信息
     getVehicleInfo(id) {
       storage.getVehicleInfo(id).then(res => {
-        if(res!=undefined){
+        if (res != undefined) {
           this.vehicleInfo = res;
           var arrDate = res.vehicleInfos;
           this.length = arrDate.length;
@@ -687,109 +710,136 @@ export default {
             ar.push(obj);
           }
           this.listData = ar;
-        }else{
-          var arrs = [{xfc:'暂无数据',gl:'0',zl:'0'}]
+        } else {
+          var arrs = [{ xfc: "暂无数据", gl: "0", zl: "0" }];
           this.listData = arrs;
         }
       });
     },
     //获取值班信息
     getOnDutyInfo(id) {
-      storage.getOnDutyInfo('af127c960a8b490683a1ff9c57b83163',1).then(res => {
-        if(res!=undefined){
+      storage.getOnDutyInfo("af127c960a8b490683a1ff9c57b83163", 1).then(res => {
+        if (res != undefined) {
           this.OnDutyInfo = res;
           this.OnDutArr1 = res.brigadeHeadquarters;
           this.OnDutArr2 = res.stationDutyCadres;
-        }else{this.OnDutArr1 = ['暂无数据'];this.OnDutArr2 = ['暂无数据']}
+        } else {
+          this.OnDutArr1 = ["暂无数据"];
+          this.OnDutArr2 = ["暂无数据"];
+        }
       });
     },
     //获取今日警情信息
     getEarlyInfo(id) {
-      storage.getEarlyInfo(id,1).then(res => {
-        if(res!=undefined){
+      storage.getEarlyInfo(id, 1).then(res => {
+        if (res != undefined) {
           this.earlyInfo = res;
+          var fire = 0;
+          var eme = 0;
+          var soc = 0;
+          var falseA = 0;
+          var other = 0;
+
+          fire = parseInt(res.fireAlarmNum);
+          eme = parseInt(res.emergencyRescueNum);
+          soc = parseInt(res.socialAssistanceNum);
+          falseA = parseInt(res.falseAlarmNum);
+          other = parseInt(res.otherAlertNum);
+          this.count = fire + eme + soc + falseA + other;
+          console.log("count===", this.count);
         }
       });
     },
 
     // 每月之星
-    getMonth(stationId){
-      var date = new Date();  
+    getMonth(stationId) {
+      var date = new Date();
       var month = date.getMonth() + 1;
 
       var strDate = date.getDate();
       if (month >= 1 && month <= 9) {
-          month = "0" + month;
+        month = "0" + month;
       }
       if (strDate >= 0 && strDate <= 9) {
-          strDate = "0" + strDate;
-      } 
+        strDate = "0" + strDate;
+      }
       var hours = date.getHours();
-      if (hours >=0 && hours <= 9) {
-          if (hours == 0) {
-              hours = "00";
-          } else{
-              hours = "0" + hours;
-          }
+      if (hours >= 0 && hours <= 9) {
+        if (hours == 0) {
+          hours = "00";
+        } else {
+          hours = "0" + hours;
+        }
       }
       var minutes = date.getMinutes();
-      if (minutes >=0 && minutes <= 9) {
-          if (minutes == 0) {
-              minutes = "00";
-          } else{
-              minutes = "0" + minutes;
-          }
+      if (minutes >= 0 && minutes <= 9) {
+        if (minutes == 0) {
+          minutes = "00";
+        } else {
+          minutes = "0" + minutes;
+        }
       }
       var seconds = date.getSeconds();
-      if (seconds >=0 && seconds <= 9) {
-          if (seconds == 0) {
-              seconds = "00";
-          } else{
-              seconds = "0" + seconds;
-          }
+      if (seconds >= 0 && seconds <= 9) {
+        if (seconds == 0) {
+          seconds = "00";
+        } else {
+          seconds = "0" + seconds;
+        }
       }
-      var currentdate = date.getFullYear()+"-"+ month+"-"+strDate+" "+hours+":"+minutes+":"+ seconds;
+      var currentdate =
+        date.getFullYear() +
+        "-" +
+        month +
+        "-" +
+        strDate +
+        " " +
+        hours +
+        ":" +
+        minutes +
+        ":" +
+        seconds;
       let par = {
         stationId: stationId,
         date: currentdate
-      }
+      };
       request.getStationStarMonth(par).then(res => {
-        if(res== "undefined" || res== null || res== ""){
+        if (res == "undefined" || res == null || res == "") {
           return false;
-        }else{
-          if(res.data.learningStar.name != null){
-          this.learnStar = res.data.learningStar.name;
+        } else {
+          if (res.data.learningStar.name != null) {
+            this.learnStar = res.data.learningStar.name;
           }
-          if(res.data.disciplineStar.name != null){
+          if (res.data.disciplineStar.name != null) {
             this.disciplineStar = res.data.disciplineStar.name;
           }
-          if(res.data.trainStar.name != null){
+          if (res.data.trainStar.name != null) {
             this.trainStar = res.data.trainStar.name;
           }
-          if(res.data.houseStar.name != null){
+          if (res.data.houseStar.name != null) {
             this.houseStar = res.data.houseStar.name;
           }
-          if(res.data.learningStar.imgUrl != null){
+          if (res.data.learningStar.imgUrl != null) {
             this.learn_img = res.data.learningStar.imgUrl;
           }
-          if(res.data.disciplineStar.imgUrl != null){
+          if (res.data.disciplineStar.imgUrl != null) {
             this.discipline_img = res.data.disciplineStar.imgUrl;
           }
-          if(res.data.houseStar.imgUrl != null){
+          if (res.data.houseStar.imgUrl != null) {
             this.house_img = res.data.houseStar.imgUrl;
           }
-          if(res.data.trainStar.imgUrl != null){
+          if (res.data.trainStar.imgUrl != null) {
             this.train_img = res.data.trainStar.imgUrl;
           }
-        } 
-      })
+        }
+      });
     },
 
     //人员动态和生日
-    getMainInfo(deptId){
+    getMainInfo(deptId) {
       let par = {
         deptId: deptId
-      }
+      };
       request.getMainInfo(par).then(res => {
         this.noticeData = res.data.notice;
         this.userNames1 = res.data.userNames1;
@@ -804,14 +854,14 @@ export default {
         this.numZaigang = res.data.numZaigang;
         this.numGongchai = res.data.numGongchai;
         this.numXiujia = res.data.numXiujia;
-        if(res.data.birthdayNames.length != 0){
+        if (res.data.birthdayNames.length != 0) {
           let pr;
-          pr = '祝'+ res.data.birthdayNames + '生日快乐！'
+          pr = "祝" + res.data.birthdayNames + "生日快乐！";
           let br = [];
           br.push(pr);
           this.birthday_data = br;
-        }else{
-            this.birthday_data = ['对党忠诚，纪律严明，赴汤蹈火，竭诚为民'];
+        } else {
+          this.birthday_data = ["对党忠诚，纪律严明，赴汤蹈火，竭诚为民"];
         }
         //this.birthday_data = ['对党忠诚，纪律严明，赴汤蹈火，竭诚为民'];
         // myjing公告
@@ -820,57 +870,57 @@ export default {
     },
 
     //量化考评
-    getAssessmentInfo(stationId){
+    getAssessmentInfo(stationId) {
       let par = {
         stationId: stationId
-      }
-      request.getAssessmentInfo(par).then(res =>{
+      };
+      request.getAssessmentInfo(par).then(res => {
         var ar = [];
-        if(res.data){
+        if (res.data) {
           let idd1 = [];
           let idd2 = [];
           let idd3 = [];
           let idd4 = [];
           let idd5 = [];
           let idd6 = [];
-          if(res.data[0] != null){
+          if (res.data[0] != null) {
             idd1.push(res.data[0].evaluationName);
             idd1.push(res.data[0].project);
-            idd1.push(res.data[0].score + '分');
+            idd1.push(res.data[0].score + "分");
             this.idd1 = idd1;
           }
-          if(res.data[1] != null){
+          if (res.data[1] != null) {
             idd2.push(res.data[1].evaluationName);
             idd2.push(res.data[1].project);
-            idd2.push(res.data[1].score + '分');
+            idd2.push(res.data[1].score + "分");
             this.idd2 = idd2;
           }
-          if(res.data[2] != null){
+          if (res.data[2] != null) {
             idd3.push(res.data[2].evaluationName);
             idd3.push(res.data[2].project);
-            idd3.push(res.data[2].score + '分');
+            idd3.push(res.data[2].score + "分");
             this.idd3 = idd3;
           }
-          if(res.data[3] != null){
+          if (res.data[3] != null) {
             idd4.push(res.data[3].evaluationName);
             idd4.push(res.data[3].project);
-            idd4.push(res.data[3].score + '分');
+            idd4.push(res.data[3].score + "分");
             this.idd4 = idd4;
           }
-          if(res.data[4] != null){
+          if (res.data[4] != null) {
             idd5.push(res.data[4].evaluationName);
             idd5.push(res.data[4].project);
-            idd5.push(res.data[4].score + '分');
+            idd5.push(res.data[4].score + "分");
             this.idd5 = idd5;
           }
-          if(res.data[5] != null){
+          if (res.data[5] != null) {
             idd6.push(res.data[5].evaluationName);
             idd6.push(res.data[5].project);
-            idd6.push(res.data[5].score + '分');
+            idd6.push(res.data[5].score + "分");
             this.idd6 = idd6;
           }
         }
-      })
+      });
     }
   },
   computed: {
@@ -887,8 +937,7 @@ export default {
       };
     },
 
-    test() {
-    },
+    test() {},
     center_option() {
       return {
         step: 0.2, // 数值越大速度滚动越快
@@ -902,17 +951,17 @@ export default {
       };
     }
   },
-  mounted(){
+  mounted() {
     //this.getMonth();
     // this.getMainInfo();
     //this.getAssessmentInfo();
     storage.getUserPermissionsDate().then(res => {
-      if(res.errcode==405){
-          this.$message({
-            message: res.errmsg,
-            type: "warning"
-          });
-      }else{
+      if (res.errcode == 405) {
+        this.$message({
+          message: res.errmsg,
+          type: "warning"
+        });
+      } else {
         this.setUserPermissions(res);
       }
     });
