@@ -50,38 +50,50 @@
             <div class="detail_nums">
               <ul class="commander_list mf">
                 <li class="commander_name">指&nbsp;&nbsp;&nbsp;挥&nbsp;&nbsp;&nbsp;员 :</li>
-                <li class="commander_detail">
-                  <span v-for="item in userNames1">{{item}}</span>
+                <li class="commander_detail">                
+                  <span  v-for="item in userNames1" v-if="'1'=='1'">{{item.sequenceNo}}</span>
+                  <span v-else-if="item.sequenceStatus=='2'" class="gree" v-for="item in userNames1">{{item.sequenceNo}}</span>
+                  <span class="yello" v-for="item in userNames1" v-else="item.sequenceStatus=='3'">{{item.sequenceNo}}</span>
                 </li>
               </ul>
               <ul class="commander_list ms">
                 <li class="commander_name">特 勤 一 班 :</li>
                 <li class="commander_detail">
-                  <span v-for="item in userNames2">{{item}}</span>
+                  <span v-for="item in userNames2" v-if="item.sequenceStatus=='1'">{{item.sequenceNo}}</span>
+                  <span v-else-if="item.sequenceStatus=='2'" class="gree" v-for="item in userNames2">{{item.sequenceNo}}</span>
+                  <span v-else="item.sequenceStatus=='3'" class="yello" v-for="item in userNames2">{{item.sequenceNo}}</span>
                 </li>
               </ul>
               <ul class="commander_list mx">
                 <li class="commander_name">特 勤 二 班 :</li>
                 <li class="commander_detail">
-                  <span v-for="item in userNames3">{{item}}</span>
+                  <span v-for="item in userNames3" v-if="item.sequenceStatus=='1'">{{item.sequenceNo}}</span>
+                  <span v-else-if="item.sequenceStatus=='2'" class="gree" v-for="item in userNames3">{{item.sequenceNo}}</span>
+                  <span v-else="item.sequenceStatus=='3'" class="yello" v-for="item in userNames3">{{item.sequenceNo}}</span>
                 </li>
               </ul>
               <ul class="commander_list mj">
                 <li class="commander_name">灭 火 一 班 :</li>
                 <li class="commander_detail">
-                  <span v-for="item in userNames4">{{item}}</span>
+                  <span v-for="item in userNames4" v-if="item.sequenceStatus=='1'">{{item.sequenceNo}}</span>
+                  <span v-else-if="item.sequenceStatus=='2'" class="gree" v-for="item in userNames4">{{item.sequenceNo}}</span>
+                  <span v-else="item.sequenceStatus=='3'" class="yello" v-for="item in userNames4">{{item.sequenceNo}}</span>
                 </li>
               </ul>
               <ul class="commander_list mk">
                 <li class="commander_name">灭 火 二 班 :</li>
                 <li class="commander_detail">
-                  <span v-for="item in userNames5">{{item}}</span>
+                  <span v-for="item in userNames5" v-if="item.sequenceStatus=='1'">{{item.sequenceNo}}</span>
+                  <span v-else-if="item.sequenceStatus=='2'" class="gree" v-for="item in userNames5">{{item.sequenceNo}}</span>
+                  <span v-else="item.sequenceStatus=='3'" class="yello" v-for="item in userNames5">{{item.sequenceNo}}</span>
                 </li>
               </ul>
               <ul class="commander_list ml">
                 <li class="commander_name"> 通讯保障班 :</li>
                 <li class="commander_detail">
-                  <span v-for="item in userNames6">{{item}}</span>
+                  <span v-for="item in userNames6" v-if="item.sequenceStatus=='1'">{{item.sequenceNo}}</span>
+                  <span v-else-if="item.sequenceStatus=='2'" class="gree" v-for="item in userNames6">{{item.sequenceNo}}</span>
+                  <span v-else="item.sequenceStatus=='3'" class="yello" v-for="item in userNames6">{{item.sequenceNo}}</span>
                 </li>
               </ul>
             </div>
@@ -381,6 +393,12 @@
 .dialog-footer {
   text-align: center;
 }
+.gree{
+  color:#13A71D
+}
+.yello{
+  color:#C0A000
+}
 </style>
 
 <script>
@@ -443,6 +461,13 @@ export default {
         userNames4:[],
         userNames5:[],
         userNames6:[],
+
+        /*****strat */
+        user1:{},
+
+        /******end */
+
+        
         //量化考评
         idd1:[],
         idd2:[],
@@ -789,22 +814,17 @@ export default {
         deptId: deptId
       }
       request.getMainInfo(par).then(res => {
-        this.noticeData = res.data.notice;
+        console.log(res);
         this.userNames1 = res.data.userNames1;
         this.userNames2 = res.data.userNames2;
         this.userNames3 = res.data.userNames3;
         this.userNames4 = res.data.userNames4;
         this.userNames5 = res.data.userNames5;
         this.userNames6 = res.data.userNames6;
-        this.numAll = res.data.numAll;
-        this.numtype1 = res.data.numtype1;
-        this.numtype2 = res.data.numtype2;
-        this.numZaigang = res.data.numZaigang;
-        this.numGongchai = res.data.numGongchai;
-        this.numXiujia = res.data.numXiujia;
+
         if(res.data.birthdayNames.length != 0){
           let pr;
-          pr = '祝'+ res.data.birthdayNames + '生日快乐！'
+          pr = '祝'+ res.data.birthdayNames + '生日快乐！';
           let br = [];
           br.push(pr);
           this.birthday_data = br;
