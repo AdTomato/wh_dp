@@ -84,6 +84,10 @@ const request = {
     uploadVehicleStatus(data){
         return Put('/controller/carsInfo/updateCarsStatus',data);
     },
+    //大队人员动态和生日
+    getTeamInfo(data){
+        return Get('/controller/personlInfo/getTeamInfo', data);
+    },
     //获取双随机公开数据a
     getRandomData(data){
         return Get('/controller/personlInfo/getTwoRandownInfo',data);
