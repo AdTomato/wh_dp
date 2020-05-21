@@ -230,7 +230,7 @@
               <vue-seamless-scroll
                 :data="listData"
                 class="seamless-warp"
-                :class-option="length > 6 ? classOption : length < 6 ? test : '暂无数据'"
+                :class-option="length > 6 ? classOption : length < 6 ? unClassOption : '暂无数据'"
               >
                 <ul class="ve_ul">
                   <li v-for="item in listData">
@@ -674,8 +674,10 @@ export default {
     },
 
     handleClick(event) {
-      this.dialogFormVisibleType = true;
-      this.carsId = event.target.dataset.dept;
+      if(event.target.dataset.dept!=undefined){
+        this.dialogFormVisibleType = true;
+        this.carsId = event.target.dataset.dept;
+      }
     },
 
     //根据大队id获取大队下消防站的数据
@@ -1004,6 +1006,7 @@ export default {
         waitTime: 1000 // 单步运动停止的时间(默认值1000ms)
       };
     },
+    unClassOption(){}, //勿删
     // center_option() {
     //   return {
     //     step: 0.2, // 数值越大速度滚动越快
@@ -1037,7 +1040,7 @@ export default {
         this.setUserPermissions(res);
       }
     });
-    setInterval(this.timer, 1000*60*60*2);
+    setInterval(this.timer, 1000*60*60*2);  //定时器 2小时请求一次
   }
 };
 </script>
