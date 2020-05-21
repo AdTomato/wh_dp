@@ -38,7 +38,7 @@
                 <span class="bang-name">姓名</span>
                 <span class="bang-score">成绩</span>
               </div>
-              <div v-if="!trainData" class="bangnull">
+              <div v-if="trainData.length == 0" class="bangnull">
                   <p>暂时没有人上榜！</p>
               </div>
               <div v-else>
@@ -97,10 +97,10 @@
                     this.eduPmInfo = eduRes.data.afternoon;
                     this.eduNightInfo = eduRes.data.night;
                 }
-                if(lhbRes.data!=null){
+                if(lhbRes.data.length !=0 ){
                   this.trainData = lhbRes.data[0].detailInfos;
                 }
-                console.log(eduRes);
+                console.log(lhbRes.data);
             }
                    
         },

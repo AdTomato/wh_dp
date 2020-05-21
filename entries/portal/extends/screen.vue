@@ -932,7 +932,8 @@ export default {
           this.newsList = ['对党忠诚，纪律严明，赴汤蹈火，竭诚为民!']
         }
         // myjing公告
-        this.flagVisible = true;
+        this.flagVisible = true
+        this.noticeData = res.data.notice;
       });
     },
 

@@ -12,17 +12,7 @@
         <!-- 通知公告 -->
         <Notice ref="notice" :noticeData="noticeData" :flagVisible="flagVisible"></Notice>
         <!-- 本周重点工作 -->
-        <div class="screen-item">
-          <h3 class="screen-item-title">本周重点工作</h3>
-          <vue-seamless-scroll :data="worksData" class="seamless-work" :class-option="workClassOption">
-            <ul class="important-work">
-                <li v-for="(item, index) in worksData" :key="index" @click="updateWorkStatus(item)">
-                    <p>{{item.workContent}}</p>
-                    <span>{{item.status}}</span>
-                </li>
-            </ul>
-          </vue-seamless-scroll>
-        </div>
+        <Weekwork ref="weekwork"></Weekwork>
       </div>
       <!-- 中间 -->
       <div class="screen-center dd-center">
@@ -260,6 +250,7 @@ import axios from "axios";
 import vueSeamlessScroll from "vue-seamless-scroll";
 import Weather from './components/weather';
 import Notice from './components/notice';
+import Weekwork from './components/weekwork'
 import request from './api/request';
 import echarts from "echarts";
 Vue.prototype.$echarts = echarts;
@@ -286,7 +277,6 @@ export default {
       //myjing
       noticeData: [],
       flagVisible: false,
-      worksData: [],
 
       orgOptions: {},
       customColor1: "#EE6B77",
@@ -316,36 +306,11 @@ export default {
     //组件
     vueSeamlessScroll,
     Weather,
-    Notice
+    Notice,
+    Weekwork
   },
   methods: {
-    // 获取本周重点工作
-    getWorks(){
-      let par = {
-        brigadeId: '586d63454d6841dfa667405212572ca7'
-      }
-      request.getWorkData(par).then(res => {
-        res.data.forEach(item => {
-          item.weekFocusList.forEach(ele => {
-            this.worksData.push(ele);
-          })
-        })
-      })
-    },
-    // 更新本周工作重点
-    updateWorkStatus(item){
-      const urlPath = "http://121.41.27.194:8080/api";
-      axios.put(urlPath+`/controller/weekWork/updateWorksStatus?id=${item.id}&status=${item.status}`)
-      .then(res => {
-        if(res.errcode == 0){
-          if(item.status == '已完成'){
-            item.status = '进行中';
-          }else{
-            item.status = '已完成';
-          }
-        }
-      })
-    },
+    
     myEcharts(res) {
       // 基于准备好的dom，初始化echarts实例
       var myChart = this.$echarts.init(document.getElementById("main"));
@@ -536,6 +501,10 @@ export default {
         if(res.data.userNames3 != null){
           this.userNames3 = res.data.userNames3;
         }
+
+        // 公告，勿删
+        this.flagVisible = true
+        this.noticeData = res.data.notice;
       })
     },
     // xsheng 添加strat 2020-05-19
@@ -628,6 +597,9 @@ export default {
           type: "warning"
         });
       }
+
+      // 获取本周工作任务
+      this.$refs["weekwork"].getWorks(this.formOrg.id);
     },
     //设置下拉数据 (公用)
     setDate(arrs) {
@@ -659,15 +631,9 @@ export default {
         waitTime: 1000 // 单步运动停止的时间(默认值1000ms)
       }
     },
-    workClassOption() {
-      return {
-          step: 0.2, // 数值越大速度滚动越快
-      };
-    }
   },
   mounted() {
     var res = null;
-    this.getWorks();
     this.getEarlyInfo();
     this.myEcharts(res);
     this.getOnDutyInfo();
