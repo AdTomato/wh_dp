@@ -160,11 +160,9 @@
           </div>
         </div>
         <div class="content-bottom">
-          <vue-seamless-scroll :data="birthday_data" class="seamless" :class-option="center_option">
-            <ul class="center_item">
-              <li v-for="item in birthday_data">
-                <span class="birthday_text" v-text="item"></span>
-              </li>
+          <vue-seamless-scroll :data="newsList" :class-option="optionLeft" class="seamless-warp2">
+            <ul class="item">
+              <li class= "" v-for="item in newsList" v-text="item"></li>
             </ul>
           </vue-seamless-scroll>
         </div>
@@ -383,13 +381,22 @@
   height: 266px;
   overflow: hidden;
 }
-.seamless {
+/* .seamless {
   height: 100%;
   overflow: hidden;
   z-index: 999;
   float: left;
   padding-left: 10%;
-}
+} */
+/* .seamless-warp2 {
+  ul.item {
+      width: 6.3rem;
+      li {
+          float: left;
+          margin-right: 6rem;
+      }
+  }
+} */
 .dialog-footer {
   text-align: center;
 }
@@ -437,6 +444,8 @@ export default {
       formOrg_z: { id: "", region: "", name: "", sourceId: "" },
       formLabelWidth: "120px",
       birthday_data: [],
+      newsList: ['对党忠诚，纪律严明，赴汤蹈火，竭诚为民!'],
+      //newsList:[],
       length: 0,
       count: 0,
       //每月之星
@@ -474,32 +483,6 @@ export default {
       evaluationName: "",
       project: "",
       score: "",
-        //人员动态
-        numAll: '',
-        numtype1: '',
-        numtype2: '',
-        numZaigang: '',
-        numGongchai: '',
-        numXiujia: '',
-        commander_add: '',
-        userNames1:[],
-        userNames2:[],
-        userNames3:[],
-        userNames4:[],
-        userNames5:[],
-        userNames6:[],
-        //量化考评
-        idd1:[],
-        idd2:[],
-        idd3:[],
-        idd4:[],
-        idd5:[],
-        idd6:[],
-        evaluate_list:[],
-        idds:[],
-        evaluationName: '',
-        project: '',
-        score: '',
 
       value1: "",
       earlyInfo: {}, //今日警情信息
@@ -921,16 +904,17 @@ export default {
         this.numZaigang = res.data.numZaigang;
         this.numGongchai = res.data.numGongchai;
         this.numXiujia = res.data.numXiujia;
+        // let pr = [];
+        // pr.push('祝' + res.data.birthdayNames + '生日快乐!');
+        // console.log(pr);
+        // this.newsList = pr;
         if(res.data.birthdayNames.length != 0){
-          let pr;
-          pr = '祝'+ res.data.birthdayNames + '生日快乐！';
-          let br = [];
-          br.push(pr);
-          this.birthday_data = br;
-        } else {
-          this.birthday_data = ["对党忠诚，纪律严明，赴汤蹈火，竭诚为民"];
+          let pr = [];
+          pr.push('祝'+ res.data.birthdayNames + '生日快乐！');
+          this.newsList = pr;
+        }else{
+          this.newsList = ['对党忠诚，纪律严明，赴汤蹈火，竭诚为民!']
         }
-        //this.birthday_data = ['对党忠诚，纪律严明，赴汤蹈火，竭诚为民'];
         // myjing公告
         this.flagVisible = true;
       });
@@ -1003,19 +987,23 @@ export default {
         waitTime: 1000 // 单步运动停止的时间(默认值1000ms)
       };
     },
-
-    test() {},
-    center_option() {
+    // center_option() {
+    //   return {
+    //     step: 0.2, // 数值越大速度滚动越快
+    //     limitMoveNum: 2, // 开始无缝滚动的数据量 this.dataList.length
+    //     hoverStop: true, // 是否开启鼠标悬停stop
+    //     direction: 1, // 0向下 1向上 2向左 3向右
+    //     openWatch: true, // 开启数据实时监控刷新dom
+    //     singleHeight: 0, // 单步运动停止的高度(默认值0是无缝不停止的滚动) direction => 0/1
+    //     singleWidth: 0, // 单步运动停止的宽度(默认值0是无缝不停止的滚动) direction => 2/3
+    //     waitTime: 1000 // 单步运动停止的时间(默认值1000ms)
+    //   };
+    // }
+    optionLeft () {
       return {
-        step: 0.2, // 数值越大速度滚动越快
-        limitMoveNum: 2, // 开始无缝滚动的数据量 this.dataList.length
-        hoverStop: true, // 是否开启鼠标悬停stop
-        direction: 1, // 0向下 1向上 2向左 3向右
-        openWatch: true, // 开启数据实时监控刷新dom
-        singleHeight: 0, // 单步运动停止的高度(默认值0是无缝不停止的滚动) direction => 0/1
-        singleWidth: 0, // 单步运动停止的宽度(默认值0是无缝不停止的滚动) direction => 2/3
-        waitTime: 1000 // 单步运动停止的时间(默认值1000ms)
-      };
+            direction: 2,
+            limitMoveNum: 0
+          }
     }
   },
   mounted() {
