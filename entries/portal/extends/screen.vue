@@ -1,7 +1,7 @@
 <template>
   <div class="screen">
     <div class="screen-title">
-      <h2>武汉市汉阳区七里庙消防救援站</h2>
+      <h2>武汉市{{titleNameDd+titleName}}消防救援站</h2>
       <img src="./assets/images/navbar_bg.png" alt />
     </div>
     <div class="screen-main">
@@ -432,6 +432,8 @@ export default {
       dialogFormVisibleType: false,
       dialogFormVisibleOrg: true,
       showClo: false,
+      titleName:'',
+      titleNameDd:'',
       full: true,
       play_d: true,
       play_x: true,
@@ -519,6 +521,7 @@ export default {
       });
       console.log("选择消防站时存储数据=",obj)
       this.formOrg_z = obj;
+      this.titleName = obj.name;
     },
 
     //用户权限处理
@@ -682,13 +685,15 @@ export default {
 
     //根据大队id获取大队下消防站的数据
     getListData(id) {
+      let s = "";
       //选择大队时存储数据 strat
       let objs = {};
       objs = this.options.find(item => {
         return item.id === id;
       });
-      console.log("选择大队时存储数据=",objs)
+      s = objs.name;
       this.formOrg = objs;
+      this.titleNameDd = s.substr(0, s.length - 2)+'区';
       //选择大队时存储数据 end
 
       var parmar = { brigadeId: id };
