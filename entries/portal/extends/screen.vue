@@ -50,38 +50,50 @@
             <div class="detail_nums">
               <ul class="commander_list mf">
                 <li class="commander_name">指&nbsp;&nbsp;&nbsp;挥&nbsp;&nbsp;&nbsp;员 :</li>
-                <li class="commander_detail">
-                  <span v-for="item in userNames1">{{item}}</span>
+                <li class="commander_detail">                
+                  <span  v-for="item in userNames1" v-if="'1'=='1'">{{item.sequenceNo}}</span>
+                  <span v-else-if="item.sequenceStatus=='2'" class="gree" v-for="item in userNames1">{{item.sequenceNo}}</span>
+                  <span class="yello" v-for="item in userNames1" v-else="item.sequenceStatus=='3'">{{item.sequenceNo}}</span>
                 </li>
               </ul>
               <ul class="commander_list ms">
                 <li class="commander_name">特 勤 一 班 :</li>
                 <li class="commander_detail">
-                  <span v-for="item in userNames2">{{item}}</span>
+                  <span v-for="item in userNames2" v-if="item.sequenceStatus=='1'">{{item.sequenceNo}}</span>
+                  <span v-else-if="item.sequenceStatus=='2'" class="gree" v-for="item in userNames2">{{item.sequenceNo}}</span>
+                  <span v-else="item.sequenceStatus=='3'" class="yello" v-for="item in userNames2">{{item.sequenceNo}}</span>
                 </li>
               </ul>
               <ul class="commander_list mx">
                 <li class="commander_name">特 勤 二 班 :</li>
                 <li class="commander_detail">
-                  <span v-for="item in userNames3">{{item}}</span>
+                  <span v-for="item in userNames3" v-if="item.sequenceStatus=='1'">{{item.sequenceNo}}</span>
+                  <span v-else-if="item.sequenceStatus=='2'" class="gree" v-for="item in userNames3">{{item.sequenceNo}}</span>
+                  <span v-else="item.sequenceStatus=='3'" class="yello" v-for="item in userNames3">{{item.sequenceNo}}</span>
                 </li>
               </ul>
               <ul class="commander_list mj">
                 <li class="commander_name">灭 火 一 班 :</li>
                 <li class="commander_detail">
-                  <span v-for="item in userNames4">{{item}}</span>
+                  <span v-for="item in userNames4" v-if="item.sequenceStatus=='1'">{{item.sequenceNo}}</span>
+                  <span v-else-if="item.sequenceStatus=='2'" class="gree" v-for="item in userNames4">{{item.sequenceNo}}</span>
+                  <span v-else="item.sequenceStatus=='3'" class="yello" v-for="item in userNames4">{{item.sequenceNo}}</span>
                 </li>
               </ul>
               <ul class="commander_list mk">
                 <li class="commander_name">灭 火 二 班 :</li>
                 <li class="commander_detail">
-                  <span v-for="item in userNames5">{{item}}</span>
+                  <span v-for="item in userNames5" v-if="item.sequenceStatus=='1'">{{item.sequenceNo}}</span>
+                  <span v-else-if="item.sequenceStatus=='2'" class="gree" v-for="item in userNames5">{{item.sequenceNo}}</span>
+                  <span v-else="item.sequenceStatus=='3'" class="yello" v-for="item in userNames5">{{item.sequenceNo}}</span>
                 </li>
               </ul>
               <ul class="commander_list ml">
-                <li class="commander_name">通讯保障班 :</li>
+                <li class="commander_name">通信保障班 :</li>
                 <li class="commander_detail">
-                  <span v-for="item in userNames6">{{item}}</span>
+                  <span v-for="item in userNames6" v-if="item.sequenceStatus=='1'">{{item.sequenceNo}}</span>
+                  <span v-else-if="item.sequenceStatus=='2'" class="gree" v-for="item in userNames6">{{item.sequenceNo}}</span>
+                  <span v-else="item.sequenceStatus=='3'" class="yello" v-for="item in userNames6">{{item.sequenceNo}}</span>
                 </li>
               </ul>
             </div>
@@ -254,7 +266,7 @@
 
               <div class="duty">
                 <ul class="duty_ul">
-                  <li class="size17">大队全勤指挥部:</li>
+                  <li class="size17">队站值班干部:</li>
                   <li class="duty_ul_li" v-for="(item,i) in OnDutArr2">{{item}}</li>
                 </ul>
               </div>
@@ -381,6 +393,12 @@
 .dialog-footer {
   text-align: center;
 }
+.gree{
+  color:#13A71D
+}
+.yello{
+  color:#C0A000
+}
 </style>
 
 <script>
@@ -430,7 +448,6 @@ export default {
       discipline_img: "",
       houser_img: "",
       train_img: "",
-
       //人员动态
       numAll: "",
       numtype1: "",
@@ -457,6 +474,32 @@ export default {
       evaluationName: "",
       project: "",
       score: "",
+        //人员动态
+        numAll: '',
+        numtype1: '',
+        numtype2: '',
+        numZaigang: '',
+        numGongchai: '',
+        numXiujia: '',
+        commander_add: '',
+        userNames1:[],
+        userNames2:[],
+        userNames3:[],
+        userNames4:[],
+        userNames5:[],
+        userNames6:[],
+        //量化考评
+        idd1:[],
+        idd2:[],
+        idd3:[],
+        idd4:[],
+        idd5:[],
+        idd6:[],
+        evaluate_list:[],
+        idds:[],
+        evaluationName: '',
+        project: '',
+        score: '',
 
       value1: "",
       earlyInfo: {}, //今日警情信息
@@ -491,6 +534,7 @@ export default {
       obj = this.options_z.find(item => {
         return item.id === val;
       });
+      console.log("选择消防站时存储数据=",obj)
       this.formOrg_z = obj;
     },
 
@@ -527,16 +571,18 @@ export default {
         this.eduStationId = this.formOrg.id;
         this.dialogFormVisibleOrg = false; //查看大队大屏
         this.$message({
-          message: "查看大队大屏",
+          message: "查看支队大屏",
           type: "success"
         });
+        console.log("支队时候的id=",this.eduStationId);
       } else if (this.formOrg.id != "" && this.formOrg_z.id != "") {
-        this.noticeSourceId = this.formOrg.sourceId;
-        this.eduStationId = this.formOrg.id;
+        this.noticeSourceId = this.formOrg_z.sourceId;
+        this.eduStationId = this.formOrg_z.id;
         this.$message({
           message: "查看大队下面消防站大屏",
           type: "success"
         });
+        console.log("大队时候的id=",this.eduStationId);
         this.dialogFormVisibleOrg = false; //查看大队下面消防站大屏
       } else if (this.formOrg_z.id != "" && this.formOrg.id == "") {
         this.noticeSourceId = this.formOrg_z.sourceId;
@@ -545,6 +591,7 @@ export default {
           message: "只查看消防站大屏",
           type: "success"
         });
+        console.log("消防站时候的id=",this.eduStationId);
         this.dialogFormVisibleOrg = false; //查看消防站大屏
       } else if (this.play_d == false && this.play_x == false) {
         this.$message({
@@ -561,6 +608,8 @@ export default {
       // 公告
       // this.$refs['notice'].getNoticeInfo(this.noticeSourceId);
       // 教育训练计划
+
+      console.log("eduStationId====",this.eduStationId);
       this.$refs["education"].getEducationData(this.eduStationId);
       this.getMainInfo(this.noticeSourceId);
       this.getAssessmentInfo(this.eduStationId);
@@ -569,8 +618,6 @@ export default {
       this.getEarlyInfo(this.eduStationId); //警情信息
       this.getOnDutyInfo(this.eduStationId); //值班信息
       this.getVehicleInfo(this.eduStationId); //车辆信息
-
-      self.setInterval("this.getEarlyInfo()",1000);
     },
 
     uploadEarliInfo(type) {
@@ -632,7 +679,7 @@ export default {
               type: "success"
             });
             this.dialogFormVisibleType = false;
-            this.getVehicleInfo(); //车辆信息
+           this.getVehicleInfo(this.eduStationId); //车辆信息
           }
         })
         .catch(error => {});
@@ -654,6 +701,7 @@ export default {
       objs = this.options.find(item => {
         return item.id === id;
       });
+      console.log("选择大队时存储数据=",objs)
       this.formOrg = objs;
       //选择大队时存储数据 end
 
@@ -804,6 +852,7 @@ export default {
         date: currentdate
       };
       request.getStationStarMonth(par).then(res => {
+        console.log("learningStar=",res)
         if (res == "undefined" || res == null || res == "") {
           return false;
         } else {
@@ -841,7 +890,25 @@ export default {
         deptId: deptId
       };
       request.getMainInfo(par).then(res => {
-        this.noticeData = res.data.notice;
+        if(res.data.numAll != null){
+          this.numAll = res.data.numAll;
+        }
+        if(res.data.numtype1 != null){
+          this.numtype1 = res.data.numtype1;
+        }
+        if(res.data.numtype2 != null){
+          this.numtype2 = res.data.numtype2;
+        }
+        if(res.data.numZaigang != null){
+          this.numZaigang = res.data.numZaigang;
+        }
+        if(res.data.numGongchai != null){
+          this.numGongchai = res.data.numGongchai;
+        }
+        if(res.data.numXiujia != null){
+          this.numXiujia = res.data.numXiujia;
+        }
+        console.log(res);
         this.userNames1 = res.data.userNames1;
         this.userNames2 = res.data.userNames2;
         this.userNames3 = res.data.userNames3;
@@ -854,9 +921,9 @@ export default {
         this.numZaigang = res.data.numZaigang;
         this.numGongchai = res.data.numGongchai;
         this.numXiujia = res.data.numXiujia;
-        if (res.data.birthdayNames.length != 0) {
+        if(res.data.birthdayNames.length != 0){
           let pr;
-          pr = "祝" + res.data.birthdayNames + "生日快乐！";
+          pr = '祝'+ res.data.birthdayNames + '生日快乐！';
           let br = [];
           br.push(pr);
           this.birthday_data = br;

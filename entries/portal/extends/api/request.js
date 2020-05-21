@@ -42,7 +42,7 @@ const request = {
     },
     //获取登录人权限
     getUserPermissions:(data) => {
-        return Get('/controller/org/getUserAuthority?userId=2c90a43e6efe8b04016effb119271c6f',data);
+        return Get('/controller/org/getUserAuthority',data);
     },
     //根据大队id获取消防站
     getStation:(data) => {
