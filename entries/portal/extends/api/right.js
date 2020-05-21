@@ -25,15 +25,16 @@ var storage = {
 
       //根据消防站id获取今日警情信息
       async getEarlyInfo(stationId,type){
+        var time = new Date().toLocaleDateString().replace(/\//g, '-')+" 00:00:00";
         if(type == 2){
           var parmar = {
             brigadeId:stationId,
-            date:new Date().toLocaleDateString().replace(/\//g, '-')+" 00:00:00"
+            date:time
           }
         }else{
           var parmar = {
             stationId:stationId,
-            date:new Date().toLocaleDateString().replace(/\//g, '-')+" 00:00:00"
+            date:time
           }
         }
         await request.getEarlyInfo(parmar,type).then(res => {

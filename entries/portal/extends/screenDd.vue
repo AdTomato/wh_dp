@@ -103,7 +103,7 @@
         <div class="dd-list jq-info">
           <h3 class="screen-item-title">今日警情信息</h3>
 
-          <div class="num">接处警总量({{earlyInfo.callPoliceTotal}}起)</div>
+          <div class="num">接出警总量({{count}}起)</div>
           <div class="info info1">
             <ul>
               <li>
@@ -282,6 +282,7 @@ export default {
       formLabelWidth: "120px",
       options: [{ value: "选项1", label: "无数据", sourceId: "", id: "" }],
       play_d:false,
+      count:0,
       //myjing
       noticeData: [],
       flagVisible: false,
@@ -301,8 +302,6 @@ export default {
       userNames1: [],
       userNames2: [],
       userNames3: [],
-
-      url: "https://kp.ctce.com.cn:10088/api",
       url: "",
       dialogFormVisible: false,
       dialogFormVisibleType: false,
@@ -548,6 +547,19 @@ export default {
           this.earlyInfo = res.dateAlertInfo;
           this.earlyInfoEchart = res.monthAlertAnalysis;
           this.myEcharts(this.earlyInfoEchart);
+
+          var fire = 0;
+          var eme = 0;
+          var soc = 0;
+          var falseA = 0;
+          var other = 0;
+
+          fire = parseInt(res.dateAlertInfo.fireAlarmNum);
+          eme = parseInt(res.dateAlertInfo.emergencyRescueNum);
+          soc = parseInt(res.dateAlertInfo.socialAssistanceNum);
+          falseA = parseInt(res.dateAlertInfo.falseAlarmNum);
+          other = parseInt(res.dateAlertInfo.otherAlertNum);
+          this.count = fire + eme + soc + falseA + other;
         }else{console.log("今日警情信息数据返回为空")}
       });
     },
@@ -577,6 +589,7 @@ export default {
       objs = this.options.find(item => {
         return item.id === id;
       });
+      console.log("选择大队时封装数据=",objs)
       this.formOrg = objs;
       //选择大队时存储数据 end
     },

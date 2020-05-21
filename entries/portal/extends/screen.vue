@@ -618,6 +618,7 @@ export default {
       this.getEarlyInfo(this.eduStationId); //警情信息
       this.getOnDutyInfo(this.eduStationId); //值班信息
       this.getVehicleInfo(this.eduStationId); //车辆信息
+      
     },
 
     uploadEarliInfo(type) {
@@ -764,6 +765,21 @@ export default {
         }
       });
     },
+
+    //定时器 2小时更新一次
+    timer(){
+      console.log("定时执行函数----2小时执行一次");
+      this.$refs["education"].getEducationData(this.eduStationId);
+      this.getMainInfo(this.noticeSourceId);
+      this.getAssessmentInfo(this.eduStationId);
+      this.getMonth(this.eduStationId);
+      this.getEarlyInfo(this.eduStationId); //警情信息
+      this.getOnDutyInfo(this.eduStationId); //值班信息
+      this.getVehicleInfo(this.eduStationId); //车辆信息
+    },
+
+
+
     //获取值班信息
     getOnDutyInfo(id) {
       storage.getOnDutyInfo("af127c960a8b490683a1ff9c57b83163", 1).then(res => {
@@ -1032,6 +1048,7 @@ export default {
         this.setUserPermissions(res);
       }
     });
+    setInterval(this.timer, 1000*60*60*2);
   }
 };
 </script>
