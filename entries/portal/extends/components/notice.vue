@@ -9,13 +9,16 @@
                 <img src="../assets/images/timg.gif" alt />
             </div>
             <div class="warn-txt" v-else>
-                <vue-seamless-scroll :data="noticeData" class="seamless-notice" :class-option="noticeClassOption">
-                    <ul class="item">
-                        <li v-for="item in noticeData">
-                            <p>{{item.title}}</p>
-                        </li>
-                    </ul>
-                </vue-seamless-scroll>
+                <p v-if="noticeData.length == 0">暂时没有数据！</p>
+                <div v-else>
+                    <vue-seamless-scroll :data="noticeData" class="seamless-notice" :class-option="noticeClassOption">
+                        <ul class="item">
+                            <li v-for="item in noticeData">
+                                <p>{{item.title}}</p>
+                            </li>
+                        </ul>
+                    </vue-seamless-scroll>
+                </div>
             </div>
           </div>
         </div>

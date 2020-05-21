@@ -12,17 +12,7 @@
         <!-- 通知公告 -->
         <Notice ref="notice" :noticeData="noticeData" :flagVisible="flagVisible"></Notice>
         <!-- 本周重点工作 -->
-        <div class="screen-item">
-          <h3 class="screen-item-title">本周重点工作</h3>
-          <vue-seamless-scroll :data="worksData" class="seamless-work" :class-option="workClassOption">
-            <ul class="important-work">
-              <li v-for="(item, index) in worksData" :key="index" @click="updateWorkStatus(item)">
-                <p>{{item.workContent}}</p>
-                <span>{{item.status}}</span>
-              </li>
-            </ul>
-          </vue-seamless-scroll>
-        </div>
+        <Weekwork ref="weekwork"></Weekwork>
       </div>
       <!-- 中间 -->
       <div class="screen-center dd-center">
@@ -61,25 +51,25 @@
             <ul class="commander_list mf">
               <li class="commander_name">大队主管:</li>
               <li class="commander_detail">
-                <span  v-for="item in userNames1" v-if="'1'=='1'">{{item.sequenceNo}}</span>
-                <span v-else-if="item.sequenceStatus=='2'" class="gree" v-for="item in userNames1">{{item.sequenceNo}}</span>
-                <span class="yello" v-for="item in userNames1" v-else="item.sequenceStatus=='3'">{{item.sequenceNo}}</span>
+                <span v-for="item in userNames1" :key="item.sequenceNo" v-if="'1'=='1'">{{item.sequenceNo}}</span>
+                <span v-else-if="item.sequenceStatus=='2'" :key="item.sequenceNo" class="gree" v-for="item in userNames1">{{item.sequenceNo}}</span>
+                <span class="yello" v-for="item in userNames1" :key="item.sequenceNo" v-else="item.sequenceStatus=='3'">{{item.sequenceNo}}</span>
               </li>
             </ul>
             <ul class="commander_list ms">
               <li class="commander_name">大队干部:</li>
               <li class="commander_detail">
-                <span v-for="item in userNames2" v-if="item.sequenceStatus=='1'">{{item.sequenceNo}}</span>
-                <span v-else-if="item.sequenceStatus=='2'" class="gree" v-for="item in userNames2">{{item.sequenceNo}}</span>
-                <span v-else="item.sequenceStatus=='3'" class="yello" v-for="item in userNames2">{{item.sequenceNo}}</span>
+                <span v-for="item in userNames2" :key="item.sequenceNo" v-if="item.sequenceStatus=='1'">{{item.sequenceNo}}</span>
+                <span v-else-if="item.sequenceStatus=='2'" :key="item.sequenceNo" class="gree" v-for="item in userNames2">{{item.sequenceNo}}</span>
+                <span class="yello" v-for="item in userNames2" :key="item.sequenceNo" v-else="item.sequenceStatus=='3'">{{item.sequenceNo}}</span>
               </li>
             </ul>
             <ul class="commander_list mx">
               <li class="commander_name">大队文员:</li>
               <li class="commander_detail">
-                <span v-for="item in userNames3" v-if="item.sequenceStatus=='1'">{{item.sequenceNo}}</span>
-                <span v-else-if="item.sequenceStatus=='2'" class="gree" v-for="item in userNames3">{{item.sequenceNo}}</span>
-                <span v-else="item.sequenceStatus=='3'" class="yello" v-for="item in userNames3">{{item.sequenceNo}}</span>
+                <span v-for="item in userNames3" :key="item.sequenceNo" v-if="item.sequenceStatus=='1'">{{item.sequenceNo}}</span>
+                <span v-else-if="item.sequenceStatus=='2'" :key="item.sequenceNo" class="gree" v-for="item in userNames3">{{item.sequenceNo}}</span>
+                <span class="yello" v-for="item in userNames3" :key="item.sequenceNo" v-else="item.sequenceStatus=='3'">{{item.sequenceNo}}</span>
               </li>
             </ul>
           </div>
@@ -95,7 +85,7 @@
         <div class="content-bottom">
           <vue-seamless-scroll :data="newsList" :class-option="optionLeft" class="seamless-warp2">
             <ul class="item">
-              <li class= "" v-for="item in newsList" v-text="item"></li>
+              <li class= "" v-for="item in newsList" :key="item" v-text="item"></li>
             </ul>
           </vue-seamless-scroll>
         </div>
@@ -107,7 +97,7 @@
         <div class="dd-list jq-info">
           <h3 class="screen-item-title">今日警情信息</h3>
 
-          <div class="num">接处警总量({{earlyInfo.callPoliceTotal}}起)</div>
+          <div class="num">接出警总量({{count}}起)</div>
           <div class="info info1">
             <ul>
               <li>
@@ -242,13 +232,6 @@
   </div>
 </template>
 <style>
-/* .seamless{
-  height: 100%;
-  overflow: hidden;
-  z-index: 999;
-  float: left;
-  padding-left: 10%;
-} */
 .el-dialog__footer{
   text-align: center;
 }
@@ -259,7 +242,6 @@
   color:#C0A000
 }
 </style>
-
 <script>
 import Vue from "vue";
 import "./assets/lib/rem.js";
@@ -270,6 +252,7 @@ import axios from "axios";
 import vueSeamlessScroll from "vue-seamless-scroll";
 import Weather from './components/weather';
 import Notice from './components/notice';
+import Weekwork from './components/weekwork';
 import request from './api/request';
 import echarts from "echarts";
 Vue.prototype.$echarts = echarts;
@@ -292,16 +275,19 @@ export default {
       formLabelWidth: "120px",
       options: [{ value: "选项1", label: "无数据", sourceId: "", id: "" }],
       play_d:false,
+      count:0,
       //myjing
       noticeData: [],
       flagVisible: false,
-      worksData: [],
 
       orgOptions: {},
       customColor1: "#EE6B77",
       customColor2: "#EDD300",
       customColor3: "#F588FE",
 
+      streetName:[],
+      streetNum:[],
+      
       numAll:'',
       numtype1:'',
       numtype2:'',
@@ -311,8 +297,6 @@ export default {
       userNames1: [],
       userNames2: [],
       userNames3: [],
-
-      url: "https://kp.ctce.com.cn:10088/api",
       url: "",
       dialogFormVisible: false,
       dialogFormVisibleType: false,
@@ -323,7 +307,8 @@ export default {
     //组件
     vueSeamlessScroll,
     Weather,
-    Notice
+    Notice,
+    Weekwork
   },
   methods: {
     // 获取本周重点工作
@@ -363,6 +348,20 @@ export default {
       return percentage === 100 ? "45" : `${percentage}/45`;
     },
 
+    //月度警情分析
+    getBrigadeAlertInfoByBrigadeId(){
+      let par = {
+        brigadeId: "586d63454d6841dfa667405212572ca7",
+        date: "2020-05-18 00:00:00"
+      };
+      request.getBrigadeAlertInfoByBrigadeId(par).then(res =>{
+        console.log("111");
+        this.streetName = res.data.streets;
+        this.streetNum = res.data.alertNums;
+        console.log(this.streetName);
+        console.log(this.streetNum);
+      });
+    },
     //人员动态和生日
     getTeamInfo(){
       let prr = {
@@ -420,7 +419,8 @@ export default {
       });
     },
     //月度警情量分析
-    myEcharts(data) {
+
+    myEcharts(res) {
       // 基于准备好的dom，初始化echarts实例
       //月度警情量类型分析
       var myChart = this.$echarts.init(document.getElementById("main"));
@@ -477,6 +477,7 @@ export default {
       myChart.resize();
 
       // 基于准备好的dom，初始化echarts实例
+      //月度警情量分析
       var myCharts = this.$echarts.init(document.getElementById("month-data"));
       // 指定图表的配置项和数据
       var options = {
@@ -511,7 +512,8 @@ export default {
             },
             axisLabel:{
               color: 'white'
-            }
+            },
+            data:this.streetName
           }
         ],
         yAxis: [
@@ -557,24 +559,89 @@ export default {
               position: 'top',
               color: '#38AC9C'
             },
-            data: [45, 35, 28, 33, 45]
+            data: this.streetNum
           }
         ]
       };
-
-      // getBrigadeAlertInfoByBrigadeId(brigadeId){
-      //   let pr = {
-      //       brigadeId: this.formOrg.id
-      //   }
-      //   request.getBrigadeAlertInfoByBrigadeId(this.formOrg.id).then(res =>{
-      //       console.log(res);
-      //   })
-      // }
 
       // 使用刚指定的配置项和数据显示图表。
       myCharts.setOption(options);
       myCharts.resize();
     },
+
+    format(percentage) {
+      return percentage === 100 ? '45' : `${percentage}/45`;
+    },
+    getData(){
+      // 调用
+      request.getStationAlertInfo().then(res => {})
+      return percentage === 100 ? "45" : `${percentage}/45`;
+    },
+
+    //人员动态生日
+    getTeamInfo(){
+      let prr = {
+        sourceId: '145623281'
+      }
+      request.getTeamInfo(prr).then(res =>{
+        console.log(res);
+        if(res.data.numAll != null){
+          this.numAll = res.data.numAll;
+        }
+        if(res.data.numtype1 != null){
+          this.numtype1 = res.data.numtype1;
+        }
+        if(res.data.numtype2 != null){
+          this.numtype2 = res.data.numtype2;
+        }
+        if(res.data.numZaigang != null){
+          this.numZaigang = res.data.numZaigang;
+        }
+        if(res.data.numGongchai != null){
+          this.numGongchai = res.data.numGongchai;
+        }
+        if(res.data.numXiujia != null){
+          this.numXiujia = res.data.numXiujia;
+        }
+        if(res.data.userNames1 != null){
+          this.userNames1 = res.data.userNames1;
+        }
+        if(res.data.userNames2 != null){
+          this.userNames2 = res.data.userNames2;
+        }
+        if(res.data.userNames3 != null){
+          this.userNames3 = res.data.userNames3;
+        }
+
+        // 公告，勿删
+        this.flagVisible = true
+        this.noticeData = res.data.notice;
+      })
+    },
+    // xsheng 添加strat 2020-05-19
+
+    //获取今日警情信息
+  getEarlyInfo() {
+    storage.getEarlyInfo(this.formOrg.id,2).then(res => {
+      if(res!=undefined){
+        this.earlyInfo = res.dateAlertInfo;
+        this.earlyInfoEchart = res.monthAlertAnalysis;
+        this.myEcharts(this.earlyInfoEchart);
+        var fire = 0;
+        var eme = 0;
+        var soc = 0;
+        var falseA = 0;
+        var other = 0;
+
+        fire = parseInt(res.dateAlertInfo.fireAlarmNum);
+        eme = parseInt(res.dateAlertInfo.emergencyRescueNum);
+        soc = parseInt(res.dateAlertInfo.socialAssistanceNum);
+        falseA = parseInt(res.dateAlertInfo.falseAlarmNum);
+        other = parseInt(res.dateAlertInfo.otherAlertNum);
+        this.count = fire + eme + soc + falseA + other;
+      }else{console.log("今日警情信息数据返回为空")}
+    });
+  },
     //获取值班信息
     getOnDutyInfo() {
       storage.getOnDutyInfo(this.formOrg.id,2).then(res => {
@@ -601,6 +668,7 @@ export default {
       objs = this.options.find(item => {
         return item.id === id;
       });
+      console.log("选择大队时封装数据=",objs)
       this.formOrg = objs;
       //选择大队时存储数据 end
     },
@@ -639,6 +707,9 @@ export default {
           type: "warning"
         });
       }
+
+      // 获取本周工作任务
+      this.$refs["weekwork"].getWorks(this.formOrg.id);
     },
     //设置下拉数据 (公用)
     setDate(arrs) {
@@ -676,15 +747,9 @@ export default {
             limitMoveNum: 0
           }
     },
-    workClassOption() {
-      return {
-          step: 0.2, // 数值越大速度滚动越快
-      };
-    }
   },
   mounted() {
     var res = null;
-    this.getWorks();
     this.getEarlyInfo();
     this.myEcharts(res);
     this.getOnDutyInfo();
@@ -695,6 +760,7 @@ export default {
       myChart.resize();
     };
     this.getTeamInfo();
+    this.getBrigadeAlertInfoByBrigadeId();
   }
 };
 </script>

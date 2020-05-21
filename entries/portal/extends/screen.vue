@@ -51,7 +51,7 @@
               <ul class="commander_list mf">
                 <li class="commander_name">指&nbsp;&nbsp;&nbsp;挥&nbsp;&nbsp;&nbsp;员 :</li>
                 <li class="commander_detail">                
-                  <span  v-for="item in userNames1" v-if="'1'=='1'">{{item.sequenceNo}}</span>
+                  <span  v-for="item in userNames1" v-if="item.sequenceStatus=='1'">{{item.sequenceNo}}</span>
                   <span v-else-if="item.sequenceStatus=='2'" class="gree" v-for="item in userNames1">{{item.sequenceNo}}</span>
                   <span class="yello" v-for="item in userNames1" v-else="item.sequenceStatus=='3'">{{item.sequenceNo}}</span>
                 </li>
