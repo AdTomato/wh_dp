@@ -1,7 +1,7 @@
 <template>
   <div class="screen">
     <div class="screen-title">
-      <h2>武汉市汉阳区消防救援大队</h2>
+      <h2>武汉市{{titleNameDd}}消防救援大队</h2>
       <img src="./assets/images/navbar_bg.png" alt />
     </div>
     <div class="screen-main dd-main">
@@ -276,6 +276,7 @@ export default {
       options: [{ value: "选项1", label: "无数据", sourceId: "", id: "" }],
       play_d:false,
       count:0,
+      titleNameDd:'',
       //myjing
       noticeData: [],
       flagVisible: false,
@@ -663,13 +664,15 @@ export default {
     },
      //根据大队id获取大队下消防站的数据
     getListData(id) {
+      let s = '';
       //选择大队时存储数据 strat
       let objs = {};
       objs = this.options.find(item => {
         return item.id === id;
       });
-      console.log("选择大队时封装数据=",objs)
+      s = objs.name;
       this.formOrg = objs;
+      this.titleNameDd = s.substr(0, s.length - 2)+'区';
       //选择大队时存储数据 end
     },
 
