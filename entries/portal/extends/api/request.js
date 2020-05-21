@@ -91,6 +91,11 @@ const request = {
     //获取双随机公开数据a
     getRandomData(data){
         return Get('/controller/personlInfo/getTwoRandownInfo',data);
+    },
+
+    //月度警情量分析
+    getBrigadeAlertInfoByBrigadeId(data){
+        return Get('/controller/alertInfo/getBrigadeAlertInfoByBrigadeId',data);
     }
 }
 

@@ -381,22 +381,6 @@
   height: 266px;
   overflow: hidden;
 }
-/* .seamless {
-  height: 100%;
-  overflow: hidden;
-  z-index: 999;
-  float: left;
-  padding-left: 10%;
-} */
-/* .seamless-warp2 {
-  ul.item {
-      width: 6.3rem;
-      li {
-          float: left;
-          margin-right: 6rem;
-      }
-  }
-} */
 .dialog-footer {
   text-align: center;
 }

@@ -16,10 +16,10 @@
           <h3 class="screen-item-title">本周重点工作</h3>
           <vue-seamless-scroll :data="worksData" class="seamless-work" :class-option="workClassOption">
             <ul class="important-work">
-                <li v-for="(item, index) in worksData" :key="index" @click="updateWorkStatus(item)">
-                    <p>{{item.workContent}}</p>
-                    <span>{{item.status}}</span>
-                </li>
+              <li v-for="(item, index) in worksData" :key="index" @click="updateWorkStatus(item)">
+                <p>{{item.workContent}}</p>
+                <span>{{item.status}}</span>
+              </li>
             </ul>
           </vue-seamless-scroll>
         </div>
@@ -61,19 +61,25 @@
             <ul class="commander_list mf">
               <li class="commander_name">大队主管:</li>
               <li class="commander_detail">
-                <span v-for="item in userNames1">{{item}}</span>
+                <span  v-for="item in userNames1" v-if="'1'=='1'">{{item.sequenceNo}}</span>
+                <span v-else-if="item.sequenceStatus=='2'" class="gree" v-for="item in userNames1">{{item.sequenceNo}}</span>
+                <span class="yello" v-for="item in userNames1" v-else="item.sequenceStatus=='3'">{{item.sequenceNo}}</span>
               </li>
             </ul>
             <ul class="commander_list ms">
               <li class="commander_name">大队干部:</li>
               <li class="commander_detail">
-                <span v-for="item in userNames2">{{item}}</span>
+                <span v-for="item in userNames2" v-if="item.sequenceStatus=='1'">{{item.sequenceNo}}</span>
+                <span v-else-if="item.sequenceStatus=='2'" class="gree" v-for="item in userNames2">{{item.sequenceNo}}</span>
+                <span v-else="item.sequenceStatus=='3'" class="yello" v-for="item in userNames2">{{item.sequenceNo}}</span>
               </li>
             </ul>
             <ul class="commander_list mx">
               <li class="commander_name">大队文员:</li>
               <li class="commander_detail">
-                <span v-for="item in userNames3">{{item}}</span>
+                <span v-for="item in userNames3" v-if="item.sequenceStatus=='1'">{{item.sequenceNo}}</span>
+                <span v-else-if="item.sequenceStatus=='2'" class="gree" v-for="item in userNames3">{{item.sequenceNo}}</span>
+                <span v-else="item.sequenceStatus=='3'" class="yello" v-for="item in userNames3">{{item.sequenceNo}}</span>
               </li>
             </ul>
           </div>
@@ -86,14 +92,12 @@
           </div>
         </div>
         <!-- 生日 -->
-        <div class="dd-birthday dd-list">
-          <vue-seamless-scroll :data="birthday_data" class="seamless" :class-option="center_option">
-              <ul class="center_item">
-                <li v-for="item in birthday_data">
-                  <span class="birthday_text" v-text="item.text"></span>
-                </li>
-              </ul>
-            </vue-seamless-scroll>
+        <div class="content-bottom">
+          <vue-seamless-scroll :data="newsList" :class-option="optionLeft" class="seamless-warp2">
+            <ul class="item">
+              <li class= "" v-for="item in newsList" v-text="item"></li>
+            </ul>
+          </vue-seamless-scroll>
         </div>
       </div>
       <!-- 右边 -->
@@ -238,15 +242,21 @@
   </div>
 </template>
 <style>
-.seamless{
+/* .seamless{
   height: 100%;
   overflow: hidden;
   z-index: 999;
   float: left;
   padding-left: 10%;
-}
+} */
 .el-dialog__footer{
   text-align: center;
+}
+.gree{
+  color:#13A71D
+}
+.yello{
+  color:#C0A000
 }
 </style>
 
@@ -306,11 +316,7 @@ export default {
       url: "",
       dialogFormVisible: false,
       dialogFormVisibleType: false,
-      birthday_data: [{
-          'text': '祝陈飞同志生日快乐'
-        }, {
-          'text': '祝飞儿同志生日快乐'
-        }]
+      newsList: ['对党忠诚，纪律严明，赴汤蹈火，竭诚为民!']
     };
   },
   components: {
@@ -347,8 +353,76 @@ export default {
         }
       })
     },
-    myEcharts(res) {
+
+    format(percentage) {
+      return percentage === 100 ? '45' : `${percentage}/45`;
+    },
+    getData(){
+      // 调用
+      request.getStationAlertInfo().then(res => {})
+      return percentage === 100 ? "45" : `${percentage}/45`;
+    },
+
+    //人员动态和生日
+    getTeamInfo(){
+      let prr = {
+        sourceId: '145623281'
+      }
+      request.getTeamInfo(prr).then(res =>{
+        console.log(res);
+        if(res.data.numAll != null){
+        this.numAll = res.data.numAll;
+        }
+        if(res.data.numtype1 != null){
+          this.numtype1 = res.data.numtype1;
+        }
+        if(res.data.numtype2 != null){
+          this.numtype2 = res.data.numtype2;
+        }
+        if(res.data.numZaigang != null){
+          this.numZaigang = res.data.numZaigang;
+        }
+        if(res.data.numGongchai != null){
+          this.numGongchai = res.data.numGongchai;
+        }
+        if(res.data.numXiujia != null){
+          this.numXiujia = res.data.numXiujia;
+        }
+        if(res.data.userNames1 != null){
+          this.userNames1 = res.data.userNames1;
+        }
+        if(res.data.userNames2 != null){
+          this.userNames2 = res.data.userNames2;
+        }
+        if(res.data.userNames3 != null){
+          this.userNames3 = res.data.userNames3;
+        }
+        if(res.data.birthdayNames.length != 0){
+          let pr = [];
+          pr.push('祝'+ res.data.birthdayNames + '生日快乐！');
+          this.newsList = pr;
+        }else{
+          this.newsList = ['对党忠诚，纪律严明，赴汤蹈火，竭诚为民!']
+        }
+      })
+    },
+    // xsheng 添加strat 2020-05-19
+
+    //获取今日警情信息 月度警情信息
+    getEarlyInfo() {
+      storage.getEarlyInfo(this.formOrg.id,2).then(res => {
+        if(res!=undefined){
+          console.log(res);
+          this.earlyInfo = res.dateAlertInfo;
+          this.earlyInfoEchart = res.monthAlertAnalysis;
+          this.myEcharts(this.earlyInfoEchart);
+        }else{console.log("今日警情信息数据返回为空")}
+      });
+    },
+    //月度警情量分析
+    myEcharts(data) {
       // 基于准备好的dom，初始化echarts实例
+      //月度警情量类型分析
       var myChart = this.$echarts.init(document.getElementById("main"));
       // 指定图表的配置项和数据
       var option = {
@@ -402,8 +476,6 @@ export default {
       myChart.setOption(option);
       myChart.resize();
 
-      //月度警情量分析
-
       // 基于准备好的dom，初始化echarts实例
       var myCharts = this.$echarts.init(document.getElementById("month-data"));
       // 指定图表的配置项和数据
@@ -426,7 +498,7 @@ export default {
           {
 
             type: "category",
-            data: ["*街道", "*街道", "*街道", "*街道", "*街道"],
+            data: [],
             position: 'bottom',
             axisTick: {
               alignWithLabel: true
@@ -489,67 +561,19 @@ export default {
           }
         ]
       };
+
+      // getBrigadeAlertInfoByBrigadeId(brigadeId){
+      //   let pr = {
+      //       brigadeId: this.formOrg.id
+      //   }
+      //   request.getBrigadeAlertInfoByBrigadeId(this.formOrg.id).then(res =>{
+      //       console.log(res);
+      //   })
+      // }
+
       // 使用刚指定的配置项和数据显示图表。
       myCharts.setOption(options);
       myCharts.resize();
-    },
-
-    format(percentage) {
-      return percentage === 100 ? '45' : `${percentage}/45`;
-    },
-    getData(){
-      // 调用
-      request.getStationAlertInfo().then(res => {})
-      return percentage === 100 ? "45" : `${percentage}/45`;
-    },
-
-    //人员动态生日
-    getTeamInfo(){
-      let prr = {
-        sourceId: '145623281'
-      }
-      request.getTeamInfo(prr).then(res =>{
-        console.log(res);
-        if(res.data.numAll != null){
-          this.numAll = res.data.numAll;
-        }
-        if(res.data.numtype1 != null){
-          this.numtype1 = res.data.numtype1;
-        }
-        if(res.data.numtype2 != null){
-          this.numtype2 = res.data.numtype2;
-        }
-        if(res.data.numZaigang != null){
-          this.numZaigang = res.data.numZaigang;
-        }
-        if(res.data.numGongchai != null){
-          this.numGongchai = res.data.numGongchai;
-        }
-        if(res.data.numXiujia != null){
-          this.numXiujia = res.data.numXiujia;
-        }
-        if(res.data.userNames1 != null){
-          this.userNames1 = res.data.userNames1;
-        }
-        if(res.data.userNames2 != null){
-          this.userNames2 = res.data.userNames2;
-        }
-        if(res.data.userNames3 != null){
-          this.userNames3 = res.data.userNames3;
-        }
-      })
-    },
-    // xsheng 添加strat 2020-05-19
-
-    //获取今日警情信息
-    getEarlyInfo() {
-      storage.getEarlyInfo(this.formOrg.id,2).then(res => {
-        if(res!=undefined){
-          this.earlyInfo = res.dateAlertInfo;
-          this.earlyInfoEchart = res.monthAlertAnalysis;
-          this.myEcharts(this.earlyInfoEchart);
-        }else{console.log("今日警情信息数据返回为空")}
-      });
     },
     //获取值班信息
     getOnDutyInfo() {
@@ -634,17 +658,23 @@ export default {
     },
   },
   computed: {
-    center_option(){
-      return{
-        step: 0.2, // 数值越大速度滚动越快
-        limitMoveNum: 2, // 开始无缝滚动的数据量 this.dataList.length
-        hoverStop: true, // 是否开启鼠标悬停stop
-        direction: 1, // 0向下 1向上 2向左 3向右
-        openWatch: true, // 开启数据实时监控刷新dom
-        singleHeight: 0, // 单步运动停止的高度(默认值0是无缝不停止的滚动) direction => 0/1
-        singleWidth: 0, // 单步运动停止的宽度(默认值0是无缝不停止的滚动) direction => 2/3
-        waitTime: 1000 // 单步运动停止的时间(默认值1000ms)
-      }
+    // center_option(){
+    //   return{
+    //     step: 0.2, // 数值越大速度滚动越快
+    //     limitMoveNum: 2, // 开始无缝滚动的数据量 this.dataList.length
+    //     hoverStop: true, // 是否开启鼠标悬停stop
+    //     direction: 1, // 0向下 1向上 2向左 3向右
+    //     openWatch: true, // 开启数据实时监控刷新dom
+    //     singleHeight: 0, // 单步运动停止的高度(默认值0是无缝不停止的滚动) direction => 0/1
+    //     singleWidth: 0, // 单步运动停止的宽度(默认值0是无缝不停止的滚动) direction => 2/3
+    //     waitTime: 1000 // 单步运动停止的时间(默认值1000ms)
+    //   }
+    // },
+    optionLeft () {
+      return {
+            direction: 2,
+            limitMoveNum: 0
+          }
     },
     workClassOption() {
       return {
