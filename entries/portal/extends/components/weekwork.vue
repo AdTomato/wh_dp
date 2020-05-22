@@ -26,9 +26,11 @@
           </el-form>
           <div slot="footer" class="dialog-footer">
             <el-button @click="visibleStatus = false">取 消</el-button>
-            <el-button type="primary" @click="confirmUpdate">确 定</el-button>
+            <el-button type="primary" @click="confirmStatus">确 定</el-button>
           </div>
         </el-dialog>
+        <!-- 密码确认 -->
+        <Password :visible.sync="visiblePassword"></Password>
     </div>
 </template>
 
@@ -37,6 +39,7 @@
     import ElementUI from "element-ui";
     import "element-ui/lib/theme-chalk/index.css";
     import request from '../api/request';
+    import Password from './password.vue'
     import vueSeamlessScroll from "vue-seamless-scroll";
     export default {
         name: "weekwork",
@@ -45,6 +48,7 @@
         data() {
             return {
                 visibleStatus: false,
+                visiblePassword: false,
                 formLabelWidth: "120px",
                 workStatus: '',
                 currentId: '',
@@ -57,6 +61,7 @@
         components: {
             //组件
             vueSeamlessScroll,
+            Password
         },
         computed: {
             workClassOption() {
@@ -89,6 +94,10 @@
                 this.currentId = item.id;
                 console.log(this.workBriageId);
                 this.valStatus = item.status;
+            },
+            confirmStatus(){
+                this.visibleStatus = false;
+                this.visiblePassword = true;
             },
             confirmUpdate(){
                 const urlPath = "http://121.41.27.194:8080/api";

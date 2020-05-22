@@ -10,7 +10,7 @@
         <!-- 天气情况 -->
         <Weather></Weather>
         <!-- 通知公告 -->
-        <Notice ref="notice" :noticeData="noticeData" :flagVisible="flagVisible"></Notice>
+        <Notice ref="notice"></Notice>
         <!-- 本周重点工作 -->
         <Weekwork ref="weekwork"></Weekwork>
       </div>
@@ -278,8 +278,6 @@ export default {
       count:0,
       titleNameDd:'',
       //myjing
-      noticeData: [],
-      flagVisible: false,
 
       orgOptions: {},
       customColor1: "#EE6B77",
@@ -312,34 +310,6 @@ export default {
     Weekwork
   },
   methods: {
-    // 获取本周重点工作
-    getWorks(){
-      let par = {
-        brigadeId: '586d63454d6841dfa667405212572ca7'
-      }
-      request.getWorkData(par).then(res => {
-        res.data.forEach(item => {
-          item.weekFocusList.forEach(ele => {
-            this.worksData.push(ele);
-          })
-        })
-      })
-    },
-    // 更新本周工作重点
-    updateWorkStatus(item){
-      const urlPath = "http://121.41.27.194:8080/api";
-      axios.put(urlPath+`/controller/weekWork/updateWorksStatus?id=${item.id}&status=${item.status}`)
-      .then(res => {
-        if(res.errcode == 0){
-          if(item.status == '已完成'){
-            item.status = '进行中';
-          }else{
-            item.status = '已完成';
-          }
-        }
-      })
-    },
-
     format(percentage) {
       return percentage === 100 ? '45' : `${percentage}/45`;
     },
@@ -614,9 +584,7 @@ export default {
           this.userNames3 = res.data.userNames3;
         }
 
-        // 公告，勿删
-        this.flagVisible = true
-        this.noticeData = res.data.notice;
+
       })
     },
     // xsheng 添加strat 2020-05-19
@@ -713,6 +681,7 @@ export default {
 
       // 获取本周工作任务
       this.$refs["weekwork"].getWorks(this.formOrg.id);
+      this.$refs["notice"].getBrigadeNoticeInfo(this.formOrg.id);
     },
     //设置下拉数据 (公用)
     setDate(arrs) {

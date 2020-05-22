@@ -10,7 +10,7 @@
         <!-- 天气情况 -->
         <Weather></Weather>
         <!-- 通知公告 -->
-        <Notice ref="notice" :noticeData="noticeData" :flagVisible="flagVisible"></Notice>
+        <Notice ref="notice"></Notice>
         <!-- 教育训练计划和龙虎榜 -->
         <Education ref="education"></Education>
       </div>
@@ -481,8 +481,7 @@ export default {
       status: "",
       noticeSourceId: "",
       eduStationId: "",
-      noticeData: [],
-      flagVisible: false
+      noticeZhanId: '',
     };
   },
   components: {
@@ -539,6 +538,7 @@ export default {
       if (this.formOrg.id != "" && this.formOrg_z.id == "") {
         this.noticeSourceId = this.formOrg.sourceId;
         this.eduStationId = this.formOrg.id;
+        this.noticeZhanId = this.formOrg_z.id;
         this.dialogFormVisibleOrg = false; //查看大队大屏
         this.$message({
           message: "查看支队大屏",
@@ -548,6 +548,7 @@ export default {
       } else if (this.formOrg.id != "" && this.formOrg_z.id != "") {
         this.noticeSourceId = this.formOrg_z.sourceId;
         this.eduStationId = this.formOrg_z.id;
+        this.noticeZhanId = this.formOrg_z.id;
         this.$message({
           message: "查看大队下面消防站大屏",
           type: "success"
@@ -557,6 +558,7 @@ export default {
       } else if (this.formOrg_z.id != "" && this.formOrg.id == "") {
         this.noticeSourceId = this.formOrg_z.sourceId;
         this.eduStationId = this.formOrg_z.id;
+        this.noticeZhanId = this.formOrg_z.id;
         this.$message({
           message: "只查看消防站大屏",
           type: "success"
@@ -581,6 +583,8 @@ export default {
 
       console.log("eduStationId====",this.eduStationId);
       this.$refs["education"].getEducationData(this.eduStationId);
+      this.$refs["notice"].getNoticeInfo(this.noticeZhanId);
+      // this.$refs["notice"].getNoticeInfo(this.noticeZhanId);
       this.getMainInfo(this.noticeSourceId);
       this.getAssessmentInfo(this.eduStationId);
       this.getMonth(this.eduStationId);
@@ -904,8 +908,6 @@ export default {
         }else{
           this.newsList = ['对党忠诚，纪律严明，赴汤蹈火，竭诚为民!']
         }
-        // myjing公告
-        this.flagVisible = true;
       });
     },
 

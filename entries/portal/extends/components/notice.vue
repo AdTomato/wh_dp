@@ -5,15 +5,12 @@
           <div class="warn-info">
             <img class="notice-icon" src="../assets/images/notice_icon.png" alt />
             <span>公告：</span>
-            <div class="warn-txt warn-img" v-if="!flagVisible">
-                <img src="../assets/images/timg.gif" alt />
-            </div>
-            <div class="warn-txt" v-else>
-                <p v-if="noticeData.length == 0">暂时没有数据！</p>
+            <div class="warn-txt">
+                <p v-if="listData.length == 0">暂时没有数据！</p>
                 <div v-else>
-                    <vue-seamless-scroll :data="noticeData" class="seamless-notice" :class-option="noticeClassOption">
+                    <vue-seamless-scroll :data="listData" class="seamless-notice" :class-option="noticeClassOption">
                         <ul class="item">
-                            <li v-for="item in noticeData">
+                            <li v-for="(item, index) in listData" @click="noticeClick(item , index)" :key="index">
                                 <p>{{item.title}}</p>
                             </li>
                         </ul>
@@ -32,11 +29,7 @@
     export default {
         name: "notice",
         props: {
-            flagVisible: {
-                type: Boolean,
-                default: false
-            },
-            noticeData: Array
+            
         },
         data() {
             return {
@@ -55,27 +48,30 @@
             }
         },
         methods:{
-            async getNoticeInfo(deptId){
+            async getNoticeInfo(id){
                 // 后期userId传入
                 let par = {
-                    deptId: deptId
+                    stationId: id
                 }
                 const res = await request.getNotice(par);
-                let noticeRes = res.data;
-                if(noticeRes.notice){
-                    let arr = [];
-                    for (let i = 0; i < noticeRes.notice.length; i++) {
-                        let noticeObj = {};
-                        noticeObj.title = noticeRes.notice[i].title;
-                        arr.push(noticeObj);
-                    }
-
-                    this.listData = arr;
-                }
+                this.listData = res.data;
                 console.log(this.listData);
-            }
-            
-                   
+            },
+            async getBrigadeNoticeInfo(id){
+                // 后期userId传入
+                let par = {
+                    brigadeId: id
+                }
+                const res = await request.getNoticeBrigade(par);
+                this.listData = res.data;
+                console.log(this.listData);
+            },
+            noticeClick(item, index){
+                console.log(item.url);
+                if(item.url){
+                    window.location.href = item.url
+                }
+            }     
         },
         mounted(){
         }

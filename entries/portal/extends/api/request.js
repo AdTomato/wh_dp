@@ -22,8 +22,12 @@ const request = {
         return Get('/controller/weather/getWeatherByCityCode',data)
     },
     getNotice:(data) => {
-        // 获取公告
-        return Get('/controller/personlInfo/getInfo',data);
+        // 获取消防站公告
+        return Get('/controller/announcement/getStationAnnouncement',data);
+    },
+    getNoticeBrigade:(data) => {
+        // 获取大队公告
+        return Get('/controller/announcement/getBrigadeAnnouncement',data);
     },
     getEducationInfo:(data) => {
         // 获取教育训练计划
