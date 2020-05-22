@@ -230,7 +230,7 @@
               <vue-seamless-scroll
                 :data="listData"
                 class="seamless-warp"
-                :class-option="length > 6 ? classOption : length < 6 ? test : '暂无数据'"
+                :class-option="length > 6 ? classOption : length < 6 ? unClassOption : '暂无数据'"
               >
                 <ul class="ve_ul">
                   <li v-for="item in listData">
@@ -634,14 +634,7 @@ export default {
     },
 
     uploadVehicleStatusBtn() {
-      axios
-        .put(
-          this.url +
-            "/controller/carsInfo/updateCarsStatus?carsId=" +
-            this.carsId +
-            "&status=" +
-            this.status
-        )
+      axios.put(this.url + "/controller/carsInfo/updateCarsStatus?carsId=" +this.carsId +"&status=" +this.status)
         .then(response => {
           if (response.errcode == 0) {
             this.$message({
@@ -660,8 +653,10 @@ export default {
     },
 
     handleClick(event) {
-      this.dialogFormVisibleType = true;
-      this.carsId = event.target.dataset.dept;
+      if(event.target.dataset.dept!=undefined){
+        this.dialogFormVisibleType = true;
+        this.carsId = event.target.dataset.dept;
+      }
     },
 
     //根据大队id获取大队下消防站的数据
@@ -710,6 +705,18 @@ export default {
         }
         return arr;
       }
+    },
+
+    //定时器 2小时更新一次
+    timer(){
+      console.log("定时执行函数----2小时执行一次");
+      this.$refs["education"].getEducationData(this.eduStationId);
+      this.getMainInfo(this.noticeSourceId);
+      this.getAssessmentInfo(this.eduStationId);
+      this.getMonth(this.eduStationId);
+      this.getEarlyInfo(this.eduStationId); //警情信息
+      this.getOnDutyInfo(this.eduStationId); //值班信息
+      this.getVehicleInfo(this.eduStationId); //车辆信息
     },
 
     //获取车辆信息
@@ -976,18 +983,7 @@ export default {
         waitTime: 1000 // 单步运动停止的时间(默认值1000ms)
       };
     },
-    // center_option() {
-    //   return {
-    //     step: 0.2, // 数值越大速度滚动越快
-    //     limitMoveNum: 2, // 开始无缝滚动的数据量 this.dataList.length
-    //     hoverStop: true, // 是否开启鼠标悬停stop
-    //     direction: 1, // 0向下 1向上 2向左 3向右
-    //     openWatch: true, // 开启数据实时监控刷新dom
-    //     singleHeight: 0, // 单步运动停止的高度(默认值0是无缝不停止的滚动) direction => 0/1
-    //     singleWidth: 0, // 单步运动停止的宽度(默认值0是无缝不停止的滚动) direction => 2/3
-    //     waitTime: 1000 // 单步运动停止的时间(默认值1000ms)
-    //   };
-    // }
+    unClassOption(){}, //勿删
     optionLeft () {
       return {
             direction: 2,
@@ -996,9 +992,6 @@ export default {
     }
   },
   mounted() {
-    //this.getMonth();
-    // this.getMainInfo();
-    //this.getAssessmentInfo();
     storage.getUserPermissionsDate().then(res => {
       if (res.errcode == 405) {
         this.$message({
@@ -1009,6 +1002,7 @@ export default {
         this.setUserPermissions(res);
       }
     });
+    setInterval(this.timer, 1000*60*60*2);  //定时器 2小时请求一次
   }
 };
 </script>
