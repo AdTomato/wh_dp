@@ -51,49 +51,49 @@
               <ul class="commander_list mf">
                 <li class="commander_name">指&nbsp;&nbsp;&nbsp;挥&nbsp;&nbsp;&nbsp;员 :</li>
                 <li class="commander_detail">                
-                  <span  v-for="item in userNames1" v-if="item.sequenceStatus=='1'">{{item.sequenceNo}}</span>
-                  <span v-else-if="item.sequenceStatus=='2'" class="gree" v-for="item in userNames1">{{item.sequenceNo}}</span>
-                  <span class="yello" v-for="item in userNames1" v-else="item.sequenceStatus=='3'">{{item.sequenceNo}}</span>
+                  <span  v-for="item in userNames1" v-show="item.sequenceStatus=='1'">{{item.sequenceNo}}</span>
+                  <span v-show="item.sequenceStatus=='2'" class="gree" v-for="item in userNames1">{{item.sequenceNo}}</span>
+                  <span class="yello" v-for="item in userNames1" v-show="item.sequenceStatus=='3'">{{item.sequenceNo}}</span>
                 </li>
               </ul>
               <ul class="commander_list ms">
                 <li class="commander_name">特 勤 一 班 :</li>
                 <li class="commander_detail">
-                  <span v-for="item in userNames2" v-if="item.sequenceStatus=='1'">{{item.sequenceNo}}</span>
-                  <span v-else-if="item.sequenceStatus=='2'" class="gree" v-for="item in userNames2">{{item.sequenceNo}}</span>
-                  <span v-else="item.sequenceStatus=='3'" class="yello" v-for="item in userNames2">{{item.sequenceNo}}</span>
+                  <span v-for="item in userNames2" v-show="item.sequenceStatus=='1'">{{item.sequenceNo}}</span>
+                  <span v-show="item.sequenceStatus=='2'" class="gree" v-for="item in userNames2">{{item.sequenceNo}}</span>
+                  <span v-show="item.sequenceStatus=='3'" class="yello" v-for="item in userNames2">{{item.sequenceNo}}</span>
                 </li>
               </ul>
               <ul class="commander_list mx">
                 <li class="commander_name">特 勤 二 班 :</li>
                 <li class="commander_detail">
-                  <span v-for="item in userNames3" v-if="item.sequenceStatus=='1'">{{item.sequenceNo}}</span>
-                  <span v-else-if="item.sequenceStatus=='2'" class="gree" v-for="item in userNames3">{{item.sequenceNo}}</span>
-                  <span v-else="item.sequenceStatus=='3'" class="yello" v-for="item in userNames3">{{item.sequenceNo}}</span>
+                  <span v-for="item in userNames3" v-show="item.sequenceStatus=='1'">{{item.sequenceNo}}</span>
+                  <span v-show="item.sequenceStatus=='2'" class="gree" v-for="item in userNames3">{{item.sequenceNo}}</span>
+                  <span v-show="item.sequenceStatus=='3'" class="yello" v-for="item in userNames3">{{item.sequenceNo}}</span>
                 </li>
               </ul>
               <ul class="commander_list mj">
                 <li class="commander_name">灭 火 一 班 :</li>
                 <li class="commander_detail">
-                  <span v-for="item in userNames4" v-if="item.sequenceStatus=='1'">{{item.sequenceNo}}</span>
-                  <span v-else-if="item.sequenceStatus=='2'" class="gree" v-for="item in userNames4">{{item.sequenceNo}}</span>
-                  <span v-else="item.sequenceStatus=='3'" class="yello" v-for="item in userNames4">{{item.sequenceNo}}</span>
+                  <span v-for="item in userNames4" v-show="item.sequenceStatus=='1'">{{item.sequenceNo}}</span>
+                  <span v-show="item.sequenceStatus=='2'" class="gree" v-for="item in userNames4">{{item.sequenceNo}}</span>
+                  <span v-show="item.sequenceStatus=='3'" class="yello" v-for="item in userNames4">{{item.sequenceNo}}</span>
                 </li>
               </ul>
               <ul class="commander_list mk">
                 <li class="commander_name">灭 火 二 班 :</li>
                 <li class="commander_detail">
-                  <span v-for="item in userNames5" v-if="item.sequenceStatus=='1'">{{item.sequenceNo}}</span>
-                  <span v-else-if="item.sequenceStatus=='2'" class="gree" v-for="item in userNames5">{{item.sequenceNo}}</span>
-                  <span v-else="item.sequenceStatus=='3'" class="yello" v-for="item in userNames5">{{item.sequenceNo}}</span>
+                  <span v-for="item in userNames5" v-show="item.sequenceStatus=='1'">{{item.sequenceNo}}</span>
+                  <span v-show="item.sequenceStatus=='2'" class="gree" v-for="item in userNames5">{{item.sequenceNo}}</span>
+                  <span v-show="item.sequenceStatus=='3'" class="yello" v-for="item in userNames5">{{item.sequenceNo}}</span>
                 </li>
               </ul>
               <ul class="commander_list ml">
                 <li class="commander_name">通信保障班 :</li>
                 <li class="commander_detail">
-                  <span v-for="item in userNames6" v-if="item.sequenceStatus=='1'">{{item.sequenceNo}}</span>
-                  <span v-else-if="item.sequenceStatus=='2'" class="gree" v-for="item in userNames6">{{item.sequenceNo}}</span>
-                  <span v-else="item.sequenceStatus=='3'" class="yello" v-for="item in userNames6">{{item.sequenceNo}}</span>
+                  <span v-for="item in userNames6" v-show="item.sequenceStatus=='1'">{{item.sequenceNo}}</span>
+                  <span v-show="item.sequenceStatus=='2'" class="gree" v-for="item in userNames6">{{item.sequenceNo}}</span>
+                  <span v-show="item.sequenceStatus=='3'" class="yello" v-for="item in userNames6">{{item.sequenceNo}}</span>
                 </li>
               </ul>
             </div>
