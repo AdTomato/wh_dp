@@ -51,25 +51,25 @@
             <ul class="commander_list mf">
               <li class="commander_name">大队主管:</li>
               <li class="commander_detail">
-                <span v-for="item in userNames1" :key="item.sequenceNo" v-if="'1'=='1'">{{item.sequenceNo}}</span>
-                <span v-else-if="item.sequenceStatus=='2'" :key="item.sequenceNo" class="gree" v-for="item in userNames1">{{item.sequenceNo}}</span>
-                <span class="yello" v-for="item in userNames1" :key="item.sequenceNo" v-else="item.sequenceStatus=='3'">{{item.sequenceNo}}</span>
+                <span v-for="item in userNames1" :key="item.sequenceNo" v-show="item.sequenceStatus=='1'">{{item.sequenceNo}}</span>
+                <span v-show="item.sequenceStatus=='2'" :key="item.sequenceNo" class="gree" v-for="item in userNames1">{{item.sequenceNo}}</span>
+                <span class="yello" v-for="item in userNames1" :key="item.sequenceNo" v-show="item.sequenceStatus=='3'">{{item.sequenceNo}}</span>
               </li>
             </ul>
             <ul class="commander_list ms">
               <li class="commander_name">大队干部:</li>
               <li class="commander_detail">
-                <span v-for="item in userNames2" :key="item.sequenceNo" v-if="item.sequenceStatus=='1'">{{item.sequenceNo}}</span>
-                <span v-else-if="item.sequenceStatus=='2'" :key="item.sequenceNo" class="gree" v-for="item in userNames2">{{item.sequenceNo}}</span>
-                <span class="yello" v-for="item in userNames2" :key="item.sequenceNo" v-else="item.sequenceStatus=='3'">{{item.sequenceNo}}</span>
+                <span v-for="item in userNames2" :key="item.sequenceNo" v-show="item.sequenceStatus=='1'">{{item.sequenceNo}}</span>
+                <span v-show="item.sequenceStatus=='2'" :key="item.sequenceNo" class="gree" v-for="item in userNames2">{{item.sequenceNo}}</span>
+                <span class="yello" v-for="item in userNames2" :key="item.sequenceNo" v-show="item.sequenceStatus=='3'">{{item.sequenceNo}}</span>
               </li>
             </ul>
             <ul class="commander_list mx">
               <li class="commander_name">大队文员:</li>
               <li class="commander_detail">
-                <span v-for="item in userNames3" :key="item.sequenceNo" v-if="item.sequenceStatus=='1'">{{item.sequenceNo}}</span>
-                <span v-else-if="item.sequenceStatus=='2'" :key="item.sequenceNo" class="gree" v-for="item in userNames3">{{item.sequenceNo}}</span>
-                <span class="yello" v-for="item in userNames3" :key="item.sequenceNo" v-else="item.sequenceStatus=='3'">{{item.sequenceNo}}</span>
+                <span v-for="item in userNames3" :key="item.sequenceNo" v-show="item.sequenceStatus=='1'">{{item.sequenceNo}}</span>
+                <span v-show="item.sequenceStatus=='2'" :key="item.sequenceNo" class="gree" v-for="item in userNames3">{{item.sequenceNo}}</span>
+                <span class="yello" v-for="item in userNames3" :key="item.sequenceNo" v-show="item.sequenceStatus=='3'">{{item.sequenceNo}}</span>
               </li>
             </ul>
           </div>

@@ -100,6 +100,11 @@ const request = {
     //月度警情量分析
     getBrigadeAlertInfoByBrigadeId(data){
         return Get('/controller/alertInfo/getBrigadeAlertInfoByBrigadeId',data);
+    },
+
+    //量化考勤周报月度详情信息
+    getAssessmentMonthDetailInfo(data){
+        return Get('/controller/quantiAssessment/getAssessmentMonthDetailInfo', data);
     }
 }
 
