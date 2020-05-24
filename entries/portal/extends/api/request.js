@@ -64,8 +64,8 @@ const request = {
     },
 
     //更新今日警情信息
-    uploadEarlyInfo(data){
-        return Put('/controller/alertInfo/updateStationAlertInfoByStationId',data);
+    uploadEarlyInfo(data,type,psw){
+        return Put('/controller/alertInfo/updateStationAlertInfoByStationId?consumerType='+type+'&password='+psw,data);
     },
 
     //获取值班信息

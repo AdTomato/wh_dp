@@ -5,7 +5,7 @@
         :close-on-press-escape="false">
           <el-form :model="form" ref="passwordForm" :rules="rules">
             <el-form-item label="密码" :label-width="formLabelWidth" prop="inputPass">
-              <el-input v-model="form.inputPass" placeholder="请输入密码"></el-input>
+              <el-input v-model="form.inputPass" placeholder="请输入密码" type="password"></el-input>
             </el-form-item>
           </el-form>
           <div slot="footer" class="dialog-footer">
@@ -43,8 +43,8 @@
             
         },
         methods:{
-            confirmUpdate(val){
-                console.log(val);
+            confirmUpdate(){
+                this.$emit('passwordCommit', this.form.inputPass);
             },
             modalClose() {
                 this.$emit('update:visible', false); // 直接修改父组件的属性

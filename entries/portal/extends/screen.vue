@@ -207,6 +207,8 @@
               </ul>
             </div>
           </div>
+
+          <Password :visible.sync="visiblePassword" @passwordCommit = "passwordCommit"></Password>
           <!-- 今日警情信息end -->
 
           <!-- 值勤车辆strat -->
@@ -230,7 +232,7 @@
               <vue-seamless-scroll
                 :data="listData"
                 class="seamless-warp"
-                :class-option="length > 6 ? classOption : length < 6 ? unClassOption : '暂无数据'"
+                :class-option="length > 6 ? classOption : unClassOption"
               >
                 <ul class="ve_ul">
                   <li v-for="item in listData">
@@ -241,8 +243,8 @@
                       <div v-else="item.status=='在位'" class="round bj_g fr"></div>
                     </div>
                     <div class="list_text">
-                      <div class="mt2">发动机功率:{{item.gl}}</div>
-                      <div class="list_text2">起重重量:{{item.zl}}</div>
+                      <div class="mt2">发动机功率:{{item.gl+"/KM"}}</div>
+                      <div v-if="item.zl"  class="list_text2">起重重量:{{item.zl+"吨"}}</div>
                     </div>
                   </li>
                 </ul>
@@ -404,12 +406,15 @@ import Weather from "./components/weather";
 import Notice from "./components/notice";
 import Education from "./components/education";
 import vueSeamlessScroll from "vue-seamless-scroll";
+import Password from './components/password.vue'
 Vue.use(ElementUI, axios, vueSeamlessScroll);
 export default {
   name: "hello",
   data() {
     return {
       url: "http://121.41.27.194:8080/api",
+      visiblePassword: false,
+      consumerType:'',
       dataobj: "",
       sourceId: "",
       dialogFormVisible: false,
@@ -489,7 +494,8 @@ export default {
     vueSeamlessScroll,
     Weather,
     Notice,
-    Education
+    Education,
+    Password
   },
   methods: {
     inputRef: function() {
@@ -599,13 +605,17 @@ export default {
       this.earlyType = type;
     },
     uploadEarlyBtn() {
+      this.dialogFormVisible = false;
+      this.visiblePassword = true;
+    },
+
+    passwordCommit(password){
       var fire = 0;
       var eme = 0;
       var soc = 0;
       var falseA = 0;
       var other = 0;
       var count = 0;
-      this.dialogFormVisible = false;
       fire = parseInt(this.earlyInfo.fireAlarmNum);
       eme = parseInt(this.earlyInfo.emergencyRescueNum);
       soc = parseInt(this.earlyInfo.socialAssistanceNum);
@@ -619,17 +629,26 @@ export default {
         emergencyRescueNum: this.earlyInfo.emergencyRescueNum,
         socialAssistanceNum: this.earlyInfo.socialAssistanceNum,
         falseAlarmNum: this.earlyInfo.falseAlarmNum,
-        otherAlertNum: this.earlyInfo.otherAlertNum
+        otherAlertNum: this.earlyInfo.otherAlertNum,
+        stationId:this.eduStationId
       };
-      request.uploadEarlyInfo(parmar).then(res => {
+      console.log("封装数据==",parmar)
+      request.uploadEarlyInfo(parmar,this.consumerType,password).then(res => {
         if (res.errcode == 0) {
           this.$message({
             message: "更新成功",
             type: "success"
           });
           this.getEarlyInfo(this.eduStationId); //警情信息
+          this.visiblePassword = false;
+        }else if(res.errcode == 407){
+          this.$message({
+            message: "密码错误！请重新输入",
+            type: "error"
+          });
         }
       });
+
     },
 
     uploadVehicleStatus(carsId) {
@@ -891,7 +910,7 @@ export default {
         if(res.data.numXiujia != null){
           this.numXiujia = res.data.numXiujia;
         }
-        console.log(res);
+        
         this.userNames1 = res.data.userNames1;
         this.userNames2 = res.data.userNames2;
         this.userNames3 = res.data.userNames3;
@@ -1001,7 +1020,15 @@ export default {
           type: "warning"
         });
       } else {
+        console.log("用户权限=",res)
         this.setUserPermissions(res);
+        if(true!=res.isDetachment){
+          this.consumerType = '支队';
+        }else if(true!=res.isBrigade){
+          this.consumerType = '大队';
+        }else if(true!=res.isStation){
+          this.consumerType = '消防站';
+        }
       }
     });
     setInterval(this.timer, 1000*60*60*2);  //定时器 2小时请求一次
