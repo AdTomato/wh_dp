@@ -51,25 +51,31 @@
             <ul class="commander_list mf">
               <li class="commander_name">大队主管:</li>
               <li class="commander_detail">
-                <span v-for="item in userNames1" :key="item.item" v-show="item.sequenceStatus=='1'">{{item.sequenceNo}}</span>
-                <span v-show="item.sequenceStatus=='2'" :key="item.item" class="gree" v-for="item in userNames1">{{item.sequenceNo}}</span>
-                <span class="yello" v-for="item in userNames1" :key="item.item" v-show="item.sequenceStatus=='3'">{{item.sequenceNo}}</span>
+                <vue-seamless-scroll :data="userNames1" :class-option="optionUp" class="seamless-userName">
+                  <span v-for="item in userNames1" v-text="item.sequenceNo" v-show="item.sequenceStatus=='1'"></span>
+                  <span v-show="item.sequenceStatus=='2'" class="gree" v-for="item in userNames1" v-text="item.sequenceNo"></span>
+                  <span v-show="item.sequenceStatus=='3'" class="yello" v-for="item in userNames1" v-text="item.sequenceNo"></span>
+                </vue-seamless-scroll>
               </li>
             </ul>
             <ul class="commander_list ms">
               <li class="commander_name">大队干部:</li>
               <li class="commander_detail">
-                <span v-for="item in userNames2" :key="item.item" v-show="item.sequenceStatus=='1'">{{item.sequenceNo}}</span>
-                <span v-show="item.sequenceStatus=='2'" :key="item.item" class="gree" v-for="item in userNames2">{{item.sequenceNo}}</span>
-                <span class="yello" v-for="item in userNames2" :key="item.item" v-show="item.sequenceStatus=='3'">{{item.sequenceNo}}</span>
+                <vue-seamless-scroll :data="userNames2" :class-option="optionUp1" class="seamless-userName1">
+                  <span v-for="item in userNames2" v-text="item.sequenceNo" v-show="item.sequenceStatus=='1'"></span>
+                  <span v-show="item.sequenceStatus=='2'" class="gree" v-for="item in userNames2" v-text="item.sequenceNo"></span>
+                  <span v-show="item.sequenceStatus=='3'" class="yello" v-for="item in userNames2" v-text="item.sequenceNo"></span>
+                </vue-seamless-scroll>
               </li>
             </ul>
             <ul class="commander_list mx">
               <li class="commander_name">大队文员:</li>
               <li class="commander_detail">
-                <span v-for="item in userNames3" :key="item.item" v-show="item.sequenceStatus=='1'">{{item.sequenceNo}}</span>
-                <span v-show="item.sequenceStatus=='2'" :key="item.item" class="gree" v-for="item in userNames3">{{item.sequenceNo}}</span>
-                <span class="yello" v-for="item in userNames3" :key="item.item" v-show="item.sequenceStatus=='3'">{{item.sequenceNo}}</span>
+                <vue-seamless-scroll :data="userNames3" :class-option="optionUp2" class="seamless-userName2">
+                  <span v-for="item in userNames3" :key="item.item" v-show="item.sequenceStatus=='1'">{{item.sequenceNo}}</span>
+                  <span v-show="item.sequenceStatus=='2'" :key="item.item" class="gree" v-for="item in userNames3">{{item.sequenceNo}}</span>
+                  <span class="yello" v-for="item in userNames3" :key="item.item" v-show="item.sequenceStatus=='3'">{{item.sequenceNo}}</span>
+                </vue-seamless-scroll>
               </li>
             </ul>
           </div>
@@ -393,6 +399,8 @@ export default {
       // 基于准备好的dom，初始化echarts实例
       //月度警情量类型分析
       var myChart = this.$echarts.init(document.getElementById("main"));
+      console.log('街道数目:' + this.streetNum);
+      console.log('街道名称' + this.streetName);
       // 指定图表的配置项和数据
       var option = {
         tooltip: {
@@ -528,8 +536,8 @@ export default {
               position: 'top',
               color: '#38AC9C'
             },
-            // data: this.streetNum  [10, 52, 200, 334, 390, 330, 220]
-            data:[10, 52, 200, 334, 390, 330, 220]
+            data: this.streetNum
+            //data:[10, 52, 200, 334, 390, 330, 220]
           }
         ]
       };
@@ -709,6 +717,42 @@ export default {
             limitMoveNum: 0
           }
     },
+    optionUp(){
+      return{
+        step: 0.2, // 数值越大速度滚动越快
+        limitMoveNum: 15, // 开始无缝滚动的数据量 this.dataList.length
+        hoverStop: true, // 是否开启鼠标悬停stop
+        direction: 1, // 0向下 1向上 2向左 3向右
+        openWatch: true, // 开启数据实时监控刷新dom
+        singleHeight: 0, // 单步运动停止的高度(默认值0是无缝不停止的滚动) direction => 0/1
+        singleWidth: 0, // 单步运动停止的宽度(默认值0是无缝不停止的滚动) direction => 2/3
+        waitTime: 1000 // 单步运动停止的时间(默认值1000ms)
+      }
+    },
+    optionUp1(){
+      return{
+        step: 0.2, // 数值越大速度滚动越快
+        limitMoveNum: 22, // 开始无缝滚动的数据量 this.dataList.length
+        hoverStop: true, // 是否开启鼠标悬停stop
+        direction: 1, // 0向下 1向上 2向左 3向右
+        openWatch: true, // 开启数据实时监控刷新dom
+        singleHeight: 0, // 单步运动停止的高度(默认值0是无缝不停止的滚动) direction => 0/1
+        singleWidth: 0, // 单步运动停止的宽度(默认值0是无缝不停止的滚动) direction => 2/3
+        waitTime: 1000 // 单步运动停止的时间(默认值1000ms)
+      }
+    },
+    optionUp2(){
+      return{
+        step: 0.2, // 数值越大速度滚动越快
+        limitMoveNum: 29, // 开始无缝滚动的数据量 this.dataList.length
+        hoverStop: true, // 是否开启鼠标悬停stop
+        direction: 1, // 0向下 1向上 2向左 3向右
+        openWatch: true, // 开启数据实时监控刷新dom
+        singleHeight: 0, // 单步运动停止的高度(默认值0是无缝不停止的滚动) direction => 0/1
+        singleWidth: 0, // 单步运动停止的宽度(默认值0是无缝不停止的滚动) direction => 2/3
+        waitTime: 1000 // 单步运动停止的时间(默认值1000ms)
+      }
+    }
   },
   mounted() {
     var res = null;
