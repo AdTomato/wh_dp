@@ -30,7 +30,7 @@
           </div>
         </el-dialog>
         <!-- 密码确认 -->
-        <Password :visible.sync="visiblePassword" :passFlag="passFlag" @confirmUpdateNotice="confirmUpdateNotice"></Password>
+        <Password :visible.sync="visiblePassword" :passBool="passBool" @confirmUpdateNotice="confirmUpdateNotice"></Password>
     </div>
 </template>
 
@@ -56,7 +56,7 @@
                 workBriageId: '',
                 valStatus: '',
                 worksData: [],
-                passFlag: false
+                passBool: false
             }
         },
         components: {
@@ -114,13 +114,13 @@
                         this.visibleStatus = false;
                         this.worksData = [];
                         this.getWorks(this.workBriageId);
+                        this.visiblePassword = false;
                     }else if(res.errcode == 407){
                         this.$message({
                             message: "密码错误，状态更新失败",
                             type: "error"
                         });
                     }
-                    this.visiblePassword = false;
                 })
             },
             getStatus(value){

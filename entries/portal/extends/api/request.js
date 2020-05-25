@@ -64,8 +64,8 @@ const request = {
     },
 
     //更新今日警情信息
-    uploadEarlyInfo(data){
-        return Put('/controller/alertInfo/updateStationAlertInfoByStationId',data);
+    uploadEarlyInfo(data,type,psw){
+        return Put('/controller/alertInfo/updateStationAlertInfoByStationId?consumerType='+type+'&password='+psw,data);
     },
 
     //获取值班信息
@@ -100,6 +100,11 @@ const request = {
     //月度警情量分析
     getBrigadeAlertInfoByBrigadeId(data){
         return Get('/controller/alertInfo/getBrigadeAlertInfoByBrigadeId',data);
+    },
+
+    //量化考勤周报月度详情信息
+    getAssessmentMonthDetailInfo(data){
+        return Get('/controller/quantiAssessment/getAssessmentMonthDetailInfo', data);
     }
 }
 

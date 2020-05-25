@@ -27,7 +27,19 @@
                 type: Boolean,
                 default: false
             },
-            passFlag: {
+            passBool: {
+                type: Boolean,
+                default: false
+            },
+            isDetachment: {
+                type: Boolean,
+                default: false
+            },
+            isBrigade: {
+                type: Boolean,
+                default: false
+            },
+            isStation: {
                 type: Boolean,
                 default: false
             }
@@ -48,12 +60,14 @@
         },
         methods:{
             confirmUpdate(formName){
-                console.log(this.form.inputPass);
+                console.log(this.isDetachment);
                 this.$refs[formName].validate(valid => {
                     if (valid) {
                         //如果通过验证 to do...
-                        if(!this.passFlag){
+                        if(!this.passBool){
                             this.$emit('confirmUpdateNotice', this.form.inputPass);
+                        }else{
+                            this.$emit('passwordCommit', this.form.inputPass);
                         }
                     } else {
                         return false;
