@@ -50,50 +50,116 @@
             <div class="detail_nums">
               <ul class="commander_list mf">
                 <li class="commander_name">指&nbsp;&nbsp;&nbsp;挥&nbsp;&nbsp;&nbsp;员 :</li>
-                <li class="commander_detail">                
-                  <span  v-for="item in userNames1" v-show="item.sequenceStatus=='1'">{{item.sequenceNo}}</span>
-                  <span v-show="item.sequenceStatus=='2'" class="gree" v-for="item in userNames1">{{item.sequenceNo}}</span>
-                  <span class="yello" v-for="item in userNames1" v-show="item.sequenceStatus=='3'">{{item.sequenceNo}}</span>
+                <li class="commander_detail">
+                  <span
+                    v-for="item in userNames1"
+                    v-show="item.sequenceStatus=='1'"
+                  >{{item.sequenceNo}}</span>
+                  <span
+                    v-show="item.sequenceStatus=='2'"
+                    class="gree"
+                    v-for="item in userNames1"
+                  >{{item.sequenceNo}}</span>
+                  <span
+                    class="yello"
+                    v-for="item in userNames1"
+                    v-show="item.sequenceStatus=='3'"
+                  >{{item.sequenceNo}}</span>
                 </li>
               </ul>
               <ul class="commander_list ms">
                 <li class="commander_name">特 勤 一 班 :</li>
                 <li class="commander_detail">
-                  <span v-for="item in userNames2" v-show="item.sequenceStatus=='1'">{{item.sequenceNo}}</span>
-                  <span v-show="item.sequenceStatus=='2'" class="gree" v-for="item in userNames2">{{item.sequenceNo}}</span>
-                  <span v-show="item.sequenceStatus=='3'" class="yello" v-for="item in userNames2">{{item.sequenceNo}}</span>
+                  <span
+                    v-for="item in userNames2"
+                    v-show="item.sequenceStatus=='1'"
+                  >{{item.sequenceNo}}</span>
+                  <span
+                    v-show="item.sequenceStatus=='2'"
+                    class="gree"
+                    v-for="item in userNames2"
+                  >{{item.sequenceNo}}</span>
+                  <span
+                    v-show="item.sequenceStatus=='3'"
+                    class="yello"
+                    v-for="item in userNames2"
+                  >{{item.sequenceNo}}</span>
                 </li>
               </ul>
               <ul class="commander_list mx">
                 <li class="commander_name">特 勤 二 班 :</li>
                 <li class="commander_detail">
-                  <span v-for="item in userNames3" v-show="item.sequenceStatus=='1'">{{item.sequenceNo}}</span>
-                  <span v-show="item.sequenceStatus=='2'" class="gree" v-for="item in userNames3">{{item.sequenceNo}}</span>
-                  <span v-show="item.sequenceStatus=='3'" class="yello" v-for="item in userNames3">{{item.sequenceNo}}</span>
+                  <span
+                    v-for="item in userNames3"
+                    v-show="item.sequenceStatus=='1'"
+                  >{{item.sequenceNo}}</span>
+                  <span
+                    v-show="item.sequenceStatus=='2'"
+                    class="gree"
+                    v-for="item in userNames3"
+                  >{{item.sequenceNo}}</span>
+                  <span
+                    v-show="item.sequenceStatus=='3'"
+                    class="yello"
+                    v-for="item in userNames3"
+                  >{{item.sequenceNo}}</span>
                 </li>
               </ul>
               <ul class="commander_list mj">
                 <li class="commander_name">灭 火 一 班 :</li>
                 <li class="commander_detail">
-                  <span v-for="item in userNames4" v-show="item.sequenceStatus=='1'">{{item.sequenceNo}}</span>
-                  <span v-show="item.sequenceStatus=='2'" class="gree" v-for="item in userNames4">{{item.sequenceNo}}</span>
-                  <span v-show="item.sequenceStatus=='3'" class="yello" v-for="item in userNames4">{{item.sequenceNo}}</span>
+                  <span
+                    v-for="item in userNames4"
+                    v-show="item.sequenceStatus=='1'"
+                  >{{item.sequenceNo}}</span>
+                  <span
+                    v-show="item.sequenceStatus=='2'"
+                    class="gree"
+                    v-for="item in userNames4"
+                  >{{item.sequenceNo}}</span>
+                  <span
+                    v-show="item.sequenceStatus=='3'"
+                    class="yello"
+                    v-for="item in userNames4"
+                  >{{item.sequenceNo}}</span>
                 </li>
               </ul>
               <ul class="commander_list mk">
                 <li class="commander_name">灭 火 二 班 :</li>
                 <li class="commander_detail">
-                  <span v-for="item in userNames5" v-show="item.sequenceStatus=='1'">{{item.sequenceNo}}</span>
-                  <span v-show="item.sequenceStatus=='2'" class="gree" v-for="item in userNames5">{{item.sequenceNo}}</span>
-                  <span v-show="item.sequenceStatus=='3'" class="yello" v-for="item in userNames5">{{item.sequenceNo}}</span>
+                  <span
+                    v-for="item in userNames5"
+                    v-show="item.sequenceStatus=='1'"
+                  >{{item.sequenceNo}}</span>
+                  <span
+                    v-show="item.sequenceStatus=='2'"
+                    class="gree"
+                    v-for="item in userNames5"
+                  >{{item.sequenceNo}}</span>
+                  <span
+                    v-show="item.sequenceStatus=='3'"
+                    class="yello"
+                    v-for="item in userNames5"
+                  >{{item.sequenceNo}}</span>
                 </li>
               </ul>
               <ul class="commander_list ml">
                 <li class="commander_name">通信保障班 :</li>
                 <li class="commander_detail">
-                  <span v-for="item in userNames6" v-show="item.sequenceStatus=='1'">{{item.sequenceNo}}</span>
-                  <span v-show="item.sequenceStatus=='2'" class="gree" v-for="item in userNames6">{{item.sequenceNo}}</span>
-                  <span v-show="item.sequenceStatus=='3'" class="yello" v-for="item in userNames6">{{item.sequenceNo}}</span>
+                  <span
+                    v-for="item in userNames6"
+                    v-show="item.sequenceStatus=='1'"
+                  >{{item.sequenceNo}}</span>
+                  <span
+                    v-show="item.sequenceStatus=='2'"
+                    class="gree"
+                    v-for="item in userNames6"
+                  >{{item.sequenceNo}}</span>
+                  <span
+                    v-show="item.sequenceStatus=='3'"
+                    class="yello"
+                    v-for="item in userNames6"
+                  >{{item.sequenceNo}}</span>
                 </li>
               </ul>
             </div>
@@ -182,7 +248,7 @@
         <div class="content-bottom">
           <vue-seamless-scroll :data="newsList" :class-option="optionLeft" class="seamless-warp2">
             <ul class="item">
-              <li class= "" v-for="item in newsList" v-text="item"></li>
+              <li class v-for="item in newsList" v-text="item"></li>
             </ul>
           </vue-seamless-scroll>
         </div>
@@ -228,7 +294,7 @@
             </div>
           </div>
 
-          <Password :visible.sync="visiblePassword" @passwordCommit = "passwordCommit"></Password>
+          <Password :visible.sync="visiblePassword" @passwordCommit="passwordCommit"></Password>
           <!-- 今日警情信息end -->
 
           <!-- 值勤车辆strat -->
@@ -252,7 +318,7 @@
               <vue-seamless-scroll
                 :data="listData"
                 class="seamless-warp"
-                :class-option="length > 6 ? classOption : unClassOption"
+                :class-option="classOption"
               >
                 <ul class="ve_ul">
                   <li v-for="item in listData">
@@ -264,7 +330,7 @@
                     </div>
                     <div class="list_text">
                       <div class="mt2">发动机功率:{{item.gl+"/KM"}}</div>
-                      <div v-if="item.zl"  class="list_text2">起重重量:{{item.zl+"吨"}}</div>
+                      <div v-if="item.zl" class="list_text2">起重重量:{{item.zl+"吨"}}</div>
                     </div>
                   </li>
                 </ul>
@@ -406,11 +472,11 @@
 .dialog-footer {
   text-align: center;
 }
-.gree{
-  color:#13A71D
+.gree {
+  color: #13a71d;
 }
-.yello{
-  color:#C0A000
+.yello {
+  color: #c0a000;
 }
 </style>
 
@@ -426,7 +492,7 @@ import Weather from "./components/weather";
 import Notice from "./components/notice";
 import Education from "./components/education";
 import vueSeamlessScroll from "vue-seamless-scroll";
-import Password from './components/password.vue'
+import Password from "./components/password.vue";
 Vue.use(ElementUI, axios, vueSeamlessScroll);
 export default {
   name: "hello",
@@ -434,15 +500,15 @@ export default {
     return {
       url: "http://121.41.27.194:8080/api",
       visiblePassword: false,
-      consumerType:'',
+      consumerType: "",
       dataobj: "",
       sourceId: "",
       dialogFormVisible: false,
       dialogFormVisibleType: false,
       dialogFormVisibleOrg: true,
       showClo: false,
-      titleName:'',
-      titleNameDd:'',
+      titleName: "",
+      titleNameDd: "",
       full: true,
       play_d: true,
       play_x: true,
@@ -455,9 +521,9 @@ export default {
       formOrg_z: { id: "", region: "", name: "", sourceId: "" },
       formLabelWidth: "120px",
       birthday_data: [],
-      newsList: ['对党忠诚，纪律严明，赴汤蹈火，竭诚为民!'],
+      newsList: ["对党忠诚，纪律严明，赴汤蹈火，竭诚为民!"],
       //newsList:[],
-      length: 0,
+      lengths: 0,
       count: 0,
       //每月之星
       learnStar: "",
@@ -497,8 +563,8 @@ export default {
 
       //更新量化考情周报
       openClick: false,
-      tableDataDetail:[],
-      spanArr:[],
+      tableDataDetail: [],
+      spanArr: [],
 
       value1: "",
       earlyInfo: {}, //今日警情信息
@@ -511,7 +577,8 @@ export default {
       status: "",
       noticeSourceId: "",
       eduStationId: "",
-      noticeZhanId: '',
+      noticeZhanId: "",
+      passFlags: false
     };
   },
   components: {
@@ -533,7 +600,7 @@ export default {
       obj = this.options_z.find(item => {
         return item.id === val;
       });
-      console.log("选择消防站时存储数据=",obj)
+      console.log("选择消防站时存储数据=", obj);
       this.formOrg_z = obj;
       this.titleName = obj.name;
     },
@@ -576,7 +643,7 @@ export default {
       //     type: "success"
       //   });
       //   console.log("支队时候的id=",this.eduStationId);
-      // } else 
+      // } else
       if (this.formOrg.id != "" && this.formOrg_z.id != "") {
         this.noticeSourceId = this.formOrg_z.sourceId;
         this.eduStationId = this.formOrg_z.id;
@@ -585,7 +652,7 @@ export default {
           message: "查看大队下面消防站大屏",
           type: "success"
         });
-        console.log("大队时候的id=",this.eduStationId);
+        console.log("大队时候的id=", this.eduStationId);
         this.dialogFormVisibleOrg = false; //查看大队下面消防站大屏
       } else if (this.formOrg_z.id != "" && this.formOrg.id == "") {
         this.noticeSourceId = this.formOrg_z.sourceId;
@@ -595,19 +662,19 @@ export default {
           message: "只查看消防站大屏",
           type: "success"
         });
-        console.log("消防站时候的id=",this.eduStationId);
+        console.log("消防站时候的id=", this.eduStationId);
         this.dialogFormVisibleOrg = false; //查看消防站大屏
       } else if (this.play_d == false && this.play_x == false) {
         this.$message({
           message: "该用户没有权限，无法查看大屏数据",
           type: "warning"
         });
-      } else if(this.formOrg_z.id == ""){
+      } else if (this.formOrg_z.id == "") {
         this.$message({
           message: "请选择消防站",
           type: "warning"
         });
-      }else{
+      } else {
         this.$message({
           message: "请选择部门",
           type: "warning"
@@ -618,7 +685,7 @@ export default {
       // this.$refs['notice'].getNoticeInfo(this.noticeSourceId);
       // 教育训练计划
 
-      console.log("eduStationId====",this.eduStationId);
+      console.log("eduStationId====", this.eduStationId);
       this.$refs["education"].getEducationData(this.eduStationId);
       this.$refs["notice"].getNoticeInfo(this.noticeZhanId);
       // this.$refs["notice"].getNoticeInfo(this.noticeZhanId);
@@ -639,48 +706,114 @@ export default {
     uploadEarlyBtn() {
       this.dialogFormVisible = false;
       this.visiblePassword = true;
+      this.passFlags = ture;
     },
 
-    passwordCommit(password){
-      var fire = 0;
-      var eme = 0;
-      var soc = 0;
-      var falseA = 0;
-      var other = 0;
-      var count = 0;
-      fire = parseInt(this.earlyInfo.fireAlarmNum);
-      eme = parseInt(this.earlyInfo.emergencyRescueNum);
-      soc = parseInt(this.earlyInfo.socialAssistanceNum);
-      falseA = parseInt(this.earlyInfo.falseAlarmNum);
-      other = parseInt(this.earlyInfo.otherAlertNum);
-      count = fire + eme + soc + falseA + other;
-      var parmar = {
-        id: this.earlyInfo.id,
-        callPoliceTotal: count,
-        fireAlarmNum: this.earlyInfo.fireAlarmNum,
-        emergencyRescueNum: this.earlyInfo.emergencyRescueNum,
-        socialAssistanceNum: this.earlyInfo.socialAssistanceNum,
-        falseAlarmNum: this.earlyInfo.falseAlarmNum,
-        otherAlertNum: this.earlyInfo.otherAlertNum,
-        stationId:this.eduStationId
-      };
-      console.log("封装数据==",parmar)
-      request.uploadEarlyInfo(parmar,this.consumerType,password).then(res => {
-        if (res.errcode == 0) {
-          this.$message({
-            message: "更新成功",
-            type: "success"
+    passwordCommit(password) {
+      if (this.passFlags == true) {
+        var fire = 0;
+        var eme = 0;
+        var soc = 0;
+        var falseA = 0;
+        var other = 0;
+        var count = 0;
+        fire = parseInt(this.earlyInfo.fireAlarmNum);
+        eme = parseInt(this.earlyInfo.emergencyRescueNum);
+        soc = parseInt(this.earlyInfo.socialAssistanceNum);
+        falseA = parseInt(this.earlyInfo.falseAlarmNum);
+        other = parseInt(this.earlyInfo.otherAlertNum);
+        count = fire + eme + soc + falseA + other;
+        var parmar = {
+          id: this.earlyInfo.id,
+          callPoliceTotal: count,
+          fireAlarmNum: this.earlyInfo.fireAlarmNum,
+          emergencyRescueNum: this.earlyInfo.emergencyRescueNum,
+          socialAssistanceNum: this.earlyInfo.socialAssistanceNum,
+          falseAlarmNum: this.earlyInfo.falseAlarmNum,
+          otherAlertNum: this.earlyInfo.otherAlertNum,
+          stationId: this.eduStationId
+        };
+        console.log("封装数据==", parmar);
+        request.uploadEarlyInfo(parmar, this.consumerType, password)
+          .then(res => {
+            if (res.errcode == 0) {
+              this.$message({
+                message: "更新成功",
+                type: "success"
+              });
+              this.getEarlyInfo(this.eduStationId); //警情信息
+              this.visiblePassword = false;
+            } else if (res.errcode == 407) {
+              this.$message({
+                message: "密码错误！请重新输入",
+                type: "error"
+              });
+            }
           });
-          this.getEarlyInfo(this.eduStationId); //警情信息
-          this.visiblePassword = false;
-        }else if(res.errcode == 407){
-          this.$message({
-            message: "密码错误！请重新输入",
-            type: "error"
-          });
-        }
-      });
+      }else{
+        debugger;
+        if(this.consumerType == "大队"){
+          console.log("访问大队")
+           axios.put(this.url + "/controller/carsInfo/updateCarsStatus?carsId=" +this.carsId +"&status=" +this.status +"&stationId=" +this.formOrg.id +"&consumerType=大队&password=" +password)
+          .then(response => {
+            if (response.errcode == 0) {
+              this.$message({
+                message: "更新成功",
+                type: "success"
+              });
+              this.getVehicleInfo(this.eduStationId); //车辆信息
+              this.visiblePassword = false;
+            } else if (res.errcode == 407) {
+                this.$message({
+                  message: "密码错误！请重新输入",
+                  type: "error"
+                });
+              }
+          })
+          .catch(error => {});
+        }else if(this.consumerType == "支队"){
+          console.log("访问支队")
+          axios.put(this.url + "/controller/carsInfo/updateCarsStatus?carsId=" +this.carsId +"&status=" +this.status +"&stationId=" +this.formOrg.id +"&consumerType=支队&password=" +password)
+          .then(response => {
+            if (response.errcode == 0) {
+              this.$message({
+                message: "更新成功",
+                type: "success"
+              });
+              this.getVehicleInfo(this.eduStationId); //车辆信息
+              this.visiblePassword = false;
+            } else if (res.errcode == 407) {
+                this.$message({
+                  message: "密码错误！请重新输入",
+                  type: "error"
+                });
+              }
+          })
+          .catch(error => {});
 
+        }else{
+          console.log("访问消防站")
+           axios.put(this.url + "/controller/carsInfo/updateCarsStatus?carsId=" +this.carsId +"&status=" +this.status +"&stationId=" +this.formOrg_z.id +"&consumerType=消防站&password=" +password)
+          .then(response => {
+            if (response.errcode == 0) {
+              this.$message({
+                message: "更新成功",
+                type: "success"
+              });
+              this.getVehicleInfo(this.eduStationId); //车辆信息
+              this.visiblePassword = false;
+            } else if (res.errcode == 407) {
+                this.$message({
+                  message: "密码错误！请重新输入",
+                  type: "error"
+                });
+              }
+          })
+          .catch(error => {});
+        }
+        
+
+      }
     },
 
     uploadVehicleStatus(carsId) {
@@ -689,18 +822,8 @@ export default {
     },
 
     uploadVehicleStatusBtn() {
-      axios.put(this.url + "/controller/carsInfo/updateCarsStatus?carsId=" +this.carsId +"&status=" +this.status)
-        .then(response => {
-          if (response.errcode == 0) {
-            this.$message({
-              message: "更新成功",
-              type: "success"
-            });
-            this.dialogFormVisibleType = false;
-           this.getVehicleInfo(this.eduStationId); //车辆信息
-          }
-        })
-        .catch(error => {});
+      this.dialogFormVisible = false;
+      this.visiblePassword = true;
     },
 
     getFormType() {
@@ -708,7 +831,7 @@ export default {
     },
 
     handleClick(event) {
-      if(event.target.dataset.dept!=undefined){
+      if (event.target.dataset.dept != undefined) {
         this.dialogFormVisibleType = true;
         this.carsId = event.target.dataset.dept;
       }
@@ -724,7 +847,7 @@ export default {
       });
       s = objs.name;
       this.formOrg = objs;
-      this.titleNameDd = s.substr(0, s.length - 2)+'区';
+      this.titleNameDd = s.substr(0, s.length - 2) + "区";
       //选择大队时存储数据 end
 
       var parmar = { brigadeId: id };
@@ -763,7 +886,7 @@ export default {
     },
 
     //定时器 2小时更新一次
-    timer(){
+    timer() {
       console.log("定时执行函数----2小时执行一次");
       this.$refs["education"].getEducationData(this.eduStationId);
       this.getMainInfo(this.noticeSourceId);
@@ -780,7 +903,8 @@ export default {
         if (res != undefined) {
           this.vehicleInfo = res;
           var arrDate = res.vehicleInfos;
-          this.length = arrDate.length;
+          this.lengths = arrDate.length;
+          console.log("车辆总数=",this.lengths)
           var ar = [];
           for (var i = 0; i < arrDate.length; i++) {
             var obj = new Object();
@@ -886,7 +1010,7 @@ export default {
         date: currentdate
       };
       request.getStationStarMonth(par).then(res => {
-        console.log("learningStar=",res)
+        console.log("learningStar=", res);
         if (res == "undefined" || res == null || res == "") {
           return false;
         } else {
@@ -924,25 +1048,25 @@ export default {
         deptId: deptId
       };
       request.getMainInfo(par).then(res => {
-        if(res.data.numAll != null){
+        if (res.data.numAll != null) {
           this.numAll = res.data.numAll;
         }
-        if(res.data.numtype1 != null){
+        if (res.data.numtype1 != null) {
           this.numtype1 = res.data.numtype1;
         }
-        if(res.data.numtype2 != null){
+        if (res.data.numtype2 != null) {
           this.numtype2 = res.data.numtype2;
         }
-        if(res.data.numZaigang != null){
+        if (res.data.numZaigang != null) {
           this.numZaigang = res.data.numZaigang;
         }
-        if(res.data.numGongchai != null){
+        if (res.data.numGongchai != null) {
           this.numGongchai = res.data.numGongchai;
         }
-        if(res.data.numXiujia != null){
+        if (res.data.numXiujia != null) {
           this.numXiujia = res.data.numXiujia;
         }
-        
+
         this.userNames1 = res.data.userNames1;
         this.userNames2 = res.data.userNames2;
         this.userNames3 = res.data.userNames3;
@@ -959,12 +1083,12 @@ export default {
         // pr.push('祝' + res.data.birthdayNames + '生日快乐!');
         // console.log(pr);
         // this.newsList = pr;
-        if(res.data.birthdayNames.length != 0){
+        if (res.data.birthdayNames.length != 0) {
           let pr = [];
-          pr.push('祝'+ res.data.birthdayNames + '生日快乐！');
+          pr.push("祝" + res.data.birthdayNames + "生日快乐！");
           this.newsList = pr;
-        }else{
-          this.newsList = ['对党忠诚，纪律严明，赴汤蹈火，竭诚为民!']
+        } else {
+          this.newsList = ["对党忠诚，纪律严明，赴汤蹈火，竭诚为民!"];
         }
       });
     },
@@ -1024,24 +1148,28 @@ export default {
     },
 
     //量化考勤周报详情页面
-    handleDetail(){
+    handleDetail() {
       this.openClick = true;
     },
 
     //更新量化考情周报
-    getAssessmentMonthDetailInfo(stationId){
+    getAssessmentMonthDetailInfo(stationId) {
       let pr = {
         stationId: stationId
-      }
-      request.getAssessmentMonthDetailInfo(pr).then(res =>{
-        console.log('量化考情详情');
+      };
+      request.getAssessmentMonthDetailInfo(pr).then(res => {
+        console.log("量化考情详情");
         var arr = [];
-        for(var i = 0; i < res.data.length; i++){
+        for (var i = 0; i < res.data.length; i++) {
           var teams = res.data[i].team;
-            for(var j=0 ; j < res.data[i].quantiAssessmentMonthInfoList.length;j++){
+          for (
+            var j = 0;
+            j < res.data[i].quantiAssessmentMonthInfoList.length;
+            j++
+          ) {
             var key = "team";
             var value = teams;
-            res.data[i].quantiAssessmentMonthInfoList[j][key]= value;
+            res.data[i].quantiAssessmentMonthInfoList[j][key] = value;
             arr.push(res.data[i].quantiAssessmentMonthInfoList[j]);
           }
         }
@@ -1052,55 +1180,48 @@ export default {
     },
 
     //合并单元格
-    getSpanArr(data){
+    getSpanArr(data) {
       console.log("333333333");
       for (var i = 0; i < data.length; i++) {
         if (i === 0) {
-          this.spanArr.push(1);
-          this.pos = 0
-          } else {
-        // 判断当前元素与上一个元素是否相同
-        if (data[i].team === data[i - 1].team) {
-            this.spanArr[this.pos] += 1;
-            this.spanArr.push(0);
-          } else {
-            this.spanArr.push(1);
-            this.pos = i;
-          }
-        }   
+          this.spanArr.push(1);
+          this.pos = 0;
+        } else {
+          // 判断当前元素与上一个元素是否相同
+          if (data[i].team === data[i - 1].team) {
+            this.spanArr[this.pos] += 1;
+            this.spanArr.push(0);
+          } else {
+            this.spanArr.push(1);
+            this.pos = i;
+          }
+        }
       }
     },
 
-    objectSpanMethod({ row, column, rowIndex, columnIndex }){
+    objectSpanMethod({ row, column, rowIndex, columnIndex }) {
       if (columnIndex === 0) {
         const _row = this.spanArr[rowIndex];
-            const _col = _row > 0 ? 1 : 0;
-            return {
-                  rowspan: _row,
-                  colspan: _col
-            }   
+        const _col = _row > 0 ? 1 : 0;
+        return {
+          rowspan: _row,
+          colspan: _col
+        };
       }
-    },
+    }
   },
   computed: {
     classOption() {
-      return {
-        step: 0.2, // 数值越大速度滚动越快
-        limitMoveNum: 0, // 开始无缝滚动的数据量 this.dataList.length
-        hoverStop: true, // 是否开启鼠标悬停stop
-        direction: 0, // 0向下 1向上 2向左 3向右
-        openWatch: true, // 开启数据实时监控刷新dom
-        singleHeight: 0, // 单步运动停止的高度(默认值0是无缝不停止的滚动) direction => 0/1
-        singleWidth: 0, // 单步运动停止的宽度(默认值0是无缝不停止的滚动) direction => 2/3
-        waitTime: 1000 // 单步运动停止的时间(默认值1000ms)
-      };
+        return {
+            step: 0.2, // 数值越大速度滚动越快
+            limitMoveNum:8
+        };
     },
-    unClassOption(){}, //勿删
-    optionLeft () {
+    optionLeft() {
       return {
-            direction: 2,
-            limitMoveNum: 0
-          }
+        direction: 2,
+        limitMoveNum: 0
+      };
     }
   },
   mounted() {
@@ -1111,18 +1232,18 @@ export default {
           type: "warning"
         });
       } else {
-        console.log("用户权限=",res)
+        console.log("用户权限=", res);
         this.setUserPermissions(res);
-        if(true!=res.isDetachment){
-          this.consumerType = '支队';
-        }else if(true!=res.isBrigade){
-          this.consumerType = '大队';
-        }else if(true!=res.isStation){
-          this.consumerType = '消防站';
+        if (true != res.isDetachment) {
+          this.consumerType = "支队";
+        } else if (true != res.isBrigade) {
+          this.consumerType = "大队";
+        } else if (true != res.isStation) {
+          this.consumerType = "消防站";
         }
       }
     });
-    setInterval(this.timer, 1000*60*60*2);  //定时器 2小时请求一次
+    setInterval(this.timer, 1000 * 60 * 60 * 2); //定时器 2小时请求一次
     //this.getSpanArr(this.tableDataDetail);
   }
 };

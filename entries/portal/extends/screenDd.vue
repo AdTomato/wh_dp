@@ -714,9 +714,14 @@ export default {
     var res = null;
     this.getEarlyInfo();
     this.myEcharts(res);
-    
     storage.getUserPermissionsDate().then(res => {
-      this.sourceId = res.brigadeData[0].sourceId
+      if(res.isDetachment==true){
+          this.sourceId = res.detachmentData[0].sourceId
+      }else if(res.isBrigade==true){
+          this.sourceId = res.brigadeData[0].sourceId
+      }else if(res.isBrigade==true){
+          this.sourceId = res.stationData[0].sourceId
+      }
       this.setUserPermissions(res);
     });
     this.myEcharts();
