@@ -25,7 +25,10 @@
 <script>
     import axios from "axios";
     import request from "../api/request";
+    import ElementUI from "element-ui";
+    import "element-ui/lib/theme-chalk/index.css";
     import vueSeamlessScroll from "vue-seamless-scroll";
+import replace$ from 'dingtalk-jsapi/api/biz/navigation/replace';
     export default {
         name: "notice",
         props: {
@@ -34,6 +37,7 @@
         data() {
             return {
                 listData: [],
+                noticeUrl: '',
             }
         },
         components: {
@@ -44,6 +48,7 @@
             noticeClassOption() {
                 return {
                     step: 0.2, // 数值越大速度滚动越快
+                    limitMoveNum: 5
                 };
             }
         },
@@ -68,12 +73,19 @@
             },
             noticeClick(item, index){
                 console.log(item.url);
+                this.noticeUrl = item.url;
                 if(item.url){
-                    window.location.href = item.url
+                    var itemUrl = item.url.slice(20);
+                    // window.location.href = item.url;
+                    let routeUrl = this.$router.resolve({
+                        path: itemUrl
+                    });
+                    window.open(routeUrl.href, '_blank');
                 }
-            }     
+            },
         },
         mounted(){
+            
         }
     }
 </script>

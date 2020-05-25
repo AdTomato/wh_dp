@@ -399,8 +399,6 @@ export default {
       // 基于准备好的dom，初始化echarts实例
       //月度警情量类型分析
       var myChart = this.$echarts.init(document.getElementById("main"));
-      console.log('街道数目:' + this.streetNum);
-      console.log('街道名称' + this.streetName);
       // 指定图表的配置项和数据
       var option = {
         tooltip: {
@@ -596,27 +594,27 @@ export default {
     // xsheng 添加strat 2020-05-19
 
     //获取今日警情信息
-  getEarlyInfo() {
-    storage.getEarlyInfo(this.formOrg.id,2).then(res => {
-      if(res!=undefined){
-        this.earlyInfo = res.dateAlertInfo;
-        this.earlyInfoEchart = res.monthAlertAnalysis;
-        this.myEcharts(this.earlyInfoEchart);
-        var fire = 0;
-        var eme = 0;
-        var soc = 0;
-        var falseA = 0;
-        var other = 0;
+    getEarlyInfo() {
+      storage.getEarlyInfo(this.formOrg.id,2).then(res => {
+        if(res!=undefined){
+          this.earlyInfo = res.dateAlertInfo;
+          this.earlyInfoEchart = res.monthAlertAnalysis;
+          this.myEcharts(this.earlyInfoEchart);
+          var fire = 0;
+          var eme = 0;
+          var soc = 0;
+          var falseA = 0;
+          var other = 0;
 
-        fire = parseInt(res.dateAlertInfo.fireAlarmNum);
-        eme = parseInt(res.dateAlertInfo.emergencyRescueNum);
-        soc = parseInt(res.dateAlertInfo.socialAssistanceNum);
-        falseA = parseInt(res.dateAlertInfo.falseAlarmNum);
-        other = parseInt(res.dateAlertInfo.otherAlertNum);
-        this.count = fire + eme + soc + falseA + other;
-      }else{console.log("今日警情信息数据返回为空")}
-    });
-  },
+          fire = parseInt(res.dateAlertInfo.fireAlarmNum);
+          eme = parseInt(res.dateAlertInfo.emergencyRescueNum);
+          soc = parseInt(res.dateAlertInfo.socialAssistanceNum);
+          falseA = parseInt(res.dateAlertInfo.falseAlarmNum);
+          other = parseInt(res.dateAlertInfo.otherAlertNum);
+          this.count = fire + eme + soc + falseA + other;
+        }else{console.log("今日警情信息数据返回为空")}
+      });
+    },
     //获取值班信息
     getOnDutyInfo() {
       storage.getOnDutyInfo(this.formOrg.id,2).then(res => {
@@ -758,9 +756,14 @@ export default {
     var res = null;
     this.getEarlyInfo();
     this.myEcharts(res);
-    
     storage.getUserPermissionsDate().then(res => {
-      this.sourceId = res.brigadeData[0].sourceId
+      if(res.isDetachment==true){
+          this.sourceId = res.detachmentData[0].sourceId
+      }else if(res.isBrigade==true){
+          this.sourceId = res.brigadeData[0].sourceId
+      }else if(res.isBrigade==true){
+          this.sourceId = res.stationData[0].sourceId
+      }
       this.setUserPermissions(res);
     });
     this.myEcharts();

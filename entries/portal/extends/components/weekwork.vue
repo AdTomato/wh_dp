@@ -30,7 +30,7 @@
           </div>
         </el-dialog>
         <!-- 密码确认 -->
-        <Password :visible.sync="visiblePassword"></Password>
+        <Password :visible.sync="visiblePassword" :passBool="passBool" @confirmUpdateNotice="confirmUpdateNotice"></Password>
     </div>
 </template>
 
@@ -55,7 +55,8 @@
                 form: {},
                 workBriageId: '',
                 valStatus: '',
-                worksData: []
+                worksData: [],
+                passBool: false,
             }
         },
         components: {
@@ -67,6 +68,7 @@
             workClassOption() {
                 return {
                     step: 0.2, // 数值越大速度滚动越快
+                    limitMoveNum: 5
                 };
             }
         },
@@ -99,10 +101,12 @@
                 this.visibleStatus = false;
                 this.visiblePassword = true;
             },
-            confirmUpdate(){
+            confirmUpdateNotice(val){
                 const urlPath = "http://121.41.27.194:8080/api";
-                axios.put(urlPath+`/controller/weekWork/updateWorksStatus?id=${this.currentId}&status=${this.workStatus}`)
+                axios.put(urlPath+`/controller/weekWork/updateWorksStatus?id=${this.currentId}&status=${this.workStatus}&brigadeId=${this.workBriageId}
+                &consumerType=大队&password=${val}`)
                 .then(res => {
+                    debugger;
                     if (res.errcode == 0) {
                         this.$message({
                             message: "状态更新成功",
@@ -111,6 +115,12 @@
                         this.visibleStatus = false;
                         this.worksData = [];
                         this.getWorks(this.workBriageId);
+                        this.visiblePassword = false;
+                    }else if(res.errcode == 407){
+                        this.$message({
+                            message: "密码错误，状态更新失败",
+                            type: "error"
+                        });
                     }
                 })
             },
