@@ -22,7 +22,7 @@
             <div class="total_nums">
               <ul class="tel_ul">
                 <li>
-                  总指挥
+                  总人数
                   <div class="commander mt">{{numAll}}</div>
                 </li>
                 <li>
@@ -602,7 +602,6 @@ export default {
       obj = this.options_z.find(item => {
         return item.id === val;
       });
-      console.log("选择消防站时存储数据=", obj);
       this.formOrg_z = obj;
       this.titleName = obj.name;
     },
@@ -633,8 +632,6 @@ export default {
 
     //确定按钮 处理查看大屏类型
     confirmBtn() {
-      console.log("formOrg_z==", this.formOrg_z); //站json
-      console.log("formOrg", this.formOrg); //大队json
       // if (this.formOrg.id != "" && this.formOrg_z.id == "") {
       //   this.noticeSourceId = this.formOrg.sourceId;
       //   this.eduStationId = this.formOrg.id;
@@ -655,7 +652,6 @@ export default {
           message: "查看大队下面消防站大屏",
           type: "success"
         });
-        console.log("大队时候的id=", this.eduStationId);
         this.dialogFormVisibleOrg = false; //查看大队下面消防站大屏
       } else if (this.formOrg_z.id != "" && this.formOrg.id == "") {
         this.noticeSourceId = this.formOrg_z.sourceId;
@@ -666,7 +662,6 @@ export default {
           message: "只查看消防站大屏",
           type: "success"
         });
-        console.log("消防站时候的id=", this.eduStationId);
         this.dialogFormVisibleOrg = false; //查看消防站大屏
       } else if (this.play_d == false && this.play_x == false) {
         this.$message({
@@ -689,7 +684,6 @@ export default {
       // this.$refs['notice'].getNoticeInfo(this.noticeSourceId);
       // 教育训练计划
 
-      console.log("eduStationId====", this.eduStationId);
       this.$refs["education"].getEducationData(this.eduStationId);
       this.$refs["notice"].getNoticeInfo(this.noticeZhanId);
       // this.$refs["notice"].getNoticeInfo(this.noticeZhanId);
@@ -715,8 +709,6 @@ export default {
     },
 
     passwordCommit(password){
-
-      debugger;
       if(this.passFlags){
         var fire = 0;
         var eme = 0;
@@ -740,10 +732,7 @@ export default {
           otherAlertNum: this.earlyInfo.otherAlertNum,
           stationId:this.updateId
         };
-        console.log("封装数据==",parmar)
-        debugger;
         request.uploadEarlyInfo(parmar,this.consumerType,password).then(res => {
-          debugger;
           if (res.errcode == 0) {
             this.$message({
               message: "更新成功",
@@ -759,13 +748,9 @@ export default {
           }
         })
       }else{
-        debugger;
            axios.put(this.url + "/controller/carsInfo/updateCarsStatus?carsId=" +this.carsId +"&status=" +this.status +"&stationId=" +this.updateId +"&consumerType="+this.consumerType+"&password=" +password)
           .then(response => {
-            debugger;
-            console.log("response=",response)
             if (response.errcode == 0) {
-              debugger;
               this.$message({
                 message: "更新成功",
                 type: "success"
@@ -774,7 +759,6 @@ export default {
               this.visiblePassword = false;
               this.dialogFormVisible = false;
             } else if (response.errcode == 407) {
-              debugger;
                 this.$message({
                   message: "密码错误！请重新输入",
                   type: "error"
@@ -782,7 +766,6 @@ export default {
               }
           })
           .catch(error => {
-            console.log("ereor = ",error)
           });
 
       }
@@ -878,7 +861,6 @@ export default {
           this.vehicleInfo = res;
           var arrDate = res.vehicleInfos;
           this.lengths = arrDate.length;
-          console.log("车辆总数=",this.lengths)
           var ar = [];
           for (var i = 0; i < arrDate.length; i++) {
             var obj = new Object();
@@ -926,7 +908,6 @@ export default {
           falseA = parseInt(res.falseAlarmNum);
           other = parseInt(res.otherAlertNum);
           this.count = fire + eme + soc + falseA + other;
-          console.log("count===", this.count);
         }
       });
     },
@@ -984,7 +965,6 @@ export default {
         date: currentdate
       };
       request.getStationStarMonth(par).then(res => {
-        console.log("learningStar=", res);
         if (res == "undefined" || res == null || res == "") {
           return false;
         } else {
@@ -1053,10 +1033,6 @@ export default {
         this.numZaigang = res.data.numZaigang;
         this.numGongchai = res.data.numGongchai;
         this.numXiujia = res.data.numXiujia;
-        // let pr = [];
-        // pr.push('祝' + res.data.birthdayNames + '生日快乐!');
-        // console.log(pr);
-        // this.newsList = pr;
         if (res.data.birthdayNames.length != 0) {
           let pr = [];
           pr.push("祝" + res.data.birthdayNames + "生日快乐！");
@@ -1132,7 +1108,6 @@ export default {
         stationId: stationId
       };
       request.getAssessmentMonthDetailInfo(pr).then(res => {
-        console.log("量化考情详情");
         var arr = [];
         for (var i = 0; i < res.data.length; i++) {
           var teams = res.data[i].team;
@@ -1149,13 +1124,11 @@ export default {
         }
         this.getSpanArr(arr);
         this.tableDataDetail = arr;
-        console.log(this.tableDataDetail);
       });
     },
 
     //合并单元格
     getSpanArr(data) {
-      console.log("333333333");
       for (var i = 0; i < data.length; i++) {
         if (i === 0) {
           this.spanArr.push(1);
@@ -1206,7 +1179,6 @@ export default {
           type: "warning"
         });
       } else {
-        console.log("用户权限=", res);
         this.setUserPermissions(res);
         if(true==res.isDetachment){
           this.passBool = true;

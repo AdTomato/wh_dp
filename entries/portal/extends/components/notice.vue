@@ -28,6 +28,7 @@
     import ElementUI from "element-ui";
     import "element-ui/lib/theme-chalk/index.css";
     import vueSeamlessScroll from "vue-seamless-scroll";
+import replace$ from 'dingtalk-jsapi/api/biz/navigation/replace';
     export default {
         name: "notice",
         props: {
@@ -74,7 +75,12 @@
                 console.log(item.url);
                 this.noticeUrl = item.url;
                 if(item.url){
-                    window.location.href = item.url;
+                    var itemUrl = item.url.slice(20);
+                    // window.location.href = item.url;
+                    let routeUrl = this.$router.resolve({
+                        path: itemUrl
+                    });
+                    window.open(routeUrl.href, '_blank');
                 }
             },
         },
