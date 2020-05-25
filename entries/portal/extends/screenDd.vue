@@ -22,7 +22,7 @@
           <div class="total_num">
             <ul class="tel_ul">
               <li>
-                总指挥
+                总人数
                 <div class="commander mt">{{numAll}}</div>
               </li>
               <li>
@@ -336,7 +336,7 @@ export default {
       request.getBrigadeAlertInfoByBrigadeId(par).then(res =>{
         this.streetName = res.data.streets;
         this.streetNum = res.data.alertNums;
-        this.myEcharts(this.streetName);
+        this.myEcharts(null,this.streetName);
       });
     },
     //人员动态和生日
@@ -384,18 +384,20 @@ export default {
     // xsheng 添加strat 2020-05-19
 
     //获取今日警情信息 月度警情信息
-    getEarlyInfo() {
-      storage.getEarlyInfo(this.formOrg.id,2).then(res => {
-        if(res!=undefined){
-          this.earlyInfo = res.dateAlertInfo;
-          this.earlyInfoEchart = res.monthAlertAnalysis;
-          this.myEcharts(this.earlyInfoEchart);
-        }else{console.log("今日警情信息数据返回为空")}
-      });
-    },
+    // getEarlyInfo() {
+    //   storage.getEarlyInfo(this.formOrg.id,2).then(res => {
+    //     if(res!=undefined){
+    //       console.log("今日警情信息数据==",res.monthAlertAnalysis);
+    //       this.earlyInfoEchart = [];
+    //       this.earlyInfo = res.dateAlertInfo;
+    //       this.earlyInfoEchart = res.monthAlertAnalysis;
+    //       this.myEcharts(this.earlyInfoEchart,null);
+    //     }else{console.log("今日警情信息数据返回为空")}
+    //   });
+    // },
     //月度警情量分析
 
-    myEcharts(res) {
+    myEcharts(earlyInfoEchart,streetName) {
       // 基于准备好的dom，初始化echarts实例
       //月度警情量类型分析
       var myChart = this.$echarts.init(document.getElementById("main"));
@@ -443,7 +445,7 @@ export default {
             labelLine: {
               show: false
             },
-            data: this.earlyInfoEchart
+            data: earlyInfoEchart
           }
         ]
       };
@@ -597,9 +599,10 @@ export default {
     getEarlyInfo() {
       storage.getEarlyInfo(this.formOrg.id,2).then(res => {
         if(res!=undefined){
+          debugger;
           this.earlyInfo = res.dateAlertInfo;
           this.earlyInfoEchart = res.monthAlertAnalysis;
-          this.myEcharts(this.earlyInfoEchart);
+          this.myEcharts(this.earlyInfoEchart,null);
           var fire = 0;
           var eme = 0;
           var soc = 0;
@@ -690,6 +693,8 @@ export default {
       this.getTeamInfo();
       this.getOnDutyInfo();
       this.getRandom();
+      this.myEcharts();
+      this.getEarlyInfo();
     },
     //设置下拉数据 (公用)
     setDate(arrs) {
@@ -754,8 +759,6 @@ export default {
   },
   mounted() {
     var res = null;
-    this.getEarlyInfo();
-    this.myEcharts(res);
     storage.getUserPermissionsDate().then(res => {
       if(res.isDetachment==true){
           this.sourceId = res.detachmentData[0].sourceId
@@ -766,7 +769,6 @@ export default {
       }
       this.setUserPermissions(res);
     });
-    this.myEcharts();
   }
 };
 </script>
