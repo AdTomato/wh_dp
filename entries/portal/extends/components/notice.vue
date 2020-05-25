@@ -89,9 +89,3 @@ import replace$ from 'dingtalk-jsapi/api/biz/navigation/replace';
         }
     }
 </script>
-
-<style lang="less" scoped>
-.notice-dialog .el-dialog{
-    height: 900px;
-}
-</style>

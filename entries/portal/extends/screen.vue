@@ -466,7 +466,7 @@
 </template>
 <style>
 .seamless-warp {
-  height: 266px;
+  /* height: 266px; */
   overflow: hidden;
 }
 .dialog-footer {
