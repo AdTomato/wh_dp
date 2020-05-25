@@ -10,7 +10,7 @@
                 <div v-else>
                     <vue-seamless-scroll :data="listData" class="seamless-notice" :class-option="noticeClassOption">
                         <ul class="item">
-                            <li v-for="(item, index) in listData" @click="noticeClick(item , index)" :key="index">
+                            <li style="cursor:pointer;" v-for="(item, index) in listData" @click="noticeClick(item , index)" :key="index">
                                 <p>{{item.title}}</p>
                             </li>
                         </ul>

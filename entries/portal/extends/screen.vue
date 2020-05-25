@@ -200,7 +200,7 @@
             </div>
           </div>
           <div class="content-right">
-            <div class="screen-item" style="height:100%" @click="handleDetail">
+            <div class="screen-item" style="height:100%;cursor:pointer;" @click="handleDetail">
               <h3 class="screen-item-title">量化考评周报</h3>
               <ul class="evaluate_detail">
                 <li>
@@ -803,7 +803,7 @@ export default {
       });
       s = objs.name;
       this.formOrg = objs;
-      this.titleNameDd = s.substr(0, s.length - 2) + "区";
+      this.titleNameDd = s.substr(0, s.length - 2) + "大队";
       //选择大队时存储数据 end
 
       var parmar = { brigadeId: id };
