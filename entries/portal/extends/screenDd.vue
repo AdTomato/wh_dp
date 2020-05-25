@@ -51,25 +51,25 @@
             <ul class="commander_list mf">
               <li class="commander_name">大队主管:</li>
               <li class="commander_detail">
-                <span v-for="item in userNames1" :key="item.sequenceNo" v-if="'1'=='1'">{{item.sequenceNo}}</span>
-                <span v-else-if="item.sequenceStatus=='2'" :key="item.sequenceNo" class="gree" v-for="item in userNames1">{{item.sequenceNo}}</span>
-                <span class="yello" v-for="item in userNames1" :key="item.sequenceNo" v-else="item.sequenceStatus=='3'">{{item.sequenceNo}}</span>
+                <span v-for="item in userNames1" :key="item.item" v-show="item.sequenceStatus=='1'">{{item.sequenceNo}}</span>
+                <span v-show="item.sequenceStatus=='2'" :key="item.item" class="gree" v-for="item in userNames1">{{item.sequenceNo}}</span>
+                <span class="yello" v-for="item in userNames1" :key="item.item" v-show="item.sequenceStatus=='3'">{{item.sequenceNo}}</span>
               </li>
             </ul>
             <ul class="commander_list ms">
               <li class="commander_name">大队干部:</li>
               <li class="commander_detail">
-                <span v-for="item in userNames2" :key="item.sequenceNo" v-if="item.sequenceStatus=='1'">{{item.sequenceNo}}</span>
-                <span v-else-if="item.sequenceStatus=='2'" :key="item.sequenceNo" class="gree" v-for="item in userNames2">{{item.sequenceNo}}</span>
-                <span class="yello" v-for="item in userNames2" :key="item.sequenceNo" v-else="item.sequenceStatus=='3'">{{item.sequenceNo}}</span>
+                <span v-for="item in userNames2" :key="item.item" v-show="item.sequenceStatus=='1'">{{item.sequenceNo}}</span>
+                <span v-show="item.sequenceStatus=='2'" :key="item.item" class="gree" v-for="item in userNames2">{{item.sequenceNo}}</span>
+                <span class="yello" v-for="item in userNames2" :key="item.item" v-show="item.sequenceStatus=='3'">{{item.sequenceNo}}</span>
               </li>
             </ul>
             <ul class="commander_list mx">
               <li class="commander_name">大队文员:</li>
               <li class="commander_detail">
-                <span v-for="item in userNames3" :key="item.sequenceNo" v-if="item.sequenceStatus=='1'">{{item.sequenceNo}}</span>
-                <span v-else-if="item.sequenceStatus=='2'" :key="item.sequenceNo" class="gree" v-for="item in userNames3">{{item.sequenceNo}}</span>
-                <span class="yello" v-for="item in userNames3" :key="item.sequenceNo" v-else="item.sequenceStatus=='3'">{{item.sequenceNo}}</span>
+                <span v-for="item in userNames3" :key="item.item" v-show="item.sequenceStatus=='1'">{{item.sequenceNo}}</span>
+                <span v-show="item.sequenceStatus=='2'" :key="item.item" class="gree" v-for="item in userNames3">{{item.sequenceNo}}</span>
+                <span class="yello" v-for="item in userNames3" :key="item.item" v-show="item.sequenceStatus=='3'">{{item.sequenceNo}}</span>
               </li>
             </ul>
           </div>
@@ -277,6 +277,7 @@ export default {
       play_d:false,
       count:0,
       titleNameDd:'',
+      sourceId:'',
       //myjing
 
       orgOptions: {},
@@ -321,25 +322,23 @@ export default {
 
     //月度警情分析
     getBrigadeAlertInfoByBrigadeId(){
+      var time = new Date().toLocaleDateString().replace(/\//g, '-')+" 00:00:00";
       let par = {
-        brigadeId: "586d63454d6841dfa667405212572ca7",
-        date: "2020-05-18 00:00:00"
+        brigadeId: this.formOrg.id,
+        date: time
       };
       request.getBrigadeAlertInfoByBrigadeId(par).then(res =>{
-        console.log("111");
         this.streetName = res.data.streets;
         this.streetNum = res.data.alertNums;
-        console.log(this.streetName);
-        console.log(this.streetNum);
+        this.myEcharts(this.streetName);
       });
     },
     //人员动态和生日
     getTeamInfo(){
       let prr = {
-        sourceId: '145623281'
+        sourceId: this.sourceId
       }
       request.getTeamInfo(prr).then(res =>{
-        console.log(res);
         if(res.data.numAll != null){
         this.numAll = res.data.numAll;
         }
@@ -382,7 +381,6 @@ export default {
     getEarlyInfo() {
       storage.getEarlyInfo(this.formOrg.id,2).then(res => {
         if(res!=undefined){
-          console.log(res);
           this.earlyInfo = res.dateAlertInfo;
           this.earlyInfoEchart = res.monthAlertAnalysis;
           this.myEcharts(this.earlyInfoEchart);
@@ -530,7 +528,8 @@ export default {
               position: 'top',
               color: '#38AC9C'
             },
-            data: this.streetNum
+            // data: this.streetNum  [10, 52, 200, 334, 390, 330, 220]
+            data:[10, 52, 200, 334, 390, 330, 220]
           }
         ]
       };
@@ -552,10 +551,9 @@ export default {
     //人员动态生日
     getTeamInfo(){
       let prr = {
-        sourceId: '145623281'
+        sourceId: this.sourceId
       }
       request.getTeamInfo(prr).then(res =>{
-        console.log(res);
         if(res.data.numAll != null){
           this.numAll = res.data.numAll;
         }
@@ -682,6 +680,10 @@ export default {
       // 获取本周工作任务
       this.$refs["weekwork"].getWorks(this.formOrg.id);
       this.$refs["notice"].getBrigadeNoticeInfo(this.formOrg.id);
+      this.getBrigadeAlertInfoByBrigadeId();
+      this.getTeamInfo();
+      this.getOnDutyInfo();
+      this.getRandom();
     },
     //设置下拉数据 (公用)
     setDate(arrs) {
@@ -701,18 +703,6 @@ export default {
     },
   },
   computed: {
-    // center_option(){
-    //   return{
-    //     step: 0.2, // 数值越大速度滚动越快
-    //     limitMoveNum: 2, // 开始无缝滚动的数据量 this.dataList.length
-    //     hoverStop: true, // 是否开启鼠标悬停stop
-    //     direction: 1, // 0向下 1向上 2向左 3向右
-    //     openWatch: true, // 开启数据实时监控刷新dom
-    //     singleHeight: 0, // 单步运动停止的高度(默认值0是无缝不停止的滚动) direction => 0/1
-    //     singleWidth: 0, // 单步运动停止的宽度(默认值0是无缝不停止的滚动) direction => 2/3
-    //     waitTime: 1000 // 单步运动停止的时间(默认值1000ms)
-    //   }
-    // },
     optionLeft () {
       return {
             direction: 2,
@@ -724,15 +714,12 @@ export default {
     var res = null;
     this.getEarlyInfo();
     this.myEcharts(res);
-    this.getOnDutyInfo();
-    this.getRandom();
-    storage.getUserPermissionsDate().then(res => {this.setUserPermissions(res);});
+    
+    storage.getUserPermissionsDate().then(res => {
+      this.sourceId = res.brigadeData[0].sourceId
+      this.setUserPermissions(res);
+    });
     this.myEcharts();
-    window.onresize = function() {
-      myChart.resize();
-    };
-    this.getTeamInfo();
-    this.getBrigadeAlertInfoByBrigadeId();
   }
 };
 </script>

@@ -51,49 +51,49 @@
               <ul class="commander_list mf">
                 <li class="commander_name">指&nbsp;&nbsp;&nbsp;挥&nbsp;&nbsp;&nbsp;员 :</li>
                 <li class="commander_detail">                
-                  <span  v-for="item in userNames1" v-if="item.sequenceStatus=='1'">{{item.sequenceNo}}</span>
-                  <span v-else-if="item.sequenceStatus=='2'" class="gree" v-for="item in userNames1">{{item.sequenceNo}}</span>
-                  <span class="yello" v-for="item in userNames1" v-else="item.sequenceStatus=='3'">{{item.sequenceNo}}</span>
+                  <span  v-for="item in userNames1" v-show="item.sequenceStatus=='1'">{{item.sequenceNo}}</span>
+                  <span v-show="item.sequenceStatus=='2'" class="gree" v-for="item in userNames1">{{item.sequenceNo}}</span>
+                  <span class="yello" v-for="item in userNames1" v-show="item.sequenceStatus=='3'">{{item.sequenceNo}}</span>
                 </li>
               </ul>
               <ul class="commander_list ms">
                 <li class="commander_name">特 勤 一 班 :</li>
                 <li class="commander_detail">
-                  <span v-for="item in userNames2" v-if="item.sequenceStatus=='1'">{{item.sequenceNo}}</span>
-                  <span v-else-if="item.sequenceStatus=='2'" class="gree" v-for="item in userNames2">{{item.sequenceNo}}</span>
-                  <span v-else="item.sequenceStatus=='3'" class="yello" v-for="item in userNames2">{{item.sequenceNo}}</span>
+                  <span v-for="item in userNames2" v-show="item.sequenceStatus=='1'">{{item.sequenceNo}}</span>
+                  <span v-show="item.sequenceStatus=='2'" class="gree" v-for="item in userNames2">{{item.sequenceNo}}</span>
+                  <span v-show="item.sequenceStatus=='3'" class="yello" v-for="item in userNames2">{{item.sequenceNo}}</span>
                 </li>
               </ul>
               <ul class="commander_list mx">
                 <li class="commander_name">特 勤 二 班 :</li>
                 <li class="commander_detail">
-                  <span v-for="item in userNames3" v-if="item.sequenceStatus=='1'">{{item.sequenceNo}}</span>
-                  <span v-else-if="item.sequenceStatus=='2'" class="gree" v-for="item in userNames3">{{item.sequenceNo}}</span>
-                  <span v-else="item.sequenceStatus=='3'" class="yello" v-for="item in userNames3">{{item.sequenceNo}}</span>
+                  <span v-for="item in userNames3" v-show="item.sequenceStatus=='1'">{{item.sequenceNo}}</span>
+                  <span v-show="item.sequenceStatus=='2'" class="gree" v-for="item in userNames3">{{item.sequenceNo}}</span>
+                  <span v-show="item.sequenceStatus=='3'" class="yello" v-for="item in userNames3">{{item.sequenceNo}}</span>
                 </li>
               </ul>
               <ul class="commander_list mj">
                 <li class="commander_name">灭 火 一 班 :</li>
                 <li class="commander_detail">
-                  <span v-for="item in userNames4" v-if="item.sequenceStatus=='1'">{{item.sequenceNo}}</span>
-                  <span v-else-if="item.sequenceStatus=='2'" class="gree" v-for="item in userNames4">{{item.sequenceNo}}</span>
-                  <span v-else="item.sequenceStatus=='3'" class="yello" v-for="item in userNames4">{{item.sequenceNo}}</span>
+                  <span v-for="item in userNames4" v-show="item.sequenceStatus=='1'">{{item.sequenceNo}}</span>
+                  <span v-show="item.sequenceStatus=='2'" class="gree" v-for="item in userNames4">{{item.sequenceNo}}</span>
+                  <span v-show="item.sequenceStatus=='3'" class="yello" v-for="item in userNames4">{{item.sequenceNo}}</span>
                 </li>
               </ul>
               <ul class="commander_list mk">
                 <li class="commander_name">灭 火 二 班 :</li>
                 <li class="commander_detail">
-                  <span v-for="item in userNames5" v-if="item.sequenceStatus=='1'">{{item.sequenceNo}}</span>
-                  <span v-else-if="item.sequenceStatus=='2'" class="gree" v-for="item in userNames5">{{item.sequenceNo}}</span>
-                  <span v-else="item.sequenceStatus=='3'" class="yello" v-for="item in userNames5">{{item.sequenceNo}}</span>
+                  <span v-for="item in userNames5" v-show="item.sequenceStatus=='1'">{{item.sequenceNo}}</span>
+                  <span v-show="item.sequenceStatus=='2'" class="gree" v-for="item in userNames5">{{item.sequenceNo}}</span>
+                  <span v-show="item.sequenceStatus=='3'" class="yello" v-for="item in userNames5">{{item.sequenceNo}}</span>
                 </li>
               </ul>
               <ul class="commander_list ml">
                 <li class="commander_name">通信保障班 :</li>
                 <li class="commander_detail">
-                  <span v-for="item in userNames6" v-if="item.sequenceStatus=='1'">{{item.sequenceNo}}</span>
-                  <span v-else-if="item.sequenceStatus=='2'" class="gree" v-for="item in userNames6">{{item.sequenceNo}}</span>
-                  <span v-else="item.sequenceStatus=='3'" class="yello" v-for="item in userNames6">{{item.sequenceNo}}</span>
+                  <span v-for="item in userNames6" v-show="item.sequenceStatus=='1'">{{item.sequenceNo}}</span>
+                  <span v-show="item.sequenceStatus=='2'" class="gree" v-for="item in userNames6">{{item.sequenceNo}}</span>
+                  <span v-show="item.sequenceStatus=='3'" class="yello" v-for="item in userNames6">{{item.sequenceNo}}</span>
                 </li>
               </ul>
             </div>
@@ -134,7 +134,7 @@
             </div>
           </div>
           <div class="content-right">
-            <div class="screen-item" style="height:100%">
+            <div class="screen-item" style="height:100%" @click="handleDetail">
               <h3 class="screen-item-title">量化考评周报</h3>
               <ul class="evaluate_detail">
                 <li>
@@ -157,6 +157,26 @@
                 </li>
               </ul>
             </div>
+            <el-dialog title="量化考勤周报" :visible.sync="openClick">
+              <el-form :model="formType">
+                <el-table class="tableData" :data="tableDataDetail" :span-method="objectSpanMethod">
+                  <el-table-column prop="team" label="班级" width="100%"></el-table-column>
+                  <el-table-column prop="name" label="姓名"></el-table-column>
+                  <el-table-column prop="zzsxScore" label="政治思想加/扣分"></el-table-column>
+                  <el-table-column prop="fcmlScore" label="服从命令加/扣分"></el-table-column>
+                  <el-table-column prop="zzsjScore" label="遵纪守法加/扣分"></el-table-column>
+                  <el-table-column prop="zfycScore" label="作风养成加/扣分"></el-table-column>
+                  <el-table-column prop="shzdScore" label="一日生活制度加/扣分"></el-table-column>
+                  <el-table-column prop="jsxlScore" label="军事训练加/扣分"></el-table-column>
+                  <el-table-column prop="mhjyScore" label="灭火救援加/扣分"></el-table-column>
+                  <el-table-column prop="currentMonthScore" label="本月综合得分"></el-table-column>
+                  <el-table-column prop="lastMonthScore" label="上月综合得分"></el-table-column>
+                </el-table>
+              </el-form>
+              <div slot="footer" class="dialog-footer">
+                <el-button @click="openClick = false">关 闭</el-button>
+              </div>
+            </el-dialog>
           </div>
         </div>
         <div class="content-bottom">
@@ -475,6 +495,11 @@ export default {
       project: "",
       score: "",
 
+      //更新量化考情周报
+      openClick: false,
+      tableDataDetail:[],
+      spanArr:[],
+
       value1: "",
       earlyInfo: {}, //今日警情信息
       earlyType: 0, //警情类型 处理传参
@@ -541,17 +566,18 @@ export default {
     confirmBtn() {
       console.log("formOrg_z==", this.formOrg_z); //站json
       console.log("formOrg", this.formOrg); //大队json
-      if (this.formOrg.id != "" && this.formOrg_z.id == "") {
-        this.noticeSourceId = this.formOrg.sourceId;
-        this.eduStationId = this.formOrg.id;
-        this.noticeZhanId = this.formOrg_z.id;
-        this.dialogFormVisibleOrg = false; //查看大队大屏
-        this.$message({
-          message: "查看支队大屏",
-          type: "success"
-        });
-        console.log("支队时候的id=",this.eduStationId);
-      } else if (this.formOrg.id != "" && this.formOrg_z.id != "") {
+      // if (this.formOrg.id != "" && this.formOrg_z.id == "") {
+      //   this.noticeSourceId = this.formOrg.sourceId;
+      //   this.eduStationId = this.formOrg.id;
+      //   this.noticeZhanId = this.formOrg_z.id;
+      //   this.dialogFormVisibleOrg = false; //查看大队大屏
+      //   this.$message({
+      //     message: "查看支队大屏",
+      //     type: "success"
+      //   });
+      //   console.log("支队时候的id=",this.eduStationId);
+      // } else 
+      if (this.formOrg.id != "" && this.formOrg_z.id != "") {
         this.noticeSourceId = this.formOrg_z.sourceId;
         this.eduStationId = this.formOrg_z.id;
         this.noticeZhanId = this.formOrg_z.id;
@@ -576,7 +602,12 @@ export default {
           message: "该用户没有权限，无法查看大屏数据",
           type: "warning"
         });
-      } else {
+      } else if(this.formOrg_z.id == ""){
+        this.$message({
+          message: "请选择消防站",
+          type: "warning"
+        });
+      }else{
         this.$message({
           message: "请选择部门",
           type: "warning"
@@ -592,8 +623,9 @@ export default {
       this.$refs["notice"].getNoticeInfo(this.noticeZhanId);
       // this.$refs["notice"].getNoticeInfo(this.noticeZhanId);
       this.getMainInfo(this.noticeSourceId);
-      this.getAssessmentInfo(this.eduStationId);
+      this.getAssessmentInfo(this.eduStationId); //量化考评
       this.getMonth(this.eduStationId);
+      this.getAssessmentMonthDetailInfo(this.eduStationId); //量化考评详细
 
       this.getEarlyInfo(this.eduStationId); //警情信息
       this.getOnDutyInfo(this.eduStationId); //值班信息
@@ -989,7 +1021,66 @@ export default {
           }
         }
       });
-    }
+    },
+
+    //量化考勤周报详情页面
+    handleDetail(){
+      this.openClick = true;
+    },
+
+    //更新量化考情周报
+    getAssessmentMonthDetailInfo(stationId){
+      let pr = {
+        stationId: stationId
+      }
+      request.getAssessmentMonthDetailInfo(pr).then(res =>{
+        console.log('量化考情详情');
+        var arr = [];
+        for(var i = 0; i < res.data.length; i++){
+          var teams = res.data[i].team;
+            for(var j=0 ; j < res.data[i].quantiAssessmentMonthInfoList.length;j++){
+            var key = "team";
+            var value = teams;
+            res.data[i].quantiAssessmentMonthInfoList[j][key]= value;
+            arr.push(res.data[i].quantiAssessmentMonthInfoList[j]);
+          }
+        }
+        this.getSpanArr(arr);
+        this.tableDataDetail = arr;
+        console.log(this.tableDataDetail);
+      });
+    },
+
+    //合并单元格
+    getSpanArr(data){
+      console.log("333333333");
+      for (var i = 0; i < data.length; i++) {
+        if (i === 0) {
+          this.spanArr.push(1);
+          this.pos = 0
+          } else {
+        // 判断当前元素与上一个元素是否相同
+        if (data[i].team === data[i - 1].team) {
+            this.spanArr[this.pos] += 1;
+            this.spanArr.push(0);
+          } else {
+            this.spanArr.push(1);
+            this.pos = i;
+          }
+        }   
+      }
+    },
+
+    objectSpanMethod({ row, column, rowIndex, columnIndex }){
+      if (columnIndex === 0) {
+        const _row = this.spanArr[rowIndex];
+            const _col = _row > 0 ? 1 : 0;
+            return {
+                  rowspan: _row,
+                  colspan: _col
+            }   
+      }
+    },
   },
   computed: {
     classOption() {
@@ -1032,6 +1123,7 @@ export default {
       }
     });
     setInterval(this.timer, 1000*60*60*2);  //定时器 2小时请求一次
+    //this.getSpanArr(this.tableDataDetail);
   }
 };
 </script>
