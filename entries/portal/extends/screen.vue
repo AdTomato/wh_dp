@@ -293,8 +293,8 @@
               </ul>
             </div>
           </div>
-
-          <Password :visible.sync="visiblePassword" @passwordCommit="passwordCommit"></Password>
+          <Password :visible.sync="visiblePassword" @passwordCommit = "passwordCommit" 
+          :passBool="passBool"></Password>
           <!-- 今日警情信息end -->
 
           <!-- 值勤车辆strat -->
@@ -578,7 +578,9 @@ export default {
       noticeSourceId: "",
       eduStationId: "",
       noticeZhanId: "",
-      passFlags: false
+      passFlags: false,
+      passBool: false,
+      updateId: ''
     };
   },
   components: {
@@ -648,6 +650,7 @@ export default {
         this.noticeSourceId = this.formOrg_z.sourceId;
         this.eduStationId = this.formOrg_z.id;
         this.noticeZhanId = this.formOrg_z.id;
+        this.updateId = this.formOrg.id;
         this.$message({
           message: "查看大队下面消防站大屏",
           type: "success"
@@ -658,6 +661,7 @@ export default {
         this.noticeSourceId = this.formOrg_z.sourceId;
         this.eduStationId = this.formOrg_z.id;
         this.noticeZhanId = this.formOrg_z.id;
+        this.updateId = this.formOrg_z.id;
         this.$message({
           message: "只查看消防站大屏",
           type: "success"
@@ -702,15 +706,18 @@ export default {
     uploadEarliInfo(type) {
       this.dialogFormVisible = true;
       this.earlyType = type;
+      this.passFlags = false;
     },
     uploadEarlyBtn() {
       this.dialogFormVisible = false;
       this.visiblePassword = true;
-      this.passFlags = ture;
+      this.passFlags = true;
     },
 
-    passwordCommit(password) {
-      if (this.passFlags == true) {
+    passwordCommit(password){
+
+      debugger;
+      if(this.passFlags){
         var fire = 0;
         var eme = 0;
         var soc = 0;
@@ -731,87 +738,52 @@ export default {
           socialAssistanceNum: this.earlyInfo.socialAssistanceNum,
           falseAlarmNum: this.earlyInfo.falseAlarmNum,
           otherAlertNum: this.earlyInfo.otherAlertNum,
-          stationId: this.eduStationId
+          stationId:this.updateId
         };
-        console.log("封装数据==", parmar);
-        request.uploadEarlyInfo(parmar, this.consumerType, password)
-          .then(res => {
-            if (res.errcode == 0) {
-              this.$message({
-                message: "更新成功",
-                type: "success"
-              });
-              this.getEarlyInfo(this.eduStationId); //警情信息
-              this.visiblePassword = false;
-            } else if (res.errcode == 407) {
-              this.$message({
-                message: "密码错误！请重新输入",
-                type: "error"
-              });
-            }
-          });
+        console.log("封装数据==",parmar)
+        debugger;
+        request.uploadEarlyInfo(parmar,this.consumerType,password).then(res => {
+          debugger;
+          if (res.errcode == 0) {
+            this.$message({
+              message: "更新成功",
+              type: "success"
+            });
+            this.getEarlyInfo(this.updateId); //警情信息
+            this.visiblePassword = false;
+          }else if(res.errcode == 407){
+            this.$message({
+              message: "密码错误！请重新输入",
+              type: "error"
+            });
+          }
+        })
       }else{
         debugger;
-        if(this.consumerType == "大队"){
-          console.log("访问大队")
-           axios.put(this.url + "/controller/carsInfo/updateCarsStatus?carsId=" +this.carsId +"&status=" +this.status +"&stationId=" +this.formOrg.id +"&consumerType=大队&password=" +password)
+           axios.put(this.url + "/controller/carsInfo/updateCarsStatus?carsId=" +this.carsId +"&status=" +this.status +"&stationId=" +this.updateId +"&consumerType="+this.consumerType+"&password=" +password)
           .then(response => {
+            debugger;
+            console.log("response=",response)
             if (response.errcode == 0) {
+              debugger;
               this.$message({
                 message: "更新成功",
                 type: "success"
               });
               this.getVehicleInfo(this.eduStationId); //车辆信息
               this.visiblePassword = false;
-            } else if (res.errcode == 407) {
+              this.dialogFormVisible = false;
+            } else if (response.errcode == 407) {
+              debugger;
                 this.$message({
                   message: "密码错误！请重新输入",
                   type: "error"
                 });
               }
           })
-          .catch(error => {});
-        }else if(this.consumerType == "支队"){
-          console.log("访问支队")
-          axios.put(this.url + "/controller/carsInfo/updateCarsStatus?carsId=" +this.carsId +"&status=" +this.status +"&stationId=" +this.formOrg.id +"&consumerType=支队&password=" +password)
-          .then(response => {
-            if (response.errcode == 0) {
-              this.$message({
-                message: "更新成功",
-                type: "success"
-              });
-              this.getVehicleInfo(this.eduStationId); //车辆信息
-              this.visiblePassword = false;
-            } else if (res.errcode == 407) {
-                this.$message({
-                  message: "密码错误！请重新输入",
-                  type: "error"
-                });
-              }
-          })
-          .catch(error => {});
-
-        }else{
-          console.log("访问消防站")
-           axios.put(this.url + "/controller/carsInfo/updateCarsStatus?carsId=" +this.carsId +"&status=" +this.status +"&stationId=" +this.formOrg_z.id +"&consumerType=消防站&password=" +password)
-          .then(response => {
-            if (response.errcode == 0) {
-              this.$message({
-                message: "更新成功",
-                type: "success"
-              });
-              this.getVehicleInfo(this.eduStationId); //车辆信息
-              this.visiblePassword = false;
-            } else if (res.errcode == 407) {
-                this.$message({
-                  message: "密码错误！请重新输入",
-                  type: "error"
-                });
-              }
-          })
-          .catch(error => {});
-        }
-        
+          .catch(error => {
+            console.log("ereor = ",error)
+          });
 
       }
     },
@@ -824,6 +796,7 @@ export default {
     uploadVehicleStatusBtn() {
       this.dialogFormVisible = false;
       this.visiblePassword = true;
+      this.passFlags = false;
     },
 
     getFormType() {
@@ -889,6 +862,7 @@ export default {
     timer() {
       console.log("定时执行函数----2小时执行一次");
       this.$refs["education"].getEducationData(this.eduStationId);
+      this.$refs["notice"].getNoticeInfo(this.noticeZhanId);
       this.getMainInfo(this.noticeSourceId);
       this.getAssessmentInfo(this.eduStationId);
       this.getMonth(this.eduStationId);
@@ -1234,12 +1208,15 @@ export default {
       } else {
         console.log("用户权限=", res);
         this.setUserPermissions(res);
-        if (true != res.isDetachment) {
-          this.consumerType = "支队";
-        } else if (true != res.isBrigade) {
-          this.consumerType = "大队";
-        } else if (true != res.isStation) {
-          this.consumerType = "消防站";
+        if(true==res.isDetachment){
+          this.passBool = true;
+          this.consumerType = '支队';
+        }else if(true==res.isBrigade){
+          this.passBool = true;
+          this.consumerType = '大队';
+        }else if(true==res.isStation){
+          this.passBool = true;
+          this.consumerType = '消防站';
         }
       }
     });

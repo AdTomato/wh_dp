@@ -588,27 +588,27 @@ export default {
     // xsheng 添加strat 2020-05-19
 
     //获取今日警情信息
-  getEarlyInfo() {
-    storage.getEarlyInfo(this.formOrg.id,2).then(res => {
-      if(res!=undefined){
-        this.earlyInfo = res.dateAlertInfo;
-        this.earlyInfoEchart = res.monthAlertAnalysis;
-        this.myEcharts(this.earlyInfoEchart);
-        var fire = 0;
-        var eme = 0;
-        var soc = 0;
-        var falseA = 0;
-        var other = 0;
+    getEarlyInfo() {
+      storage.getEarlyInfo(this.formOrg.id,2).then(res => {
+        if(res!=undefined){
+          this.earlyInfo = res.dateAlertInfo;
+          this.earlyInfoEchart = res.monthAlertAnalysis;
+          this.myEcharts(this.earlyInfoEchart);
+          var fire = 0;
+          var eme = 0;
+          var soc = 0;
+          var falseA = 0;
+          var other = 0;
 
-        fire = parseInt(res.dateAlertInfo.fireAlarmNum);
-        eme = parseInt(res.dateAlertInfo.emergencyRescueNum);
-        soc = parseInt(res.dateAlertInfo.socialAssistanceNum);
-        falseA = parseInt(res.dateAlertInfo.falseAlarmNum);
-        other = parseInt(res.dateAlertInfo.otherAlertNum);
-        this.count = fire + eme + soc + falseA + other;
-      }else{console.log("今日警情信息数据返回为空")}
-    });
-  },
+          fire = parseInt(res.dateAlertInfo.fireAlarmNum);
+          eme = parseInt(res.dateAlertInfo.emergencyRescueNum);
+          soc = parseInt(res.dateAlertInfo.socialAssistanceNum);
+          falseA = parseInt(res.dateAlertInfo.falseAlarmNum);
+          other = parseInt(res.dateAlertInfo.otherAlertNum);
+          this.count = fire + eme + soc + falseA + other;
+        }else{console.log("今日警情信息数据返回为空")}
+      });
+    },
     //获取值班信息
     getOnDutyInfo() {
       storage.getOnDutyInfo(this.formOrg.id,2).then(res => {

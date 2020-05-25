@@ -9,7 +9,7 @@
             </el-form-item>
           </el-form>
           <div slot="footer" class="dialog-footer">
-            <el-button type="primary" @click="confirmUpdate">确 定</el-button>
+            <el-button type="primary" @click="confirmUpdate('passwordForm')">确 定</el-button>
           </div>
         </el-dialog>
     </div>
@@ -27,6 +27,22 @@
                 type: Boolean,
                 default: false
             },
+            passBool: {
+                type: Boolean,
+                default: false
+            },
+            isDetachment: {
+                type: Boolean,
+                default: false
+            },
+            isBrigade: {
+                type: Boolean,
+                default: false
+            },
+            isStation: {
+                type: Boolean,
+                default: false
+            }
         },
         data() {
             return {
@@ -43,8 +59,20 @@
             
         },
         methods:{
-            confirmUpdate(){
-                this.$emit('passwordCommit', this.form.inputPass);
+            confirmUpdate(formName){
+                console.log(this.isDetachment);
+                this.$refs[formName].validate(valid => {
+                    if (valid) {
+                        //如果通过验证 to do...
+                        if(!this.passBool){
+                            this.$emit('confirmUpdateNotice', this.form.inputPass);
+                        }else{
+                            this.$emit('passwordCommit', this.form.inputPass);
+                        }
+                    } else {
+                        return false;
+                    }
+                })
             },
             modalClose() {
                 this.$emit('update:visible', false); // 直接修改父组件的属性
