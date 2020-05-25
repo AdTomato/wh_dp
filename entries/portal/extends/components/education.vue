@@ -81,6 +81,7 @@
             eduClassOption() {
                 return {
                     step: 0.2, // 数值越大速度滚动越快
+                    limitMoveNum: 8
                 };
             }
         },
