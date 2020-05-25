@@ -36,7 +36,7 @@
         data() {
             return {
                 listData: [],
-                noticeUrl: ''
+                noticeUrl: '',
             }
         },
         components: {
@@ -47,6 +47,7 @@
             noticeClassOption() {
                 return {
                     step: 0.2, // 数值越大速度滚动越快
+                    limitMoveNum: 5
                 };
             }
         },
