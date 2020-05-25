@@ -50,116 +50,62 @@
             <div class="detail_nums">
               <ul class="commander_list mf">
                 <li class="commander_name">指&nbsp;&nbsp;&nbsp;挥&nbsp;&nbsp;&nbsp;员 :</li>
-                <li class="commander_detail">
-                  <span
-                    v-for="item in userNames1"
-                    v-show="item.sequenceStatus=='1'"
-                  >{{item.sequenceNo}}</span>
-                  <span
-                    v-show="item.sequenceStatus=='2'"
-                    class="gree"
-                    v-for="item in userNames1"
-                  >{{item.sequenceNo}}</span>
-                  <span
-                    class="yello"
-                    v-for="item in userNames1"
-                    v-show="item.sequenceStatus=='3'"
-                  >{{item.sequenceNo}}</span>
+                <li class="commander_detail">                
+                  <vue-seamless-scroll :data="userNames1" :class-option="optionUp" class="seamless-userName">
+                    <span v-for="item in userNames1" v-text="item.sequenceNo" v-show="item.sequenceStatus=='1'"></span>
+                    <span v-show="item.sequenceStatus=='2'" class="gree" v-for="item in userNames1" v-text="item.sequenceNo"></span>
+                    <span v-show="item.sequenceStatus=='3'" class="yello" v-for="item in userNames1" v-text="item.sequenceNo"></span>
+                  </vue-seamless-scroll>
                 </li>
               </ul>
               <ul class="commander_list ms">
                 <li class="commander_name">特 勤 一 班 :</li>
                 <li class="commander_detail">
-                  <span
-                    v-for="item in userNames2"
-                    v-show="item.sequenceStatus=='1'"
-                  >{{item.sequenceNo}}</span>
-                  <span
-                    v-show="item.sequenceStatus=='2'"
-                    class="gree"
-                    v-for="item in userNames2"
-                  >{{item.sequenceNo}}</span>
-                  <span
-                    v-show="item.sequenceStatus=='3'"
-                    class="yello"
-                    v-for="item in userNames2"
-                  >{{item.sequenceNo}}</span>
+                  <vue-seamless-scroll :data="userNames2" :class-option="optionUp" class="seamless-userName">
+                    <span v-for="item in userNames2" v-text="item.sequenceNo" v-show="item.sequenceStatus=='1'"></span>
+                    <span v-show="item.sequenceStatus=='2'" class="gree" v-for="item in userNames2" v-text="item.sequenceNo"></span>
+                    <span v-show="item.sequenceStatus=='3'" class="yello" v-for="item in userNames2" v-text="item.sequenceNo"></span>
+                  </vue-seamless-scroll>
                 </li>
               </ul>
               <ul class="commander_list mx">
                 <li class="commander_name">特 勤 二 班 :</li>
                 <li class="commander_detail">
-                  <span
-                    v-for="item in userNames3"
-                    v-show="item.sequenceStatus=='1'"
-                  >{{item.sequenceNo}}</span>
-                  <span
-                    v-show="item.sequenceStatus=='2'"
-                    class="gree"
-                    v-for="item in userNames3"
-                  >{{item.sequenceNo}}</span>
-                  <span
-                    v-show="item.sequenceStatus=='3'"
-                    class="yello"
-                    v-for="item in userNames3"
-                  >{{item.sequenceNo}}</span>
+                  <vue-seamless-scroll :data="userNames3" :class-option="optionUp" class="seamless-userName">
+                    <span v-for="item in userNames3" v-text="item.sequenceNo" v-show="item.sequenceStatus=='1'"></span>
+                    <span v-show="item.sequenceStatus=='2'" class="gree" v-for="item in userNames3" v-text="item.sequenceNo"></span>
+                    <span v-show="item.sequenceStatus=='3'" class="yello" v-for="item in userNames3" v-text="item.sequenceNo"></span>
+                  </vue-seamless-scroll>
                 </li>
               </ul>
               <ul class="commander_list mj">
                 <li class="commander_name">灭 火 一 班 :</li>
                 <li class="commander_detail">
-                  <span
-                    v-for="item in userNames4"
-                    v-show="item.sequenceStatus=='1'"
-                  >{{item.sequenceNo}}</span>
-                  <span
-                    v-show="item.sequenceStatus=='2'"
-                    class="gree"
-                    v-for="item in userNames4"
-                  >{{item.sequenceNo}}</span>
-                  <span
-                    v-show="item.sequenceStatus=='3'"
-                    class="yello"
-                    v-for="item in userNames4"
-                  >{{item.sequenceNo}}</span>
+                  <vue-seamless-scroll :data="userNames4" :class-option="optionUp" class="seamless-userName">
+                    <span v-for="item in userNames4" v-text="item.sequenceNo" v-show="item.sequenceStatus=='1'"></span>
+                    <span v-show="item.sequenceStatus=='2'" class="gree" v-for="item in userNames4" v-text="item.sequenceNo"></span>
+                    <span v-show="item.sequenceStatus=='3'" class="yello" v-for="item in userNames4" v-text="item.sequenceNo"></span>
+                  </vue-seamless-scroll>
                 </li>
               </ul>
               <ul class="commander_list mk">
                 <li class="commander_name">灭 火 二 班 :</li>
                 <li class="commander_detail">
-                  <span
-                    v-for="item in userNames5"
-                    v-show="item.sequenceStatus=='1'"
-                  >{{item.sequenceNo}}</span>
-                  <span
-                    v-show="item.sequenceStatus=='2'"
-                    class="gree"
-                    v-for="item in userNames5"
-                  >{{item.sequenceNo}}</span>
-                  <span
-                    v-show="item.sequenceStatus=='3'"
-                    class="yello"
-                    v-for="item in userNames5"
-                  >{{item.sequenceNo}}</span>
+                  <vue-seamless-scroll :data="userNames5" :class-option="optionUp" class="seamless-userName">
+                    <span v-for="item in userNames5" v-text="item.sequenceNo" v-show="item.sequenceStatus=='1'"></span>
+                    <span v-show="item.sequenceStatus=='2'" class="gree" v-for="item in userNames5" v-text="item.sequenceNo"></span>
+                    <span v-show="item.sequenceStatus=='3'" class="yello" v-for="item in userNames5" v-text="item.sequenceNo"></span>
+                  </vue-seamless-scroll>
                 </li>
               </ul>
               <ul class="commander_list ml">
                 <li class="commander_name">通信保障班 :</li>
                 <li class="commander_detail">
-                  <span
-                    v-for="item in userNames6"
-                    v-show="item.sequenceStatus=='1'"
-                  >{{item.sequenceNo}}</span>
-                  <span
-                    v-show="item.sequenceStatus=='2'"
-                    class="gree"
-                    v-for="item in userNames6"
-                  >{{item.sequenceNo}}</span>
-                  <span
-                    v-show="item.sequenceStatus=='3'"
-                    class="yello"
-                    v-for="item in userNames6"
-                  >{{item.sequenceNo}}</span>
+                  <vue-seamless-scroll :data="userNames6" :class-option="optionUp" class="seamless-userName">
+                    <span v-for="item in userNames6" v-text="item.sequenceNo" v-show="item.sequenceStatus=='1'"></span>
+                    <span v-show="item.sequenceStatus=='2'" class="gree" v-for="item in userNames6" v-text="item.sequenceNo"></span>
+                    <span v-show="item.sequenceStatus=='3'" class="yello" v-for="item in userNames6" v-text="item.sequenceNo"></span>
+                  </vue-seamless-scroll>
                 </li>
               </ul>
             </div>
@@ -293,8 +239,7 @@
               </ul>
             </div>
           </div>
-          <Password :visible.sync="visiblePassword" @passwordCommit = "passwordCommit" 
-          :passBool="passBool"></Password>
+          <Password :visible.sync="visiblePassword" @passwordCommit = "passwordCommit" :passBool="passBool"></Password>
           <!-- 今日警情信息end -->
 
           <!-- 值勤车辆strat -->
@@ -1166,9 +1111,21 @@ export default {
     },
     optionLeft() {
       return {
-        direction: 2,
-        limitMoveNum: 0
-      };
+            direction: 2,
+            limitMoveNum: 0
+          }
+    },
+    optionUp(){
+      return{
+        step: 0.2, // 数值越大速度滚动越快
+        limitMoveNum: 15, // 开始无缝滚动的数据量 this.dataList.length
+        hoverStop: true, // 是否开启鼠标悬停stop
+        direction: 1, // 0向下 1向上 2向左 3向右
+        openWatch: true, // 开启数据实时监控刷新dom
+        singleHeight: 0, // 单步运动停止的高度(默认值0是无缝不停止的滚动) direction => 0/1
+        singleWidth: 0, // 单步运动停止的宽度(默认值0是无缝不停止的滚动) direction => 2/3
+        waitTime: 1000 // 单步运动停止的时间(默认值1000ms)
+      }
     }
   },
   mounted() {
