@@ -25,6 +25,8 @@
 <script>
     import axios from "axios";
     import request from "../api/request";
+    import ElementUI from "element-ui";
+    import "element-ui/lib/theme-chalk/index.css";
     import vueSeamlessScroll from "vue-seamless-scroll";
     export default {
         name: "notice",
@@ -34,6 +36,7 @@
         data() {
             return {
                 listData: [],
+                noticeUrl: ''
             }
         },
         components: {
@@ -68,12 +71,20 @@
             },
             noticeClick(item, index){
                 console.log(item.url);
+                this.noticeUrl = item.url;
                 if(item.url){
-                    window.location.href = item.url
+                    window.location.href = item.url;
                 }
-            }     
+            },
         },
         mounted(){
+            
         }
     }
 </script>
+
+<style lang="less" scoped>
+.notice-dialog .el-dialog{
+    height: 900px;
+}
+</style>

@@ -715,6 +715,7 @@ export default {
     timer(){
       console.log("定时执行函数----2小时执行一次");
       this.$refs["education"].getEducationData(this.eduStationId);
+      this.$refs["notice"].getNoticeInfo(this.noticeZhanId);
       this.getMainInfo(this.noticeSourceId);
       this.getAssessmentInfo(this.eduStationId);
       this.getMonth(this.eduStationId);
