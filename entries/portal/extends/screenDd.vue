@@ -402,6 +402,7 @@ export default {
       // 基于准备好的dom，初始化echarts实例
       //月度警情量类型分析
       var myChart = this.$echarts.init(document.getElementById("main"));
+      console.log('streetName:' + this.streetName);
       // 指定图表的配置项和数据
       var option = {
         tooltip: {
@@ -489,7 +490,9 @@ export default {
               }
             },
             axisLabel:{
-              color: 'white'
+              color: 'white',
+              interval:0,  
+              rotate:40  
             },
             data:this.streetName
           }
