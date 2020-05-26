@@ -276,6 +276,7 @@
                     <div class="list_text">
                       <div class="mt2">发动机功率:{{item.gl+"/KM"}}</div>
                       <div v-if="item.zl" class="list_text2">起重重量:{{item.zl+"吨"}}</div>
+                      <div v-if="item.zy" class="list_text2">载液容量:{{item.zy}}</div>
                     </div>
                   </li>
                 </ul>
@@ -802,6 +803,7 @@ export default {
     //获取车辆信息
     getVehicleInfo(id) {
       storage.getVehicleInfo(id).then(res => {
+        console.log("车辆信息===",res)
         if (res != undefined) {
           this.vehicleInfo = res;
           var arrDate = res.vehicleInfos;
@@ -812,7 +814,8 @@ export default {
             obj.id = arrDate[i].id;
             obj.xfc = arrDate[i].vehicleName;
             obj.gl = arrDate[i].enginePower;
-            obj.zl = arrDate[i].liftingWeight;
+            obj.zl = arrDate[i].liftingWeight; 
+            obj.zy = arrDate[i].carrierVolume
             obj.status = arrDate[i].vehicleStatus;
             ar.push(obj);
           }
