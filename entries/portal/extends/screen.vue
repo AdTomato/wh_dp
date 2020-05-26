@@ -932,7 +932,7 @@ export default {
             this.discipline_img = res.data.disciplineStar.imgUrl;
           }
           if (res.data.houseStar.imgUrl != null) {
-            this.house_img = res.data.houseStar.imgUrl;
+            this.houser_img = res.data.houseStar.imgUrl;
           }
           if (res.data.trainStar.imgUrl != null) {
             this.train_img = res.data.trainStar.imgUrl;

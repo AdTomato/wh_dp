@@ -489,7 +489,9 @@ export default {
               }
             },
             axisLabel:{
-              color: 'white'
+              color: 'white',
+              interval:0,  
+              rotate:40  
             },
             data:this.streetName
           }
@@ -507,6 +509,7 @@ export default {
             },
             axisLabel:{
               color: 'white'
+              
             },
             splitLine: {    // gird 区域中的分割线
               show: true,   // 是否显示
@@ -599,6 +602,7 @@ export default {
     //获取今日警情信息
     getEarlyInfo() {
       storage.getEarlyInfo(this.formOrg.id,2).then(res => {
+        console.log("今日警情信息=",res)
         if(res!=undefined){
           debugger;
           this.earlyInfo = res.dateAlertInfo;
