@@ -59,7 +59,9 @@ import replace$ from 'dingtalk-jsapi/api/biz/navigation/replace';
                     stationId: id
                 }
                 const res = await request.getNotice(par);
-                this.listData = res.data;
+                if(res.data){
+                    this.listData = res.data;
+                }
                 console.log(this.listData);
             },
             async getBrigadeNoticeInfo(id){
@@ -68,7 +70,9 @@ import replace$ from 'dingtalk-jsapi/api/biz/navigation/replace';
                     brigadeId: id
                 }
                 const res = await request.getNoticeBrigade(par);
-                this.listData = res.data;
+                if(res.data){
+                    this.listData = res.data;
+                }
                 console.log(this.listData);
             },
             noticeClick(item, index){
