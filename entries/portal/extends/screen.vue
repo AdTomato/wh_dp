@@ -577,8 +577,6 @@ export default {
 
     //确定按钮 处理查看大屏类型
     confirmBtn() {
-      console.log('-----',this.formOrg_z);
-      console.log(this.formOrg);
       // if (this.formOrg.id != "" && this.formOrg_z.id == "") {
       //   this.noticeSourceId = this.formOrg.sourceId;
       //   this.eduStationId = this.formOrg.id;
@@ -591,7 +589,7 @@ export default {
       //   console.log("支队时候的id=",this.eduStationId);
       // } else
       if (this.formOrg.id != "" && this.formOrg_z.id != "") {
-        this.noticeSourceId = this.formOrg.sourceId;
+        this.noticeSourceId = this.formOrg_z.sourceId;
         this.eduStationId = this.formOrg_z.id;
         this.noticeZhanId = this.formOrg_z.id;
         this.updateId = this.formOrg.id;
@@ -601,7 +599,7 @@ export default {
         });
         this.dialogFormVisibleOrg = false; //查看大队下面消防站大屏
       } else if (this.formOrg_z.id != "" && this.formOrg.id == "") {
-        this.noticeSourceId = this.formOrg.sourceId;
+        this.noticeSourceId = this.formOrg_z.sourceId;
         this.eduStationId = this.formOrg_z.id;
         this.noticeZhanId = this.formOrg_z.id;
         this.updateId = this.formOrg_z.id;
@@ -934,7 +932,7 @@ export default {
             this.discipline_img = res.data.disciplineStar.imgUrl;
           }
           if (res.data.houseStar.imgUrl != null) {
-            this.houser_img = res.data.houseStar.imgUrl;
+            this.house_img = res.data.houseStar.imgUrl;
           }
           if (res.data.trainStar.imgUrl != null) {
             this.train_img = res.data.trainStar.imgUrl;
