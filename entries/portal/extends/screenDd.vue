@@ -284,6 +284,7 @@ export default {
       count:0,
       titleNameDd:'',
       sourceId:'',
+      personInfoId: '',
       //myjing
 
       orgOptions: {},
@@ -340,9 +341,9 @@ export default {
       });
     },
     //人员动态和生日
-    getTeamInfo(){
+    getTeamInfo(id){
       let prr = {
-        sourceId: this.sourceId
+        sourceId: id
       }
       request.getTeamInfo(prr).then(res =>{
         if(res.data.numAll != null){
@@ -557,42 +558,42 @@ export default {
     },
 
     //人员动态生日
-    getTeamInfo(){
-      let prr = {
-        sourceId: this.sourceId
-      }
-      request.getTeamInfo(prr).then(res =>{
-        if(res.data.numAll != null){
-          this.numAll = res.data.numAll;
-        }
-        if(res.data.numtype1 != null){
-          this.numtype1 = res.data.numtype1;
-        }
-        if(res.data.numtype2 != null){
-          this.numtype2 = res.data.numtype2;
-        }
-        if(res.data.numZaigang != null){
-          this.numZaigang = res.data.numZaigang;
-        }
-        if(res.data.numGongchai != null){
-          this.numGongchai = res.data.numGongchai;
-        }
-        if(res.data.numXiujia != null){
-          this.numXiujia = res.data.numXiujia;
-        }
-        if(res.data.userNames1 != null){
-          this.userNames1 = res.data.userNames1;
-        }
-        if(res.data.userNames2 != null){
-          this.userNames2 = res.data.userNames2;
-        }
-        if(res.data.userNames3 != null){
-          this.userNames3 = res.data.userNames3;
-        }
+    // getTeamInfo(){
+    //   let prr = {
+    //     sourceId: this.sourceId
+    //   }
+    //   request.getTeamInfo(prr).then(res =>{
+    //     if(res.data.numAll != null){
+    //       this.numAll = res.data.numAll;
+    //     }
+    //     if(res.data.numtype1 != null){
+    //       this.numtype1 = res.data.numtype1;
+    //     }
+    //     if(res.data.numtype2 != null){
+    //       this.numtype2 = res.data.numtype2;
+    //     }
+    //     if(res.data.numZaigang != null){
+    //       this.numZaigang = res.data.numZaigang;
+    //     }
+    //     if(res.data.numGongchai != null){
+    //       this.numGongchai = res.data.numGongchai;
+    //     }
+    //     if(res.data.numXiujia != null){
+    //       this.numXiujia = res.data.numXiujia;
+    //     }
+    //     if(res.data.userNames1 != null){
+    //       this.userNames1 = res.data.userNames1;
+    //     }
+    //     if(res.data.userNames2 != null){
+    //       this.userNames2 = res.data.userNames2;
+    //     }
+    //     if(res.data.userNames3 != null){
+    //       this.userNames3 = res.data.userNames3;
+    //     }
 
 
-      })
-    },
+    //   })
+    // },
     // xsheng 添加strat 2020-05-19
 
     //获取今日警情信息
@@ -688,12 +689,12 @@ export default {
           type: "warning"
         });
       }
-
+      this.personInfoId = this.formOrg.sourceId;
       // 获取本周工作任务
       this.$refs["weekwork"].getWorks(this.formOrg.id);
       this.$refs["notice"].getBrigadeNoticeInfo(this.formOrg.id);
       this.getBrigadeAlertInfoByBrigadeId();
-      this.getTeamInfo();
+      this.getTeamInfo(this.personInfoId);
       this.getOnDutyInfo();
       this.getRandom();
       this.myEcharts();
