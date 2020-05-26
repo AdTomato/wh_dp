@@ -647,7 +647,7 @@ export default {
       });
       s = objs.name;
       this.formOrg = objs;
-      this.titleNameDd = s.substr(0, s.length - 2)+'区';
+      this.titleNameDd = s.substr(0, s.length - 2)+'大队';
       //选择大队时存储数据 end
     },
 
@@ -656,6 +656,9 @@ export default {
       if (obj.isBrigade == true) {
         this.play_d = true;
         this.options = this.setDate(obj.brigadeData);
+      }else if(obj.isDetachment == true){
+        this.play_d = true;
+        this.options = this.setDate(obj.detachmentData);
       }else{
         this.play_d = false;
         this.$message({
