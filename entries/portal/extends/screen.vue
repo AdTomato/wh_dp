@@ -591,7 +591,7 @@ export default {
       //   console.log("支队时候的id=",this.eduStationId);
       // } else
       if (this.formOrg.id != "" && this.formOrg_z.id != "") {
-        this.noticeSourceId = this.formOrg.sourceId;
+        this.noticeSourceId = this.formOrg_z.sourceId;
         this.eduStationId = this.formOrg_z.id;
         this.noticeZhanId = this.formOrg_z.id;
         this.updateId = this.formOrg.id;
@@ -601,7 +601,7 @@ export default {
         });
         this.dialogFormVisibleOrg = false; //查看大队下面消防站大屏
       } else if (this.formOrg_z.id != "" && this.formOrg.id == "") {
-        this.noticeSourceId = this.formOrg.sourceId;
+        this.noticeSourceId = this.formOrg_z.sourceId;
         this.eduStationId = this.formOrg_z.id;
         this.noticeZhanId = this.formOrg_z.id;
         this.updateId = this.formOrg_z.id;

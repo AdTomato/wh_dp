@@ -49,7 +49,7 @@
           </div>
           <div class="detail_num">
             <ul class="commander_list mf">
-              <li class="commander_name">大队主管:</li>
+              <li class="commander_name">大队主官:</li>
               <li class="commander_detail">
                 <vue-seamless-scroll :data="userNames1" :class-option="optionUp" class="seamless-userName">
                   <span v-for="item in userNames1" v-text="item.sequenceNo" v-show="item.sequenceStatus=='1'"></span>
