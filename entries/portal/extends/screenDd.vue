@@ -115,7 +115,7 @@
             <ul class="tel_ul">
               <li>
                 火灾扑救
-                <div class="color_r mt">({{earlyInfo.falseAlarmNum}}起)</div>
+                <div class="color_r mt">({{earlyInfo.fireAlarmNum}}起)</div>
               </li>
               <li>
                 抢险救援
@@ -127,7 +127,7 @@
               </li>
               <li>
                 虚假报警
-                <div class="color_g mt">({{earlyInfo.fireAlarmNum}}起)</div>
+                <div class="color_g mt">({{earlyInfo.falseAlarmNum}}起)</div>
               </li>
               <li>
                 其他警情
@@ -402,6 +402,7 @@ export default {
       // 基于准备好的dom，初始化echarts实例
       //月度警情量类型分析
       var myChart = this.$echarts.init(document.getElementById("main"));
+      console.log('streetName:' + this.streetName);
       // 指定图表的配置项和数据
       var option = {
         tooltip: {
