@@ -88,8 +88,8 @@
               if(weatherData.code == 0 || weatherData.code == 1 || weatherData.code == 2 
               || weatherData.code == 3 || weatherData.code == 38){
                 imgurls = 'sun_icon.png'
-              }else if(weatherData.code == 4 || weatherData.code == 7 || weatherData.code == 9 || weatherData.code == 8 ){
-                imgurls = '4@1x.png'
+              }else if(weatherData.code == 9){
+                imgurls = '9@1x.png'
               }else if(weatherData.code == 10 || weatherData.code == 13 || weatherData.code == 14 || weatherData.code == 15
               || weatherData.code == 16 || weatherData.code == 17 || weatherData.code == 18 || weatherData.code == 19){
                 imgurls = '16@1x.png'
@@ -106,12 +106,14 @@
                 imgurls = '30@1x.png'
               }else if(weatherData.code == 31){
                 imgurls = '31@1x.png'
-              }else if(weatherData.code == 5 || weatherData.code == 6){
+              }else if(weatherData.code == 7 || weatherData.code == 5 || weatherData.code == 4){
                 imgurls = '5@1x.png'
               }else if(weatherData.code == 37){
                 imgurls = '37@1x.png'
               }else if(weatherData.code == 11 || weatherData.code == 12){
                 imgurls = '11@1x.png'
+              }else if(weatherData.code == 8 || weatherData.code == 6){
+                imgurls = '8@1x.png'
               }
               this.imgUrl = require('../assets/images/' + imgurls);
 
