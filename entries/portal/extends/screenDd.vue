@@ -604,7 +604,6 @@ export default {
       storage.getEarlyInfo(this.formOrg.id,2).then(res => {
         console.log("今日警情信息=",res)
         if(res!=undefined){
-          debugger;
           this.earlyInfo = res.dateAlertInfo;
           this.earlyInfoEchart = res.monthAlertAnalysis;
           this.myEcharts(this.earlyInfoEchart,null);

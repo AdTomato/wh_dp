@@ -2,13 +2,13 @@
     <div>
         <div class="screen-item">
             <h3 class="screen-item-title">本周重点工作</h3>
-            <p v-if="worksData.length ==0 ">暂时无数据！</p>
-            <div v-else>
+            <p v-if="worksData.length ==0 " class="weekwork-txt">暂时无数据！</p>
+            <div v-else @click="handleClick($event)">
                 <vue-seamless-scroll :data="worksData" class="seamless-work" :class-option="workClassOption">
                     <ul class="important-work">
-                        <li v-for="(item, index) in worksData" :key="index" @click="updateWorkStatus(item)">
+                        <li v-for="(item, index) in worksData" :key="index">
                             <p>{{item.workContent}}</p>
-                            <span>{{item.status}}</span>
+                            <span :data-status="item.status" :data-id="item.id">{{item.status}}</span>
                         </li>
                     </ul>
                 </vue-seamless-scroll>
@@ -68,7 +68,9 @@
             workClassOption() {
                 return {
                     step: 0.2, // 数值越大速度滚动越快
-                    limitMoveNum: 5
+                    limitMoveNum: 5,
+                    openTouch: false,
+                    hoverStop: true
                 };
             }
         },
@@ -128,7 +130,15 @@
                 console.log(value);
                 this.workStatus = value;
                 this.valStatus = value;
-            }
+            },
+            handleClick(event) {
+                if(event.target.dataset.status){
+                    console.log(this.workBriageId);
+                    this.visibleStatus = true;
+                    this.currentId = event.target.dataset.id;
+                    this.valStatus = event.target.dataset.status;
+                }
+            },
         },
 
     }
