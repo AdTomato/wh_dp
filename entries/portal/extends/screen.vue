@@ -254,7 +254,7 @@
                   <div class="round bj_y"></div>出动
                 </li>
                 <li>
-                  <div class="round bj_r"></div>保修
+                  <div class="round bj_r"></div>报修
                 </li>
               </ul>
             </div>
@@ -270,13 +270,13 @@
                     <div class="list_bj" :data-dept="item.id">
                       {{item.xfc}}
                       <div v-if="item.status=='出动'" class="round bj_y fr"></div>
-                      <div v-else-if="item.status=='保修'" class="round bj_r fr"></div>
+                      <div v-else-if="item.status=='报修'" class="round bj_r fr"></div>
                       <div v-else="item.status=='在位'" class="round bj_g fr"></div>
                     </div>
                     <div class="list_text">
-                      <div class="mt2">发动机功率:{{item.gl+"/KM"}}</div>
-                      <div v-if="item.zl" class="list_text2">起重重量:{{item.zl+"吨"}}</div>
-                      <div v-if="item.zy" class="list_text2">载液容量:{{item.zy}}</div>
+                      <div :title="'发动机功率:'+item.gl+'/KW'" class="mt2 limit">发动机功率:{{item.gl+"/KW"}}</div>
+                      <div :title="'起重重量:'+item.zl+'吨'" v-if="item.zl" class="list_text2 limit">起重重量:{{item.zl+"吨"}}</div>
+                      <div :title="'载液容量:'+item.zy" v-if="item.zy" class="list_text2 limit">载液容量:{{item.zy}}</div>
                     </div>
                   </li>
                 </ul>
@@ -307,7 +307,7 @@
           <!-- 值班信息end -->
         </div>
 
-        <el-dialog title="警情信息" :visible.sync="dialogFormVisible">
+        <el-dialog title="警情信息" :visible.sync="dialogFormVisible" :showClose="showClo">
           <el-form :model="earlyInfo">
             <el-form-item label="警情数量" :label-width="formLabelWidth">
               <el-input
@@ -348,7 +348,7 @@
             </el-form-item>
           </el-form>
           <div slot="footer" class="dialog-footer">
-            <el-button @click="dialogFormVisible = false">取 消</el-button>
+            <el-button @click="closeEarlyBtn">取 消</el-button>
             <el-button type="primary" @click="uploadEarlyBtn">确 定</el-button>
           </div>
         </el-dialog>
@@ -359,7 +359,7 @@
               <el-select v-model="formType.region" placeholder="请选择值勤类型" @change="getFormType">
                 <el-option label="在位" value="在位"></el-option>
                 <el-option label="出动" value="出动"></el-option>
-                <el-option label="保修" value="保修"></el-option>
+                <el-option label="报修" value="报修"></el-option>
               </el-select>
             </el-form-item>
           </el-form>
@@ -423,6 +423,9 @@
 }
 .yello {
   color: #c0a000;
+}
+.limit{
+  pointer-events: none;
 }
 </style>
 
@@ -653,6 +656,11 @@ export default {
       this.visiblePassword = true;
       this.passFlags = true;
     },
+    closeEarlyBtn(){
+      this.dialogFormVisible = false;
+      this.getEarlyInfo(this.eduStationId); //警情信息
+    }
+    ,
 
     passwordCommit(password){
       if(this.passFlags){
@@ -749,7 +757,11 @@ export default {
       });
       s = objs.name;
       this.formOrg = objs;
-      this.titleNameDd = s.substr(0, s.length - 2) + "大队";
+      if(s=='特勤大队'){
+          this.titleNameDd = s.substr(0, s.length - 2) + "大队";
+      }else{
+        this.titleNameDd = s.substr(0, s.length - 2) + "区";
+      }
       //选择大队时存储数据 end
 
       var parmar = { brigadeId: id };
@@ -1109,13 +1121,15 @@ export default {
     classOption() {
         return {
             step: 0.2, // 数值越大速度滚动越快
-            limitMoveNum:8
+            limitMoveNum:8,
+            openTouch:false
         };
     },
     optionLeft() {
       return {
             direction: 2,
-            limitMoveNum: 0
+            limitMoveNum: 0,
+            openTouch:false
           }
     },
     optionUp(){
@@ -1127,7 +1141,8 @@ export default {
         openWatch: true, // 开启数据实时监控刷新dom
         singleHeight: 0, // 单步运动停止的高度(默认值0是无缝不停止的滚动) direction => 0/1
         singleWidth: 0, // 单步运动停止的宽度(默认值0是无缝不停止的滚动) direction => 2/3
-        waitTime: 1000 // 单步运动停止的时间(默认值1000ms)
+        waitTime: 1000, // 单步运动停止的时间(默认值1000ms)
+        openTouch:false
       }
     }
   },
