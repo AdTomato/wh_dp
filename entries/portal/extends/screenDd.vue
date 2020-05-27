@@ -652,7 +652,12 @@ export default {
       });
       s = objs.name;
       this.formOrg = objs;
-      this.titleNameDd = s.substr(0, s.length - 2)+'大队';
+      if(s=='特勤大队'){
+        this.titleNameDd = s.substr(0, s.length - 2)+'大队';
+      }else{
+        this.titleNameDd = s.substr(0, s.length - 2)+'区';
+      }
+      
       //选择大队时存储数据 end
     },
 
