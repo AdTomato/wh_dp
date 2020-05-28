@@ -105,6 +105,10 @@ const request = {
     //量化考勤周报月度详情信息
     getAssessmentMonthDetailInfo(data){
         return Get('/controller/quantiAssessment/getAssessmentMonthDetailInfo', data);
+    },
+    //获取大屏标题接口
+    getTitle(data){
+        return Get('/controller/org/getTitle', data);
     }
 }
 

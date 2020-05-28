@@ -1,7 +1,7 @@
 <template>
   <div class="screen">
     <div class="screen-title">
-      <h2>武汉市{{titleNameDd+titleName}}消防救援站</h2>
+      <h2>{{titleName}}</h2>
       <img src="./assets/images/navbar_bg.png" alt />
     </div>
     <div class="screen-main">
@@ -307,7 +307,7 @@
           <!-- 值班信息end -->
         </div>
 
-        <el-dialog title="警情信息" :visible.sync="dialogFormVisible" :showClose="showClo">
+        <el-dialog title="警情信息" :visible.sync="dialogFormVisible" :showClose="showClo" :close-on-click-modal="showClo">
           <el-form :model="earlyInfo">
             <el-form-item label="警情数量" :label-width="formLabelWidth">
               <el-input
@@ -448,6 +448,7 @@ export default {
   data() {
     return {
       url: "http://121.41.27.194:8080/api",
+
       visiblePassword: false,
       consumerType: "",
       dataobj: "",
@@ -552,7 +553,6 @@ export default {
         return item.id === val;
       });
       this.formOrg_z = obj;
-      this.titleName = obj.name;
     },
 
     //用户权限处理
@@ -644,6 +644,7 @@ export default {
       this.getEarlyInfo(this.eduStationId); //警情信息
       this.getOnDutyInfo(this.eduStationId); //值班信息
       this.getVehicleInfo(this.eduStationId); //车辆信息
+      this.getTitle(this.eduStationId);//获取大屏标题
     },
 
     uploadEarliInfo(type) {
@@ -692,7 +693,7 @@ export default {
               message: "更新成功",
               type: "success"
             });
-            this.getEarlyInfo(this.updateId); //警情信息
+            this.getEarlyInfo(this.eduStationId); //警情信息
             this.visiblePassword = false;
           }else if(res.errcode == 407){
             this.$message({
@@ -757,11 +758,6 @@ export default {
       });
       s = objs.name;
       this.formOrg = objs;
-      if(s=='特勤大队'){
-          this.titleNameDd = s.substr(0, s.length - 2) + "大队";
-      }else{
-        this.titleNameDd = s.substr(0, s.length - 2) + "区";
-      }
       //选择大队时存储数据 end
 
       var parmar = { brigadeId: id };
@@ -810,6 +806,17 @@ export default {
       this.getEarlyInfo(this.eduStationId); //警情信息
       this.getOnDutyInfo(this.eduStationId); //值班信息
       this.getVehicleInfo(this.eduStationId); //车辆信息
+    },
+
+    getTitle(id){
+      storage.getTitle(id).then(res => {
+        console.log("获取大屏标题===",res);
+        if (res != undefined) {
+          this.titleName = res;
+        }else{
+          this.titleName = "未获取到大队或消防站名称";
+        }
+      });
     },
 
     //获取车辆信息

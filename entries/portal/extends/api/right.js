@@ -96,6 +96,19 @@ var storage = {
         return obj ;
       },
 
+      //获取大屏标题接口
+      async getTitle(id){
+        var parmar = {id:id}
+        await request.getTitle(parmar).then(res => {
+          if(res.errcode==0){
+            obj = res.data;
+          }else if(res.errcode == 407){
+            obj = res;
+          }
+        })
+        return obj ;
+      }
+
 }
 export default storage;//把这个方法暴露出去，方便外部引用
 

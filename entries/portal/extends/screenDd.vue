@@ -1,7 +1,7 @@
 <template>
   <div class="screen">
     <div class="screen-title">
-      <h2>武汉市{{titleNameDd}}消防救援大队</h2>
+      <h2>{{titleNameDd}}</h2>
       <img src="./assets/images/navbar_bg.png" alt />
     </div>
     <div class="screen-main dd-main">
@@ -651,13 +651,18 @@ export default {
       });
       s = objs.name;
       this.formOrg = objs;
-      if(s=='特勤大队'){
-        this.titleNameDd = s.substr(0, s.length - 2)+'大队';
-      }else{
-        this.titleNameDd = s.substr(0, s.length - 2)+'区';
-      }
-      
       //选择大队时存储数据 end
+    },
+
+    getTitle(id){
+      storage.getTitle(id).then(res => {
+        console.log("获取大屏标题===",res);
+        if (res != undefined) {
+          this.titleNameDd = res;
+        }else{
+          this.titleNameDd = "未获取到大队或消防站名称";
+        }
+      });
     },
 
     //用户权限处理
@@ -707,6 +712,7 @@ export default {
       this.getRandom();
       this.myEcharts();
       this.getEarlyInfo();
+      this.getTitle(this.formOrg.id);
     },
     //设置下拉数据 (公用)
     setDate(arrs) {
