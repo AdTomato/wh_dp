@@ -33,6 +33,10 @@ const request = {
         // 获取教育训练计划
         return Get('/controller/Education/getStationEduTrainPalnByStationId',data);
     },
+    getEducationDesc:(data) => {
+        // 获取教育训练计划详情
+        return Get('/controller/Education/getEduTrainPalnWeekByStationId',data);
+    },
     getTrainInfo:(data) => {
         // 获取龙虎榜
         return Get('/controller/trainResult/getTrainResults',data);

@@ -2,7 +2,7 @@
     <div>
         <div class="two-branch">
             <!-- 教育训练计划 -->
-          <div class="branch-item">
+          <div class="branch-item" @click="eduInformation">
             <h3 class="screen-item-title">教育训练计划</h3>
             <div class="branch-cont">
               <div class="branch-cont-title">
@@ -55,6 +55,43 @@
             </div>
           </div>
         </div>
+        <el-dialog title="本周教育训练详情" :visible.sync="eduVisible" width="55%" center>
+          <el-table
+            :data="tableData"
+            class="edu-table"
+            border
+            style="width: 100%"
+            >
+            <el-table-column
+              prop="weekDate"
+              label="时间"
+              width="112">
+            </el-table-column>
+            <el-table-column
+              prop="morningExercises"
+              label="早上"
+              width="182">
+            </el-table-column>
+            <el-table-column
+              prop="morning"
+              label="上午"
+              width="182">
+            </el-table-column>
+            <el-table-column
+              prop="afternoon"
+              label="下午"
+              width="200">
+            </el-table-column>
+            <el-table-column
+              prop="night"
+              label="晚上"
+              width="200">
+            </el-table-column>
+          </el-table>
+          <div slot="footer" class="dialog-footer">
+            <el-button type="primary" @click="closeDialog">关 闭</el-button>
+          </div>
+        </el-dialog>
     </div>
 </template>
 
@@ -70,7 +107,10 @@
                 eduAmInfo: '',
                 eduPmInfo: '',
                 eduNightInfo: '',
-                trainData: []
+                trainData: [],
+                eduVisible: false,
+                eduStationId: '',
+                tableData: []
             }
         },
         components: {
@@ -88,6 +128,7 @@
         },
         methods:{
             async getEducationData(stationId){
+                this.eduStationId = stationId;
                 let par = {
                     stationId: stationId
                 }
@@ -103,10 +144,51 @@
                   this.trainData = lhbRes.data[0].detailInfos;
                 }
                 console.log(lhbRes.data);
+            },
+            eduInformation(){
+            // 
+              this.eduVisible = true;
+              let par = {
+                stationId: this.eduStationId
+              }
+              request.getEducationDesc(par).then( res => {
+                console.log(res);
+                let eduArr = [];
+                if(res.data){
+                  res.data.forEach(item => {
+                    let eduObj = {};
+                    eduObj.weekDate = this.weekDay(item.date);
+                    eduObj.morningExercises = item.morningExercises;
+                    eduObj.morning = item.morning;
+                    eduObj.afternoon = item.afternoon;
+                    eduObj.night = item.night;
+                    eduArr.push(eduObj);
+                  })
+
+                  this.tableData = eduArr;
+                }
+              })
+              // 
+            },
+            weekDay(date){
+              let curDate = date.split(' ')[0];
+              let curDateChild = curDate.split('-');
+              let dt = new Date(curDateChild[0], parseInt(curDateChild[1] - 1), curDateChild[2]);
+              let weekDay = ["星期日", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六"];
+              return weekDay[dt.getDay()];
+            },
+            closeDialog(){
+              this.eduVisible = false;
             }
-                   
         },
         mounted(){
         }
     }
 </script>
+
+
+<style lang="less">
+  // .edu-table td, .edu-table th {
+  //   text-align: center;
+  // } 
+</style>
