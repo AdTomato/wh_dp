@@ -242,9 +242,9 @@
           <Password :visible.sync="visiblePassword" @passwordCommit = "passwordCommit" :passBool="passBool"></Password>
           <!-- 今日警情信息end -->
 
-          <!-- 值勤车辆strat -->
+          <!-- 执勤车辆strat -->
           <div class="rigth-middle screen-item">
-            <h3 class="screen-item-title">值勤车辆</h3>
+            <h3 class="screen-item-title">执勤车辆</h3>
             <div class="num1 zq-num1">
               <ul class="zq_ul">
                 <li>
@@ -283,7 +283,7 @@
               </vue-seamless-scroll>
             </div>
           </div>
-          <!-- 值勤车辆end -->
+          <!-- 执勤车辆end -->
 
           <!-- 值班信息strat -->
           <div class="right-bottom screen-item">
@@ -292,14 +292,14 @@
               <div class="duty">
                 <ul class="duty_ul">
                   <li class="size17">大队全勤指挥部:</li>
-                  <li style="float: left;margin-left: 10px;" v-for="(item,i) in OnDutArr1">{{item}}</li>
+                  <li style="float: left;margin-left: 10px;" v-for="(item,i) in OnDutArr1">{{item.dutyName}}</li>
                 </ul>
               </div>
 
               <div class="duty">
                 <ul class="duty_ul">
                   <li class="size17">队站值班干部:</li>
-                  <li class="duty_ul_li" v-for="(item,i) in OnDutArr2">{{item}}</li>
+                  <li class="duty_ul_li" v-for="(item,i) in OnDutArr2">{{item.dutyName}}</li>
                 </ul>
               </div>
             </div>
@@ -353,10 +353,10 @@
           </div>
         </el-dialog>
 
-        <el-dialog title="值勤车辆" :visible.sync="dialogFormVisibleType">
+        <el-dialog title="执勤车辆" :visible.sync="dialogFormVisibleType">
           <el-form :model="formType">
-            <el-form-item label="值勤类型" :label-width="formLabelWidth">
-              <el-select v-model="formType.region" placeholder="请选择值勤类型" @change="getFormType">
+            <el-form-item label="执勤类型" :label-width="formLabelWidth">
+              <el-select v-model="formType.region" placeholder="请选择执勤类型" @change="getFormType">
                 <el-option label="在位" value="在位"></el-option>
                 <el-option label="出动" value="出动"></el-option>
                 <el-option label="报修" value="报修"></el-option>
@@ -847,7 +847,8 @@ export default {
     },
     //获取值班信息
     getOnDutyInfo(id) {
-      storage.getOnDutyInfo("af127c960a8b490683a1ff9c57b83163", 1).then(res => {
+      console.log("查看id=",id)
+      storage.getOnDutyInfo(id, 1).then(res => {
         if (res != undefined) {
           this.OnDutyInfo = res;
           this.OnDutArr1 = res.brigadeHeadquarters;
@@ -868,13 +869,23 @@ export default {
           var soc = 0;
           var falseA = 0;
           var other = 0;
-
-          fire = parseInt(res.fireAlarmNum);
-          eme = parseInt(res.emergencyRescueNum);
-          soc = parseInt(res.socialAssistanceNum);
-          falseA = parseInt(res.falseAlarmNum);
-          other = parseInt(res.otherAlertNum);
+          if(res.fireAlarmNum!=null){
+            fire = parseInt(res.fireAlarmNum);
+          }
+          if(res.emergencyRescueNum!=null){
+            eme = parseInt(res.emergencyRescueNum);
+          }
+          if(res.socialAssistanceNum!=null){
+            soc = parseInt(res.socialAssistanceNum);
+          }
+          if(res.falseAlarmNum!=null){
+            falseA = parseInt(res.falseAlarmNum);
+          }
+          if(res.otherAlertNum!=null){
+            other = parseInt(res.otherAlertNum);
+          }
           this.count = fire + eme + soc + falseA + other;
+          console.log("this.count=",this.count)
         }
       });
     },
@@ -1027,42 +1038,68 @@ export default {
           if (res.data[0] != null) {
             idd1.push(res.data[0].evaluationName);
             idd1.push(res.data[0].project);
-            idd1.push(res.data[0].score + "分");
+            if(res.data[0].score > 0){
+              idd1.push("+" + res.data[0].score + "分")
+            }else{
+              idd1.push(res.data[0].score + "分");
+            }
             this.idd1 = idd1;
           }
           if (res.data[1] != null) {
             idd2.push(res.data[1].evaluationName);
             idd2.push(res.data[1].project);
-            idd2.push(res.data[1].score + "分");
+            if(res.data[1].score > 0){
+              idd2.push("+" + res.data[1].score + "分");
+            }else{
+              idd2.push(res.data[1].score + "分");
+            }
             this.idd2 = idd2;
           }
           if (res.data[2] != null) {
             idd3.push(res.data[2].evaluationName);
             idd3.push(res.data[2].project);
-            idd3.push(res.data[2].score + "分");
+            if(res.data[2].score > 0){
+              idd3.push("+" + res.data[2].score + "分");
+            }else{
+              idd3.push(res.data[2].score + "分");
+            }
             this.idd3 = idd3;
           }
           if (res.data[3] != null) {
             idd4.push(res.data[3].evaluationName);
             idd4.push(res.data[3].project);
-            idd4.push(res.data[3].score + "分");
+            if(res.data[3].score > 0){
+              idd4.push("+" + res.data[3].score + "分");
+            }else{
+              idd4.push(res.data[3].score + "分");
+            }
             this.idd4 = idd4;
           }
           if (res.data[4] != null) {
             idd5.push(res.data[4].evaluationName);
             idd5.push(res.data[4].project);
-            idd5.push(res.data[4].score + "分");
+            if(res.data[4].score > 0){
+              idd5.push("+" + res.data[4].score + "分");
+            }else{
+              idd5.push(res.data[4].score + "分");
+            }
             this.idd5 = idd5;
           }
           if (res.data[5] != null) {
             idd6.push(res.data[5].evaluationName);
             idd6.push(res.data[5].project);
-            idd6.push(res.data[5].score + "分");
+            if(res.data[5].score > 0){
+              idd6.push("+" + res.data[5].score + "分");
+            }else{
+              idd6.push(res.data[5].score + "分");
+            }
+
             this.idd6 = idd6;
           }
         }
       });
     },
+
 
     //量化考勤周报详情页面
     handleDetail() {
