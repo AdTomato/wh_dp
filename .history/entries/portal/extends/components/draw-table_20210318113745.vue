@@ -682,32 +682,12 @@
                   that.obj[flag] = people;
                 }
               }
-              if(flag == "消防站主官") {
+              if(flag == "队站干部") {
                 // 文员需要获取2名
                 if(that.obj.hasOwnProperty(flag)) {
                   // 存在
                   var people = that.obj[flag];
-                  if(people.length == 1) {
-                    // 已经取瞒
-                    return;
-                  }
-                  if(people.includes(userName)) {
-                    // 已经存储过了
-                    return;
-                  }
-                  people.push(userName);
-                } else {
-                  var people = new Array();
-                  people.push(userName);
-                  that.obj[flag] = people;
-                }
-              }
-              if(flag == "消防站副职") {
-                // 文员需要获取2名
-                if(that.obj.hasOwnProperty(flag)) {
-                  // 存在
-                  var people = that.obj[flag];
-                  if(people.length == 1) {
+                  if(people.length == 2) {
                     // 已经取瞒
                     return;
                   }

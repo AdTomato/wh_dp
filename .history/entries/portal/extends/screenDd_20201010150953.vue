@@ -319,7 +319,7 @@ export default {
   },
   methods: {
     format(percentage) {
-      console.log("percentage==",percentage)
+      console.log("percentage==")
       //return percentage === 100 ? '45' : `${percentage}/45`;
       return percentage === 100 ? this.random.shouldCheck : `${percentage}/${this.random.shouldCheck}`;
     },
@@ -556,12 +556,12 @@ export default {
     },
 
     format(percentage) {
-     return percentage === 100 ? this.random.shouldCheck : `${percentage}/${this.random.shouldCheck}`;
+      return percentage === 100 ? '45' : `${percentage}/45`;
     },
     getData(){
       // 调用
-       request.getStationAlertInfo().then(res => {})
-      return percentage === 100 ? this.random.shouldCheck : `${percentage}/${this.random.shouldCheck}`;
+      request.getStationAlertInfo().then(res => {})
+      return percentage === 100 ? "45" : `${percentage}/45`;
     },
 
     //人员动态生日
@@ -800,11 +800,4 @@ export default {
 @import "./assets/styles/screen.less";
 @import "./assets/styles/right.less";
 @import "./assets/styles/content.less";
-.el-progress-bar{
-  padding-right: 59px;
-  width: 100%;
-  margin-right: -58px;
-  -webkit-box-sizing: border-box;
-  box-sizing: border-box;
-}
 </style>

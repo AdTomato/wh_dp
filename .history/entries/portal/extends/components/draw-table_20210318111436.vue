@@ -559,32 +559,12 @@
                   that.obj[flag] = people;
                 }
               }
-              if(flag == "消防站主官") {
+              if(flag == "队站干部") {
                 // 文员需要获取2名
                 if(that.obj.hasOwnProperty(flag)) {
                   // 存在
                   var people = that.obj[flag];
-                  if(people.length == 1) {
-                    // 已经取瞒
-                    return;
-                  }
-                  if(people.includes(userName)) {
-                    // 已经存储过了
-                    return;
-                  }
-                  people.push(userName);
-                } else {
-                  var people = new Array();
-                  people.push(userName);
-                  that.obj[flag] = people;
-                }
-              }
-              if(flag == "消防站副职") {
-                // 文员需要获取2名
-                if(that.obj.hasOwnProperty(flag)) {
-                  // 存在
-                  var people = that.obj[flag];
-                  if(people.length == 1) {
+                  if(people.length == 2) {
                     // 已经取瞒
                     return;
                   }
@@ -626,13 +606,10 @@
               if(that.obj.hasOwnProperty("大队干部")) {
                 allPeople += that.obj["大队干部"].length;
               }
-              if(that.obj.hasOwnProperty("消防站主官")) {
-                allPeople += that.obj["消防站主官"].length;
+              if(that.obj.hasOwnProperty("队站干部")) {
+                allPeople += that.obj["队站干部"].length;
               }
-              if(that.obj.hasOwnProperty("消防站主官")) {
-                allPeople += that.obj["消防站主官"].length;
-              }
-              if(that.obj.hasOwnProperty("消防站副职")) {
+              if(that.obj.hasOwnProperty("消防员")) {
                 allPeople += that.obj["消防员"].length;
               }
               if(allPeople == 11) {
@@ -682,27 +659,7 @@
                   that.obj[flag] = people;
                 }
               }
-              if(flag == "消防站主官") {
-                // 文员需要获取2名
-                if(that.obj.hasOwnProperty(flag)) {
-                  // 存在
-                  var people = that.obj[flag];
-                  if(people.length == 1) {
-                    // 已经取瞒
-                    return;
-                  }
-                  if(people.includes(userName)) {
-                    // 已经存储过了
-                    return;
-                  }
-                  people.push(userName);
-                } else {
-                  var people = new Array();
-                  people.push(userName);
-                  that.obj[flag] = people;
-                }
-              }
-              if(flag == "消防站副职") {
+              if(flag == "队站干部") {
                 // 文员需要获取2名
                 if(that.obj.hasOwnProperty(flag)) {
                   // 存在
@@ -747,7 +704,7 @@
                 if(that.obj.hasOwnProperty(flag)) {
                   // 存在
                   var people = that.obj[flag];
-                  if(people.length == 3) {
+                  if(people.length == 4) {
                     // 已经取瞒
                     return;
                   }
@@ -769,11 +726,8 @@
               if(that.obj.hasOwnProperty("大队干部")) {
                 allPeople += that.obj["大队干部"].length;
               }
-              if(that.obj.hasOwnProperty("消防站主官")) {
-                allPeople += that.obj["消防站主官"].length;
-              }
-              if(that.obj.hasOwnProperty("消防站副职")) {
-                allPeople += that.obj["消防员"].length;
+              if(that.obj.hasOwnProperty("队站干部")) {
+                allPeople += that.obj["队站干部"].length;
               }
               if(that.obj.hasOwnProperty("消防员")) {
                 allPeople += that.obj["消防员"].length;

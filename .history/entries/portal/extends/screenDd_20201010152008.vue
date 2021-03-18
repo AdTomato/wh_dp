@@ -800,11 +800,5 @@ export default {
 @import "./assets/styles/screen.less";
 @import "./assets/styles/right.less";
 @import "./assets/styles/content.less";
-.el-progress-bar{
-  padding-right: 59px;
-  width: 100%;
-  margin-right: -58px;
-  -webkit-box-sizing: border-box;
-  box-sizing: border-box;
-}
+..el-progress-bar
 </style>

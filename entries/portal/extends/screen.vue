@@ -42,7 +42,7 @@
                   <div class="out_work mt">{{numGongchai}}</div>
                 </li>
                 <li style="color: #BDA100">
-                  休假
+                  休假/轮休
                   <div class="no_work mt">{{numXiujia}}</div>
                 </li>
               </ul>
@@ -274,9 +274,9 @@
                       <div v-else="item.status=='在位'" class="round bj_g fr"></div>
                     </div>
                     <div class="list_text">
-                      <div :title="'发动机功率:'+item.gl+'/KW'" class="mt2 limit">发动机功率:{{item.gl+"/KW"}}</div>
-                      <div :title="'起重重量:'+item.zl+'吨'" v-if="item.zl" class="list_text2 limit">起重重量:{{item.zl+"吨"}}</div>
-                      <div :title="'载液容量:'+item.zy" v-if="item.zy" class="list_text2 limit">载液容量:{{item.zy}}</div>
+                      <div :title="'发动机功率:'+item.gl+'/KW'" class="mt2 limit"> <div :title="item.gl" class="hidden">发动机功率:{{item.gl+"/KW"}}</div></div>
+                      <div :title="'起重重量:'+item.zl+'吨'" v-if="item.zl" class="list_text2 limit"><div :title="item.zl" class="hidden">起重重量:{{item.zl+"吨"}}</div></div>
+                      <div :title="'载液容量:'+item.zy" v-if="item.zy" class="list_text2 limit"><div :title="item.zy" class="hidden">载液容量:{{item.zy}}</div> </div>
                     </div>
                   </li>
                 </ul>
@@ -426,6 +426,10 @@
 }
 .limit{
   pointer-events: none;
+}
+.hidden{
+  width: 205px;
+  word-wrap: break-word; word-break: normal;
 }
 </style>
 
