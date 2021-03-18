@@ -5,7 +5,7 @@
       <el-button type="primary" icon="el-icon-arrow-left" class="draw-btn-back" @click="prev">返回</el-button>
       <el-button type="success" class="draw-btn" @click="drawResult" >抽签</el-button>
     </div>
-    
+
     <ul class="table-list">
         <!-- <li v-for="(groupItem, index) in groupArr">
           <p>{{groupItem}}</p>
@@ -19,7 +19,7 @@
           <li v-for="(personItem, index) in list">
             <p  :class="itemIndex==index? 'addclass' : 'normol'">{{personItem}}</p>
           </li>
-        
+
     </ul>
     <!-- 弹框 -->
     <el-dialog
@@ -93,7 +93,7 @@
         // 当抽签成功时候，打开对话框
         var that =this
         //that.dialogVisible = true;
-        
+
         clearInterval(that.timer);
 				that.timer = setInterval(function() {
           var i = Math.floor(Math.random() * that.list.length);
@@ -461,7 +461,7 @@
                   that.obj[flag] = people;
                 }
               }
-              if(flag == "干部") {
+              if(flag == "机关干部") {
                 // 消防员需要获取2名
                 if(that.obj.hasOwnProperty(flag)) {
                   // 存在
@@ -481,7 +481,7 @@
                   that.obj[flag] = people;
                 }
               }
-              if(flag == "通勤消防员") {
+              if(flag == "勤务消防员") {
                 // 文员需要获取2名
                 if(that.obj.hasOwnProperty(flag)) {
                   // 存在
@@ -505,11 +505,11 @@
               if(that.obj.hasOwnProperty("指挥员")) {
                 allPeople += that.obj["指挥员"].length;
               }
-              if(that.obj.hasOwnProperty("干部")) {
-                allPeople += that.obj["干部"].length;
+              if(that.obj.hasOwnProperty("机关干部")) {
+                allPeople += that.obj["机关干部"].length;
               }
-              if(that.obj.hasOwnProperty("通勤消防员")) {
-                allPeople += that.obj["通勤消防员"].length;
+              if(that.obj.hasOwnProperty("勤务消防员")) {
+                allPeople += that.obj["勤务消防员"].length;
               }
               if(allPeople == 11) {
                 // 抽签结束
@@ -519,7 +519,7 @@
 
             } else if(dName == "特勤大队") {
               flag = position;
-              if(flag == "指挥员") {
+              if(flag == "大队主官") {
                 // 干部需要获取2名
                 if(that.obj.hasOwnProperty(flag)) {
                   // 存在
@@ -620,8 +620,8 @@
                 }
               }
               var allPeople = 0;
-              if(that.obj.hasOwnProperty("指挥员")) {
-                allPeople += that.obj["指挥员"].length;
+              if(that.obj.hasOwnProperty("大队主官")) {
+                allPeople += that.obj["大队主官"].length;
               }
               if(that.obj.hasOwnProperty("大队干部")) {
                 allPeople += that.obj["大队干部"].length;
@@ -629,10 +629,10 @@
               if(that.obj.hasOwnProperty("消防站主官")) {
                 allPeople += that.obj["消防站主官"].length;
               }
-              if(that.obj.hasOwnProperty("消防站主官")) {
-                allPeople += that.obj["消防站主官"].length;
-              }
               if(that.obj.hasOwnProperty("消防站副职")) {
+                allPeople += that.obj["消防站副职"].length;
+              }
+              if(that.obj.hasOwnProperty("消防员")) {
                 allPeople += that.obj["消防员"].length;
               }
               if(allPeople == 11) {
@@ -642,7 +642,7 @@
               }
             } else {
               flag = position;
-              if(flag == "指挥员") {
+              if(flag == "大队主官") {
                 // 干部需要获取2名
                 if(that.obj.hasOwnProperty(flag)) {
                   // 存在
@@ -763,8 +763,8 @@
                 }
               }
               var allPeople = 0;
-              if(that.obj.hasOwnProperty("指挥员")) {
-                allPeople += that.obj["指挥员"].length;
+              if(that.obj.hasOwnProperty("大队主官")) {
+                allPeople += that.obj["大队主官"].length;
               }
               if(that.obj.hasOwnProperty("大队干部")) {
                 allPeople += that.obj["大队干部"].length;
@@ -1057,22 +1057,22 @@
             }
           }
         }, 20)
-        
+
 
       },
-      /** 
-         * 获取指定的URL参数值 
-         * URL:http://www.quwan.com/index?name=tyler 
-         * 参数：paramName URL参数 
-         * 调用方法:getParam("name") 
-         * 返回值:tyler 
-         */ 
-      getParam(paramName) { 
-        var paramValue = ""; var isFound = !1; 
-          if (window.location.search.indexOf("?") == 0 && window.location.search.indexOf("=") > 1) { 
-              var arrSource = unescape(window.location.search).substring(1, window.location.search.length).split("&"), i = 0; 
-              while (i < arrSource.length && !isFound) arrSource[i].indexOf("=") > 0 && arrSource[i].split("=")[0].toLowerCase() == paramName.toLowerCase() && (paramValue = arrSource[i].split("=")[1], isFound = !0), i++ 
-          } 
+      /**
+         * 获取指定的URL参数值
+         * URL:http://www.quwan.com/index?name=tyler
+         * 参数：paramName URL参数
+         * 调用方法:getParam("name")
+         * 返回值:tyler
+         */
+      getParam(paramName) {
+        var paramValue = ""; var isFound = !1;
+          if (window.location.search.indexOf("?") == 0 && window.location.search.indexOf("=") > 1) {
+              var arrSource = unescape(window.location.search).substring(1, window.location.search.length).split("&"), i = 0;
+              while (i < arrSource.length && !isFound) arrSource[i].indexOf("=") > 0 && arrSource[i].split("=")[0].toLowerCase() == paramName.toLowerCase() && (paramValue = arrSource[i].split("=")[1], isFound = !0), i++
+          }
           return paramValue == "" && (paramValue = null), paramValue
       },
       getData(){
@@ -1110,7 +1110,7 @@
       clearInterval(this.timer)
       this.dialogVisible = true;
   　　},10000);
-     
+
     }
   }
 </script>
@@ -1172,7 +1172,7 @@
         text-align: center;
         color: #333;
         font-size: 16px;
-        
+
     }
 
     .addclass {
