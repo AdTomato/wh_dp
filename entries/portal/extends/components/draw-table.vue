@@ -643,6 +643,7 @@
             } else {
               flag = position;
               if(flag == "大队主官") {
+                debugger;
                 // 干部需要获取2名
                 if(that.obj.hasOwnProperty(flag)) {
                   // 存在
@@ -773,7 +774,7 @@
                 allPeople += that.obj["消防站主官"].length;
               }
               if(that.obj.hasOwnProperty("消防站副职")) {
-                allPeople += that.obj["消防员"].length;
+                allPeople += that.obj["消防站副职"].length;
               }
               if(that.obj.hasOwnProperty("消防员")) {
                 allPeople += that.obj["消防员"].length;
