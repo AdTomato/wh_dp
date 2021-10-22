@@ -28,7 +28,7 @@
     "@h3/awesome-ui": "2.0.1",
     "@h3/report": "2.2.13-cloudpivot.2",
     "animate.css": "^3.7.2",
-    "axios": "^0.18.0",
+    "axios": "^0.21.2",
     "dingtalk-jsapi": "^2.6.0",
     "fastclick": "^1.0.6",
     "h3-antd-vue": "^1.1.50",
