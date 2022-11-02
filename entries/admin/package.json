@@ -16,7 +16,7 @@
   "dependencies": {
     "animate.css": "^3.7.2",
     "babel-polyfill": "^6.26.0",
-    "canvg": "^1.5.3",
+    "canvg": "^4.0.1",
     "html2canvas": "^1.0.0-alpha.12",
     "monaco-editor": "0.17.0"
   },
